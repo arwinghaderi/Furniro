@@ -21,277 +21,277 @@ menuLink.forEach(function (menuLink) {
 
 let productListArraysShop = [
     {
-        id: 1, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 1, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair", count: 1,
     },
 
     {
-        id: 2, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 2, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair", count: 1,
     },
 
     {
-        id: 3, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 3, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa", count: 1,
     },
 
     {
-        id: 4, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 4, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table", count: 1,
     },
     {
-        id: 5, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 5, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair", count: 1,
     },
 
     {
-        id: 6, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 6, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair", count: 1,
     },
 
     {
-        id: 7, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 7, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa", count: 1,
     },
 
     {
-        id: 8, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 8, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table", count: 1,
     },
 
     {
-        id: 9, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 9, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair", count: 1,
     },
 
     {
-        id: 10, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 10, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair", count: 1,
     },
 
     {
-        id: 11, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 11, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa", count: 1,
     },
 
     {
-        id: 12, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 12, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table", count: 1,
     },
     {
-        id: 13, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 13, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair", count: 1,
     },
 
     {
-        id: 14, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 14, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair", count: 1,
     },
 
     {
-        id: 15, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 15, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa", count: 1,
     },
 
     {
-        id: 16, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 16, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table", count: 1,
     },
     {
-        id: 17, img: "images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
+        id: 17, img: "../images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
         DiscountPrice: null, price: 1500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "lamp", count: 1,
     },
     {
-        id: 18, img: "images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
+        id: 18, img: "../images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
         DiscountPrice: null, price: 150000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "mug", count: 1,
 
     },
     {
-        id: 19, img: "images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
+        id: 19, img: "../images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 25, newProduct: false, discount: true
         , poster: true, type: "mug", count: 1,
     },
 
     {
-        id: 20, img: "images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
+        id: 20, img: "../images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "pot", count: 1,
     },
 
     {
-        id: 21, img: "images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
+        id: 21, img: "../images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
         DiscountPrice: null, price: 1500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "lamp"
     },
     {
-        id: 22, img: "images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
+        id: 22, img: "../images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
         DiscountPrice: null, price: 150000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "mug"
 
     },
     {
-        id: 23, img: "images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
+        id: 23, img: "../images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 25, newProduct: false, discount: true
         , poster: true, type: "bed set"
     },
 
     {
-        id: 24, img: "images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
+        id: 24, img: "../images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "pot"
     },
 
 
     {
-        id: 25, img: "images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
+        id: 25, img: "../images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
         DiscountPrice: null, price: 1500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "lamp"
     },
     {
-        id: 26, img: "images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
+        id: 26, img: "../images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
         DiscountPrice: null, price: 150000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "mug"
 
     },
     {
-        id: 27, img: "images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
+        id: 27, img: "../images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 25, newProduct: false, discount: true
         , poster: true, type: "bed set"
     },
 
     {
-        id: 28, img: "images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
+        id: 28, img: "../images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "pot"
     },
     {
-        id: 29, img: "images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
+        id: 29, img: "../images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
         DiscountPrice: null, price: 1500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "lamp"
     },
     {
-        id: 30, img: "images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
+        id: 30, img: "../images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
         DiscountPrice: null, price: 150000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "mug"
 
     },
     {
-        id: 31, img: "images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
+        id: 31, img: "../images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 25, newProduct: false, discount: true
         , poster: true, type: "bed set"
     },
 
     {
-        id: 32, img: "images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
+        id: 32, img: "../images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "pot"
     },
     {
-        id: 33, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 33, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair"
     },
 
     {
-        id: 34, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 34, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair"
     },
 
     {
-        id: 35, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 35, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa"
     },
 
     {
-        id: 36, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 36, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table"
     },
     {
-        id: 37, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 37, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair"
     },
 
     {
-        id: 38, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 38, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair"
     },
 
     {
-        id: 39, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 39, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa"
     },
 
     {
-        id: 40, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 40, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table"
     },
     {
-        id: 41, img: "images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
+        id: 41, img: "../images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
         DiscountPrice: null, price: 1500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "lamp"
     },
     {
-        id: 42, img: "images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
+        id: 42, img: "../images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
         DiscountPrice: null, price: 150000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "mug"
 
     },
     {
-        id: 43, img: "images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
+        id: 43, img: "../images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 25, newProduct: false, discount: true
         , poster: true, type: "bed set"
     },
 
     {
-        id: 44, img: "images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
+        id: 44, img: "../images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "pot"
     },
     {
-        id: 45, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 45, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair"
     },
 
     {
-        id: 46, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 46, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair"
     },
 
     {
-        id: 47, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 47, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa"
     },
 
     {
-        id: 48, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 48, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table"
     },
@@ -321,9 +321,10 @@ function setTemplateDom(productListArraysShop) {
             let discountPercent = +product.discountPercent
             let totalDiscount = (price * discountPercent) / 100
             let total = price - totalDiscount
+            console.log(product.img);
             rowProduct.insertAdjacentHTML('beforeend', '<div class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show "><div class="product-box"  id="discount"  ><div  ' +
                 'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
-                '<div class="box-add-btn-cart"><a href="product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
+                '<div class="box-add-btn-cart"><a href="../Pages/product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
                 ' <div class="product-overlay__options">' +
                 ' <div class="option-overlay">' +
                 '+ <svg width="12" height="14" viewBox="0 0 12 14" fill="none" >' +

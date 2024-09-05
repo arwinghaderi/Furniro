@@ -1,11 +1,11 @@
-/* 
-============== 
-    HOME
-==============
-*/
+@import url(../Features/navBar.css);
+@import url(../Features/footer.css);
+@import url(../Features/products.css);
+@import url(/Furniro/styles/defaults.css);
+
 
 .home {
-    background: url("../images/img.png")center no-repeat;
+    background: url("/Furniro/images/img.png")center no-repeat;
     background-size: cover;
     display: flex;
     justify-content: end;
@@ -410,4 +410,3 @@ slaisder-section
 
     object-fit: cover;
 }
-

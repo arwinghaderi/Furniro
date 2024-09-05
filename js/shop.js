@@ -344,7 +344,7 @@ function setTemplateDom(productListArraysShop) {
 
         product.newProduct === true ? rowProduct.insertAdjacentHTML('beforeend', '   <div class="col col-lg-3 product-main-box product-main-box__shop " id="new"><div class="product-box"><div  ' +
             'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
-            '<div class="box-add-btn-cart"><a href="product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
+            '<div class="box-add-btn-cart"><a href="../Pages/product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
             ' <div class="product-overlay__options">' +
             ' <div class="option-overlay">' +
             '+ <svg width="12" height="14" viewBox="0 0 12 14" fill="none" >' +
@@ -361,7 +361,7 @@ function setTemplateDom(productListArraysShop) {
             '<span class="product-price">' + product.price.toLocaleString("en") + '</span>' +
             '</div> </div></div></div> ') : product.poster === false ? rowProduct.insertAdjacentHTML('beforeend', '   <div class="col col-lg-3 product-main-box product-main-box__shop poster"><div class="product-box "><div  ' +
                 'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
-                '<div class="box-add-btn-cart"><a href="product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
+                '<div class="box-add-btn-cart"><a href="../Pages/product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
                 ' <div class="product-overlay__options">' +
                 ' <div class="option-overlay">' +
                 '+ <svg width="12" height="14" viewBox="0 0 12 14" fill="none" >' +

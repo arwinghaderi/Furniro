@@ -374,6 +374,7 @@ let productListArraysShop = [
         , poster: true, type: "table", imgSecoundMain: "../images/product img STEAM table.webp", imgSecound1: "../images/table Respira main 1.webp", imgSecound2: "../images/product img LINEN table.webp", imgSecound3: "../images/table Respira main 3.webp", imgSecound4: "../images/product img black table.webp", description: "Faux Teak and Aluminum will never rust and it will never rot, making these materials ideal for an outdoor restaurant table. This table is a great way to impart your restaurant patio or outdoor cafe with somber, architectural elegance. We have many sizes available, including most of the popular patio sizes. Pair with our matching bar stool, armchair, and side chair to complete your patio set.", color1: "STEAM", color2: "LINEN", color3: "black", color4: "transparent"
         , count: 1, colorActive: "STEAM", sizeActive: "L"
     },
+
 ]
 
 // **elment html Single Page Product 
@@ -582,7 +583,7 @@ function setBtncolor(btnColor, imgMainProduct) {
 
 // **set Img Product Btn color
 function setImgProduct(colorName, imgMainProduct) {
-    imgMainProduct.setAttribute("src", "images/product img " + colorName + " " + locationFind.type + ".webp")
+    imgMainProduct.setAttribute("src", "../images/product img " + colorName + " " + locationFind.type + ".webp")
 }
 
 

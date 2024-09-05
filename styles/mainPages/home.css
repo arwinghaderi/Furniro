@@ -217,6 +217,7 @@ slaisder-section
     height: 48.6rem;
     position: relative;
     filter: blur(0.3rem);
+    transition: all 0.5s ease-in;
 }
 
 .slaider-img--active {

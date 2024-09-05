@@ -1,8 +1,51 @@
+@import url(../Features/navBar.css);
+@import url(../Features/footer.css);
+@import url(../Features/products.css);
+@import url(/Furniro/styles/defaults.css);
+
 /*
 ==========================
 cart-shop page-cart
 ==========================
 */
+
+.shop,
+.cart {
+    background: url("/Furniro/images/Rectangle\ 1.png") no-repeat center;
+    width: 100%;
+    background-size: cover;
+    height: 34.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.shop__title,
+.cart__title {
+    font-size: 4.8rem;
+    font-family: "Poppins-Medium";
+}
+
+.shop-container-description,
+.cart-container-description {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shop-container-description__befor,
+.cart-container-description__befor {
+    font-family: "Poppins-Medium";
+}
+
+.shop-container-description__now,
+.cart-container-description__now {
+    font-family: "Poppins-Regular";
+}
+
 
 .cart-shop-section {
     width: 100%;

@@ -2,12 +2,13 @@ let $ = document
 
 const hamburger = $.querySelector(".hamburger")
 const contenerMenuMobail = $.querySelector(".contener-menu-mobail ")
+let menuLink = document.querySelectorAll(".list-menu-item__link")
 
 hamburger.addEventListener("click", function () {
     hamburger.classList.toggle("active")
     contenerMenuMobail.classList.toggle("contener-menu-mobail--active")
 })
-let menuLink = document.querySelectorAll(".list-menu-item__link")
+
 menuLink.forEach(function (menuLink) {
     menuLink.addEventListener("click", function () {
         document.querySelector(".list-menu-item__link--active").classList.remove("list-menu-item__link--active")
@@ -18,128 +19,128 @@ menuLink.forEach(function (menuLink) {
 
 let productListArrays = [
     {
-        id: 1, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 1, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair"
     },
 
     {
-        id: 2, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 2, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair"
     },
 
     {
-        id: 3, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 3, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa"
     },
 
     {
-        id: 4, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 4, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table"
     },
     {
-        id: 5, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 5, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair"
     },
 
     {
-        id: 6, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 6, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair"
     },
 
     {
-        id: 7, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 7, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa"
     },
 
     {
-        id: 8, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 8, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table"
     },
 
     {
-        id: 9, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 9, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair"
     },
 
     {
-        id: 10, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 10, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair"
     },
 
     {
-        id: 11, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 11, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa"
     },
 
     {
-        id: 12, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 12, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table"
     },
     {
-        id: 13, img: "images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
+        id: 13, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
         DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
         , poster: true, type: "chair"
     },
 
     {
-        id: 14, img: "images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
+        id: 14, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
         DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "chair"
     },
 
     {
-        id: 15, img: "images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
+        id: 15, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
         , poster: true, type: "sofa"
     },
 
     {
-        id: 16, img: "images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
+        id: 16, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "table"
     },
     {
-        id: 17, img: "images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
+        id: 17, img: "../images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
         DiscountPrice: null, price: 1500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "lamp"
     },
     {
-        id: 18, img: "images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
+        id: 18, img: "../images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
         DiscountPrice: null, price: 150000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "mug"
 
     },
     {
-        id: 19, img: "images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
+        id: 19, img: "../images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
         DiscountPrice: 7000000, price: 14000000, discountPercent: 25, newProduct: false, discount: true
         , poster: true, type: "mug"
     },
 
     {
-        id: 20, img: "images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
+        id: 20, img: "../images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
         DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "pot"
     },
 
     {
-        id: 21, img: "images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
+        id: 21, img: "i../mages/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
         DiscountPrice: null, price: 1500000, discountPercent: 0, newProduct: false, discount: false
         , poster: false, type: "lamp"
     },
     {
-        id: 22, img: "images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
+        id: 22, img: "../images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
         DiscountPrice: null, price: 150000, discountPercent: 0, newProduct: true, discount: false
         , poster: true, type: "mug"
 
@@ -163,7 +164,7 @@ function setProductDom(productListArrays) {
             let total = price - totalDiscount
             rowProduct.insertAdjacentHTML('beforeend', '   <div class="col col-lg-3 product-main-box"><div class="product-box"><div  ' +
                 'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
-                '<div class="box-add-btn-cart"><a href="product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
+                '<div class="box-add-btn-cart"><a href = "../Furniro/Pages/product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
                 ' <div class="product-overlay__options">' +
                 ' <div class="option-overlay">' +
                 '+ <svg width="12" height="14" viewBox="0 0 12 14" fill="none" >' +
@@ -183,7 +184,7 @@ function setProductDom(productListArrays) {
 
         product.newProduct === true ? rowProduct.insertAdjacentHTML('beforeend', '   <div class="col col-lg-3 product-main-box"><div class="product-box"><div  ' +
             'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
-            '<div class="box-add-btn-cart"><a href="product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
+            '<div class="box-add-btn-cart"><a href="../Furniro/Pages/product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
             ' <div class="product-overlay__options">' +
             ' <div class="option-overlay">' +
             '+ <svg width="12" height="14" viewBox="0 0 12 14" fill="none" >' +
@@ -200,7 +201,7 @@ function setProductDom(productListArrays) {
             '<span class="product-price">' + product.price.toLocaleString("en") + '</span>' +
             '</div> </div></div></div> ') : product.poster === false ? rowProduct.insertAdjacentHTML('beforeend', '   <div class="col col-lg-3 product-main-box"><div class="product-box "><div  ' +
                 'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
-                '<div class="box-add-btn-cart"><a href="product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
+                '<div class="box-add-btn-cart"><a href="../Furniro/Pages/product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
                 ' <div class="product-overlay__options">' +
                 ' <div class="option-overlay">' +
                 '+ <svg width="12" height="14" viewBox="0 0 12 14" fill="none" >' +

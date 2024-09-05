@@ -1,3 +1,5 @@
+import { products } from "../js/db/data.js"
+
 let $ = document
 
 const hamburger = $.querySelector(".hamburger")
@@ -17,145 +19,12 @@ menuLink.forEach(function (menuLink) {
 })
 
 
-let productListArrays = [
-    {
-        id: 1, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
-        price: 3500000, discountPercent: 30, newProduct: false, discount: true
-        , poster: true, type: "chair"
-    },
-
-    {
-        id: 2, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
-        DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
-        , poster: false, type: "chair"
-    },
-
-    {
-        id: 3, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
-        DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
-        , poster: true, type: "sofa"
-    },
-
-    {
-        id: 4, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
-        DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
-        , poster: true, type: "table"
-    },
-    {
-        id: 5, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
-        DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
-        , poster: true, type: "chair"
-    },
-
-    {
-        id: 6, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
-        DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
-        , poster: false, type: "chair"
-    },
-
-    {
-        id: 7, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
-        DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
-        , poster: true, type: "sofa"
-    },
-
-    {
-        id: 8, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
-        DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
-        , poster: true, type: "table"
-    },
-
-    {
-        id: 9, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
-        DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
-        , poster: true, type: "chair"
-    },
-
-    {
-        id: 10, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
-        DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
-        , poster: false, type: "chair"
-    },
-
-    {
-        id: 11, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
-        DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
-        , poster: true, type: "sofa"
-    },
-
-    {
-        id: 12, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
-        DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
-        , poster: true, type: "table"
-    },
-    {
-        id: 13, img: "../images/image 1.jpg", productName: "Syltherine", productIntroduction: "Stylish cafe chair",
-        DiscountPrice: 2500000, price: 3500000, discountPercent: 30, newProduct: false, discount: true
-        , poster: true, type: "chair"
-    },
-
-    {
-        id: 14, img: "../images/image 2.jpg", productName: "Leviosa", productIntroduction: "Stylish cafe chair",
-        DiscountPrice: null, price: 2500000, discountPercent: 0, newProduct: false, discount: false
-        , poster: false, type: "chair"
-    },
-
-    {
-        id: 15, img: "../images/image 3.jpg", productName: "Lolito", productIntroduction: "Luxury big sofa",
-        DiscountPrice: 7000000, price: 14000000, discountPercent: 50, newProduct: false, discount: true
-        , poster: true, type: "sofa"
-    },
-
-    {
-        id: 16, img: "../images/image 4.jpg", productName: "Respira", productIntroduction: "Outdoor bar table and stool",
-        DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
-        , poster: true, type: "table"
-    },
-    {
-        id: 17, img: "../images/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
-        DiscountPrice: null, price: 1500000, discountPercent: 0, newProduct: false, discount: false
-        , poster: false, type: "lamp"
-    },
-    {
-        id: 18, img: "../images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
-        DiscountPrice: null, price: 150000, discountPercent: 0, newProduct: true, discount: false
-        , poster: true, type: "mug"
-
-    },
-    {
-        id: 19, img: "../images/image 7.jpg", productName: "Pingky", productIntroduction: "Cute bed set",
-        DiscountPrice: 7000000, price: 14000000, discountPercent: 25, newProduct: false, discount: true
-        , poster: true, type: "mug"
-    },
-
-    {
-        id: 20, img: "../images/Images8.jpg", productName: "Potty", productIntroduction: "Minimalist flower pot",
-        DiscountPrice: null, price: 500000, discountPercent: 0, newProduct: true, discount: false
-        , poster: true, type: "pot"
-    },
-
-    {
-        id: 21, img: "i../mages/Image 5.png", productName: "Grifo", productIntroduction: "Night lamp",
-        DiscountPrice: null, price: 1500000, discountPercent: 0, newProduct: false, discount: false
-        , poster: false, type: "lamp"
-    },
-    {
-        id: 22, img: "../images/image 6.jpg", productName: "Muggo", productIntroduction: "Small mug",
-        DiscountPrice: null, price: 150000, discountPercent: 0, newProduct: true, discount: false
-        , poster: true, type: "mug"
-
-    },
-]
 let rowProduct = document.querySelector(".row-container")
-
-
-
-
 //** set Product templet Dom
 
-function setProductDom(productListArrays) {
+function setProductDom(products) {
 
-    productListArrays.forEach(function (product) {
+    products.forEach(function (product) {
 
         if (product.discount === true) {
             let price = +product.price
@@ -229,12 +98,12 @@ let curentItem = 8
 let curentPage = 1
 let btnShowMor = document.querySelector(".show-more")
 let Loder = document.querySelector(".show-more__loder")
-function setBtnShowMor(productListArrays) {
+function setBtnShowMor(products) {
     let indexEnd = curentItem * curentPage
     let indexStart = indexEnd - indexEnd
     console.log(indexStart, indexEnd);
-    let productListArraysSlice = productListArrays.slice(indexStart, indexEnd);
-    setProductDom(productListArraysSlice)
+    let productsSlice = products.slice(indexStart, indexEnd);
+    setProductDom(productsSlice)
     btnShowMor.addEventListener("click", function () {
         btnShowMor.style.display = "none"
         Loder.style.display = "block"
@@ -246,21 +115,21 @@ function setBtnShowMor(productListArrays) {
             indexEnd = curentItem * curentPage
             indexStart = indexEnd - indexEnd
             console.log(indexStart, indexEnd);
-            productListArraysSlice = productListArrays.slice(indexStart, indexEnd);
-            console.log(productListArraysSlice);
-            setProductDom(productListArraysSlice)
+            productsSlice = products.slice(indexStart, indexEnd);
+            console.log(productsSlice);
+            setProductDom(productsSlice)
             if (curentItem <= curentItem + 8) {
                 clearInterval(interval)
             }
-            if (indexEnd >= productListArrays.length) {
+            if (indexEnd >= products.length) {
                 btnShowMor.style.display = "none"
             }
-            setLocalStoreg(productListArraysSlice)
+            setLocalStoreg(productsSlice)
             setLocalStoregCurrentPage(curentPage)
         }, 3000)
     })
 }
-setBtnShowMor(productListArrays)
+setBtnShowMor(products)
 
 
 
@@ -270,7 +139,7 @@ function setLocalStoregCurrentPage(curentPage) {
 }
 
 
-function getItemLocalStoregCurrentPage(productListArrays) {
+function getItemLocalStoregCurrentPage(products) {
     let curentPageLocal = JSON.parse(localStorage.getItem("curentPageHome"))
     console.log(curentPageLocal);
     if (curentPageLocal) {
@@ -278,37 +147,37 @@ function getItemLocalStoregCurrentPage(productListArrays) {
         curentPage = curentPageLocal
     }
     else {
-        productListArrays = []
+        products = []
     }
-    setProductDom(productListArrays)
+    setProductDom(products)
 }
-getItemLocalStoregCurrentPage(productListArrays)
+getItemLocalStoregCurrentPage(products)
 
-function setLocalStoreg(productListArrays) {
-    localStorage.setItem("productArrayHome", JSON.stringify(productListArrays))
+function setLocalStoreg(products) {
+    localStorage.setItem("productArrayHome", JSON.stringify(products))
 }
 
 
-function getItemLocalStoreg(productListArrays) {
-    console.log(productListArrays);
+function getItemLocalStoreg(products) {
+    console.log(products);
     let getItem = JSON.parse(localStorage.getItem("productArrayHome"))
     console.log(getItem);
     if (getItem) {
-        if (productListArrays.length === getItem.length) {
+        if (products.length === getItem.length) {
             btnShowMor.style.display = "none"
         }
-        if (productListArrays.length < getItem.length + curentItem) {
+        if (products.length < getItem.length + curentItem) {
             rowProduct.innerHTML = ""
         }
-        productListArrays = getItem
+        products = getItem
     }
     else {
-        productListArrays = []
+        products = []
     }
-    setProductDom(productListArrays)
+    setProductDom(products)
 }
 window.addEventListener('load', function name(params) {
-    getItemLocalStoreg(productListArrays)
+    getItemLocalStoreg(products)
 })
 
 

@@ -1,6 +1,8 @@
 import { products } from "../js/db/data.js"
 
+
 let $ = document
+
 
 const hamburger = $.querySelector(".hamburger")
 const contenerMenuMobail = $.querySelector(".contener-menu-mobail ")
@@ -101,8 +103,6 @@ function setTemplateDom(products) {
     })
 
 }
-
-
 
 //** */ boxFilter
 let shopFilterbox = document.querySelector(".shop-filter")

@@ -354,4 +354,13 @@ let products = [
     },
 
 ]
-export { products }
+let images = [
+    { id: 1, introduction: "Second bedroom", Title: "pleasant", img: "images/Rectangle 24.jpg" },
+    { id: 2, introduction: "bed Room", Title: "Inner Peace", img: "images/Rectangle 25.jpg" },
+    { id: 3, introduction: "work room", Title: "cute", img: "images/Rectangle 26.jpg" },
+    { id: 4, introduction: "kitchen", Title: "centralized", img: "images/Rectangle 25.jpg" },
+]
+
+
+
+export { products, images }

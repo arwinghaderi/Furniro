@@ -1,4 +1,4 @@
-import { products } from "../js/db/data.js"
+import { products, images } from "../js/db/data.js"
 
 let $ = document
 
@@ -22,7 +22,7 @@ menuLink.forEach(function (menuLink) {
 let rowProduct = document.querySelector(".row-container")
 //** set Product templet Dom
 
-function setProductDom(products) {
+function setProductsDom (products) {
 
     products.forEach(function (product) {
 
@@ -103,7 +103,7 @@ function setBtnShowMor(products) {
     let indexStart = indexEnd - indexEnd
     console.log(indexStart, indexEnd);
     let productsSlice = products.slice(indexStart, indexEnd);
-    setProductDom(productsSlice)
+    setProductsDom (productsSlice)
     btnShowMor.addEventListener("click", function () {
         btnShowMor.style.display = "none"
         Loder.style.display = "block"
@@ -117,7 +117,7 @@ function setBtnShowMor(products) {
             console.log(indexStart, indexEnd);
             productsSlice = products.slice(indexStart, indexEnd);
             console.log(productsSlice);
-            setProductDom(productsSlice)
+            setProductsDom (productsSlice)
             if (curentItem <= curentItem + 8) {
                 clearInterval(interval)
             }
@@ -149,7 +149,7 @@ function getItemLocalStoregCurrentPage(products) {
     else {
         products = []
     }
-    setProductDom(products)
+    setProductsDom (products)
 }
 getItemLocalStoregCurrentPage(products)
 
@@ -174,7 +174,7 @@ function getItemLocalStoreg(products) {
     else {
         products = []
     }
-    setProductDom(products)
+    setProductsDom (products)
 }
 window.addEventListener('load', function name(params) {
     getItemLocalStoreg(products)
@@ -194,13 +194,7 @@ let slaiderbtnright = document.querySelector("#slaider-btn-right")
 let boxContantImgIntroduction = document.querySelector(".box-contant-img-slaider__introduction")
 
 
-let listArrayimg = [
-    { id: 1, introduction: "Second bedroom", Title: "pleasant", img: "images/Rectangle 24.jpg" },
-    { id: 2, introduction: "bed Room", Title: "Inner Peace", img: "images/Rectangle 25.jpg" },
-    { id: 3, introduction: "work room", Title: "cute", img: "images/Rectangle 26.jpg" },
-    { id: 4, introduction: "kitchen", Title: "centralized", img: "images/Rectangle 25.jpg" },
 
-]
 
 
 // **next item slader
@@ -208,49 +202,49 @@ let listArrayimg = [
 let indexArrayImg = 0
 function nextItem() {
     indexArrayImg++
-    if (indexArrayImg === listArrayimg.length) {
+    if (indexArrayImg === images.length) {
         indexArrayImg = 0
-        slaiderImg[0].setAttribute("src", listArrayimg[indexArrayImg].img)
+        slaiderImg[0].setAttribute("src", images[indexArrayImg].img)
     }
-    slaiderImg[0].setAttribute("src", listArrayimg[indexArrayImg].img)
+    slaiderImg[0].setAttribute("src", images[indexArrayImg].img)
     document.querySelector(".checkmark-input--active").classList.remove("checkmark-input--active")
     document.querySelector(".custom-input-radio--active").classList.remove("custom-input-radio--active")
     customInputRadio[indexArrayImg].classList.add("custom-input-radio--active")
     checkmarkInput[indexArrayImg].classList.add("checkmark-input--active")
     if (indexArrayImg === 0) {
         let indexResult = indexArrayImg + 4
-        boxContantImgIntroduction.innerHTML = "0" + indexResult + "___" + listArrayimg[indexArrayImg].introduction
+        boxContantImgIntroduction.innerHTML = "0" + indexResult + "___" + images[indexArrayImg].introduction
     } else {
-        boxContantImgIntroduction.innerHTML = "0" + indexArrayImg + "___" + listArrayimg[indexArrayImg].introduction
+        boxContantImgIntroduction.innerHTML = "0" + indexArrayImg + "___" + images[indexArrayImg].introduction
     }
     indexArrayImg++
-    if (indexArrayImg === listArrayimg.length) {
+    if (indexArrayImg === images.length) {
         indexArrayImg = 0
-        slaiderImg[1].setAttribute("src", listArrayimg[indexArrayImg].img)
+        slaiderImg[1].setAttribute("src", images[indexArrayImg].img)
     }
 
-    slaiderImg[1].setAttribute("src", listArrayimg[indexArrayImg].img)
-    imgSlaiderTitle.innerHTML = listArrayimg[indexArrayImg].Title
+    slaiderImg[1].setAttribute("src", images[indexArrayImg].img)
+    imgSlaiderTitle.innerHTML = images[indexArrayImg].Title
     indexArrayImg++
-    if (indexArrayImg === listArrayimg.length) {
+    if (indexArrayImg === images.length) {
         indexArrayImg = 0
-        slaiderImg[2].setAttribute("src", listArrayimg[indexArrayImg].img)
+        slaiderImg[2].setAttribute("src", images[indexArrayImg].img)
     }
-    slaiderImg[2].setAttribute("src", listArrayimg[indexArrayImg].img)
-
-
-    indexArrayImg++
-    if (indexArrayImg === listArrayimg.length) {
-        indexArrayImg = 0
-        slaiderImg[3].setAttribute("src", listArrayimg[indexArrayImg].img)
-    }
-    slaiderImg[3].setAttribute("src", listArrayimg[indexArrayImg].img)
+    slaiderImg[2].setAttribute("src", images[indexArrayImg].img)
 
 
     indexArrayImg++
-    if (indexArrayImg === listArrayimg.length) {
+    if (indexArrayImg === images.length) {
         indexArrayImg = 0
-        slaiderImg[3].setAttribute("src", listArrayimg[indexArrayImg].img)
+        slaiderImg[3].setAttribute("src", images[indexArrayImg].img)
+    }
+    slaiderImg[3].setAttribute("src", images[indexArrayImg].img)
+
+
+    indexArrayImg++
+    if (indexArrayImg === images.length) {
+        indexArrayImg = 0
+        slaiderImg[3].setAttribute("src", images[indexArrayImg].img)
     }
 }
 slaiderbtnright.addEventListener("click", nextItem);
@@ -264,51 +258,51 @@ customInputRadio.forEach(function (params, ind) {
     params.addEventListener("click", function () {
         indexArrayImg = ind
         indexArrayImg++
-        if (indexArrayImg === listArrayimg.length) {
+        if (indexArrayImg === images.length) {
             indexArrayImg = 0
-            slaiderImg[0].setAttribute("src", listArrayimg[ind].img)
+            slaiderImg[0].setAttribute("src", images[ind].img)
         }
-        slaiderImg[0].setAttribute("src", listArrayimg[ind].img)
+        slaiderImg[0].setAttribute("src", images[ind].img)
 
 
         if (indexArrayImg === 0) {
             let indexResult = indexArrayImg + 4
-            boxContantImgIntroduction.innerHTML = "0" + indexResult + "___" + listArrayimg[indexArrayImg].introduction
+            boxContantImgIntroduction.innerHTML = "0" + indexResult + "___" + images[indexArrayImg].introduction
         } else {
-            boxContantImgIntroduction.innerHTML = "0" + indexArrayImg + "___" + listArrayimg[indexArrayImg].introduction
+            boxContantImgIntroduction.innerHTML = "0" + indexArrayImg + "___" + images[indexArrayImg].introduction
         }
-        imgSlaiderTitle.innerHTML = listArrayimg[indexArrayImg].Title
+        imgSlaiderTitle.innerHTML = images[indexArrayImg].Title
 
         indexArrayImg++
-        if (indexArrayImg === listArrayimg.length) {
+        if (indexArrayImg === images.length) {
             indexArrayImg = 0
-            slaiderImg[1].setAttribute("src", listArrayimg[indexArrayImg].img)
+            slaiderImg[1].setAttribute("src", images[indexArrayImg].img)
         }
-        slaiderImg[1].setAttribute("src", listArrayimg[indexArrayImg].img)
-
-
-        indexArrayImg++
-        if (indexArrayImg === listArrayimg.length) {
-            indexArrayImg = 0
-            slaiderImg[2].setAttribute("src", listArrayimg[indexArrayImg].img)
-        }
-        slaiderImg[2].setAttribute("src", listArrayimg[indexArrayImg].img)
+        slaiderImg[1].setAttribute("src", images[indexArrayImg].img)
 
 
         indexArrayImg++
-        if (indexArrayImg === listArrayimg.length) {
+        if (indexArrayImg === images.length) {
             indexArrayImg = 0
-            slaiderImg[3].setAttribute("src", listArrayimg[indexArrayImg].img)
+            slaiderImg[2].setAttribute("src", images[indexArrayImg].img)
         }
-        slaiderImg[3].setAttribute("src", listArrayimg[indexArrayImg].img)
+        slaiderImg[2].setAttribute("src", images[indexArrayImg].img)
 
 
         indexArrayImg++
-        if (indexArrayImg === listArrayimg.length) {
+        if (indexArrayImg === images.length) {
             indexArrayImg = 0
-            slaiderImg[3].setAttribute("src", listArrayimg[indexArrayImg].img)
+            slaiderImg[3].setAttribute("src", images[indexArrayImg].img)
         }
-        slaiderImg[1].setAttribute("src", listArrayimg[indexArrayImg].img)
+        slaiderImg[3].setAttribute("src", images[indexArrayImg].img)
+
+
+        indexArrayImg++
+        if (indexArrayImg === images.length) {
+            indexArrayImg = 0
+            slaiderImg[3].setAttribute("src", images[indexArrayImg].img)
+        }
+        slaiderImg[1].setAttribute("src", images[indexArrayImg].img)
 
 
         document.querySelector(".checkmark-input--active").classList.remove("checkmark-input--active")

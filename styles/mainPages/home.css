@@ -85,7 +85,7 @@
 
 .range-secondary-title {
     font-size: 2rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     color: #666666;
 }
 

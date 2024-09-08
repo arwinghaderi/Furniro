@@ -43,7 +43,7 @@ cart-shop page-cart
 
 .shop-container-description__now,
 .cart-container-description__now {
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 
@@ -102,7 +102,7 @@ cart-shop page-cart
 .cart-shop-section__product-price,
 .cart-shop-section__product-name {
     color: var(--gray-color);
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 .cart-shop-section__product-Quantity-box {
@@ -135,7 +135,7 @@ cart-shop page-cart
 }
 
 .cart-shop-section__product-Subtotal {
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 .cart-shop-section__total {
@@ -171,7 +171,7 @@ cart-shop page-cart
 
 .cart-shop-section__sub-total-price {
     color: var(--gray-color);
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 
@@ -193,6 +193,6 @@ cart-shop page-cart
     width: 22.8rem;
     height: 5.9rem;
     font-size: 2rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     cursor: pointer;
 }

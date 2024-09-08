@@ -28,7 +28,7 @@
 }
 
 .item-introduction__address {
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     color: var(--gray-color);
 
 }
@@ -69,7 +69,7 @@
 .items-Newsletter__input-email::placeholder {
     color: var(--gray-color);
     font-size: 1.4rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 
@@ -89,5 +89,5 @@ hr {
 }
 
 .copt-right-text {
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }

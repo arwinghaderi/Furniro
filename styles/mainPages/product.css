@@ -41,7 +41,7 @@
 
 .shop-container-description__now,
 .cart-container-description__now {
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 /* 
@@ -66,7 +66,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 .shop-filter__box-icon {
@@ -186,7 +186,7 @@
     box-shadow: 0.5rem 0.5rem 1rem gray;
     border-radius: 1rem;
     font-size: 1.8rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     line-height: 1.6;
     cursor: pointer;
     z-index: 100;
@@ -239,7 +239,7 @@
 .shop-products__button-next-text,
 .shop-products__button-prev-text {
     font-size: 2rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     outline: none;
     border: none;
     background-color: transparent;
@@ -415,7 +415,7 @@ cart-shop singel-product
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 .box-calculation {
@@ -443,7 +443,7 @@ cart-shop singel-product
 }
 
 .sub-total-box__title {
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 .sub-total-box__price {
@@ -480,7 +480,7 @@ cart-shop singel-product
     outline: none;
     border: none;
     background-color: transparent;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     cursor: pointer;
 }
 
@@ -513,7 +513,7 @@ cart-shop singel-product
     display: flex;
     align-items: center;
     gap: 3rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 .route-product__path-name {
@@ -600,7 +600,7 @@ cart-shop singel-product
 
 .detailes-produc-Specifications__title {
     font-size: 4.2rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 .detailes-produc-Specifications {
@@ -652,12 +652,12 @@ cart-shop singel-product
 
 .detailes-produc-Specifications__status {
     color: var(--gray-color);
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 
 }
 
 .detailes-product__size-box {
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 .detailes-product__size__name {
@@ -695,7 +695,7 @@ cart-shop singel-product
 }
 
 .detailes-product__color-box {
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 
 
 }
@@ -785,7 +785,7 @@ cart-shop singel-product
     display: flex;
     align-items: center;
     gap: 2rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     margin-top: 2rem;
 }
 
@@ -850,7 +850,7 @@ cart-shop singel-product
     border: none;
     background-color: transparent;
     font-size: 2rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     cursor: pointer;
 }
 
@@ -883,7 +883,7 @@ cart-shop singel-product
 
 .Supplementary-specifications {
     display: flex;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     color: var(--gray-color);
 }
 

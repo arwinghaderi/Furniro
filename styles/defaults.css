@@ -11,11 +11,13 @@ html {
     --dark-color: #000000;
     --gray-color: #9F9F9F;
     --white-color: #FFFFFF;
+    --primary-font:"Poppins-Regular";
 }
 
 *::after,
 *::before {
     box-sizing: inherit;
+    font-family: var(--primary-font);
 }
 
 body {

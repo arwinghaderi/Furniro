@@ -62,7 +62,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     opacity: 1;
 }
 

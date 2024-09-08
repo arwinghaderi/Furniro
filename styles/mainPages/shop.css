@@ -42,7 +42,7 @@
 
 .shop-container-description__now,
 .cart-container-description__now {
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 /* 
@@ -67,7 +67,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
 }
 
 .shop-filter__box-icon {
@@ -188,7 +188,7 @@
     box-shadow: 0.5rem 0.5rem 1rem gray;
     border-radius: 1rem;
     font-size: 1.8rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     line-height: 1.6;
     cursor: pointer;
     z-index: 100;
@@ -241,7 +241,7 @@
 .shop-products__button-next-text,
 .shop-products__button-prev-text {
     font-size: 2rem;
-    font-family: "Poppins-Regular";
+    font-family: var(--primary-font);
     outline: none;
     border: none;
     background-color: transparent;

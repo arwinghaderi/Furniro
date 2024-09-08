@@ -22,7 +22,7 @@ menuLink.forEach(function (menuLink) {
 let rowProduct = document.querySelector(".row-container")
 //** set Product templet Dom
 
-function setProductsDom (products) {
+function setProductsDom(products) {
 
     products.forEach(function (product) {
 
@@ -89,9 +89,6 @@ function setProductsDom (products) {
 }
 
 
-
-
-
 //** set Btn Show Mor
 
 let curentItem = 8
@@ -103,7 +100,7 @@ function setBtnShowMor(products) {
     let indexStart = indexEnd - indexEnd
     console.log(indexStart, indexEnd);
     let productsSlice = products.slice(indexStart, indexEnd);
-    setProductsDom (productsSlice)
+    setProductsDom(productsSlice)
     btnShowMor.addEventListener("click", function () {
         btnShowMor.style.display = "none"
         Loder.style.display = "block"
@@ -117,7 +114,7 @@ function setBtnShowMor(products) {
             console.log(indexStart, indexEnd);
             productsSlice = products.slice(indexStart, indexEnd);
             console.log(productsSlice);
-            setProductsDom (productsSlice)
+            setProductsDom(productsSlice)
             if (curentItem <= curentItem + 8) {
                 clearInterval(interval)
             }
@@ -149,7 +146,7 @@ function getItemLocalStoregCurrentPage(products) {
     else {
         products = []
     }
-    setProductsDom (products)
+    setProductsDom(products)
 }
 getItemLocalStoregCurrentPage(products)
 
@@ -174,7 +171,7 @@ function getItemLocalStoreg(products) {
     else {
         products = []
     }
-    setProductsDom (products)
+    setProductsDom(products)
 }
 window.addEventListener('load', function name(params) {
     getItemLocalStoreg(products)

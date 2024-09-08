@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: center;
     font-family: "Poppins-Bold";
-    color: #3A3A3A;
+    color: var(--text-Secondary-color);
     font-size: 4rem;
 }
 
@@ -45,7 +45,7 @@
 .box-add-btn-cart {
     width: 20.2rem;
     height: 4.2rem;
-    background-color: #ffffff;
+    background-color: var( --white-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,7 +54,7 @@
 }
 
 .box-add-btn-cart__text {
-    color: #B88E2F;
+    color: var(--Primary-color);
     font-family: "Poppins-SemiBold";
 }
 
@@ -73,7 +73,7 @@
 }
 
 .option-overlay__text {
-    color: #ffffff;
+    color: var( --white-color);
     margin-left: 0.8rem;
 }
 
@@ -96,7 +96,7 @@
 }
 
 .Discount-product__number {
-    color: #ffffff;
+    color: var( --white-color);
 }
 
 .product-Introductions {
@@ -106,7 +106,7 @@
 .product-name {
     font-family: "Poppins-SemiBold";
     font-size: 2.4rem;
-    color: #3A3A3A;
+    color: var(--text-Secondary-color);
 }
 
 .product-Introduction {

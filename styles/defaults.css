@@ -5,6 +5,12 @@ html {
 
 :root {
     --text-color: #333333;
+    --text-Secondary-color: #3A3A3A;
+    --Primary-color: #B88E2F;
+    --secondary-color: #FAF3EA;
+    --dark-color: #000000;
+    --gray-color: #9F9F9F;
+    --white-color: #FFFFFF;
 }
 
 *::after,
@@ -18,7 +24,6 @@ body {
     font-family: "Poppins-Medium";
     color: var(--text-color);
 }
-
 
 a {
     text-decoration: none;

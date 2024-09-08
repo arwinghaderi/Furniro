@@ -101,13 +101,13 @@ cart-shop page-cart
 
 .cart-shop-section__product-price,
 .cart-shop-section__product-name {
-    color: #9F9F9F;
+    color: var(--gray-color);
     font-family: "Poppins-Regular";
 }
 
 .cart-shop-section__product-Quantity-box {
     border-radius: 0.5rem;
-    border: 0.1rem solid #9F9F9F;
+    border: 0.1rem solid var(--gray-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -170,7 +170,7 @@ cart-shop page-cart
 
 
 .cart-shop-section__sub-total-price {
-    color: #9F9F9F;
+    color: var(--gray-color);
     font-family: "Poppins-Regular";
 }
 
@@ -178,11 +178,11 @@ cart-shop page-cart
 
 .cart-shop-section__total-price {
     font-size: 2rem;
-    color: #B88E2F;
+    color: var(--Primary-color);
 }
 
 .cart-shop-section__total-btn-checkOut-box {
-    border: 0.1rem solid #000000;
+    border: 0.1rem solid var(--dark-color);
     border-radius: 1.5rem;
 }
 

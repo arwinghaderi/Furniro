@@ -29,7 +29,7 @@
 
 .item-introduction__address {
     font-family: "Poppins-Regular";
-    color: #9F9F9F;
+    color: var(--gray-color);
 
 }
 
@@ -37,14 +37,14 @@
 
 .item-links__link,
 .item-helps__link {
-    color: #000000;
+    color: var(--dark-color);
 
 }
 
 .items-helps__title,
 .items-Newsletter,
 .items-links__title {
-    color: #9F9F9F;
+    color: var(--gray-color);
 }
 
 
@@ -56,7 +56,7 @@
 
 .items-Newsletter__box-input,
 .items-Newsletter__box-button {
-    border-bottom: #000000 solid 0.1rem;
+    border-bottom: var(--dark-color) solid 0.1rem;
 }
 
 .items-Newsletter__input-email,
@@ -67,7 +67,7 @@
 }
 
 .items-Newsletter__input-email::placeholder {
-    color: #9F9F9F;
+    color: var(--gray-color);
     font-size: 1.4rem;
     font-family: "Poppins-Regular";
 }

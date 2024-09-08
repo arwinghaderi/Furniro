@@ -2,7 +2,6 @@
 @import url(../Features/footer.css);
 @import url(../Features/products.css);
 @import url(/Furniro/styles/defaults.css);
-
 /* 
 ===================
   #SHOP--HoME
@@ -80,7 +79,7 @@
     content: "";
     width: 0.2rem;
     height: 4rem;
-    background-color: #9F9F9F;
+    background-color: var(--gray-color);
 }
 
 .shop-filters__result-text-box-icon {
@@ -126,14 +125,14 @@
     width: 100%;
     height: 100%;
     font-size: 2rem;
-    color: #9F9F9F;
+    color: var(--gray-color);
     appearance: none;
     -webkit-appearance: none;
 }
 
 .shop-filter__input::placeholder {
     font-size: 2rem;
-    color: #9F9F9F;
+    color: var(--gray-color);
 }
 
 .shop-filter__input--text {
@@ -268,11 +267,11 @@
 }
 
 .shop-products__pagination-box--active {
-    background-color: #B88E2F;
+    background-color: var(--Primary-color);
 }
 
 .shop-product-button--active {
-    color: #ffffff;
+    color: var( --white-color);
 }
 
 /* ================
@@ -335,7 +334,7 @@ cart-shop singel-product
     right: -30rem;
     height: 100%;
     width: 0;
-    background-color: #ffffff;
+    background-color: var( --white-color);
     z-index: 100;
     padding: 3rem;
     display: flex;
@@ -432,7 +431,7 @@ cart-shop singel-product
 
 .box-calculation__price {
     padding-left: 2rem;
-    color: #B88E2F;
+    color: var(--Primary-color);
     font-family: "Poppins-Medium";
 }
 
@@ -449,7 +448,7 @@ cart-shop singel-product
 
 .sub-total-box__price {
     padding-right: 3rem;
-    color: #B88E2F;
+    color: var(--Primary-color);
     font-family: "Poppins-SemiBold";
 }
 
@@ -518,7 +517,7 @@ cart-shop singel-product
 }
 
 .route-product__path-name {
-    color: #9F9F9F;
+    color: var(--gray-color);
 
 }
 
@@ -529,7 +528,7 @@ cart-shop singel-product
 .line {
     width: 0.2rem;
     height: 4rem;
-    background-color: #9F9F9F;
+    background-color: var(--gray-color);
 }
 
 /*
@@ -571,9 +570,9 @@ cart-shop singel-product
 }
 
 .detailes-product-img-secound__box--active {
-    background-color: #b88e2f;
+    background-color: var(--Primary-color);
     transform: scale(1.4);
-    border: 0.5rem double #ffffff;
+    border: 0.5rem double var( --white-color);
 }
 
 .detailes-product-img-secound__img {
@@ -615,7 +614,7 @@ cart-shop singel-product
 
 .detailes-produc-Specifications__price,
 .detailes-produc-Specifications__price-discount {
-    color: #9F9F9F;
+    color: var(--gray-color);
     font-size: 2.4rem;
     font-family: "Poppins-Medium";
 }
@@ -652,7 +651,7 @@ cart-shop singel-product
 }
 
 .detailes-produc-Specifications__status {
-    color: #9F9F9F;
+    color: var(--gray-color);
     font-family: "Poppins-Regular";
 
 }
@@ -662,7 +661,7 @@ cart-shop singel-product
 }
 
 .detailes-product__size__name {
-    color: #9F9F9F;
+    color: var(--gray-color);
 }
 
 .detailes-product__size-btn-container {
@@ -686,13 +685,13 @@ cart-shop singel-product
 }
 
 .detailes-product__size-btn-box--active {
-    background-color: #B88E2F;
+    background-color: var(--Primary-color);
 }
 
 .detailes-product__size-btn {}
 
 .detailes-product__size-btn--active {
-    color: #ffffff;
+    color: var( --white-color);
 }
 
 .detailes-product__color-box {
@@ -702,7 +701,7 @@ cart-shop singel-product
 }
 
 .detailes-product__Color__name {
-    color: #9F9F9F;
+    color: var(--gray-color);
 }
 
 .detailes-product__Color-btn-container {
@@ -795,7 +794,7 @@ cart-shop singel-product
 .detailes-product-btn__box-Compare {
     width: 12.3rem;
     height: 6.4rem;
-    border: 0.1rem solid #9F9F9F;
+    border: 0.1rem solid var(--gray-color);
     background-color: transparent;
     display: flex;
     align-items: center;
@@ -885,7 +884,7 @@ cart-shop singel-product
 .Supplementary-specifications {
     display: flex;
     font-family: "Poppins-Regular";
-    color: #9F9F9F;
+    color: var(--gray-color);
 }
 
 .Supplementary-specifications__title {}

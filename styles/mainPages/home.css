@@ -3,7 +3,6 @@
 @import url(../Features/products.css);
 @import url(/Furniro/styles/defaults.css);
 
-
 .home {
     background: url("/Furniro/images/img.png")center no-repeat;
     background-size: cover;
@@ -35,7 +34,7 @@
 .home__title {
     font-family: "Poppins-Bold";
     font-size: 4.2rem;
-    color: #B88E2F;
+    color: var(--Primary-color);
     padding-right: 18rem;
 }
 
@@ -48,7 +47,7 @@
 .home__btn-box {
     max-width: 20.2rem;
     height: 7rem;
-    background-color: #B88E2F;
+    background-color: var(--Primary-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,10 +122,10 @@
     outline: none;
     background-color: transparent;
     border: none;
-    border: 0.1rem solid #B88E2F;
+    border: 0.1rem solid var(--Primary-color);
     width: 24.8rem;
     height: 4.8rem;
-    color: #B88E2F;
+    color: var(--Primary-color);
     font-family: "Poppins-Bold";
     cursor: pointer;
 }
@@ -145,7 +144,7 @@ slaisder-section
     width: 100%;
     margin-top: 10rem;
     padding: 5rem 0 5rem 5rem;
-    background-color: #FCF8F3;
+    background-color: var(--secondary-color);
     display: flex;
     gap: 10rem;
 }
@@ -166,7 +165,7 @@ slaisder-section
 .slaider-btn-box {
     width: 17.6rem;
     height: 4.8rem;
-    background-color: #B88E2F;
+    background-color: var(--Primary-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -251,7 +250,7 @@ slaisder-section
 .slaider-content-img-arrow {
     width: 4.8rem;
     height: 4.8rem;
-    background-color: #B88E2F;
+    background-color: var(--Primary-color);
     position: absolute;
     bottom: 5%;
     left: 29.4%;
@@ -265,7 +264,7 @@ slaisder-section
 .slaider-btn {
     width: 4.8rem;
     height: 4.8rem;
-    background-color: #ffffff;
+    background-color: var( --white-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -304,7 +303,7 @@ slaisder-section
 .custom-input-radio--active {
     width: 2.7rem;
     height: 2.7rem;
-    border: 0.2rem solid #B88E2F;
+    border: 0.2rem solid var(--Primary-color);
     border-radius: 100%;
     cursor: pointer;
     display: flex;
@@ -330,7 +329,7 @@ slaisder-section
 .checkmark-input--active {
     width: calc(100% - 1rem);
     height: calc(100% - 1rem);
-    background-color: #B88E2F;
+    background-color: var(--Primary-color);
     border-radius: 100%;
     transition: all 0.8s ease-in-out;
 }
@@ -361,7 +360,7 @@ slaisder-section
 }
 
 .design-header__title {
-    color: #3A3A3A;
+    color: var(--text-Secondary-color);
     font-size: 4rem;
     font-family: "Poppins-Bold";
 }

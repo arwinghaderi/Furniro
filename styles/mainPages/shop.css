@@ -80,7 +80,7 @@
     content: "";
     width: 0.2rem;
     height: 4rem;
-    background-color: #9F9F9F;
+    background-color: var(--gray-color);
 }
 
 .shop-filters__result-text-box-icon {
@@ -104,6 +104,7 @@
     align-items: center;
     justify-content: center;
     gap: 2rem;
+
 }
 
 .shop-filter__input-box--number,
@@ -126,14 +127,14 @@
     width: 100%;
     height: 100%;
     font-size: 2rem;
-    color: #9F9F9F;
+    color: var(--gray-color);
     appearance: none;
     -webkit-appearance: none;
 }
 
 .shop-filter__input::placeholder {
     font-size: 2rem;
-    color: #9F9F9F;
+    color: var(--gray-color);
 }
 
 .shop-filter__input--text {
@@ -268,11 +269,11 @@
 }
 
 .shop-products__pagination-box--active {
-    background-color: #B88E2F;
+    background-color: var(--Primary-color);
 }
 
 .shop-product-button--active {
-    color: #ffffff;
+    color: var( --white-color);
 }
 
 /* ================

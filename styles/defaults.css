@@ -11,7 +11,7 @@ html {
     --dark-color: #000000;
     --gray-color: #9F9F9F;
     --white-color: #FFFFFF;
-    --primary-font:"Poppins-Regular";
+    --primary-font: "Poppins-Regular";
 }
 
 *::after,
@@ -29,4 +29,10 @@ body {
 
 a {
     text-decoration: none;
+}
+
+.icon {
+    color: var(--white-color);
+    width: 1.4rem;
+    height: 1.4rem;
 }

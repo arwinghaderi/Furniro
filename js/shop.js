@@ -1,5 +1,5 @@
 import { products } from "../js/db/data.js"
-import { setTemplateDom } from "./func/auth.js"
+import { setTemplateDom ,setpagination } from "./func/auth.js"
 
 let $ = document
 
@@ -32,7 +32,6 @@ iconFilter.addEventListener("click", function (event) {
 
 
 let rowProduct = $.querySelector(".row-container")
-let containerPagination = $.querySelector(".shop-products__number-pagination")
 let numberShowProduct = $.querySelector(".shop-filter__input--number")
 let numberRowUser;
 let btnFilter = $.querySelectorAll(".box-filter__btn")
@@ -140,66 +139,6 @@ function setinputNumberRow(products) {
         }
 
     })
-}
-
-
-//**setpagination
-
-function setpagination(products) {
-    containerPagination.innerHTML = ""
-    let numberpagination = Math.ceil(products.length / numberRow)
-    for (let i = 1; i < numberpagination + 1; i++) {
-        setBtnDom(i, products)
-    }
-}
-
-//**setBtnDom
-function setBtnDom(i, products) {
-    let divelmnt = $.createElement("div")
-    divelmnt.className = "shop-products__pagination-box-btn"
-
-    let btnElm = $.createElement("button")
-    btnElm.className = "shop-product-button"
-
-    btnElm.innerHTML = i
-
-    divelmnt.append(btnElm)
-
-    if (i === currentPage) {
-        divelmnt.classList.add("shop-products__pagination-box--active")
-        btnElm.classList.add("shop-product-button--active")
-    }
-    btnElm.addEventListener("click", function () {
-        currentPage = i
-        setTemplateDom(products)
-        let btnActive = $.querySelector(".shop-product-button.shop-product-button--active")
-        let btnDivActive = $.querySelector(".shop-products__pagination-box-btn.shop-products__pagination-box--active")
-        btnActive.classList.remove("shop-product-button--active")
-        btnDivActive.classList.remove("shop-products__pagination-box--active")
-        divelmnt.classList.add("shop-products__pagination-box--active")
-        btnElm.classList.add("shop-product-button--active")
-        let divBtnPrev = $.querySelector(".shop-products__prev-btn-box")
-        let nextDivElem = $.querySelector(".shop-products__next-btn-box")
-        let numberpagination = Math.ceil(products.length / numberRow)
-        if (currentPage === numberpagination) {
-            nextDivElem.style.display = "none"
-        }
-        if (currentPage > 1) {
-            divBtnPrev.style.display = "flex"
-        }
-        if (currentPage === 1) {
-            divBtnPrev.style.display = "none"
-        }
-        if (currentPage < numberpagination) {
-            nextDivElem.style.display = "flex"
-        }
-        if (numberpagination === 1) {
-            nextDivElem.style.display = "none"
-            divBtnPrev.style.display = "none"
-        }
-        setLocalStorgecurrentmPage(currentPage)
-    })
-    containerPagination.append(divelmnt)
 }
 
 //** SetBtnNextPrev*/
@@ -471,7 +410,6 @@ if (optionSelect.value === "All") {
     getItemLocalStoregcurrentPage(productsFilter)
     productsFilter.push(products)
 };
-
 window.addEventListener('load', function () {
     getItemLocalStoregFilter(productsFilter)
 })

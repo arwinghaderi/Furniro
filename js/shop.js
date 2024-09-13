@@ -1,5 +1,6 @@
 import { products } from "../js/db/data.js"
 import { addingProductsTemplate } from "../js/func/shared.js"
+import { paginationCalculations } from "./func/utils.js"
 
 let $ = document
 
@@ -40,8 +41,9 @@ let btnFilter = $.querySelectorAll(".box-filter__btn")
 let boxBtnFilter = $.querySelectorAll(".box-filter__btn-box")
 let numberRow = 8
 let currentPage = 1
-let indexEnd, indexStart
+let resultShowProducts = document.querySelector(".shop-filter__result-text")
 
+let productsBasedPagination = paginationCalculations(numberRow, currentPage, resultShowProducts)
 
 
 
@@ -495,7 +497,6 @@ function searchProducts(products) {
 
 
 window.addEventListener('load', function () {
-    let productsBasedPagination = paginationCalculations()
     console.log(productsBasedPagination);
     addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
 })

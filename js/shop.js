@@ -1,5 +1,5 @@
 import { products } from "../js/db/data.js"
-import { setTemplateDom } from "./func/auth.js"
+import { setTemplateDom } from "../js/func/shared.js"
 
 let $ = document
 
@@ -31,7 +31,8 @@ iconFilter.addEventListener("click", function (event) {
 })
 
 
-let rowProduct = $.querySelector(".row-container")
+
+let productsWrapper = $.querySelector(".row-container")
 let containerPagination = $.querySelector(".shop-products__number-pagination")
 let numberShowProduct = $.querySelector(".shop-filter__input--number")
 let numberRowUser;
@@ -65,6 +66,7 @@ function productsFilterSetting(target) {
             let filterProductsNew = products.filter(function (product) {
                 return product.newProduct === true
             })
+
             currentPage = 1
             setTemplateDom(filterProductsNew)
             setpagination(filterProductsNew)
@@ -340,7 +342,7 @@ let svgCol1 = $.querySelector(".shop-filter__svg-icon--col-1")
 let svgCol3 = $.querySelector(".shop-filter__svg-icon--col-3")
 function gridSystm1col(products) {
     svgCol1.addEventListener("click", function () {
-        rowProduct.innerHTML = ""
+        productsWrapper.innerHTML = ""
         indexEnd = numberRow * currentPage
         indexStart = indexEnd - numberRow
         shopFilterResultText.innerHTML = "Showing" + indexStart + "-- " + indexEnd + " of" + products.length + " results"
@@ -351,7 +353,7 @@ function gridSystm1col(products) {
                 let discountPercent = +product.discountPercent
                 let totalDiscount = (price * discountPercent) / 100
                 let total = price - totalDiscount
-                rowProduct.insertAdjacentHTML('beforeend', '<div class="col col-lg-12 product-main-box product-main-box__shop product-main-box__shop--show "><div class="product-box"  id="discount"  ><div  ' +
+                productsWrapper.insertAdjacentHTML('beforeend', '<div class="col col-lg-12 product-main-box product-main-box__shop product-main-box__shop--show "><div class="product-box"  id="discount"  ><div  ' +
                     'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
                     '<div class="box-add-btn-cart box-add-btn-cart--grid-col-1"><span class="box-add-btn-cart__text">Add to cart</span></div>' +
                     ' <div class="product-overlay__options product-overlay__options--grid-col-1">' +
@@ -371,7 +373,7 @@ function gridSystm1col(products) {
                     '</div> </div></div></div> ')
             }
 
-            product.newProduct === true ? rowProduct.insertAdjacentHTML('beforeend', '   <div class="col col-lg-12 product-main-box product-main-box__shop " id="new"><div class="product-box"><div  ' +
+            product.newProduct === true ? productsWrapper.insertAdjacentHTML('beforeend', '   <div class="col col-lg-12 product-main-box product-main-box__shop " id="new"><div class="product-box"><div  ' +
                 'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
                 '<div class="box-add-btn-cart"><span class="box-add-btn-cart__text">Add to cart</span></div>' +
                 ' <div class="product-overlay__options">' +
@@ -388,7 +390,7 @@ function gridSystm1col(products) {
                 ' <span class="Discount-product__number">NEW</span></div><div class="product-Introductions"><h3 class="product-name">' + product.productName + '</h3>' +
                 ' <p class="product-Introduction">' + product.productIntroduction + '</p><div class="product-price-box">' +
                 '<span class="product-price">' + product.price.toLocaleString("en") + '</span>' +
-                '</div> </div></div></div> ') : product.poster === false ? rowProduct.insertAdjacentHTML('beforeend', '   <div class="col col-lg-12 product-main-box product-main-box__shop poster"><div class="product-box "><div  ' +
+                '</div> </div></div></div> ') : product.poster === false ? productsWrapper.insertAdjacentHTML('beforeend', '   <div class="col col-lg-12 product-main-box product-main-box__shop poster"><div class="product-box "><div  ' +
                     'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
                     '<div class="box-add-btn-cart"><span class="box-add-btn-cart__text">Add to cart</span></div>' +
                     ' <div class="product-overlay__options">' +
@@ -411,6 +413,8 @@ function gridSystm1col(products) {
         setinputNumberRow(products);
         setBtnNextPrev(products)
     })
+
+    
     svgCol3.addEventListener("click", function () {
         setTemplateDom(products)
         setpagination(products)

@@ -488,17 +488,7 @@ function searchProducts(products) {
 
 
 
-const paginationCalculations = () => {
-    let copyProducts = [...products]
-    console.log(copyProducts);
-    indexEnd = numberRow * currentPage
-    indexStart = indexEnd - numberRow
-    // shopFilterResultText.innerHTML = "Showing" + indexStart + "-- " + indexEnd + " of" + products.length + " results"
-    let productListArraysSlice = copyProducts.slice(indexStart, indexEnd)
 
-    console.log(productListArraysSlice);
-    return productListArraysSlice
-}
 
 
 

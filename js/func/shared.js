@@ -1,14 +1,3 @@
-
-let numberRow = 8
-let currentPage = 1
-let indexEnd, indexStart
-let shopFilterResultText = document.querySelector(".shop-filter__result-text")
-
-
-
-
-
-
 function addingProductsTemplate(products, productsStructure, productsWrapper) {
 
     if (productsStructure === 'row') {

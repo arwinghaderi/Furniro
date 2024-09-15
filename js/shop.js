@@ -1,6 +1,6 @@
 import { products } from "../js/db/data.js"
 import { addingProductsTemplate } from "../js/func/shared.js"
-import { paginationCalculations } from "./func/utils.js"
+import { paginationCalculations, saveToLocalStorage ,getFromLocalStorage } from "./func/utils.js"
 
 let $ = document
 

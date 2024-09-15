@@ -1,14 +1,15 @@
 function addingProductsTemplate(products, productsStructure, productsWrapper) {
 
+    // const content = element.innerHTML;
     if (productsStructure === 'row') {
         products.forEach(function (product) {
+            // const content = element.innerHTML;
             if (product.discount === true) {
                 let price = +product.price
                 let discountPercent = +product.discountPercent
                 let totalDiscount = (price * discountPercent) / 100
                 let total = price - totalDiscount
-
-                productsWrapper.insertAdjacentHTML('beforeend', '<div class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show "><div class="product-box"  id="discount"  ><div  ' +
+                productsWrapper.insertAdjacentHTML("beforeend", '<div class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show "><div class="product-box"  id="discount"  ><div  ' +
                     'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
                     '<div class="box-add-btn-cart"><a href="../Pages/product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
                     ' <div class="product-overlay__options">' +
@@ -63,8 +64,10 @@ function addingProductsTemplate(products, productsStructure, productsWrapper) {
                     '<span class="product-price">' + product.price.toLocaleString("en") + '</span>' +
                     '</div> </div></div></div> ') : ""
         })
-
+        
     } else {
+     
+
         products.forEach(function (product) {
             if (product.discount === true) {
                 let price = +product.price

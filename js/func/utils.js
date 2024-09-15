@@ -19,9 +19,10 @@ const saveToLocalStorage = (key, value) => {
 }
 
 const getFromLocalStorage = (key) => {
-    let value = JSON.parse(localStorage.getItem(key))
-    return value
+    return JSON.parse(localStorage.getItem(key))
 }
 
 
-export { paginationCalculations, saveToLocalStorage, getFromLocalStorage }
+
+
+export { paginationCalculations, saveToLocalStorage, getFromLocalStorage, }

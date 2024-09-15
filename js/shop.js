@@ -1,5 +1,5 @@
-import { products } from "../js/db/data.js"
 import { addingProductsTemplate } from "../js/func/shared.js"
+import { products } from "../js/db/data.js"
 import { paginationCalculations, saveToLocalStorage, getFromLocalStorage } from "./func/utils.js"
 
 let $ = document
@@ -45,12 +45,6 @@ let currentPage = 1
 let resultShowProducts = document.querySelector(".shop-filter__result-text")
 
 let productsBasedPagination = paginationCalculations(numberRow, currentPage, resultShowProducts)
-
-
-
-
-
-
 
 
 const productsStructure = 'row'
@@ -293,7 +287,7 @@ function addingCurrentPageByUser(productsFilter) {
         currentPage = data
     }
     else {
-        currentPage = data
+        currentPage = 1
     }
     addingProductsTemplate(productsFilter, productsStructure, productsWrapper)
     setpagination(productsFilter)
@@ -452,26 +446,25 @@ function searchProducts(products) {
 // searchProducts(products)
 
 
+console.log(optionSelect.value);
+
+// if (optionSelect.value === "All") {
+//     if (currentPage === null) {
+//         currentPage = 1
+//     } else {
+//         currentPage = currentPage
+//     }
+//     console.log(productsBasedPagination);
 
 
-if (optionSelect.value === "All") {
-    if (currentPage === null) {
-        currentPage = 1
-    } else {
-        currentPage = currentPage
-    }
 
-    addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-
-    setpagination(products)
-    setinputNumberRow(products)
-    // gridSystm1col(products)
-    setBtnNextPrev(products)
-    // saveToLocalStorage("FilteredProducts", products)
-    saveToLocalStorage("currentPage", currentPage)
-    addingCurrentPageByUser(productsFilter)
-    productsFilter.push(products)
-};
+//     setpagination(productsBasedPagination)
+//     setinputNumberRow(productsBasedPagination)
+//     setBtnNextPrev(productsBasedPagination)
+//     saveToLocalStorage("FilteredProducts", productsBasedPagination)
+//     saveToLocalStorage("currentPage", currentPage)
+//     addingCurrentPageByUser(productsBasedPagination)
+// };
 
 
 
@@ -483,16 +476,13 @@ if (optionSelect.value === "All") {
 
 window.addEventListener('load', function () {
 
-    // if (productsBasedPagination.length) {
-    //     addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-    // } else {
-    //     categoryCoursesWrapper.insertAdjacentHTML('beforeend', `
-    //   <div class="alert alert-danger">هیچ دوره‌ای برای این دسته بندی وجود ندارد :/</div>
-    // `)
-    // }
 
     addingActiveOptionInSelectBoxByUser(productsFilter)
     addingProductsFilteredbyUser(productsFilter)
     addingCurrentPageByUser(productsFilter)
     addingShowProductCountbyUser(products)
+
+
+
+    addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
 }) 

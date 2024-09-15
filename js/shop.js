@@ -1,6 +1,6 @@
 import { products } from "../js/db/data.js"
 import { addingProductsTemplate } from "../js/func/shared.js"
-import { paginationCalculations, saveToLocalStorage ,getFromLocalStorage } from "./func/utils.js"
+import { paginationCalculations, saveToLocalStorage, getFromLocalStorage } from "./func/utils.js"
 
 let $ = document
 
@@ -40,6 +40,7 @@ let numberRowUser;
 let btnFilter = $.querySelectorAll(".box-filter__btn")
 let boxBtnFilter = $.querySelectorAll(".box-filter__btn-box")
 let numberRow = 8
+// numberProductsShown
 let currentPage = 1
 let resultShowProducts = document.querySelector(".shop-filter__result-text")
 
@@ -63,9 +64,11 @@ let productsFilter = []
 let optionSelect = $.querySelector(".box-filter__select")
 
 
-optionSelect.addEventListener('change', function (e) {
-    productsFilterSetting(e.target.value)
-    setLocalStorgeOptionActive(e.target.value)
+optionSelect.addEventListener('change', function (event) {
+    let optionActive = event.target.value
+
+    productsFilterSetting(optionActive)
+    saveToLocalStorage("optionActiveSelectBox", optionActive)
 })
 
 
@@ -79,15 +82,15 @@ function productsFilterSetting(target) {
             let filterProductsNew = products.filter(function (product) {
                 return product.newProduct === true
             })
-
+            console.log(filterProductsNew);
             currentPage = 1
             addingProductsTemplate(filterProductsNew, productsStructure, productsWrapper)
             setpagination(filterProductsNew)
             setinputNumberRow(filterProductsNew);
-            gridSystm1col(filterProductsNew)
+            // gridSystm1col(filterProductsNew)
             setBtnNextPrev(filterProductsNew)
-            setLocalStorgeFilter(filterProductsNew)
-            setLocalStorgecurrentmPage(currentPage)
+            saveToLocalStorage("FilteredProducts", filterProductsNew)
+            saveToLocalStorage("currentPage", currentPage)
             productsFilter.push(filterProductsNew)
             break;
         case 'discount':
@@ -98,23 +101,23 @@ function productsFilterSetting(target) {
             addingProductsTemplate(filterProductsDiscunt, productsStructure, productsWrapper)
             setpagination(filterProductsDiscunt)
             setinputNumberRow(filterProductsDiscunt);
-            gridSystm1col(filterProductsDiscunt)
+            // gridSystm1col(filterProductsDiscunt)
             setBtnNextPrev(filterProductsDiscunt)
-            setLocalStorgeFilter(filterProductsDiscunt)
-            setLocalStorgecurrentmPage(currentPage)
+            saveToLocalStorage("FilteredProducts", filterProductsDiscunt)
+            saveToLocalStorage("currentPage", currentPage)
             productsFilter.push(filterProductsDiscunt)
             break
-        // case 'All':
-        //     currentPage = 1
-        //     addingProductsTemplate(products, productsStructure, productsWrapper)
-        //     setpagination(products)
-        //     setinputNumberRow(products)
-        //     gridSystm1col(products)
-        //     setBtnNextPrev(products)
-        //     setLocalStorgeFilter(products)
-        //     setLocalStorgecurrentmPage(currentPage)
-        //     productsFilter.push(products)
-        //     break
+        case 'All':
+            currentPage = 1
+            addingProductsTemplate(products, productsStructure, productsWrapper)
+            setpagination(products)
+            setinputNumberRow(products)
+            // gridSystm1col(products)
+            setBtnNextPrev(products)
+            saveToLocalStorage("FilteredProducts", products)
+            saveToLocalStorage("currentPage", currentPage)
+            productsFilter.push(products)
+            break
         default:
             let filterProducts = products.filter(function (product) {
                 return product.type === target
@@ -124,29 +127,31 @@ function productsFilterSetting(target) {
             setpagination(filterProducts)
             setinputNumberRow(filterProducts)
             setBtnNextPrev(filterProducts)
-            gridSystm1col(filterProducts)
-            setLocalStorgeFilter(filterProducts)
-            setLocalStorgecurrentmPage(currentPage)
+
+            saveToLocalStorage("FilteredProducts", filterProducts)
+            saveToLocalStorage("currentPage", currentPage)
             productsFilter.push(filterProducts)
             break;
     }
 }
+
+
 //**setinputNumberRow
 function setinputNumberRow(products) {
     numberShowProduct.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
             let numberRowUser = +event.target.value
-            setLocalStorgeNumberRowUser(+event.target.value)
+            saveToLocalStorage("showCountProducts", numberRowUser)
             console.log(numberRow);
             if (numberRowUser > 0 && numberRowUser < 49) {
                 numberRow = numberRowUser
                 currentPage = 1
-                // addingProductsTemplate(products, productsStructure, productsWrapper)
-                // setpagination(products)
+                addingProductsTemplate(products, productsStructure, productsWrapper)
+                setpagination(products)
                 // gridSystm1col(products)
-                // setBtnNextPrev(products)
-                // setLocalStorgeFilter(products)
-                // setLocalStorgecurrentmPage(currentPage)
+                setBtnNextPrev(products)
+                saveToLocalStorage("FilteredProducts", products)
+                saveToLocalStorage("currentPage", currentPage)
             } else {
                 alert("please select a number and above zero")
             }
@@ -210,7 +215,7 @@ function setBtnDom(i, products) {
             nextDivElem.style.display = "none"
             divBtnPrev.style.display = "none"
         }
-        setLocalStorgecurrentmPage(currentPage)
+        saveToLocalStorage("currentPage", currentPage)
     })
     containerPagination.append(divelmnt)
 }
@@ -252,7 +257,7 @@ function setBtnNextPrevDom(productArrayFilter) {
         addingProductsTemplate(productArrayFilter, productsStructure, productsWrapper)
 
         setpagination(productArrayFilter)
-        setLocalStorgecurrentmPage(currentPage)
+        saveToLocalStorage("currentPage", currentPage)
     })
     divBtnPrev.addEventListener("click", function (event) {
         event.preventDefault()
@@ -265,19 +270,14 @@ function setBtnNextPrevDom(productArrayFilter) {
         }
         addingProductsTemplate(productArrayFilter, productsStructure, productsWrapper)
         setpagination(productArrayFilter)
-        setLocalStorgecurrentmPage(currentPage)
+        saveToLocalStorage("currentPage", currentPage)
     })
 }
-//**SET LOCAL STROGE NumberRowUser*/
-function setLocalStorgeNumberRowUser(numberRow) {
-    localStorage.setItem("numberRowUser", JSON.stringify(numberRow))
-    console.log(numberRow);
-}
 
-function getItemLocalStoregNumberRowUser(products) {
-    let localStorageNumberRowUser = JSON.parse(localStorage.getItem("numberRowUser"))
-    if (localStorageNumberRowUser) {
-        numberRow = +localStorageNumberRowUser
+function addingShowProductCountbyUser(products) {
+    let data = getFromLocalStorage("showCountProducts")
+    if (data) {
+        numberRow = +data
     }
     else {
         numberRow = 8
@@ -286,61 +286,44 @@ function getItemLocalStoregNumberRowUser(products) {
     setpagination(products)
     setBtnNextPrev(products)
 }
-getItemLocalStoregNumberRowUser(products)
 
-//**SET LOCAL STROGE currentmPage*/
-function setLocalStorgecurrentmPage(currentPage) {
-    localStorage.setItem("currentPageShop", JSON.stringify(currentPage))
-    console.log(currentPage);
-}
-
-function getItemLocalStoregcurrentPage(productsFilter) {
-    let currentPageLocalStorge = JSON.parse(localStorage.getItem("currentPageShop"))
-    console.log(currentPageLocalStorge);
+function addingCurrentPageByUser(productsFilter) {
+    let data = getFromLocalStorage("currentPage")
     if (currentPage) {
-        currentPage = currentPageLocalStorge
+        currentPage = data
     }
     else {
-        currentPage = currentPageLocalStorge
+        currentPage = data
     }
     addingProductsTemplate(productsFilter, productsStructure, productsWrapper)
     setpagination(productsFilter)
     setinputNumberRow(productsFilter)
     setBtnNextPrev(productsFilter)
 }
-// getItemLocalStoregcurrentPage(productsFilter)
-
 
 //**SET LOCAL STROGE OptionActive*/
 
-function setLocalStorgeOptionActive(OptionActive) {
-    localStorage.setItem("locationOptionActiveShop", JSON.stringify(OptionActive))
-    console.log(OptionActive);
-}
-function getItemLocalStoregOptionActive(productsFilter) {
-    let OptionActive = JSON.parse(localStorage.getItem("locationOptionActiveShop"))
-    if (OptionActive) {
-        optionSelect.value = OptionActive
+
+function addingActiveOptionInSelectBoxByUser(productsFilter) {
+    let data = getFromLocalStorage("optionActiveSelectBox")
+    if (data) {
+        optionSelect.value = data
     }
     else {
-        optionSelect.valuep = OptionActive
+        optionSelect.value = []
     }
+
     addingProductsTemplate(productsFilter, productsStructure, productsWrapper)
     setpagination(productsFilter)
     setinputNumberRow(productsFilter)
     setBtnNextPrev(productsFilter)
 }
-// getItemLocalStoregOptionActive(productsFilter)
 
-//**SET LOCAL STROGE Filter*/
-function setLocalStorgeFilter(productsFilter) {
-    localStorage.setItem("productsFilterShop", JSON.stringify(productsFilter))
-}
 
-function getItemLocalStoregFilter(productsFilter) {
-    let getItem = JSON.parse(localStorage.getItem("productsFilterShop"))
-    if (getItem) {
-        productsFilter = getItem
+function addingProductsFilteredbyUser(productsFilter) {
+    let data = getFromLocalStorage('FilteredProducts')
+    if (data) {
+        productsFilter = data
     }
     else {
         productsFilter = []
@@ -471,22 +454,24 @@ function searchProducts(products) {
 
 
 
-// if (optionSelect.value === "All") {
-//     if (currentPage === null) {
-//         currentPage = 1
-//     } else {
-//         currentPage = currentPage
-//     }
-//     addingProductsTemplate(products, productsStructure, productsWrapper)
-//     setpagination(products)
-//     setinputNumberRow(products)
-//     gridSystm1col(products)
-//     setBtnNextPrev(products)
-//     setLocalStorgeFilter(products)
-//     setLocalStorgecurrentmPage(currentPage)
-//     getItemLocalStoregcurrentPage(productsFilter)
-//     productsFilter.push(products)
-// };
+if (optionSelect.value === "All") {
+    if (currentPage === null) {
+        currentPage = 1
+    } else {
+        currentPage = currentPage
+    }
+
+    addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+
+    setpagination(products)
+    setinputNumberRow(products)
+    // gridSystm1col(products)
+    setBtnNextPrev(products)
+    // saveToLocalStorage("FilteredProducts", products)
+    saveToLocalStorage("currentPage", currentPage)
+    addingCurrentPageByUser(productsFilter)
+    productsFilter.push(products)
+};
 
 
 
@@ -497,6 +482,17 @@ function searchProducts(products) {
 
 
 window.addEventListener('load', function () {
-    console.log(productsBasedPagination);
-    addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-})
+
+    // if (productsBasedPagination.length) {
+    //     addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+    // } else {
+    //     categoryCoursesWrapper.insertAdjacentHTML('beforeend', `
+    //   <div class="alert alert-danger">هیچ دوره‌ای برای این دسته بندی وجود ندارد :/</div>
+    // `)
+    // }
+
+    addingActiveOptionInSelectBoxByUser(productsFilter)
+    addingProductsFilteredbyUser(productsFilter)
+    addingCurrentPageByUser(productsFilter)
+    addingShowProductCountbyUser(products)
+}) 

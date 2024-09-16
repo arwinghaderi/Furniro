@@ -1,6 +1,5 @@
 function addingProductsTemplate(products, productsStructure, productsWrapper) {
-    // const content = element.innerHTML;
-    console.log(productsStructure);
+    productsWrapper.innerHTML = ""
     if (productsStructure === 'row') {
         productsWrapper.innerHTML = '';
         products.forEach(function (product) {
@@ -68,7 +67,7 @@ const productsSorting = (products, target) => {
             productsFilter = products.filter((product => product.discount === true))
             break
         case 'All':
-
+            productsFilter = products
             break
         default:
             productsFilter = products.filter((product => product.type === target))

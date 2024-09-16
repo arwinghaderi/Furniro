@@ -47,7 +47,7 @@ let resultShowProducts = document.querySelector(".shop-filter__result-text")
 let productsBasedPagination = paginationCalculations(numberRow, currentPage, resultShowProducts)
 
 
-const productsStructure = 'row'
+let productsStructure = 'row'
 
 
 let productsFilter = []
@@ -333,6 +333,37 @@ function addingProductsFilteredbyUser(productsFilter) {
 }
 
 //** gridSystm1col */
+
+
+const structhreIcons = document.querySelectorAll(".shop-filter__svg-icon")
+
+structhreIcons.forEach((icon) => {
+    icon.addEventListener("click", (event) => {
+
+        document.querySelector(".shop-filter__svg-icon--active").classList.remove("shop-filter__svg-icon--active")
+
+        icon.classList.add("shop-filter__svg-icon--active")
+
+        insetTemplateHtml(event.target.id)
+    })
+})
+
+
+const insetTemplateHtml = (target) => {
+
+    if (target === "row") {
+        productsStructure = "row"
+        addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+
+    } else {
+        productsStructure = "col"
+        addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+    }
+
+
+}
+
+
 
 // let svgCol1 = $.querySelector(".shop-filter__svg-icon--col-1")
 // let svgCol3 = $.querySelector(".shop-filter__svg-icon--col-3")

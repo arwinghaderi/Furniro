@@ -120,6 +120,30 @@
         padding: 3rem;
     }
 
+    .product-name-col {
+        font-size: 2.5rem;
+    }
+
+    .product-Introduction-col {
+        font-size: 1.6rem;
+    }
+
+    .product-price-col {
+        font-size: 1.8rem;
+    }
+
+    .product-discountPrice-col {
+        font-size: 1.8rem;
+    }
+
+    .img-box-overlay-col {
+        width: 50%;
+    }
+
+    .product-Introductions-col {
+        width: 50%;
+    }
+
 
 
 }
@@ -312,6 +336,22 @@
     .cart-shop-section__total {
         width: 100%;
     }
+
+    .product-name-col {
+        font-size: 2rem;
+    }
+
+    .product-Introduction-col {
+        font-size: 1.6rem;
+    }
+
+    .product-price-col {
+        font-size: 1.6rem;
+    }
+
+    .product-discountPrice-col {
+        font-size: 1.6rem;
+    }
 }
 
 @media screen and (max-width:768px) {
@@ -500,6 +540,9 @@
     .icon-container-option {
         justify-content: center;
     }
+         .product-price {
+             font-size: 1.6rem;
+         }
 
 
 }

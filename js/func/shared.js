@@ -57,4 +57,23 @@ function addingProductsTemplate(products, productsStructure, productsWrapper) {
 }
 
 
-export { addingProductsTemplate }
+const productsSorting = (products, target) => {
+    let productsFilter = []
+    switch (target) {
+        case 'new':
+            productsFilter = products.filter((product => product.newProduct === true))
+            break;
+        case 'discount':
+            productsFilter = products.filter((product => product.discount === true))
+            break
+        case 'All':
+
+            break
+        default:
+            productsFilter = products.filter((product => product.type === target))
+            break;
+    }
+    console.log("sortings");
+    return productsFilter
+}
+export { addingProductsTemplate, productsSorting }

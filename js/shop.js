@@ -1,4 +1,4 @@
-import { addingProductsTemplate } from "../js/func/shared.js"
+import { addingProductsTemplate, productsSorting } from "../js/func/shared.js"
 import { products } from "../js/db/data.js"
 import { paginationCalculations, saveToLocalStorage, getFromLocalStorage } from "./func/utils.js"
 
@@ -61,7 +61,8 @@ let optionSelect = $.querySelector(".box-filter__select")
 optionSelect.addEventListener('change', function (event) {
     let optionActive = event.target.value
 
-    productsFilterSetting(optionActive)
+    let productsFilter = productsSorting(products, optionActive)
+    addingProductsTemplate(productsFilter, productsStructure, productsWrapper)
     saveToLocalStorage("optionActiveSelectBox", optionActive)
 })
 
@@ -69,65 +70,65 @@ optionSelect.addEventListener('change', function (event) {
 
 
 //**FilterArray */
-function productsFilterSetting(target) {
-    console.log(target);
-    switch (target) {
-        case 'new':
-            let filterProductsNew = products.filter(function (product) {
-                return product.newProduct === true
-            })
-            console.log(filterProductsNew);
-            currentPage = 1
-            addingProductsTemplate(filterProductsNew, productsStructure, productsWrapper)
-            setpagination(filterProductsNew)
-            setinputNumberRow(filterProductsNew);
-            // gridSystm1col(filterProductsNew)
-            setBtnNextPrev(filterProductsNew)
-            saveToLocalStorage("FilteredProducts", filterProductsNew)
-            saveToLocalStorage("currentPage", currentPage)
-            productsFilter.push(filterProductsNew)
-            break;
-        case 'discount':
-            let filterProductsDiscunt = products.filter(function (product) {
-                return product.discount === true
-            })
-            currentPage = 1
-            addingProductsTemplate(filterProductsDiscunt, productsStructure, productsWrapper)
-            setpagination(filterProductsDiscunt)
-            setinputNumberRow(filterProductsDiscunt);
-            // gridSystm1col(filterProductsDiscunt)
-            setBtnNextPrev(filterProductsDiscunt)
-            saveToLocalStorage("FilteredProducts", filterProductsDiscunt)
-            saveToLocalStorage("currentPage", currentPage)
-            productsFilter.push(filterProductsDiscunt)
-            break
-        case 'All':
-            currentPage = 1
-            addingProductsTemplate(products, productsStructure, productsWrapper)
-            setpagination(products)
-            setinputNumberRow(products)
-            // gridSystm1col(products)
-            setBtnNextPrev(products)
-            saveToLocalStorage("FilteredProducts", products)
-            saveToLocalStorage("currentPage", currentPage)
-            productsFilter.push(products)
-            break
-        default:
-            let filterProducts = products.filter(function (product) {
-                return product.type === target
-            })
-            currentPage = 1
-            addingProductsTemplate(filterProducts, productsStructure, productsWrapper)
-            setpagination(filterProducts)
-            setinputNumberRow(filterProducts)
-            setBtnNextPrev(filterProducts)
+// function productsFilterSetting(target) {
+//     console.log(target);
+//     switch (target) {
+//         case 'new':
+//             let filterProductsNew = products.filter(function (product) {
+//                 return product.newProduct === true
+//             })
+//             console.log(filterProductsNew);
+//             currentPage = 1
+//      c
+//             setpagination(filterProductsNew)
+//             setinputNumberRow(filterProductsNew);
+//             // gridSystm1col(filterProductsNew)
+//             setBtnNextPrev(filterProductsNew)
+//             saveToLocalStorage("FilteredProducts", filterProductsNew)
+//             saveToLocalStorage("currentPage", currentPage)
+//             productsFilter.push(filterProductsNew)
+//             break;
+//         case 'discount':
+//             let filterProductsDiscunt = products.filter(function (product) {
+//                 return product.discount === true
+//             })
+//             currentPage = 1
+//             addingProductsTemplate(filterProductsDiscunt, productsStructure, productsWrapper)
+//             setpagination(filterProductsDiscunt)
+//             setinputNumberRow(filterProductsDiscunt);
+//             // gridSystm1col(filterProductsDiscunt)
+//             setBtnNextPrev(filterProductsDiscunt)
+//             saveToLocalStorage("FilteredProducts", filterProductsDiscunt)
+//             saveToLocalStorage("currentPage", currentPage)
+//             productsFilter.push(filterProductsDiscunt)
+//             break
+//         case 'All':
+//             currentPage = 1
+//             addingProductsTemplate(products, productsStructure, productsWrapper)
+//             setpagination(products)
+//             setinputNumberRow(products)
+//             // gridSystm1col(products)
+//             setBtnNextPrev(products)
+//             saveToLocalStorage("FilteredProducts", products)
+//             saveToLocalStorage("currentPage", currentPage)
+//             productsFilter.push(products)
+//             break
+//         default:
+//             let filterProducts = products.filter(function (product) {
+//                 return product.type === target
+//             })
+//             currentPage = 1
+//             addingProductsTemplate(filterProducts, productsStructure, productsWrapper)
+//             setpagination(filterProducts)
+//             setinputNumberRow(filterProducts)
+//             setBtnNextPrev(filterProducts)
 
-            saveToLocalStorage("FilteredProducts", filterProducts)
-            saveToLocalStorage("currentPage", currentPage)
-            productsFilter.push(filterProducts)
-            break;
-    }
-}
+//             saveToLocalStorage("FilteredProducts", filterProducts)
+//             saveToLocalStorage("currentPage", currentPage)
+//             productsFilter.push(filterProducts)
+//             break;
+//     }
+// }
 
 
 //**setinputNumberRow
@@ -166,6 +167,7 @@ function setpagination(products) {
 }
 //**setBtnDom
 function setBtnDom(i, products) {
+    console.log(currentPage);
     let divelmnt = $.createElement("div")
     divelmnt.className = "shop-products__pagination-box-btn"
 
@@ -180,6 +182,8 @@ function setBtnDom(i, products) {
         divelmnt.classList.add("shop-products__pagination-box--active")
         btnElm.classList.add("shop-product-button--active")
     }
+
+
     btnElm.addEventListener("click", function () {
         currentPage = i
         // addingProductsTemplate(products, productsStructure, productsWrapper)

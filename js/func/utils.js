@@ -23,15 +23,11 @@ const getFromLocalStorage = (key) => {
 }
 
 const searchInProducts = (products, valueSearch, productsKey) => {
-    let valueSearchLoewr = valueSearch.toLowerCase()
-
+    let valueSearchLoewr = valueSearch.toLowerCase().trim()
 
     let searchProducts = products.filter((product) => product[productsKey].includes(valueSearchLoewr))
 
-    console.log(searchProducts);
-
     return searchProducts
-
 }
 
 

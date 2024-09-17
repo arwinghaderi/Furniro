@@ -1,14 +1,17 @@
-import { products } from "../db/data.js";
+const paginationCalculations = (products, numberRow, currentPage, resultShowProducts) => {
 
-const paginationCalculations = (numberRow, currentPage, resultShowProducts) => {
     let indexEnd, indexStart
     let copyProducts = [...products]
 
     indexEnd = numberRow * currentPage
     indexStart = indexEnd - numberRow
 
-    resultShowProducts.innerHTML = "Showing" + indexStart + "-- " + indexEnd + " of" + products.length + " results"
+
+    // resultShowProducts.innerHTML = "Showing" + indexStart + "-- " + indexEnd + " of" + products.length + " results"
+    console.log(indexStart, indexEnd);
     let paginationProducts = copyProducts.slice(indexStart, indexEnd)
+
+    console.log(paginationProducts);
 
     return paginationProducts
 }

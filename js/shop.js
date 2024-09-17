@@ -39,18 +39,20 @@ let numberShowProduct = $.querySelector(".shop-filter__input--number")
 let numberRowUser;
 let btnFilter = $.querySelectorAll(".box-filter__btn")
 let boxBtnFilter = $.querySelectorAll(".box-filter__btn-box")
+
 let numberRow = 8
 // numberProductsShown
 let currentPage = 1
 let resultShowProducts = document.querySelector(".shop-filter__result-text")
 
-let productsBasedPagination = paginationCalculations(numberRow, currentPage, resultShowProducts)
+
+
 
 
 let productsStructure = 'row'
 
 
-let productsFilter = []
+
 
 
 //**optionSelect */
@@ -59,11 +61,18 @@ let optionSelect = $.querySelector(".box-filter__select")
 
 
 optionSelect.addEventListener('change', function (event) {
-    let optionActive = event.target.value
+    currentPage = 1
 
-    let productsFilter = productsSorting(products, optionActive)
-    addingProductsTemplate(productsFilter, productsStructure, productsWrapper)
+    let optionActive = event.target.value
+    const productsFilter = productsSorting(products, optionActive)
+    const filteredProductPagination = paginationCalculations(productsFilter, numberRow, currentPage, resultShowProducts)
+
+    saveToLocalStorage("FilteredProducts", productsFilter)
+    saveToLocalStorage("currentPage", currentPage)
     saveToLocalStorage("optionActiveSelectBox", optionActive)
+    setpagination(productsFilter)
+    addingActiveOptionInSelectBoxByUser()
+    addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
 })
 
 
@@ -132,35 +141,37 @@ optionSelect.addEventListener('change', function (event) {
 
 
 //**setinputNumberRow
-function setinputNumberRow(products) {
-    numberShowProduct.addEventListener("keydown", function (event) {
-        if (event.keyCode === 13) {
-            let numberRowUser = +event.target.value
-            saveToLocalStorage("showCountProducts", numberRowUser)
-            console.log(numberRow);
-            if (numberRowUser > 0 && numberRowUser < 49) {
-                numberRow = numberRowUser
-                currentPage = 1
-                addingProductsTemplate(products, productsStructure, productsWrapper)
-                setpagination(products)
-                // gridSystm1col(products)
-                setBtnNextPrev(products)
-                saveToLocalStorage("FilteredProducts", products)
-                saveToLocalStorage("currentPage", currentPage)
-            } else {
-                alert("please select a number and above zero")
-            }
+// function setinputNumberRow(products) {
+//     numberShowProduct.addEventListener("keydown", function (event) {
+//         if (event.keyCode === 13) {
+//             let numberRowUser = +event.target.value
+//             saveToLocalStorage("showCountProducts", numberRowUser)
+//             console.log(numberRow);
+//             if (numberRowUser > 0 && numberRowUser < 49) {
+//                 numberRow = numberRowUser
+//                 currentPage = 1
+//                 addingProductsTemplate(products, productsStructure, productsWrapper)
+//                 setpagination(products)
+//                 // gridSystm1col(products)
+//                 setBtnNextPrev(products)
+//                 saveToLocalStorage("FilteredProducts", products)
+//                 saveToLocalStorage("currentPage", currentPage)
+//             } else {
+//                 alert("please select a number and above zero")
+//             }
 
 
-        }
+//         }
 
-    })
-}
+//     })
+// }
 
-//**setpagination
+// //**setpagination
 function setpagination(products) {
+    console.log(products);
     containerPagination.innerHTML = ""
     let numberpagination = Math.ceil(products.length / numberRow)
+    console.log(numberpagination);
     for (let i = 1; i < numberpagination + 1; i++) {
         setBtnDom(i, products)
     }
@@ -184,8 +195,13 @@ function setBtnDom(i, products) {
 
 
     btnElm.addEventListener("click", function () {
+        console.log(currentPage, i);
         currentPage = i
-        // addingProductsTemplate(products, productsStructure, productsWrapper)
+
+        let filteredProductPagination = paginationCalculations(products, numberRow, currentPage, resultShowProducts)
+
+        saveToLocalStorage("currentPage", currentPage)
+        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
 
         let btnActive = $.querySelector(".shop-product-button.shop-product-button--active")
         let btnDivActive = $.querySelector(".shop-products__pagination-box-btn.shop-products__pagination-box--active")
@@ -212,9 +228,9 @@ function setBtnDom(i, products) {
             nextDivElem.style.display = "none"
             divBtnPrev.style.display = "none"
         }
-        saveToLocalStorage("currentPage", currentPage)
     })
     containerPagination.append(divelmnt)
+
 }
 
 //** SetBtnNextPrev*/
@@ -279,29 +295,25 @@ function addingShowProductCountbyUser(products) {
     else {
         numberRow = 8
     }
-    // addingProductsTemplate(products, productsStructure, productsWrapper)
-    setpagination(products)
-    setBtnNextPrev(products)
+    addingProductsTemplate(products, productsStructure, productsWrapper)
+    // setpagination(products)
+    // setBtnNextPrev(products)
 }
 
-function addingCurrentPageByUser(productsFilter) {
-    let data = getFromLocalStorage("currentPage")
-    if (currentPage) {
-        currentPage = data
-    }
-    else {
-        currentPage = 1
-    }
-    addingProductsTemplate(productsFilter, productsStructure, productsWrapper)
-    setpagination(productsFilter)
-    setinputNumberRow(productsFilter)
-    setBtnNextPrev(productsFilter)
-}
+// function addingCurrentPageByUser(products) {
+//     let data = getFromLocalStorage("currentPage")
+//     if (data) {
+//         console.log(data);
+//         currentPage = data
+//     }
+//     else {
+//         currentPage = 1
+//     }
+//     addingProductsTemplate(products, productsStructure, productsWrapper)
+// }
 
 //**SET LOCAL STROGE OptionActive*/
-
-
-function addingActiveOptionInSelectBoxByUser(productsFilter) {
+function addingActiveOptionInSelectBoxByUser() {
     let data = getFromLocalStorage("optionActiveSelectBox")
     if (data) {
         optionSelect.value = data
@@ -309,30 +321,27 @@ function addingActiveOptionInSelectBoxByUser(productsFilter) {
     else {
         optionSelect.value = []
     }
-
-    addingProductsTemplate(productsFilter, productsStructure, productsWrapper)
-    setpagination(productsFilter)
-    setinputNumberRow(productsFilter)
-    setBtnNextPrev(productsFilter)
 }
 
 
-function addingProductsFilteredbyUser(productsFilter) {
-    let data = getFromLocalStorage('FilteredProducts')
-    if (data) {
-        productsFilter = data
+function addingProductsFilteredbyUser() {
+    let filterProducts = getFromLocalStorage('FilteredProducts')
+    currentPage = getFromLocalStorage("currentPage")
+    currentPage ? currentPage : currentPage = 1
+    if (filterProducts) {
+        const filteredProductPagination = paginationCalculations(filterProducts, numberRow, currentPage, resultShowProducts)
+        setpagination(filterProducts)
+        addingActiveOptionInSelectBoxByUser()
+        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
     }
     else {
-        productsFilter = []
+        let productsBasedPagination = paginationCalculations(products, numberRow, currentPage, resultShowProducts)
+        saveToLocalStorage("FilteredProducts", products)
+        setpagination(products)
+        addingActiveOptionInSelectBoxByUser()
+        addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
     }
-    addingProductsTemplate(productsFilter, productsStructure, productsWrapper)
-    setpagination(productsFilter)
-    setinputNumberRow(productsFilter)
-    setBtnNextPrev(productsFilter)
 }
-
-//** gridSystm1col */
-
 
 const structhreIcons = document.querySelectorAll(".shop-filter__svg-icon")
 
@@ -353,7 +362,6 @@ const insetTemplateHtml = (target) => {
     if (target === "row") {
         productsStructure = "row"
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-
     } else {
         productsStructure = "col"
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
@@ -392,17 +400,17 @@ searchInput.addEventListener("input", (event) => {
     let copyProducts = [...products]
 
     let productsSearchResult = searchInProducts(copyProducts, event.target.value, "productIntroduction")
-
+    console.log(productsSearchResult);
     if (productsSearchResult.length) {
-        addingProductsTemplate(productsSearchResult, productsStructure, productsWrapper)
+        let productsSearchPagination = paginationCalculations(productsSearchResult, numberRow, currentPage, resultShowProducts)
+        addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
     } else {
-        productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ دوره‌ای برای این جستوجوی  شما  وجود ندارد :/</div>`
+        productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`
     }
 })
 // searchProducts(products)
 
 
-console.log(optionSelect.value);
 
 // if (optionSelect.value === "All") {
 //     if (currentPage === null) {
@@ -410,16 +418,10 @@ console.log(optionSelect.value);
 //     } else {
 //         currentPage = currentPage
 //     }
-//     console.log(productsBasedPagination);
 
 
 
-//     setpagination(productsBasedPagination)
-//     setinputNumberRow(productsBasedPagination)
-//     setBtnNextPrev(productsBasedPagination)
-//     saveToLocalStorage("FilteredProducts", productsBasedPagination)
-//     saveToLocalStorage("currentPage", currentPage)
-//     addingCurrentPageByUser(productsBasedPagination)
+//     addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
 // };
 
 
@@ -428,17 +430,11 @@ console.log(optionSelect.value);
 
 
 
+// if (optionSelect.value === "All") {
+//     addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+// }
 
 
 window.addEventListener('load', function () {
-
-
-    addingActiveOptionInSelectBoxByUser(productsFilter)
-    addingProductsFilteredbyUser(productsFilter)
-    addingCurrentPageByUser(productsFilter)
-    addingShowProductCountbyUser(products)
-
-
-
-    addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+    addingProductsFilteredbyUser()
 }) 

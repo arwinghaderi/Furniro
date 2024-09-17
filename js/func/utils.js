@@ -22,7 +22,19 @@ const getFromLocalStorage = (key) => {
     return JSON.parse(localStorage.getItem(key))
 }
 
+const searchInProducts = (products, valueSearch, productsKey) => {
+    let valueSearchLoewr = valueSearch.toLowerCase()
+
+
+    let searchProducts = products.filter((product) => product[productsKey].includes(valueSearchLoewr))
+
+    console.log(searchProducts);
+
+    return searchProducts
+
+}
 
 
 
-export { paginationCalculations, saveToLocalStorage, getFromLocalStorage, }
+
+export { paginationCalculations, saveToLocalStorage, getFromLocalStorage, searchInProducts }

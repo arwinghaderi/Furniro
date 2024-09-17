@@ -1,6 +1,6 @@
 import { addingProductsTemplate, productsSorting } from "../js/func/shared.js"
 import { products } from "../js/db/data.js"
-import { paginationCalculations, saveToLocalStorage, getFromLocalStorage } from "./func/utils.js"
+import { paginationCalculations, saveToLocalStorage, getFromLocalStorage, searchInProducts } from "./func/utils.js"
 
 let $ = document
 
@@ -167,7 +167,6 @@ function setpagination(products) {
 }
 //**setBtnDom
 function setBtnDom(i, products) {
-    console.log(currentPage);
     let divelmnt = $.createElement("div")
     divelmnt.className = "shop-products__pagination-box-btn"
 
@@ -365,30 +364,41 @@ const insetTemplateHtml = (target) => {
 
 //** searchInput*/
 let searchInput = $.querySelector(".shop-filter__input--text")
-function searchProducts(products) {
-    searchInput.addEventListener("keyup", function (e) {
-        if (e.keyCode === 13) {
+// function searchProducts(products) {
+//     searchInput.addEventListener("keyup", function (e) {
+//         if (e.keyCode === 13) {
 
-            let valueInputSearch = searchInput.value.trim()
-            let findProductType = products.filter(function (params) {
-                return params.type === valueInputSearch
-            })
-            console.log(findProductType, valueInputSearch);
-            if (findProductType.length > 0) {
-                currentPage = 1
-                addingProductsTemplate(findProductType, productsStructure, productsWrapper)
-                setpagination(findProductType)
-                setinputNumberRow(findProductType);
-                gridSystm1col(findProductType)
-                setinputNumberRow(findProductType)
-                setBtnNextPrev(findProductType)
-                searchInput.value = ""
-            } else {
-                alert("Your search is not found. Please search carefully")
-            }
-        }
-    })
-}
+//             let valueInputSearch = searchInput.value.trim()
+//             let findProductType = products.filter(function (params) {
+//                 return params.type === valueInputSearch
+//             })
+//             console.log(findProductType, valueInputSearch);
+//             if (findProductType.length > 0) {
+//                 currentPage = 1
+//                 addingProductsTemplate(findProductType, productsStructure, productsWrapper)
+//                 setpagination(findProductType)
+//                 setinputNumberRow(findProductType);
+//                 setinputNumberRow(findProductType)
+//                 setBtnNextPrev(findProductType)
+//                 searchInput.value = ""
+//             } else {
+//                 alert("Your search is not found. Please search carefully")
+//             }
+//         }
+//     })
+// }
+
+searchInput.addEventListener("input", (event) => {
+    let copyProducts = [...products]
+
+    let productsSearchResult = searchInProducts(copyProducts, event.target.value, "productIntroduction")
+
+    if (productsSearchResult.length) {
+        addingProductsTemplate(productsSearchResult, productsStructure, productsWrapper)
+    } else {
+        productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ دوره‌ای برای این جستوجوی  شما  وجود ندارد :/</div>`
+    }
+})
 // searchProducts(products)
 
 

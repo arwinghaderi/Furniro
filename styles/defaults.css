@@ -36,3 +36,16 @@ a {
     width: 1.4rem;
     height: 1.4rem;
 }
+
+.alert {
+    color: var(--white-color);
+    font-size: 2.5rem;
+    background-color: #ff0000;
+    font-family: var(--primary-font);
+
+}
+.row-container .alert{
+    display: flex;
+        align-items: center;
+        justify-content: center;
+}

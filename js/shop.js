@@ -343,7 +343,7 @@ structhreIcons.forEach((icon) => {
 
         icon.classList.add("shop-filter__svg-icon--active")
 
-        insetTemplateHtml(event.target.id)
+        insetTemplateHtml(icon.id)
     })
 })
 

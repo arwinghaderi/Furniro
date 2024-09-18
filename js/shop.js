@@ -78,7 +78,8 @@ optionSelect.addEventListener('change', function (event) {
 
 function showProductsCountByUser() {
     numberShowProduct.addEventListener("input", function () {
-     
+     let number = +this.value
+number < 1 || number > products.length ? this.value = 1 : this.value
 
     })
 }

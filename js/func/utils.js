@@ -35,18 +35,17 @@ const searchInProducts = (products, valueSearch, productsKey) => {
     }
 }
 
-// const getCurrentPageAndShowCountProducts = (currentPage, showCountProducts) => {
-//     currentPage ? currentPage : currentPage = 1
-//     showCountProducts ? showCountProducts : showCountProducts = 8
-// }
+const getCurrentPageAndShowCountProducts = (currentPage, showCountProducts) => {
+    currentPage ? currentPage : currentPage = 1
+    showCountProducts ? showCountProducts : showCountProducts = 8
+}
 
 const ProductsWithPaginationCalculations = (products, resultShowProducts) => {
     let filterProducts = getFromLocalStorage('FilteredProducts')
     let currentPage = getFromLocalStorage("currentPage")
     let showCountProducts = getFromLocalStorage("showCountProducts")
 
-    currentPage ? currentPage : currentPage = 1
-    showCountProducts ? showCountProducts : showCountProducts = 8
+    getCurrentPageAndShowCountProducts(currentPage, showCountProducts)
 
     if (filterProducts) {
         let filteredProductsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, resultShowProducts)

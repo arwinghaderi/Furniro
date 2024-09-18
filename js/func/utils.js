@@ -7,11 +7,9 @@ const paginationCalculations = (products, numberRow, currentPage, resultShowProd
     indexStart = indexEnd - numberRow
 
 
-    // resultShowProducts.innerHTML = "Showing" + indexStart + "-- " + indexEnd + " of" + products.length + " results"
-    console.log(indexStart, indexEnd);
-    let paginationProducts = copyProducts.slice(indexStart, indexEnd)
+    resultShowProducts.innerHTML = "Showing" + indexStart + "-- " + indexEnd + " of" + products.length + " results"
 
-    console.log(paginationProducts);
+    let paginationProducts = copyProducts.slice(indexStart, indexEnd)
 
     return paginationProducts
 }
@@ -27,13 +25,45 @@ const getFromLocalStorage = (key) => {
 
 const searchInProducts = (products, valueSearch, productsKey) => {
     let valueSearchLoewr = valueSearch.toLowerCase().trim()
-
+    console.log(valueSearch);
     let searchProducts = products.filter((product) => product[productsKey].includes(valueSearchLoewr))
 
-    return searchProducts
+    if (valueSearch) {
+        return searchProducts
+    } else {
+        return products
+    }
 }
 
+// const getCurrentPageAndShowCountProducts = (currentPage, showCountProducts) => {
+//     currentPage ? currentPage : currentPage = 1
+//     showCountProducts ? showCountProducts : showCountProducts = 8
+// }
 
+const ProductsWithPaginationCalculations = (products, resultShowProducts) => {
+    let filterProducts = getFromLocalStorage('FilteredProducts')
+    let currentPage = getFromLocalStorage("currentPage")
+    let showCountProducts = getFromLocalStorage("showCountProducts")
 
+    currentPage ? currentPage : currentPage = 1
+    showCountProducts ? showCountProducts : showCountProducts = 8
 
-export { paginationCalculations, saveToLocalStorage, getFromLocalStorage, searchInProducts }
+    if (filterProducts) {
+        let filteredProductsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, resultShowProducts)
+        return filteredProductsBasedPagination
+
+    } else {
+        console.log(currentPage, showCountProducts);
+        let productsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, resultShowProducts)
+        return productsBasedPagination
+    }
+}
+
+export {
+    paginationCalculations,
+    saveToLocalStorage,
+    getFromLocalStorage,
+    searchInProducts,
+    ProductsWithPaginationCalculations,
+    getCurrentPageAndShowCountProducts
+}

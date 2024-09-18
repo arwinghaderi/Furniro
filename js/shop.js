@@ -1,6 +1,13 @@
 import { addingProductsTemplate, productsSorting } from "../js/func/shared.js"
 import { products } from "../js/db/data.js"
-import { paginationCalculations, saveToLocalStorage, getFromLocalStorage, searchInProducts } from "./func/utils.js"
+import {
+    paginationCalculations,
+    saveToLocalStorage,
+    getFromLocalStorage,
+    searchInProducts,
+    ProductsWithPaginationCalculations,
+    getCurrentPageAndShowCountProducts
+} from "./func/utils.js"
 
 let $ = document
 
@@ -39,139 +46,38 @@ let numberShowProduct = $.querySelector(".shop-filter__input--number")
 let numberRowUser;
 let btnFilter = $.querySelectorAll(".box-filter__btn")
 let boxBtnFilter = $.querySelectorAll(".box-filter__btn-box")
+let resultShowProducts = document.querySelector(".shop-filter__result-text")
 
 let numberRow = 8
 // numberProductsShown
 let currentPage = 1
-let resultShowProducts = document.querySelector(".shop-filter__result-text")
-
-
-
-
-
 let productsStructure = 'row'
-
-
-
-
 
 //**optionSelect */
 
 let optionSelect = $.querySelector(".box-filter__select")
 
-
 optionSelect.addEventListener('change', function (event) {
     currentPage = 1
+    saveToLocalStorage("currentPage", currentPage)
 
     let optionActive = event.target.value
-    const productsFilter = productsSorting(products, optionActive)
-    const filteredProductPagination = paginationCalculations(productsFilter, numberRow, currentPage, resultShowProducts)
-
-    saveToLocalStorage("FilteredProducts", productsFilter)
-    saveToLocalStorage("currentPage", currentPage)
     saveToLocalStorage("optionActiveSelectBox", optionActive)
+
+    const productsFilter = productsSorting(products, optionActive)
+    saveToLocalStorage("FilteredProducts", productsFilter)
+
+    const filteredProductPagination = ProductsWithPaginationCalculations(productsFilter, resultShowProducts)
+
     setpagination(productsFilter)
     addingActiveOptionInSelectBoxByUser()
     addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
 })
 
 
-
-
-//**FilterArray */
-// function productsFilterSetting(target) {
-//     console.log(target);
-//     switch (target) {
-//         case 'new':
-//             let filterProductsNew = products.filter(function (product) {
-//                 return product.newProduct === true
-//             })
-//             console.log(filterProductsNew);
-//             currentPage = 1
-//      c
-//             setpagination(filterProductsNew)
-//             setinputNumberRow(filterProductsNew);
-//             // gridSystm1col(filterProductsNew)
-//             setBtnNextPrev(filterProductsNew)
-//             saveToLocalStorage("FilteredProducts", filterProductsNew)
-//             saveToLocalStorage("currentPage", currentPage)
-//             productsFilter.push(filterProductsNew)
-//             break;
-//         case 'discount':
-//             let filterProductsDiscunt = products.filter(function (product) {
-//                 return product.discount === true
-//             })
-//             currentPage = 1
-//             addingProductsTemplate(filterProductsDiscunt, productsStructure, productsWrapper)
-//             setpagination(filterProductsDiscunt)
-//             setinputNumberRow(filterProductsDiscunt);
-//             // gridSystm1col(filterProductsDiscunt)
-//             setBtnNextPrev(filterProductsDiscunt)
-//             saveToLocalStorage("FilteredProducts", filterProductsDiscunt)
-//             saveToLocalStorage("currentPage", currentPage)
-//             productsFilter.push(filterProductsDiscunt)
-//             break
-//         case 'All':
-//             currentPage = 1
-//             addingProductsTemplate(products, productsStructure, productsWrapper)
-//             setpagination(products)
-//             setinputNumberRow(products)
-//             // gridSystm1col(products)
-//             setBtnNextPrev(products)
-//             saveToLocalStorage("FilteredProducts", products)
-//             saveToLocalStorage("currentPage", currentPage)
-//             productsFilter.push(products)
-//             break
-//         default:
-//             let filterProducts = products.filter(function (product) {
-//                 return product.type === target
-//             })
-//             currentPage = 1
-//             addingProductsTemplate(filterProducts, productsStructure, productsWrapper)
-//             setpagination(filterProducts)
-//             setinputNumberRow(filterProducts)
-//             setBtnNextPrev(filterProducts)
-
-//             saveToLocalStorage("FilteredProducts", filterProducts)
-//             saveToLocalStorage("currentPage", currentPage)
-//             productsFilter.push(filterProducts)
-//             break;
-//     }
-// }
-
-
-//**setinputNumberRow
-// function setinputNumberRow(products) {
-//     numberShowProduct.addEventListener("keydown", function (event) {
-//         if (event.keyCode === 13) {
-//             let numberRowUser = +event.target.value
-//             saveToLocalStorage("showCountProducts", numberRowUser)
-//             console.log(numberRow);
-//             if (numberRowUser > 0 && numberRowUser < 49) {
-//                 numberRow = numberRowUser
-//                 currentPage = 1
-//                 addingProductsTemplate(products, productsStructure, productsWrapper)
-//                 setpagination(products)
-//                 // gridSystm1col(products)
-//                 setBtnNextPrev(products)
-//                 saveToLocalStorage("FilteredProducts", products)
-//                 saveToLocalStorage("currentPage", currentPage)
-//             } else {
-//                 alert("please select a number and above zero")
-//             }
-
-
-//         }
-
-//     })
-// }
-
-// //**setpagination
 function setpagination(products) {
-    console.log(products);
     containerPagination.innerHTML = ""
     let numberpagination = Math.ceil(products.length / numberRow)
-    console.log(numberpagination);
     for (let i = 1; i < numberpagination + 1; i++) {
         setBtnDom(i, products)
     }
@@ -287,64 +193,41 @@ function setBtnNextPrevDom(productArrayFilter) {
     })
 }
 
-function addingShowProductCountbyUser(products) {
-    let data = getFromLocalStorage("showCountProducts")
-    if (data) {
-        numberRow = +data
-    }
-    else {
-        numberRow = 8
-    }
-    addingProductsTemplate(products, productsStructure, productsWrapper)
-    // setpagination(products)
-    // setBtnNextPrev(products)
-}
 
-// function addingCurrentPageByUser(products) {
-//     let data = getFromLocalStorage("currentPage")
-//     if (data) {
-//         console.log(data);
-//         currentPage = data
-//     }
-//     else {
-//         currentPage = 1
-//     }
-//     addingProductsTemplate(products, productsStructure, productsWrapper)
-// }
-
-//**SET LOCAL STROGE OptionActive*/
 function addingActiveOptionInSelectBoxByUser() {
     let data = getFromLocalStorage("optionActiveSelectBox")
     if (data) {
         optionSelect.value = data
     }
     else {
-        optionSelect.value = []
+        optionSelect.value = "All"
     }
 }
 
+// function addingProductsFilteredbyUser() {
+//     let filterProducts = getFromLocalStorage('FilteredProducts')
+//     currentPage = getFromLocalStorage('currentPage')
+//     numberRow = getFromLocalStorage("showCountProducts")
 
-function addingProductsFilteredbyUser() {
-    let filterProducts = getFromLocalStorage('FilteredProducts')
-    currentPage = getFromLocalStorage("currentPage")
-    currentPage ? currentPage : currentPage = 1
-    if (filterProducts) {
-        const filteredProductPagination = paginationCalculations(filterProducts, numberRow, currentPage, resultShowProducts)
-        setpagination(filterProducts)
-        addingActiveOptionInSelectBoxByUser()
-        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
-    }
-    else {
-        let productsBasedPagination = paginationCalculations(products, numberRow, currentPage, resultShowProducts)
-        saveToLocalStorage("FilteredProducts", products)
-        setpagination(products)
-        addingActiveOptionInSelectBoxByUser()
-        addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-    }
-}
+//     getCurrentPageAndShowCountProducts(currentPage, numberRow)
+
+//     if (filterProducts) {
+//         const filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts)
+
+//         setpagination(filterProducts)
+//         addingActiveOptionInSelectBoxByUser()
+//         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
+//     }
+//     else {
+//         const productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+
+//         saveToLocalStorage("FilteredProducts", products)
+//         setpagination(products)
+//         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+//     }
+// }
 
 const structhreIcons = document.querySelectorAll(".shop-filter__svg-icon")
-
 structhreIcons.forEach((icon) => {
     icon.addEventListener("click", (event) => {
 
@@ -352,12 +235,12 @@ structhreIcons.forEach((icon) => {
 
         icon.classList.add("shop-filter__svg-icon--active")
 
-        insetTemplateHtml(icon.id)
+        addingTemplatesBasedOnProductStructure(icon.id)
     })
 })
 
-
-const insetTemplateHtml = (target) => {
+const addingTemplatesBasedOnProductStructure = (target) => {
+    const productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
 
     if (target === "row") {
         productsStructure = "row"
@@ -366,75 +249,46 @@ const insetTemplateHtml = (target) => {
         productsStructure = "col"
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
     }
-
-
 }
 
-//** searchInput*/
-let searchInput = $.querySelector(".shop-filter__input--text")
-// function searchProducts(products) {
-//     searchInput.addEventListener("keyup", function (e) {
-//         if (e.keyCode === 13) {
+// const searchInput = $.querySelector(".shop-filter__input--text")
+// searchInput.addEventListener("input", (event) => {
+//     let copyProducts = [...products]
 
-//             let valueInputSearch = searchInput.value.trim()
-//             let findProductType = products.filter(function (params) {
-//                 return params.type === valueInputSearch
-//             })
-//             console.log(findProductType, valueInputSearch);
-//             if (findProductType.length > 0) {
-//                 currentPage = 1
-//                 addingProductsTemplate(findProductType, productsStructure, productsWrapper)
-//                 setpagination(findProductType)
-//                 setinputNumberRow(findProductType);
-//                 setinputNumberRow(findProductType)
-//                 setBtnNextPrev(findProductType)
-//                 searchInput.value = ""
-//             } else {
-//                 alert("Your search is not found. Please search carefully")
-//             }
-//         }
-//     })
-// }
+//     let productsSearchResult = searchInProducts(copyProducts, event.target.value, "productIntroduction")
+//     const productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
 
-searchInput.addEventListener("input", (event) => {
-    let copyProducts = [...products]
-
-    let productsSearchResult = searchInProducts(copyProducts, event.target.value, "productIntroduction")
-    console.log(productsSearchResult);
-    if (productsSearchResult.length) {
-        let productsSearchPagination = paginationCalculations(productsSearchResult, numberRow, currentPage, resultShowProducts)
-        addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
-    } else {
-        productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`
-    }
-})
-// searchProducts(products)
-
-
-
-// if (optionSelect.value === "All") {
-//     if (currentPage === null) {
-//         currentPage = 1
+//     if (event.target.value === "") {
+//         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+//         setpagination(products)
 //     } else {
-//         currentPage = currentPage
+//         handlingProductsBasedOnUserSearch(productsSearchResult)
 //     }
+// })
 
-
-
-//     addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-// };
-
-
-
-
-
-
-
-// if (optionSelect.value === "All") {
-//     addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+// const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
+//     if (productsSearchResult.length) {
+//         currentPage = 1
+//         saveToLocalStorage("currentPage", currentPage)
+//         let productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts)
+//         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
+//         setpagination(productsSearchResult)
+//     } else {
+//         productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`
+//         setpagination(productsSearchResult)
+//     }
 // }
-
 
 window.addEventListener('load', function () {
+    // if (getFromLocalStorage('currentPage') && getFromLocalStorage('showCountProducts')) {
+    //     currentPage = getFromLocalStorage('currentPage')
+    //     addingProductsFilteredbyUser()
+    // } else {
+    //     saveToLocalStorage("currentPage", currentPage)
+    //     saveToLocalStorage("showCountProducts", numberRow)
+    //     addingProductsFilteredbyUser()
+    // }
+    saveToLocalStorage("currentPage", currentPage)
+    saveToLocalStorage("showCountProducts", numberRow)
     addingProductsFilteredbyUser()
-}) 
+})

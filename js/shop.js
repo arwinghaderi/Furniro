@@ -204,28 +204,28 @@ function addingActiveOptionInSelectBoxByUser() {
     }
 }
 
-// function addingProductsFilteredbyUser() {
-//     let filterProducts = getFromLocalStorage('FilteredProducts')
-//     currentPage = getFromLocalStorage('currentPage')
-//     numberRow = getFromLocalStorage("showCountProducts")
+function addingProductsFilteredbyUser() {
+    let filterProducts = getFromLocalStorage('FilteredProducts')
+    currentPage = getFromLocalStorage('currentPage')
+    numberRow = getFromLocalStorage("showCountProducts")
 
-//     getCurrentPageAndShowCountProducts(currentPage, numberRow)
+    getCurrentPageAndShowCountProducts(currentPage, numberRow)
 
-//     if (filterProducts) {
-//         const filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts)
+    if (filterProducts) {
+        const filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts)
 
-//         setpagination(filterProducts)
-//         addingActiveOptionInSelectBoxByUser()
-//         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
-//     }
-//     else {
-//         const productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+        setpagination(filterProducts)
+        addingActiveOptionInSelectBoxByUser()
+        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
+    }
+    else {
+        const productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
 
-//         saveToLocalStorage("FilteredProducts", products)
-//         setpagination(products)
-//         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-//     }
-// }
+        saveToLocalStorage("FilteredProducts", products)
+        setpagination(products)
+        addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+    }
+}
 
 const structhreIcons = document.querySelectorAll(".shop-filter__svg-icon")
 structhreIcons.forEach((icon) => {
@@ -280,15 +280,12 @@ const addingTemplatesBasedOnProductStructure = (target) => {
 // }
 
 window.addEventListener('load', function () {
-    // if (getFromLocalStorage('currentPage') && getFromLocalStorage('showCountProducts')) {
-    //     currentPage = getFromLocalStorage('currentPage')
-    //     addingProductsFilteredbyUser()
-    // } else {
-    //     saveToLocalStorage("currentPage", currentPage)
-    //     saveToLocalStorage("showCountProducts", numberRow)
-    //     addingProductsFilteredbyUser()
-    // }
-    saveToLocalStorage("currentPage", currentPage)
-    saveToLocalStorage("showCountProducts", numberRow)
-    addingProductsFilteredbyUser()
+    if (getFromLocalStorage('currentPage') && getFromLocalStorage('showCountProducts')) {
+        currentPage = getFromLocalStorage('currentPage')
+        addingProductsFilteredbyUser()
+    } else {
+        saveToLocalStorage("currentPage", currentPage)
+        saveToLocalStorage("showCountProducts", numberRow)
+        addingProductsFilteredbyUser()
+    }
 })

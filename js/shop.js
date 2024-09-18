@@ -251,33 +251,33 @@ const addingTemplatesBasedOnProductStructure = (target) => {
     }
 }
 
-// const searchInput = $.querySelector(".shop-filter__input--text")
-// searchInput.addEventListener("input", (event) => {
-//     let copyProducts = [...products]
+const searchInput = $.querySelector(".shop-filter__input--text")
+searchInput.addEventListener("input", (event) => {
+    let copyProducts = [...products]
 
-//     let productsSearchResult = searchInProducts(copyProducts, event.target.value, "productIntroduction")
-//     const productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+    let productsSearchResult = searchInProducts(copyProducts, event.target.value, "productIntroduction")
+    const productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
 
-//     if (event.target.value === "") {
-//         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-//         setpagination(products)
-//     } else {
-//         handlingProductsBasedOnUserSearch(productsSearchResult)
-//     }
-// })
+    if (event.target.value === "") {
+        addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+        setpagination(products)
+    } else {
+        handlingProductsBasedOnUserSearch(productsSearchResult)
+    }
+})
 
-// const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
-//     if (productsSearchResult.length) {
-//         currentPage = 1
-//         saveToLocalStorage("currentPage", currentPage)
-//         let productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts)
-//         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
-//         setpagination(productsSearchResult)
-//     } else {
-//         productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`
-//         setpagination(productsSearchResult)
-//     }
-// }
+const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
+    if (productsSearchResult.length) {
+        currentPage = 1
+        saveToLocalStorage("currentPage", currentPage)
+        let productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts)
+        addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
+        setpagination(productsSearchResult)
+    } else {
+        productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`
+        setpagination(productsSearchResult)
+    }
+}
 
 window.addEventListener('load', function () {
     if (getFromLocalStorage('currentPage') && getFromLocalStorage('showCountProducts')) {

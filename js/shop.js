@@ -75,6 +75,15 @@ optionSelect.addEventListener('change', function (event) {
 })
 
 
+
+function showProductsCountByUser() {
+    numberShowProduct.addEventListener("input", function () {
+     
+
+    })
+}
+showProductsCountByUser()
+
 function setpagination(products) {
     containerPagination.innerHTML = ""
     let numberpagination = Math.ceil(products.length / numberRow)

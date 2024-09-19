@@ -42,6 +42,7 @@ let productsWrapper = $.querySelector(".row-container")
 let containerPagination = $.querySelector(".shop-products__number-pagination")
 let numberShowProduct = $.querySelector(".shop-filter__input--number")
 let resultShowProducts = document.querySelector(".shop-filter__result-text")
+let filteredProductPagination
 
 let numberProductsShown = 8
 let currentPage = 1
@@ -59,7 +60,7 @@ optionSelect.addEventListener('change', function (event) {
     const productsFilter = productsSorting(products, optionActive)
     saveToLocalStorage("FilteredProducts", productsFilter)
 
-    const filteredProductPagination = ProductsWithPaginationCalculations(productsFilter, resultShowProducts)
+    filteredProductPagination = ProductsWithPaginationCalculations(productsFilter, resultShowProducts)
 
     setpagination(productsFilter)
     addingActiveOptionInSelectBoxByUser()
@@ -116,7 +117,7 @@ function setBtnDom(i, products) {
         console.log(currentPage, i);
         currentPage = i
 
-        let filteredProductPagination = paginationCalculations(products, numberProductsShown, currentPage, resultShowProducts)
+        filteredProductPagination = paginationCalculations(products, numberProductsShown, currentPage, resultShowProducts)
 
         saveToLocalStorage("currentPage", currentPage)
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
@@ -224,7 +225,7 @@ function addingProductsFilteredbyUser() {
     getCurrentPageAndShowCountProducts(currentPage, numberProductsShown)
 
     if (filterProducts) {
-        const filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts)
+        filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts)
 
         setpagination(filterProducts)
         addingActiveOptionInSelectBoxByUser()
@@ -290,6 +291,7 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
     } else {
         productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`
+        resultShowProducts.innerHTML = ""
         setpagination(productsSearchResult)
     }
 }

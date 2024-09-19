@@ -38,17 +38,17 @@ iconFilter.addEventListener("click", function (event) {
 
 
 
-let productsWrapper = $.querySelector(".row-container")
-let containerPagination = $.querySelector(".shop-products__number-pagination")
-let numberShowProduct = $.querySelector(".shop-filter__input--number")
-let resultShowProducts = document.querySelector(".shop-filter__result-text")
+const productsWrapper = $.querySelector(".row-container")
+const containerPagination = $.querySelector(".shop-products__number-pagination")
+const numberShowProduct = $.querySelector(".shop-filter__input--number")
+const resultShowProducts = document.querySelector(".shop-filter__result-text")
 let filteredProductPagination, productsBasedPagination, filterProducts
 
 let numberProductsShown = 8
 let currentPage = 1
 let productsStructure = 'row'
 
-let optionSelect = $.querySelector(".box-filter__select")
+const optionSelect = $.querySelector(".box-filter__select")
 
 optionSelect.addEventListener('change', function (event) {
     currentPage = 1
@@ -207,7 +207,7 @@ function setBtnNextPrevDom(productArrayFilter) {
 }
 
 
-function addingActiveOptionInSelectBoxByUser() {
+const addingActiveOptionInSelectBoxByUser = () => {
     let data = getFromLocalStorage("optionActiveSelectBox")
     if (data) {
         optionSelect.value = data
@@ -217,7 +217,7 @@ function addingActiveOptionInSelectBoxByUser() {
     }
 }
 
-function addingProductsFilteredbyUser() {
+const addingProductsFilteredbyUser = () => {
     filterProducts = getFromLocalStorage('FilteredProducts')
     currentPage = getFromLocalStorage('currentPage')
     numberProductsShown = getFromLocalStorage("showCountProducts")
@@ -232,7 +232,7 @@ function addingProductsFilteredbyUser() {
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
     }
     else {
-         productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+        productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
 
         saveToLocalStorage("FilteredProducts", products)
         setpagination(products)
@@ -253,7 +253,7 @@ structhreIcons.forEach((icon) => {
 })
 
 const addingTemplatesBasedOnProductStructure = (target) => {
-     productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+    productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
 
     if (target === "row") {
         productsStructure = "row"
@@ -269,7 +269,7 @@ searchInput.addEventListener("input", (event) => {
     let copyProducts = [...products]
 
     let productsSearchResult = searchInProducts(copyProducts, event.target.value, "productIntroduction")
-     productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+    productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
 
     if (event.target.value === "") {
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)

@@ -42,7 +42,7 @@ let productsWrapper = $.querySelector(".row-container")
 let containerPagination = $.querySelector(".shop-products__number-pagination")
 let numberShowProduct = $.querySelector(".shop-filter__input--number")
 let resultShowProducts = document.querySelector(".shop-filter__result-text")
-let filteredProductPagination
+let filteredProductPagination, productsBasedPagination, filterProducts
 
 let numberProductsShown = 8
 let currentPage = 1
@@ -218,7 +218,7 @@ function addingActiveOptionInSelectBoxByUser() {
 }
 
 function addingProductsFilteredbyUser() {
-    let filterProducts = getFromLocalStorage('FilteredProducts')
+    filterProducts = getFromLocalStorage('FilteredProducts')
     currentPage = getFromLocalStorage('currentPage')
     numberProductsShown = getFromLocalStorage("showCountProducts")
 
@@ -232,7 +232,7 @@ function addingProductsFilteredbyUser() {
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
     }
     else {
-        const productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+         productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
 
         saveToLocalStorage("FilteredProducts", products)
         setpagination(products)
@@ -253,7 +253,7 @@ structhreIcons.forEach((icon) => {
 })
 
 const addingTemplatesBasedOnProductStructure = (target) => {
-    const productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+     productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
 
     if (target === "row") {
         productsStructure = "row"
@@ -269,13 +269,12 @@ searchInput.addEventListener("input", (event) => {
     let copyProducts = [...products]
 
     let productsSearchResult = searchInProducts(copyProducts, event.target.value, "productIntroduction")
-    const productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+     productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
 
     if (event.target.value === "") {
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
         setpagination(products)
         optionSelect.value = "All"
-        saveToLocalStorage("optionActiveSelectBox", optionActive)
         addingActiveOptionInSelectBoxByUser()
     } else {
         handlingProductsBasedOnUserSearch(productsSearchResult)

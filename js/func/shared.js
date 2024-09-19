@@ -3,14 +3,14 @@ function addingProductsTemplate(products, productsStructure, productsWrapper) {
     if (productsStructure === 'row') {
         productsWrapper.innerHTML = '';
         products.forEach(function (product) {
-            let discountTemplate = `<div class="Discount-product"><span class="Discount-product__number">${product.discountPercent}%</span></div>`
-            let newTemplate = ` <div class="Discount-product Discount-product--green "><span class="Discount-product__number">NEW</span></div>`
-            let discountPrice = `</span > <span class="product-discountPrice ">Rp ${product.price}</span>`
+            const discountTemplate = `<div class="Discount-product"><span class="Discount-product__number">${product.discountPercent}%</span></div>`
+            const newTemplate = ` <div class="Discount-product Discount-product--green "><span class="Discount-product__number">NEW</span></div>`
+            const discountPrice = `</span > <span class="product-discountPrice ">Rp ${product.price}</span>`
 
-            let price = +product.price
-            let discountPercent = +product.discountPercent
-            let totalDiscount = (price * discountPercent) / 100
-            let total = price - totalDiscount
+            const price = +product.price
+            const discountPercent = +product.discountPercent
+            const totalDiscount = (price * discountPercent) / 100
+            const total = price - totalDiscount
 
             productsWrapper.insertAdjacentHTML("beforeend", `<div class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show "><div class="product-box"  id="discount"><div   
      class="img-box-overlay"><img class="product__img product__img-col" src="${product.img}" alt="product img"><div class="product-overlay">
@@ -29,14 +29,14 @@ function addingProductsTemplate(products, productsStructure, productsWrapper) {
     } else {
         productsWrapper.innerHTML = '';
         products.forEach(function (product) {
-            let discountTemplate = `<div class="Discount-product"><span class="Discount-product__number">${product.discountPercent}%</span></div>`
-            let newTemplate = ` <div class="Discount-product Discount-product--green "><span class="Discount-product__number">NEW</span></div>`
-            let discountPrice = `</span > <span class="product-discountPrice">Rp ${product.price}</span>`
+            const discountTemplate = `<div class="Discount-product"><span class="Discount-product__number">${product.discountPercent}%</span></div>`
+            const newTemplate = ` <div class="Discount-product Discount-product--green "><span class="Discount-product__number">NEW</span></div>`
+            const discountPrice = `</span > <span class="product-discountPrice">Rp ${product.price}</span>`
 
-            let price = +product.price
-            let discountPercent = +product.discountPercent
-            let totalDiscount = (price * discountPercent) / 100
-            let total = price - totalDiscount
+            const price = +product.price
+            const discountPercent = +product.discountPercent
+            const totalDiscount = (price * discountPercent) / 100
+            const total = price - totalDiscount
 
             productsWrapper.insertAdjacentHTML("beforeend", `<div class="col col-lg-12 product-main-box product-main-box__shop product-main-box__shop--show "><div class="product-box product-box-col"  id="discount"><div   
      class="img-box-overlay img-box-overlay-col "><img class="product__img" src="${product.img}" alt="product img"><div class="product-overlay">

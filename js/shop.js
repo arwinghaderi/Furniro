@@ -242,7 +242,7 @@ const addingProductsFilteredbyUser = () => {
 
 const structhreIcons = document.querySelectorAll(".shop-filter__svg-icon")
 structhreIcons.forEach((icon) => {
-    icon.addEventListener("click", (event) => {
+    icon.addEventListener("click", () => {
 
         document.querySelector(".shop-filter__svg-icon--active").classList.remove("shop-filter__svg-icon--active")
 

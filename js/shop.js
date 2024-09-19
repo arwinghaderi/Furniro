@@ -88,6 +88,9 @@ const showProductsCount = (products) => {
         numberProductsShown < 1 || numberProductsShown > products.length ? this.value = 8 : this.value
 
         if (this.value) {
+            currentPage = 1
+            saveToLocalStorage("currentPage", currentPage)
+
             saveToLocalStorage("showCountProducts", parseInt(this.value))
             addingProductsFilteredbyUser()
             ChangeInputPlaceholderToUserChange()
@@ -287,7 +290,6 @@ searchInput.addEventListener("input", (event) => {
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
         setpagination(products)
         optionSelect.value = "All"
-        addingActiveOptionInSelectBoxByUser()
     } else {
         handlingProductsBasedOnUserSearch(productsSearchResult)
     }

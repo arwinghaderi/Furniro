@@ -7,7 +7,7 @@ const paginationCalculations = (products, numberRow, currentPage, resultShowProd
     indexStart = indexEnd - numberRow
 
 
-    resultShowProducts.innerHTML = "Showing" + indexStart + "-- " + indexEnd + " of" + products.length + " results"
+    resultShowProducts.innerHTML = `Showing  ${indexStart}  --   ${indexEnd > products.length ? products.length : indexEnd}   of  ${products.length}  results`
 
     let paginationProducts = copyProducts.slice(indexStart, indexEnd)
 

@@ -54,39 +54,48 @@ optionSelect.addEventListener('change', function (event) {
     currentPage = 1
     saveToLocalStorage("currentPage", currentPage)
 
-    let optionActive = event.target.value
+    const optionActive = event.target.value
     saveToLocalStorage("optionActiveSelectBox", optionActive)
+    addingActiveOptionInSelectBoxByUser()
+
+    numberProductsShown = 8
+    saveToLocalStorage("showCountProducts", numberProductsShown)
+    ChangeInputPlaceholderToUserChange()
+
 
     const productsFilter = productsSorting(products, optionActive)
     saveToLocalStorage("FilteredProducts", productsFilter)
 
+
     filteredProductPagination = ProductsWithPaginationCalculations(productsFilter, resultShowProducts)
 
     setpagination(productsFilter)
-    addingActiveOptionInSelectBoxByUser()
+    showProductsCount(productsFilter)
+
     addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
 })
 
-
-
 const ChangeInputPlaceholderToUserChange = () => {
     numberProductsShown = getFromLocalStorage("showCountProducts")
+    numberShowProduct.value = numberProductsShown
     numberShowProduct.setAttribute("placeholder", numberProductsShown)
 }
 
-numberShowProduct.addEventListener("input", function () {
-    numberProductsShown = parseInt(this.value)
+const showProductsCount = (products) => {
+    numberShowProduct.addEventListener("input", function () {
+        numberProductsShown = parseInt(this.value)
 
-    numberProductsShown < 1 || numberProductsShown > products.length ? this.value = 8 : this.value
+        numberProductsShown < 1 || numberProductsShown > products.length ? this.value = 8 : this.value
 
-    if (this.value) {
-        saveToLocalStorage("showCountProducts", parseInt(this.value))
-        addingProductsFilteredbyUser()
-        ChangeInputPlaceholderToUserChange()
-    } else {
-        return false
-    }
-})
+        if (this.value) {
+            saveToLocalStorage("showCountProducts", parseInt(this.value))
+            addingProductsFilteredbyUser()
+            ChangeInputPlaceholderToUserChange()
+        } else {
+            return false
+        }
+    })
+}
 
 function setpagination(products) {
     containerPagination.innerHTML = ""
@@ -228,6 +237,7 @@ const addingProductsFilteredbyUser = () => {
         filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts)
 
         setpagination(filterProducts)
+        showProductsCount(filterProducts)
         addingActiveOptionInSelectBoxByUser()
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
     }
@@ -236,6 +246,7 @@ const addingProductsFilteredbyUser = () => {
 
         saveToLocalStorage("FilteredProducts", products)
         setpagination(products)
+        showProductsCount(products)
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
     }
 }
@@ -258,9 +269,11 @@ const addingTemplatesBasedOnProductStructure = (target) => {
     if (target === "row") {
         productsStructure = "row"
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+        showProductsCount(products)
     } else {
         productsStructure = "col"
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
+        showProductsCount(products)
     }
 }
 
@@ -285,8 +298,14 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
     if (productsSearchResult.length) {
         currentPage = 1
         saveToLocalStorage("currentPage", currentPage)
+
+        numberProductsShown = 8
+        saveToLocalStorage("showCountProducts", numberProductsShown)
+        ChangeInputPlaceholderToUserChange()
+
         let productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts)
         setpagination(productsSearchResult)
+        showProductsCount(productsSearchResult)
         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
     } else {
         productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`

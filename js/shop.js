@@ -76,14 +76,21 @@ optionSelect.addEventListener('change', function (event) {
 
 
 
+const ChangeInputPlaceholderToUserChange = () => {
+    let showCount = getFromLocalStorage("showCountProducts")
+    numberShowProduct.setAttribute("placeholder", showCount)
+}
+
 function showProductsCountByUser() {
     numberShowProduct.addEventListener("input", function () {
         let number = parseInt(this.value);
-        number < 1 || number > products.length || number == null ? this.value = 8 : this.value
-        numberShowProduct.setAttribute("placeholder", this.value)
+        number < 1 || number > products.length ? this.value = 8 : this.value
 
-        
-        saveToLocalStorage("showCountProducts", parseInt(this.value))
+        ChangeInputPlaceholderToUserChange()
+
+    
+
+        addingProductsFilteredbyUser()
     })
 }
 showProductsCountByUser()
@@ -295,10 +302,12 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
 window.addEventListener('load', function () {
     if (getFromLocalStorage('currentPage') && getFromLocalStorage('showCountProducts')) {
         currentPage = getFromLocalStorage('currentPage')
+        ChangeInputPlaceholderToUserChange()
         addingProductsFilteredbyUser()
     } else {
         saveToLocalStorage("currentPage", currentPage)
         saveToLocalStorage("showCountProducts", numberRow)
+        ChangeInputPlaceholderToUserChange()
         addingProductsFilteredbyUser()
     }
 })

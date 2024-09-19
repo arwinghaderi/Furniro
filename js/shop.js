@@ -158,7 +158,6 @@ function setBtnDom(i, products) {
         }
     })
     containerPagination.append(divelmnt)
-
 }
 
 //** SetBtnNextPrev*/
@@ -304,6 +303,7 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
         ChangeInputPlaceholderToUserChange()
 
         let productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts)
+        saveToLocalStorage("FilteredProducts", productsSearchResult)
         setpagination(productsSearchResult)
         showProductsCount(productsSearchResult)
         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)

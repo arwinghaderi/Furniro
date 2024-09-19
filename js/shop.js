@@ -26,8 +26,6 @@ menuLink.forEach(function (menuLink) {
     })
 })
 
-
-//** */ boxFilter
 let shopFilterbox = $.querySelector(".shop-filter")
 let boxFilterSelect = $.querySelector(".box-filter__select")
 let iconFilter = $.querySelector(".shop-filter__svg-icon--filter")
@@ -43,17 +41,11 @@ iconFilter.addEventListener("click", function (event) {
 let productsWrapper = $.querySelector(".row-container")
 let containerPagination = $.querySelector(".shop-products__number-pagination")
 let numberShowProduct = $.querySelector(".shop-filter__input--number")
-let numberRowUser;
-let btnFilter = $.querySelectorAll(".box-filter__btn")
-let boxBtnFilter = $.querySelectorAll(".box-filter__btn-box")
 let resultShowProducts = document.querySelector(".shop-filter__result-text")
 
-let numberRow = 8
-// numberProductsShown
+let numberProductsShown = 8
 let currentPage = 1
 let productsStructure = 'row'
-
-//**optionSelect */
 
 let optionSelect = $.querySelector(".box-filter__select")
 
@@ -77,27 +69,27 @@ optionSelect.addEventListener('change', function (event) {
 
 
 const ChangeInputPlaceholderToUserChange = () => {
-    let showCount = getFromLocalStorage("showCountProducts")
-    numberShowProduct.setAttribute("placeholder", showCount)
+    numberProductsShown = getFromLocalStorage("showCountProducts")
+    numberShowProduct.setAttribute("placeholder", numberProductsShown)
 }
 
-function showProductsCountByUser() {
-    numberShowProduct.addEventListener("input", function () {
-        let number = parseInt(this.value);
-        number < 1 || number > products.length ? this.value = 8 : this.value
+numberShowProduct.addEventListener("input", function () {
+    numberProductsShown = parseInt(this.value)
 
-        ChangeInputPlaceholderToUserChange()
+    numberProductsShown < 1 || numberProductsShown > products.length ? this.value = 8 : this.value
 
-    
-
+    if (this.value) {
+        saveToLocalStorage("showCountProducts", parseInt(this.value))
         addingProductsFilteredbyUser()
-    })
-}
-showProductsCountByUser()
+        ChangeInputPlaceholderToUserChange()
+    } else {
+        return false
+    }
+})
 
 function setpagination(products) {
     containerPagination.innerHTML = ""
-    let numberpagination = Math.ceil(products.length / numberRow)
+    let numberpagination = Math.ceil(products.length / numberProductsShown)
     for (let i = 1; i < numberpagination + 1; i++) {
         setBtnDom(i, products)
     }
@@ -124,7 +116,7 @@ function setBtnDom(i, products) {
         console.log(currentPage, i);
         currentPage = i
 
-        let filteredProductPagination = paginationCalculations(products, numberRow, currentPage, resultShowProducts)
+        let filteredProductPagination = paginationCalculations(products, numberProductsShown, currentPage, resultShowProducts)
 
         saveToLocalStorage("currentPage", currentPage)
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
@@ -137,7 +129,7 @@ function setBtnDom(i, products) {
         btnElm.classList.add("shop-product-button--active")
         let divBtnPrev = $.querySelector(".shop-products__prev-btn-box")
         let nextDivElem = $.querySelector(".shop-products__next-btn-box")
-        let numberpagination = Math.ceil(products.length / numberRow)
+        let numberpagination = Math.ceil(products.length / numberProductsShown)
         if (currentPage === numberpagination) {
             nextDivElem.style.display = "none"
         }
@@ -174,7 +166,7 @@ function setBtnNextPrevDom(productArrayFilter) {
     nextContainer.insertAdjacentHTML("beforeend", ' <div class="shop-products__next-btn-box"> <button class="shop-products__button-next-text">Next</button></div > ')
     let nextDivElem = $.querySelector(".shop-products__next-btn-box")
     let divBtnPrev = $.querySelector(".shop-products__prev-btn-box")
-    let numberpagination = Math.ceil(productArrayFilter.length / numberRow)
+    let numberpagination = Math.ceil(productArrayFilter.length / numberProductsShown)
     if (numberpagination === 1) {
         nextDivElem.style.display = "none"
         divBtnPrev.style.display = "none"
@@ -201,7 +193,7 @@ function setBtnNextPrevDom(productArrayFilter) {
     divBtnPrev.addEventListener("click", function (event) {
         event.preventDefault()
         currentPage--
-        let numberpagination = Math.ceil(products.length / numberRow)
+        let numberpagination = Math.ceil(products.length / numberProductsShown)
         if (currentPage === 1) {
             divBtnPrev.style.display = "none"
         } if (currentPage < numberpagination) {
@@ -227,9 +219,9 @@ function addingActiveOptionInSelectBoxByUser() {
 function addingProductsFilteredbyUser() {
     let filterProducts = getFromLocalStorage('FilteredProducts')
     currentPage = getFromLocalStorage('currentPage')
-    numberRow = getFromLocalStorage("showCountProducts")
+    numberProductsShown = getFromLocalStorage("showCountProducts")
 
-    getCurrentPageAndShowCountProducts(currentPage, numberRow)
+    getCurrentPageAndShowCountProducts(currentPage, numberProductsShown)
 
     if (filterProducts) {
         const filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts)
@@ -281,6 +273,9 @@ searchInput.addEventListener("input", (event) => {
     if (event.target.value === "") {
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
         setpagination(products)
+        optionSelect.value = "All"
+        saveToLocalStorage("optionActiveSelectBox", optionActive)
+        addingActiveOptionInSelectBoxByUser()
     } else {
         handlingProductsBasedOnUserSearch(productsSearchResult)
     }
@@ -291,8 +286,8 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
         currentPage = 1
         saveToLocalStorage("currentPage", currentPage)
         let productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts)
-        addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
         setpagination(productsSearchResult)
+        addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
     } else {
         productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`
         setpagination(productsSearchResult)
@@ -306,7 +301,7 @@ window.addEventListener('load', function () {
         addingProductsFilteredbyUser()
     } else {
         saveToLocalStorage("currentPage", currentPage)
-        saveToLocalStorage("showCountProducts", numberRow)
+        saveToLocalStorage("showCountProducts", numberProductsShown)
         ChangeInputPlaceholderToUserChange()
         addingProductsFilteredbyUser()
     }

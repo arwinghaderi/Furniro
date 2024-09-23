@@ -68,17 +68,17 @@ function setBtnShowMor(products) {
 setBtnShowMor(products)
 
 
-function getItemLocalStoregCurrentPage(products) {
-    let curentPageLocal = JSON.parse(localStorage.getItem("curentPageHome"))
-    if (curentPageLocal) {
-        curentPage = curentPageLocal
+const getingCurrentProductsPage = (products) => {
+    curentPage = getFromLocalStorage("CurrentPageShowMore")
+    if (curentPage) {
+        curentPage = curentPage
     }
     else {
         curentPage = 1
     }
     // addingProductsTemplate(products, productsStructure, productsWrapper)
 }
-getItemLocalStoregCurrentPage(products)
+getingCurrentProductsPage(products)
 
 function setLocalStoreg(products) {
     localStorage.setItem("productArrayHome", JSON.stringify(products))

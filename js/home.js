@@ -1,5 +1,5 @@
 import { products, images } from "../js/db/data.js"
-
+import { addingProductsTemplate } from "./func/shared.js"
 let $ = document
 
 const hamburger = $.querySelector(".hamburger")

@@ -1,5 +1,9 @@
 import { products, images } from "../js/db/data.js"
 import { addingProductsTemplate } from "./func/shared.js"
+import {
+    saveToLocalStorage,
+    getFromLocalStorage,
+} from "./func/utils.js"
 let $ = document
 
 const hamburger = $.querySelector(".hamburger")
@@ -57,31 +61,22 @@ function setBtnShowMor(products) {
                 btnShowMor.style.display = "none"
             }
             setLocalStoreg(productsSlice)
-            setLocalStoregCurrentPage(curentPage)
+            saveToLocalStorage("CurrentPageShowMore", curentPage)
         }, 3000)
     })
 }
 setBtnShowMor(products)
 
 
-
-//** set Local Storeg CurrentPag Show mor
-function setLocalStoregCurrentPage(curentPage) {
-    localStorage.setItem("curentPageHome", JSON.stringify(curentPage))
-}
-
-
 function getItemLocalStoregCurrentPage(products) {
     let curentPageLocal = JSON.parse(localStorage.getItem("curentPageHome"))
-    console.log(curentPageLocal);
     if (curentPageLocal) {
-
         curentPage = curentPageLocal
     }
     else {
-        products = []
+        curentPage = 1
     }
-    addingProductsTemplate(products, productsStructure, productsWrapper)
+    // addingProductsTemplate(products, productsStructure, productsWrapper)
 }
 getItemLocalStoregCurrentPage(products)
 
@@ -93,7 +88,7 @@ function setLocalStoreg(products) {
 function getItemLocalStoreg(products) {
     console.log(products);
     let getItem = JSON.parse(localStorage.getItem("productArrayHome"))
-    console.log(getItem);
+
     if (getItem) {
         if (products.length === getItem.length) {
             btnShowMor.style.display = "none"
@@ -106,7 +101,7 @@ function getItemLocalStoreg(products) {
     else {
         products = []
     }
-    addingProductsTemplate(products, productsStructure, productsWrapper)
+    // addingProductsTemplate(products, productsStructure, productsWrapper)
 }
 window.addEventListener('load', function name(params) {
     getItemLocalStoreg(products)

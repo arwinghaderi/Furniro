@@ -19,8 +19,8 @@ menuLink.forEach(function (menuLink) {
 })
 
 
-let rowProduct = document.querySelector(".row-container")
-
+let productsWrapper = document.querySelector(".row-container")
+let productsStructure = 'row'
 
 
 
@@ -35,12 +35,12 @@ function setBtnShowMor(products) {
     let indexStart = indexEnd - indexEnd
     console.log(indexStart, indexEnd);
     let productsSlice = products.slice(indexStart, indexEnd);
-    setProductsDom(productsSlice)
+    addingProductsTemplate(productsSlice, productsStructure, productsWrapper)
     btnShowMor.addEventListener("click", function () {
         btnShowMor.style.display = "none"
         Loder.style.display = "block"
         let interval = setInterval(function () {
-            rowProduct.innerHTML = ""
+            productsWrapper.innerHTML = ""
             Loder.style.display = "none"
             btnShowMor.style.display = "block"
             curentPage++
@@ -49,7 +49,7 @@ function setBtnShowMor(products) {
             console.log(indexStart, indexEnd);
             productsSlice = products.slice(indexStart, indexEnd);
             console.log(productsSlice);
-            setProductsDom(productsSlice)
+            addingProductsTemplate(productsSlice, productsStructure, productsWrapper)
             if (curentItem <= curentItem + 8) {
                 clearInterval(interval)
             }
@@ -81,7 +81,7 @@ function getItemLocalStoregCurrentPage(products) {
     else {
         products = []
     }
-    setProductsDom(products)
+    addingProductsTemplate(products, productsStructure, productsWrapper)
 }
 getItemLocalStoregCurrentPage(products)
 
@@ -99,14 +99,14 @@ function getItemLocalStoreg(products) {
             btnShowMor.style.display = "none"
         }
         if (products.length < getItem.length + curentItem) {
-            rowProduct.innerHTML = ""
+            productsWrapper.innerHTML = ""
         }
         products = getItem
     }
     else {
         products = []
     }
-    setProductsDom(products)
+    addingProductsTemplate(products, productsStructure, productsWrapper)
 }
 window.addEventListener('load', function name(params) {
     getItemLocalStoreg(products)

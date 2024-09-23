@@ -20,63 +20,8 @@ menuLink.forEach(function (menuLink) {
 
 
 let rowProduct = document.querySelector(".row-container")
-//** set Product templet Dom
 
-function setProductsDom(products) {
 
-    products.forEach(function (product) {
-
-        if (product.discount === true) {
-            let price = +product.price
-            let discountPercent = +product.discountPercent
-            let totalDiscount = (price * discountPercent) / 100
-            let total = price - totalDiscount
-            rowProduct.insertAdjacentHTML('beforeend', '   <div class="col col-lg-3 product-main-box"><div class="product-box"><div  ' +
-                'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
-                '<div class="box-add-btn-cart"><a href = "../Furniro/Pages/product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
-                ' <div class="product-overlay__options">' +
-                ' <div class="option-overlay">' +
-                '  <i class="fas fa-share-alt fa-flip-vertical  icon" ></i>' +
-                '<span class="option-overlay__text">Share</span> </div> <div class="option-overlay">' +
-                '<i class="fas fa-exchange-alt  icon" ></i>' +
-                ' <span class="option-overlay__text">Compare</span></div>' +
-                ' <div class="option-overlay"> <i class="fa-regular fa-heart icon"></i>' +
-                ' <span class="option-overlay__text">Like</span></div></div></div> </div> <div  class="Discount-product">' +
-                ' <span class="Discount-product__number">' + "-" + product.discountPercent + "%" + '</span></div><div class="product-Introductions"><h3 class="product-name">' + product.productName + '</h3>' +
-                ' <p class="product-Introduction">' + product.productIntroduction + '</p><div class="product-price-box">' +
-                '<span class="product-price">' + "Rp " + total.toLocaleString("en") + '</span><span class="product-discountPrice">' + "Rp" + product.price + '</span>' +
-                '</div> </div></div></div> ')
-        }
-        product.newProduct === true ? rowProduct.insertAdjacentHTML('beforeend', '   <div class="col col-lg-3 product-main-box"><div class="product-box"><div  ' +
-            'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
-            '<div class="box-add-btn-cart"><a href="../Furniro/Pages/product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
-            ' <div class="product-overlay__options">' +
-            ' <div class="option-overlay">' +
-            ' <i class="fas fa-share-alt fa-flip-vertical  icon" ></i>' +
-            '<span class="option-overlay__text">Share</span> </div> <div class="option-overlay">' +
-            '<i class="fas fa-exchange-alt  icon" ></i>' +
-            ' <span class="option-overlay__text">Compare</span></div>' +
-            ' <div class="option-overlay"><i class="fa-regular fa-heart icon"></i>' +
-            ' <span class="option-overlay__text">Like</span></div></div></div> </div> <div  class="Discount-product Discount-product--green ">' +
-            ' <span class="Discount-product__number">NEW</span></div><div class="product-Introductions"><h3 class="product-name">' + product.productName + '</h3>' +
-            ' <p class="product-Introduction">' + product.productIntroduction + '</p><div class="product-price-box">' +
-            '<span class="product-price">' + product.price.toLocaleString("en") + '</span>' +
-            '</div> </div></div></div> ') : product.poster === false ? rowProduct.insertAdjacentHTML('beforeend', '   <div class="col col-lg-3 product-main-box"><div class="product-box "><div  ' +
-                'class="img-box-overlay"><img class="product__img" src="' + product.img + '" alt="product1"><div class="product-overlay">' +
-                '<div class="box-add-btn-cart"><a href="../Furniro/Pages/product.html?id=' + product.id + '" class="box-add-btn-cart__text">Details Product</a></div>' +
-                ' <div class="product-overlay__options">' +
-                ' <div class="option-overlay">' +
-                '  <i class="fas fa-share-alt fa-flip-vertical  icon" ></i> ' +
-                '<span class="option-overlay__text">Share</span> </div> <div class="option-overlay">' +
-                ' <i class="fas fa-exchange-alt  icon" ></i>  ' +
-                ' <span class="option-overlay__text">Compare</span></div>' +
-                ' <div class="option-overlay"> <i class="fa-regular fa-heart icon"></i>  ' +
-                ' <span class="option-overlay__text">Like</span></div></div></div> </div><div class="product-Introductions"><h3 class="product-name">' + product.productName + '</h3>' +
-                ' <p class="product-Introduction"> ' + product.productIntroduction + '</p><div class="product-price-box">' +
-                '<span class="product-price">' + product.price.toLocaleString("en") + '</span>' +
-                '</div> </div></div></div> ') : console.log("no product");
-    })
-}
 
 
 //** set Btn Show Mor

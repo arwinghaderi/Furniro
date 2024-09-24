@@ -81,21 +81,23 @@ const getingCurrentProductsPage = (products) => {
 }
 getingCurrentProductsPage(products)
 
-function addingProductsByUser() {
+const addingProductsByUser = (products) => {
     productsShowMore = getFromLocalStorage("pageHomeProducts")
     if (productsShowMore) {
         products.length === productsShowMore.length ? btnShowMor.style.display = "none" : btnShowMor.style.display = "flex"
         products.length < productsShowMore.length + curentItem ? productsWrapper.innerHTML = "" : addingProductsTemplate(products, productsStructure, productsWrapper)
         products = productsShowMore
+        addingProductsTemplate(products, productsStructure, productsWrapper)
     }
     else {
-        products = []
+        addingProductsTemplate(products, productsStructure, productsWrapper)
     }
-    addingProductsTemplate(products, productsStructure, productsWrapper)
 }
 window.addEventListener('load', function name(params) {
     if (getFromLocalStorage("pageHomeProducts")) {
-        addingProductsByUser()
+        addingProductsByUser(products)
+    } else {
+        addingProductsByUser(products)
     }
 })
 

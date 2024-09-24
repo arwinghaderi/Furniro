@@ -106,12 +106,7 @@ let imgSlaiderTitle = document.querySelector(".box-contant-img-slaider__title")
 let slaiderbtnright = document.querySelector("#slaider-btn-right")
 let boxContantImgIntroduction = document.querySelector(".box-contant-img-slaider__introduction")
 
-
-
-
-
 // **next item slader
-
 let indexArrayImg = 0
 function nextItem() {
     indexArrayImg++

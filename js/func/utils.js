@@ -59,10 +59,9 @@ const ProductsWithPaginationCalculations = (products, resultShowProducts) => {
 }
 
 const calculateProductsShowMoreButton = (products, curentItem, currentPage) => {
-    console.log(products);
     let indexEnd = curentItem * currentPage
     let indexStart = indexEnd - indexEnd
-  
+
     let productsShowMor = products.slice(indexStart, indexEnd);
 
     return productsShowMor

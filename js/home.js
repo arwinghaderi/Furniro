@@ -26,7 +26,7 @@ menuLink.forEach(function (menuLink) {
 let productsWrapper = document.querySelector(".row-container")
 let productsStructure = 'row'
 
-
+let productsShowMore
 
 //** set Btn Show Mor
 
@@ -81,19 +81,12 @@ const getingCurrentProductsPage = (products) => {
 }
 getingCurrentProductsPage(products)
 
-
-function getItemLocalStoreg(products) {
-    console.log(products);
-    let getItem = JSON.parse(localStorage.getItem("productArrayHome"))
-
-    if (getItem) {
-        if (products.length === getItem.length) {
-            btnShowMor.style.display = "none"
-        }
-        if (products.length < getItem.length + curentItem) {
-            productsWrapper.innerHTML = ""
-        }
-        products = getItem
+function addingProductsByUser() {
+    productsShowMore = getFromLocalStorage("pageHomeProducts")
+    if (productsShowMore) {
+        products.length === productsShowMore.length ? btnShowMor.style.display = "none" : btnShowMor.style.display = "flex"
+        products.length < productsShowMore.length + curentItem ? productsWrapper.innerHTML = "" : addingProductsTemplate(products, productsStructure, productsWrapper)
+        products = productsShowMore
     }
     else {
         products = []
@@ -101,7 +94,9 @@ function getItemLocalStoreg(products) {
     addingProductsTemplate(products, productsStructure, productsWrapper)
 }
 window.addEventListener('load', function name(params) {
-    getItemLocalStoreg(products)
+    if (getFromLocalStorage("pageHomeProducts")) {
+        addingProductsByUser()
+    }
 })
 
 

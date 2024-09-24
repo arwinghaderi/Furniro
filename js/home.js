@@ -1,8 +1,9 @@
-import { products, images } from "../js/db/data.js"
+import { products, images, } from "../js/db/data.js"
 import { addingProductsTemplate } from "./func/shared.js"
 import {
     saveToLocalStorage,
     getFromLocalStorage,
+    calculateProductsShowMoreButton
 } from "./func/utils.js"
 let $ = document
 
@@ -30,15 +31,12 @@ let productsShowMore
 
 //** set Btn Show Mor
 
-let curentItem = 8
-let curentPage = 1
+let countProduct = 8
+let currentPage = 1
 let btnShowMor = document.querySelector(".show-more")
 let Loder = document.querySelector(".show-more__loder")
 
 function setBtnShowMor(products) {
-
-
-    addingProductsTemplate(productsSlice, productsStructure, productsWrapper)
 
     btnShowMor.addEventListener("click", function () {
         btnShowMor.style.display = "none"
@@ -49,14 +47,14 @@ function setBtnShowMor(products) {
             Loder.style.display = "none"
             btnShowMor.style.display = "block"
 
-            curentPage++
-            indexEnd = curentItem * curentPage
+            currentPage++
+            indexEnd = countProduct * currentPage
             indexStart = indexEnd - indexEnd
 
             productsSlice = products.slice(indexStart, indexEnd);
             addingProductsTemplate(productsSlice, productsStructure, productsWrapper)
 
-            if (curentItem <= curentItem + 8) {
+            if (countProduct <= countProduct + 8) {
                 clearInterval(interval)
             }
             if (indexEnd >= products.length) {
@@ -64,40 +62,45 @@ function setBtnShowMor(products) {
             }
 
             saveToLocalStorage("pageHomeProducts", productsSlice)
-            saveToLocalStorage("CurrentPageShowMore", curentPage)
+            saveToLocalStorage("CurrentPageShowMore", currentPage)
         }, 3000)
     })
 }
 
-const getingCurrentProductsPage = (products) => {
-    curentPage = getFromLocalStorage("CurrentPageShowMore")
-    if (curentPage) {
-        curentPage = curentPage
+const getingcountProductsPage = () => {
+    currentPage = getFromLocalStorage("CurrentPageShowMore")
+    if (currentPage) {
+        currentPage = currentPage
     }
     else {
-        curentPage = 1
+        currentPage = 1
     }
+    return currentPage
 }
 
 const addingProductsByUser = (products) => {
     productsShowMore = getFromLocalStorage("pageHomeProducts")
+    currentPage = getingcountProductsPage()
     if (productsShowMore) {
+        productsShowMore = calculateProductsShowMoreButton(productsShowMore, countProduct, currentPage)
+
         products.length === productsShowMore.length ? btnShowMor.style.display = "none" : btnShowMor.style.display = "flex"
-        products.length < productsShowMore.length + curentItem ? productsWrapper.innerHTML = "" : addingProductsTemplate(products, productsStructure, productsWrapper)
+        products.length < productsShowMore.length + countProduct ? productsWrapper.innerHTML = "" : addingProductsTemplate(products, productsStructure, productsWrapper)
+
         addingProductsTemplate(productsShowMore, productsStructure, productsWrapper)
     }
     else {
-        setBtnShowMor(products)
+        productsShowMore = calculateProductsShowMoreButton(products, countProduct, currentPage)
+        console.log(productsShowMore);
+        addingProductsTemplate(productsShowMore, productsStructure, productsWrapper)
     }
 }
 
 window.addEventListener('load', function name(params) {
     if (getFromLocalStorage("pageHomeProducts")) {
         addingProductsByUser(products)
-        getingCurrentProductsPage(products)
     } else {
         addingProductsByUser(products)
-        getingCurrentProductsPage(products)
     }
 })
 

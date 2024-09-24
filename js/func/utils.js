@@ -58,6 +58,15 @@ const ProductsWithPaginationCalculations = (products, resultShowProducts) => {
     }
 }
 
+const calculateProductsShowMoreButton = (products, curentItem, currentPage) => {
+    let indexEnd = curentItem * currentPage
+    let indexStart = indexEnd - indexEnd
+    let productsShoMor = products.slice(indexStart, indexEnd);
+
+    
+    return productsShoMor
+}
+
 export {
     paginationCalculations,
     saveToLocalStorage,

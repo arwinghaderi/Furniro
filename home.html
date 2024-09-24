@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./styles/grid.css">
     <link rel="stylesheet" href="./styles/font.css">
     <link rel="stylesheet" href="vendor/FontAwesome5/all.min.css" />
+    <link rel="stylesheet" href="vendor/swiperSlider/swiper.css" />
     <link rel="stylesheet" href="./styles/mainPages/home.css">
     <link rel="stylesheet" href="./styles/responsive.css">
 </head>
@@ -17,7 +18,7 @@
 <body>
     <div class="container">
         <nav class="nav-bar">
-          
+
             <img class="nav-bar__logo-img" src="images/logoNavbar.jpg" alt="Logo">
             <ul class="list-menu">
                 <li class="list-menu__item"><a class="list-menu-item__link  list-menu-item__link--active"
@@ -185,49 +186,49 @@
                 </a>
             </div>
         </div>
-        <div class="slaider-conatiner">
-            <div class="slaider-container-img">
-                <div id="slaider-btn-right" class="slaider-btn "><svg width="9" height="16" viewBox="0 0 9 16"
-                        fill="none">
-                        <path d="M1.00006 1L8.00006 8L1.00006 15" stroke="#B88E2F" stroke-width="1.8"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+
+
+
+
+
+        <!-- <div class="box-contant-img-slaider">
+            <p class="box-contant-img-slaider__introduction">01___bed Room</p>
+            <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
+        </div>
+        <div class="slaider-content-img-arrow">
+            <svg class="slaider-content-img-arrow--svg" width="20" height="14" viewBox="0 0 20 14" fill="none">
+                <path d="M19 7H1M19 7L13 1M19 7L13 13" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div> -->
+
+
+        <div class="swiper mySwiper  slaider-conatiner">
+
+            <div class="swiper-wrapper ">
+                <div class="swiper-slide "><img id="active" class="slaider-img" src="images/Rectangle 24.jpg"
+                        alt="imgSlaider"></div>
+
+                <div class="swiper-slide"><img class="slaider-img " src="images/Rectangle 25.jpg" alt="imgSlaider">
                 </div>
-                <div class="box-contant-img-slaider">
-                    <p class="box-contant-img-slaider__introduction">01___bed Room</p>
-                    <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
+
+                <div class="swiper-slide"><img class="slaider-img " src="images/Rectangle 26.jpg" alt="imgSlaider">
                 </div>
-                <div class="slaider-content-img-arrow">
-                    <svg class="slaider-content-img-arrow--svg" width="20" height="14" viewBox="0 0 20 14" fill="none">
-                        <path d="M19 7H1M19 7L13 1M19 7L13 13" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </div>
-                <img id="active" class="slaider-img    slaider-img--active " src="images/Rectangle 24.jpg"
-                    alt="imgSlaider">
-                <img id="2" class="slaider-img " src="images/Rectangle 25.jpg" alt="imgSlaider">
-                <img id="3" class="slaider-img  " src="images/Rectangle 26.jpg" alt="imgSlaider">
-                <img id="4" class="slaider-img  " src="images/Rectangle 25.jpg" alt="imgSlaider">
-                <div class="slaider-pagination-container">
-                    <label id="active" class=" custom-input-radio custom-input-radio--active">
-                        <input class="input-radio" name="slaider" type="radio" checked>
-                        <span class="checkmark-input checkmark-input--active"></span>
-                    </label>
-                    <label id="2" class=" custom-input-radio">
-                        <input class="input-radio " name="slaider" type="radio">
-                        <span class="checkmark-input"></span>
-                    </label>
-                    <label id="3" class=" custom-input-radio">
-                        <input class="input-radio" name="slaider" type="radio">
-                        <span class="checkmark-input"></span>
-                    </label>
-                    <label id="4" class=" custom-input-radio">
-                        <input class="input-radio" name="slaider" type="radio">
-                        <span class="checkmark-input"></span>
-                    </label>
+
+                <div class="swiper-slide"><img class="slaider-img " src="images/Rectangle 25.jpg" alt="imgSlaider">
                 </div>
             </div>
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
         </div>
+
+
+
+
+
+
     </section>
 
     <!-- ** designs-->
@@ -344,6 +345,23 @@
 
 
     <script src="vendor/FontAwesome5/all.min.js"></script>
+    <script src="vendor/swiperSlider/swiper.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            centeredSlides: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            loop: true
+        });
+    </script>
     <script type="module" src="js/home.js"></script>
 </body>
 

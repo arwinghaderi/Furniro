@@ -31,13 +31,13 @@ let productsStructure = 'row'
 //** set Btn Show Mor
 
 let curentItem = 8
-let curentPage = 1
+let curentPage = 2
 let btnShowMor = document.querySelector(".show-more")
 let Loder = document.querySelector(".show-more__loder")
 function setBtnShowMor(products) {
     let indexEnd = curentItem * curentPage
     let indexStart = indexEnd - indexEnd
-    console.log(indexStart, indexEnd);
+    console.log(curentItem, curentPage);
     let productsSlice = products.slice(indexStart, indexEnd);
     addingProductsTemplate(productsSlice, productsStructure, productsWrapper)
     btnShowMor.addEventListener("click", function () {
@@ -53,6 +53,7 @@ function setBtnShowMor(products) {
             console.log(indexStart, indexEnd);
             productsSlice = products.slice(indexStart, indexEnd);
             console.log(productsSlice);
+            console.log(curentItem, curentPage);
             addingProductsTemplate(productsSlice, productsStructure, productsWrapper)
             if (curentItem <= curentItem + 8) {
                 clearInterval(interval)
@@ -60,7 +61,7 @@ function setBtnShowMor(products) {
             if (indexEnd >= products.length) {
                 btnShowMor.style.display = "none"
             }
-            setLocalStoreg(productsSlice)
+            saveToLocalStorage("pageHomeProducts", productsSlice)
             saveToLocalStorage("CurrentPageShowMore", curentPage)
         }, 3000)
     })
@@ -76,13 +77,9 @@ const getingCurrentProductsPage = (products) => {
     else {
         curentPage = 1
     }
-    // addingProductsTemplate(products, productsStructure, productsWrapper)
+    addingProductsTemplate(products, productsStructure, productsWrapper)
 }
 getingCurrentProductsPage(products)
-
-function setLocalStoreg(products) {
-    localStorage.setItem("productArrayHome", JSON.stringify(products))
-}
 
 
 function getItemLocalStoreg(products) {
@@ -101,7 +98,7 @@ function getItemLocalStoreg(products) {
     else {
         products = []
     }
-    // addingProductsTemplate(products, productsStructure, productsWrapper)
+    addingProductsTemplate(products, productsStructure, productsWrapper)
 }
 window.addEventListener('load', function name(params) {
     getItemLocalStoreg(products)

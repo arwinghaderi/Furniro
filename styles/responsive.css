@@ -64,19 +64,19 @@
     }
 
 
-    .slaider-img {
+    /* .slaider-img {
         width: calc(100% /1.2);
         height: 48.6rem;
         object-fit: cover;
         position: relative;
-    }
+    } */
 
 
-    .slaider-img--active {
+    /* .slaider-img--active {
         width: calc(100% /1);
         height: 58.2rem;
         object-fit: cover;
-    }
+    } */
 
     .shop-filter {
         height: 40rem;
@@ -144,8 +144,17 @@
         width: 50%;
     }
 
+    .swiper {
+        margin: 0;
+    }
 
+    .slaisder-section {
+        height: 108rem;
+    }
 
+    .swiper-wrapper {
+        height: 55rem;
+    }
 }
 
 @media screen and (max-width:992px) {
@@ -276,10 +285,6 @@
         position: absolute;
         bottom: -8%;
         left: 40%;
-    }
-
-    .slaider-content-img-arrow {
-        display: none;
     }
 
     .footer-items {
@@ -435,6 +440,15 @@
         flex-direction: column;
     }
 
+    .swiper-slide-active .slaider-img {
+        width: 100%;
+        height: 50rem;
+        object-fit: fill;
+        filter: blur(0);
+        position: relative;
+    }
+
+
 
 }
 
@@ -520,29 +534,31 @@
         font-family: "Poppins-Regular";
         gap: 0;
     }
-}
-
-@media screen and (max-width:392px) {
-    .home__title {
-        font-size: 3rem;
-    }
-
-    .detailes-product-img-secound__box {
-        width: 3.5rem;
-        height: 5rem;
-    }
-
-    .detailes-produc-Specifications__title {
-        font-size: 3.2rem;
-        text-align: center;
-    }
-
-    .icon-container-option {
-        justify-content: center;
-    }
-         .product-price {
-             font-size: 1.6rem;
-         }
 
 
-}
+
+    @media screen and (max-width:392px) {
+        .home__title {
+            font-size: 3rem;
+        }
+
+        .detailes-product-img-secound__box {
+            width: 3.5rem;
+            height: 5rem;
+        }
+
+        .detailes-produc-Specifications__title {
+            font-size: 3.2rem;
+            text-align: center;
+        }
+
+        .icon-container-option {
+            justify-content: center;
+        }
+
+        .product-price {
+            font-size: 1.6rem;
+        }
+
+
+    }}

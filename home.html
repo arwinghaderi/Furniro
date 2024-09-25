@@ -191,6 +191,8 @@
 
 
 
+
+
         <!-- <div class="box-contant-img-slaider">
             <p class="box-contant-img-slaider__introduction">01___bed Room</p>
             <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
@@ -202,11 +204,7 @@
             </svg>
         </div> -->
 
-
-
-
         <div class="swiper mySwiper ">
-
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <img id="active" class="slaider-img" src="images/Rectangle 24.jpg">
@@ -221,17 +219,10 @@
                     <img class="slaider-img " src="images/Rectangle 25.jpg" alt="imgSlaider">
                 </div>
             </div>
-
             <div class="swiper-button-next slaider-content-img-arrow"></div>
             <div class="swiper-button-prev slaider-content-img-arrow"></div>
             <div class="swiper-pagination custom-input-radio"></div>
         </div>
-
-
-
-
-
-
     </section>
 
     <!-- ** designs-->
@@ -386,6 +377,26 @@
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                // when window width is >= 320px
+                320: {
+                    slidesPerView: 1,
+                },
+                // when window width is >= 480px
+                480: {
+                    slidesPerView: 2,
+
+                },
+                // when window width is >= 640px
+                640: {
+                    slidesPerView: 3,
+                },
+                1200: {
+                    slidesPerView: 3,
+                    height: "64rem"
+                }
+
             },
             loop: true
         });

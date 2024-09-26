@@ -6,7 +6,7 @@ let $ = document
 
 // **elment html Single Page Product 
 
-let imgSecoundContainer = document.querySelector(".detailes-product-img-secound")
+
 let imgMain = document.querySelector(".detailes-product-img-main__box")
 let detailesProducSpecifications = document.querySelector(".detailes-produc-Specifications")
 let containerStarCustomerReview = document.querySelector(".detailes-produc-Specifications__customer-review-box")
@@ -31,11 +31,15 @@ let ProductSelectionByUser = products.find(function (params) {
 
 const AddingPagePathDom = () => {
     const routeProduct = document.querySelector(".route-product")
-    routeProduct.insertAdjacentHTML("afterbegin", '<div class="container"><div class= "route-product__waraper"><p class="route-product__path-name">Home</p><i class="fa-solid fa-angle-right fa-xs"></i><p class="route-product__path-name">Shop</p><i class="fa-solid fa-angle-right fa-xs"></i><div class="route-product__line-col line"></div><p class="route-product__product-name">' + ProductSelectionByUser.productName + '</p></ ></div > ')
+    routeProduct.insertAdjacentHTML("afterbegin", `<div class="container"><div class= "route-product__waraper"><p class="route-product__path-name">Home</p><i class="fa-solid fa-angle-right fa-xs"></i><p class="route-product__path-name">Shop</p><i class="fa-solid fa-angle-right fa-xs"></i><div class="route-product__line-col line"></div><p class="route-product__product-name"> ${ProductSelectionByUser.productName}</p></></div >`)
+}
+
+const addingAllProductPhotos = () => {
+    const imgSecoundContainer = document.querySelector(".detailes-product-img-secound")
+    imgSecoundContainer.insertAdjacentHTML("afterbegin", ` <div class="detailes-product-img-secound__box  detailes-product-img-secound__box--active "><img class="detailes-product-img-secound__img" src =" ${ProductSelectionByUser.imgSecoundMain}" alt = "main-product" ></div ><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${ProductSelectionByUser.imgSecound1}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${ProductSelectionByUser.imgSecound2} " alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${ProductSelectionByUser.imgSecound3}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${ProductSelectionByUser.imgSecound4} " alt="detailes-product"></div>`)
 }
 
 
-// **set Single Page Product Dom
 function setSinglePageProductDom(ProductSelectionByUser) {
     if (ProductSelectionByUser) {
         let price = +ProductSelectionByUser.price
@@ -45,11 +49,11 @@ function setSinglePageProductDom(ProductSelectionByUser) {
 
 
         AddingPagePathDom()
+        addingAllProductPhotos()
 
-        imgSecoundContainer.insertAdjacentHTML("afterbegin", '  <div class="detailes-product-img-secound__box  detailes-product-img-secound__box--active "><img class="detailes-product-img-secound__img" src ="' + ProductSelectionByUser.imgSecoundMain + '" alt = "main-product" ></div ><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="' + ProductSelectionByUser.imgSecound1 + '"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="' + ProductSelectionByUser.imgSecound2 + '" alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="' + ProductSelectionByUser.imgSecound3 + '"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src=" ' + ProductSelectionByUser.imgSecound4 + '" alt="detailes-product"></div>')
 
 
-        imgMain.insertAdjacentHTML("afterbegin", '  <img class="detailes-product-img-main___img" src="' + ProductSelectionByUser.imgSecoundMain + '" alt="main-product">')
+        imgMain.insertAdjacentHTML("afterbegin",`<img class="detailes-product-img-main___img" src="${ProductSelectionByUser.imgSecoundMain}" alt="main-product">`)
 
 
         ProductSelectionByUser.discount == true ? detailesProducSpecifications.insertAdjacentHTML("afterbegin", '<h3 class="detailes-produc-Specifications__title">' + ProductSelectionByUser.productIntroduction + '</h3><h5 class= "detailes-produc-Specifications__price-discount" >' + "Rp " + ProductSelectionByUser.price.toLocaleString("en") + '</h5 ><h5 class="detailes-produc-Specifications__price">' + "Rp " + total.toLocaleString("en") + '</h5>') : detailesProducSpecifications.insertAdjacentHTML("afterbegin", '<h3 class="detailes-produc-Specifications__title">' + ProductSelectionByUser.productIntroduction + '</h3><h5 class= "detailes-produc-Specifications__price" >' + "Rp " + ProductSelectionByUser.price.toLocaleString("en") + '</h5>')

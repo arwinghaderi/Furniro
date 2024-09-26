@@ -200,20 +200,10 @@ slaisder-section
 
 
 
-/* .slaider-container-img {
-    display: flex;
-    gap: 2rem;
-    scroll-behavior: smooth;
-    user-select: none;
-    overflow-x: hidden;
-
-} */
-
 .swiper-wrapper {
     display: flex;
     scroll-behavior: smooth;
     user-select: none;
-    /* overflow: hidden; */
 }
 
 .slaider-img {
@@ -224,14 +214,6 @@ slaisder-section
     filter: blur(0.3rem);
     transition: all 0.5s ease-in;
 }
-
-/* .slaider-img--active {
-    width: calc(100% /2.2);
-    height: 58.6rem;
-    object-fit: cover;
-    filter: blur(0);
-    position: relative;
-} */
 
 .swiper-slide-active .slaider-img {
     width: 100%;
@@ -341,18 +323,35 @@ slaisder-section
     border-radius: 100%;
 }
 
-/* .custom-input-radio--active {
-    width: 2.7rem;
-    height: 2.7rem;
-    border: 0.2rem solid var(--Primary-color);
-    border-radius: 100%;
-    cursor: pointer;
+.autoplay-progress {
+    position: absolute;
+    right: 55px;
+    bottom: 0px;
+    z-index: 10;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 1;
+    font-weight: bold;
+    color: var(--Primary-color);
+}
 
-} */
+.autoplay-progress svg {
+    --progress: 0;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    stroke-width: 4px;
+    stroke: var(--Primary-color);
+    fill: none;
+    stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+    stroke-dasharray: 125.6;
+    transform: rotate(-90deg);
+}
 
 .input-radio {
     display: none;

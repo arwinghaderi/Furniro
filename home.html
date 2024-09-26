@@ -190,32 +190,46 @@
 
 
 
+        <!-- let images = [
+{ id: 1, introduction: "Second bedroom", Title: "pleasant", img: "images/Rectangle 24.jpg" },
+{ id: 2, introduction: "bed Room", Title: "Inner Peace", img: "images/Rectangle 25.jpg" },
+{ id: 3, introduction: "work room", Title: "cute", img: "images/Rectangle 26.jpg" },
+{ id: 4, introduction: "kitchen", Title: "centralized", img: "images/Rectangle 25.jpg" },
+] -->
 
 
 
-        <!-- <div class="box-contant-img-slaider">
-            <p class="box-contant-img-slaider__introduction">01___bed Room</p>
-            <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
-        </div>
-        <div class="slaider-content-img-arrow">
-            <svg class="slaider-content-img-arrow--svg" width="20" height="14" viewBox="0 0 20 14" fill="none">
-                <path d="M19 7H1M19 7L13 1M19 7L13 13" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-        </div> -->
 
         <div class="swiper mySwiper ">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
+                    <div class="box-contant-img-slaider">
+                        <p class="box-contant-img-slaider__introduction">01___Second bedroom</p>
+                        <h5 class="box-contant-img-slaider__title">pleasant</h5>
+                    </div>
+
                     <img id="active" class="slaider-img" src="images/Rectangle 24.jpg">
                 </div>
                 <div class="swiper-slide">
+                    <div class="box-contant-img-slaider">
+                        <p class="box-contant-img-slaider__introduction">02___bed Room</p>
+                        <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
+                    </div>
+
                     <img class="slaider-img " src="images/Rectangle 25.jpg" alt="imgSlaider">
                 </div>
                 <div class="swiper-slide">
+                    <div class="box-contant-img-slaider">
+                        <p class="box-contant-img-slaider__introduction">03___work room</p>
+                        <h5 class="box-contant-img-slaider__title">cute</h5>
+                    </div>
                     <img class="slaider-img " src="images/Rectangle 26.jpg" alt="imgSlaider">
                 </div>
                 <div class="swiper-slide">
+                    <div class="box-contant-img-slaider">
+                        <p class="box-contant-img-slaider__introduction">04___bed Room</p>
+                        <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
+                    </div>
                     <img class="slaider-img " src="images/Rectangle 25.jpg" alt="imgSlaider">
                 </div>
             </div>
@@ -365,42 +379,7 @@
             loop: true
         });
     </script> -->
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 3,
-            grabCursor: true,
-            spaceBetween: 50,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-            breakpoints: {
-                // when window width is >= 320px
-                320: {
-                    slidesPerView: 1,
-                },
-                // when window width is >= 480px
-                480: {
-                    slidesPerView: 2,
-
-                },
-                // when window width is >= 640px
-                640: {
-                    slidesPerView: 3,
-                },
-                1200: {
-                    slidesPerView: 3,
-                    height: "64rem"
-                }
-
-            },
-            loop: true
-        });
-    </script>
+    <script src="js/slaider.js"></script>
     <script type="module" src="js/home.js"></script>
 </body>
 

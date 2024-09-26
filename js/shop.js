@@ -11,21 +11,6 @@ import {
 
 let $ = document
 
-const hamburger = $.querySelector(".hamburger")
-const contenerMenuMobail = $.querySelector(".contener-menu-mobail ")
-hamburger.addEventListener("click", function () {
-    hamburger.classList.toggle("active")
-    contenerMenuMobail.classList.toggle("contener-menu-mobail--active")
-})
-
-let menuLink = $.querySelectorAll(".list-menu-item__link")
-menuLink.forEach(function (menuLink) {
-    menuLink.addEventListener("click", function () {
-        $.querySelector(".list-menu-item__link--active").classList.remove("list-menu-item__link--active")
-        menuLink.classList.add("list-menu-item__link--active")
-    })
-})
-
 let shopFilterbox = $.querySelector(".shop-filter")
 let boxFilterSelect = $.querySelector(".box-filter__select")
 let iconFilter = $.querySelector(".shop-filter__svg-icon--filter")
@@ -35,8 +20,6 @@ iconFilter.addEventListener("click", function (event) {
     shopFilterbox.classList.toggle("shop-filter--active")
     boxFilterSelect.classList.toggle("box-filter__select--active")
 })
-
-
 
 const productsWrapper = $.querySelector(".row-container")
 const containerPagination = $.querySelector(".shop-products__number-pagination")
@@ -216,7 +199,6 @@ function setBtnNextPrevDom(productArrayFilter) {
         saveToLocalStorage("currentPage", currentPage)
     })
 }
-
 
 const addingActiveOptionInSelectBoxByUser = () => {
     let data = getFromLocalStorage("optionActiveSelectBox")

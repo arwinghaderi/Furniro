@@ -79,5 +79,6 @@ export {
     searchInProducts,
     ProductsWithPaginationCalculations,
     getCurrentPageAndShowCountProducts,
-    calculateProductsShowMoreButton
+    calculateProductsShowMoreButton,
+    getUrlParam
 }

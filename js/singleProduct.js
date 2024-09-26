@@ -10,22 +10,6 @@ let $ = document
 const hamburger = $.querySelector(".hamburger")
 const contenerMenuMobail = $.querySelector(".contener-menu-mobail ")
 
-hamburger.addEventListener("click", function () {
-    hamburger.classList.toggle("active")
-    contenerMenuMobail.classList.toggle("contener-menu-mobail--active")
-})
-
-
-let menuLink = document.querySelectorAll(".list-menu-item__link")
-menuLink.forEach(function (menuLink) {
-    menuLink.addEventListener("click", function () {
-        document.querySelector(".list-menu-item__link--active").classList.remove("list-menu-item__link--active")
-        menuLink.classList.add("list-menu-item__link--active")
-    })
-})
-
-
-
 // **elment html Single Page Product 
 let routeProduct = document.querySelector(".route-product")
 let imgSecoundContainer = document.querySelector(".detailes-product-img-secound")

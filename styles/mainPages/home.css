@@ -172,6 +172,16 @@ slaisder-section
     justify-content: center;
 }
 
+.slaider-contant__btn {
+    color: #ffff;
+    font-family: "Poppins-SemiBold";
+    outline: none;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+}
 
 .slaider-conatiner {
     flex-basis: 65%;
@@ -330,6 +340,7 @@ slaisder-section
     stroke-dasharray: 125.6;
     transform: rotate(-90deg);
 }
+
 /* 
 ===================
     Designs

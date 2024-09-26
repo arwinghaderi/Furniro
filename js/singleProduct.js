@@ -3,13 +3,6 @@ import { products } from "../js/db/data.js"
 
 let $ = document
 
-
-
-
-// **hamburger menu
-const hamburger = $.querySelector(".hamburger")
-const contenerMenuMobail = $.querySelector(".contener-menu-mobail ")
-
 // **elment html Single Page Product 
 let routeProduct = document.querySelector(".route-product")
 let imgSecoundContainer = document.querySelector(".detailes-product-img-secound")

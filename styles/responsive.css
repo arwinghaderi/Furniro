@@ -571,6 +571,12 @@
         width: 100%;
     }
 
+    .autoplay-progress {
+
+        right: 1rem;
+        bottom: -0.2rem
+    }
+
 }
 
 @media screen and (max-width:392px) {

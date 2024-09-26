@@ -172,33 +172,11 @@ slaisder-section
     justify-content: center;
 }
 
-.slaider-contant__btn {
-    color: #ffff;
-    font-family: "Poppins-SemiBold";
-    outline: none;
-    background-color: transparent;
-    border: none;
-    display: flex;
-    justify-content: flex-start;
-    cursor: pointer;
-}
 
 .slaider-conatiner {
     flex-basis: 65%;
     position: relative;
 }
-
-.slaider-pagination-container {
-    display: flex;
-    justify-content: flex-start;
-    gap: 1rem;
-    align-items: center;
-    position: absolute;
-    bottom: 5%;
-    left: 50%;
-}
-
-
 
 .swiper-wrapper {
     display: flex;
@@ -325,11 +303,11 @@ slaisder-section
 
 .autoplay-progress {
     position: absolute;
-    right: 55px;
+    right: 5.5rem;
     bottom: 0px;
     z-index: 10;
-    width: 48px;
-    height: 48px;
+    width: 4.8rem;
+    height: 4.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -352,28 +330,6 @@ slaisder-section
     stroke-dasharray: 125.6;
     transform: rotate(-90deg);
 }
-
-.input-radio {
-    display: none;
-}
-
-.checkmark-input {
-    width: calc(100% - 1rem);
-    height: calc(100% - 1rem);
-    background-color: #D8D8D8;
-    border-radius: 100%;
-    opacity: 1;
-    transition: all 0.8s ease-in-out;
-}
-
-.checkmark-input--active {
-    width: calc(100% - 1rem);
-    height: calc(100% - 1rem);
-    background-color: var(--Primary-color);
-    border-radius: 100%;
-    transition: all 0.8s ease-in-out;
-}
-
 /* 
 ===================
     Designs

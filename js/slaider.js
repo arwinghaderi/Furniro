@@ -5,7 +5,7 @@ const swiper = new Swiper(".mySwiper", {
     grabCursor: true,
     spaceBetween: 20,
     autoplay: {
-        delay: 3000,
+        delay: 5000,
         slidesPerGroupAuto: true,
         disableOnInteraction: false
     },
@@ -23,24 +23,17 @@ const swiper = new Swiper(".mySwiper", {
         }
     },
     breakpoints: {
-        // when window width is >= 320px
         320: {
             slidesPerView: 1,
         },
-        // when window width is >= 480px
         480: {
             slidesPerView: 2,
 
-        },
-        // when window width is >= 640px
-        640: {
-            slidesPerView: 2,
         },
         1200: {
             slidesPerView: 3,
             height: "64rem"
         }
-
     },
     loop: true
 });

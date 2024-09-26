@@ -241,9 +241,18 @@ slaisder-section
     position: relative;
 }
 
+.swiper-slide-active .box-contant-img-slaider {
+    opacity: 1;
+    transition: all ease-in-out 0.8s;
+}
+
 .box-contant-img-slaider {
-    width: 21.7rem;
-    height: 13rem;
+    opacity: 0;
+}
+
+.box-contant-img-slaider {
+    width: 20rem;
+    height: 10rem;
     padding: 4rem 2rem;
     background-color: rgb(255, 255, 255, 72%);
     position: absolute;

@@ -67,6 +67,11 @@ const calculateProductsShowMoreButton = (products, curentItem, currentPage) => {
     return productsShowMor
 }
 
+const getUrlParam = (key) => {
+    const urlParams = new URLSearchParams(window.location.search)
+    return urlParams.get(key)
+}
+
 export {
     paginationCalculations,
     saveToLocalStorage,

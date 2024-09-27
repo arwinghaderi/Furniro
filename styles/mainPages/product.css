@@ -653,6 +653,12 @@ cart-shop singel-product
     height: 2.5rem;
 }
 
+.btn-icon {
+    outline: none;
+    background-color: transparent;
+    border: none;
+}
+
 .detailes-produc-Specifications__line {
     height: 3rem;
 }

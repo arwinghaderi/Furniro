@@ -7,15 +7,10 @@ let $ = document
 // **elment html Single Page Product 
 
 
+const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
 
 
-let containerDescriptionProduct = document.querySelector(".detailes-product__description-box")
-let containerBtnSiza = document.querySelector(".detailes-product__size-box")
-let containerColorBtn = document.querySelector(".detailes-product__color-box")
-let containerBtnProduct = document.querySelector(".detailes-product-btn")
-let containerInformation = document.querySelector(".Supplementary-specifications__value-box")
 let keeperCartProduct = document.querySelector(".cart-Shop__products")
-let BtnAddToCart = document.querySelector(".detailes-product-btn__cart--add-to-cart")
 let keeperSubTotalBtn = document.querySelector(".cart-Shop__keeper__sub-btn")
 let btnCurentInputNumberPlus = document.querySelector(".detailes-product-input__quantity__plus")
 let btnCurentInputNumberMinus = document.querySelector(".detailes-product-input__quantity__minus")
@@ -43,80 +38,69 @@ const addingAllProductPhotos = () => {
     imgSecoundContainer.insertAdjacentHTML("afterbegin", ` <div class="detailes-product-img-secound__box  detailes-product-img-secound__box--active "><img class="detailes-product-img-secound__img" src =" ${ProductSelectionByUser.imgSecoundMain}" alt = "main-product" ></div ><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${ProductSelectionByUser.imgSecound1}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${ProductSelectionByUser.imgSecound2} " alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${ProductSelectionByUser.imgSecound3}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${ProductSelectionByUser.imgSecound4} " alt="detailes-product"></div>`)
 }
 
-const addingProductPriceSectionTemplate = () => {
-    const detailesProducSpecifications = document.querySelector(".detailes-produc-Specifications")
-    let price = +ProductSelectionByUser.price
-    let discountPercent = +ProductSelectionByUser.discountPercent
-    let totalDiscount = (price * discountPercent) / 100
-    let total = price - totalDiscount
-
-    ProductSelectionByUser.discount === true ? detailesProducSpecifications.insertAdjacentHTML("afterbegin", `<h3 class="detailes-produc-Specifications__title"> ${ProductSelectionByUser.productIntroduction}  </h3><h5 class= "detailes-produc-Specifications__price-discount" > Rp ${ProductSelectionByUser.price.toLocaleString("en")} </h5 ><h5 class="detailes-produc-Specifications__price">Rp  ${total.toLocaleString("en")}  </h5>`) : detailesProducSpecifications.insertAdjacentHTML("afterbegin", `<h3 class="detailes-produc-Specifications__title">${ProductSelectionByUser.productIntroduction}  </h3><h5 class= "detailes-produc-Specifications__price" > Rp  ${ProductSelectionByUser.price.toLocaleString("en")}  </h5>`)
-}
-
-const addingScoringTemplate = () => {
-    let containerStarCustomerReview = document.querySelector(".detailes-produc-Specifications__customer-review-box")
-
-    containerStarCustomerReview.insertAdjacentHTML("afterbegin", `
-    <div class="detailes-produc-Specifications__score">
-      <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
-      <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
-      <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
-      <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
-      <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
-    </div>
-    <div class="detailes-produc-Specifications__line line"></div>
-    <p class="detailes-produc-Specifications__status">0 Customer Review</p>`)
-}
-
-
-function setSinglePageProductDom(ProductSelectionByUser) {
+const addingDetailesProduct = () => {
     if (ProductSelectionByUser) {
-        AddingPagePathDom()
+        let price = +ProductSelectionByUser.price
+        let discountPercent = +ProductSelectionByUser.discountPercent
+        let totalDiscount = (price * discountPercent) / 100
+        let total = price - totalDiscount
+
         addingAllProductPhotos()
-        addingProductPriceSectionTemplate()
-        addingScoringTemplate()
+        AddingPagePathDom()
 
-        containerDescriptionProduct.insertAdjacentHTML("afterbegin", `<p class="detailes-product__description">${ProductSelectionByUser.description}  </p > `)
+        wrapperDetailesProducts.insertAdjacentHTML('afterbegin',
+            `${ProductSelectionByUser.discount ? `<h3 class="detailes-produc-Specifications__title"> ${ProductSelectionByUser.productIntroduction}</h3>
+                <h5 class= "detailes-produc-Specifications__price-discount" > Rp ${ProductSelectionByUser.price.toLocaleString("en")}</h5>
+                <h5 class="detailes-produc-Specifications__price">Rp  ${total.toLocaleString("en")} </h5>`
+                :
+               `<h3 class="detailes-produc-Specifications__title">${ProductSelectionByUser.productIntroduction}</h3>
+                <h5 class= "detailes-produc-Specifications__price"> Rp ${ProductSelectionByUser.price.toLocaleString("en")}</h5>`}
 
-        containerBtnSiza.insertAdjacentHTML("afterbegin",
-            ` <span class="detailes-product__size__name">Size</span><div class= "detailes-product__size-btn-container" ><div class="detailes-product__size-btn-box  detailes-product__size-btn-box--active"><butuon class="detailes-product__size-btn  detailes-product__size-btn--active">L</butuon></div><div class="detailes-product__size-btn-box"><butuon class="detailes-product__size-btn">XL</butuon></div><div class="detailes-product__size-btn-box"><butuon class="detailes-product__size-btn">XS</butuon></div></div> `)
-
-        containerColorBtn.insertAdjacentHTML("afterbegin",
-            `<span class="detailes-product__Color__name">Color</span><div class="detailes-product__Color-btn-container"> <div data-color="${ProductSelectionByUser.color1}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${ProductSelectionByUser.color1} detailes-product__Color-btn-box--active"> </div> <div data-color="${ProductSelectionByUser.color2}"  class="detailes-product__Color-btn-box detailes-product__size-btn--${ProductSelectionByUser.color2}"> </div><div data-color="${ProductSelectionByUser.color3}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${ProductSelectionByUser.color3}"></div><div data-color="${ProductSelectionByUser.color4}"<div class="detailes-product__Color-btn-box  detailes-product__size-btn--${ProductSelectionByUser.color4}"></div></div>`)
-
-
-        containerBtnProduct.insertAdjacentHTML("beforeend", `<div  class="detailes-product-btn__box-cart"><button class="detailes-product-btn__cart detailes-product-btn__cart--add-to-cart">Add To Cart</button></div><div class="detailes-product-btn__box-Compare"> <button class="detailes-product-btn__Compare">+Compare</button></div>`)
-
-        containerInformation.insertAdjacentHTML("afterbegin",
-            `<span class="Supplementary-specifications__value">SS00${ProductSelectionByUser.id}   </span><span class="Supplementary-specifications__value">${ProductSelectionByUser.type}</span ><span class="Supplementary-specifications__value">Sofa, Chair, Home, Shop</span> 
-            <div class="Supplementary-specifications__box-icon">
-             <div class="box-Icon-social">
-             <i class="fa-brands fa-facebook-f Icon-social"></i>
+        <div class="detailes-produc-Specifications__customer-review-box">
+            <div class="detailes-produc-Specifications__score">
+               <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
+               <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
+               <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
+               <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
+               <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
             </div>
-             <div class="box-Icon-social  box-Icon-social--linkdin">
-             <i class="fa-brands fa-linkedin-in Icon-social"></i>
-            </div>
-             <div class="box-Icon-social box-Icon-social--twitter">
-             <i class="fa-brands fa-twitter Icon-social"></i>
-            </div>
-            </div >`)
+            <div class="detailes-produc-Specifications__line line"></div>
+            <p class="detailes-produc-Specifications__status">0 Customer Review</p>  
+        </div>   
 
-        let iconStar = document.querySelectorAll(".btn-icon")
-        let statusScore = document.querySelector(".detailes-produc-Specifications__status")
-        let btnSizeBox = document.querySelectorAll(".detailes-product__size-btn-box")
-        let btnColor = document.querySelectorAll(".detailes-product__Color-btn-box ")
-        let boxImgProduct = document.querySelectorAll(".detailes-product-img-secound__box")
-        let imgMainProduct = document.querySelector(".detailes-product-img-main___img")
-        let btnAddToCart = document.querySelector(".detailes-product-btn__box-cart")
-        setScoreProduct(iconStar, statusScore)
-        setBtnSize(btnSizeBox)
-        setBtncolor(btnColor, imgMainProduct)
-        setImgProducts(boxImgProduct, imgMainProduct)
-        addBtnCart(btnAddToCart)
+        <div class="detailes-product__description-box">
+          <p class="detailes-product__description">${ProductSelectionByUser.description}</p>
+        </div>
+
+        <div class="detailes-product__size-box">
+            <span class="detailes-product__size__name">Size</span>
+          <div class= "detailes-product__size-btn-container">
+            <div class="detailes-product__size-btn-box  detailes-product__size-btn-box--active"><butuon class="detailes-product__size-btn  detailes-product__size-btn--active">L</butuon></div>
+            <div class="detailes-product__size-btn-box"><butuon class="detailes-product__size-btn">XL</butuon></div>
+            <div class="detailes-product__size-btn-box"><butuon class="detailes-product__size-btn">XS</butuon></div>
+          </div> 
+        </div>
+
+     <div class="detailes-product__color-box">
+         <span class="detailes-product__Color__name">Color</span><div class="detailes-product__Color-btn-container"> <div data-color="${ProductSelectionByUser.color1}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${ProductSelectionByUser.color1} detailes-product__Color-btn-box--active"> </div> <div data-color="${ProductSelectionByUser.color2}"  class="detailes-product__Color-btn-box detailes-product__size-btn--${ProductSelectionByUser.color2}"> </div><div data-color="${ProductSelectionByUser.color3}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${ProductSelectionByUser.color3}"></div><div data-color="${ProductSelectionByUser.color4}"<div class="detailes-product__Color-btn-box  detailes-product__size-btn--${ProductSelectionByUser.color4}"></div></div>   
+     </div> 
+
+     <div class="detailes-product-btn">
+         <div class="detailes-product-input__box-quantity">
+             <div class="detailes-product-input__quantity-Container-input">
+                 <span class="detailes-product-input__quantity__minus">-</span>
+                 <input class="detailes-product-input__quantity" type="number" placeholder="1" value="1">
+                 <span class="detailes-product-input__quantity__plus">+</span>
+             </div>
+         </div>
+         <div class="detailes-product-btn__box-cart"><button class="detailes-product-btn__cart detailes-product-btn__cart--add-to-cart">Add To Cart</button></div>
+         <div class="detailes-product-btn__box-Compare"><button  class="detailes-product-btn__Compare">+Compare</button></div>
+     </div>
+        `
+        )
     }
 }
-setSinglePageProductDom(ProductSelectionByUser)
-
+addingDetailesProduct()
 
 let cartArray = []
 

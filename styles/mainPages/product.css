@@ -604,7 +604,7 @@ cart-shop singel-product
     font-family: var(--primary-font);
 }
 
-.detailes-produc-Specifications {
+.wrapper-Detailes-Products {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -680,6 +680,7 @@ cart-shop singel-product
     outline: none;
     background-color: transparent;
     border: none;
+    padding: 0;
 }
 
 .detailes-produc-Specifications__line {

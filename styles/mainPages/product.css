@@ -2,6 +2,7 @@
 @import url(../Features/footer.css);
 @import url(../Features/products.css);
 @import url(/Furniro/styles/defaults.css);
+
 /* 
 ===================
   #SHOP--HoME
@@ -271,7 +272,7 @@
 }
 
 .shop-product-button--active {
-    color: var( --white-color);
+    color: var(--white-color);
 }
 
 /* ================
@@ -334,7 +335,7 @@ cart-shop singel-product
     right: -30rem;
     height: 100%;
     width: 0;
-    background-color: var( --white-color);
+    background-color: var(--white-color);
     z-index: 100;
     padding: 3rem;
     display: flex;
@@ -572,7 +573,7 @@ cart-shop singel-product
 .detailes-product-img-secound__box--active {
     background-color: var(--Primary-color);
     transform: scale(1.4);
-    border: 0.5rem double var( --white-color);
+    border: 0.5rem double var(--white-color);
 }
 
 .detailes-product-img-secound__img {
@@ -646,6 +647,12 @@ cart-shop singel-product
     fill: #FFC700;
 }
 
+.detailes-product-Specifications__star {
+    color: #FFC700;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
 .detailes-produc-Specifications__line {
     height: 3rem;
 }
@@ -691,7 +698,7 @@ cart-shop singel-product
 .detailes-product__size-btn {}
 
 .detailes-product__size-btn--active {
-    color: var( --white-color);
+    color: var(--white-color);
 }
 
 .detailes-product__color-box {

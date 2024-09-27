@@ -53,7 +53,7 @@ const addingDetailesProduct = () => {
                 <h5 class= "detailes-produc-Specifications__price-discount" > Rp ${ProductSelectionByUser.price.toLocaleString("en")}</h5>
                 <h5 class="detailes-produc-Specifications__price">Rp  ${total.toLocaleString("en")} </h5>`
                 :
-               `<h3 class="detailes-produc-Specifications__title">${ProductSelectionByUser.productIntroduction}</h3>
+                `<h3 class="detailes-produc-Specifications__title">${ProductSelectionByUser.productIntroduction}</h3>
                 <h5 class= "detailes-produc-Specifications__price"> Rp ${ProductSelectionByUser.price.toLocaleString("en")}</h5>`}
 
         <div class="detailes-produc-Specifications__customer-review-box">
@@ -99,6 +99,11 @@ const addingDetailesProduct = () => {
         `
         )
     }
+    let iconStar = document.querySelectorAll(".btn-icon")
+    let scoreStatus = document.querySelector(".detailes-produc-Specifications__status")
+
+    productsScoreing(iconStar, scoreStatus)
+
 }
 addingDetailesProduct()
 
@@ -184,26 +189,28 @@ function getLocalStorgeProductArrayCart() {
 getLocalStorgeProductArrayCart()
 
 
+const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
+    iconsStar.forEach(function (icon, index) {
+        if (userScoreingNumber >= index + 1) {
+            icon.firstChild.classList.add("fa-solid")
+            icon.firstChild.classList.remove("fa-regular")
+            scoreStatus.innerHTML = userScoreingNumber + "  of" + ' 5 Customer Review';
+        } else {
+            icon.firstChild.classList.add("fa-regular")
+            icon.firstChild.classList.remove("fa-solid")
+        }
+    })
+}
 
-// **set Score Product
-function setScoreProduct(iconStar, statusScore) {
-    iconStar.forEach(function (icon, i) {
-        icon.addEventListener("click", function (e) {
-            let curentStar = i + 1
-            iconStar.forEach(function (icons, j) {
-                if (curentStar >= j + 1) {
-                    icons.firstChild.classList.add("fa-solid")
-                    icons.firstChild.classList.remove("fa-regular")
-                    statusScore.innerHTML = curentStar + "  of" + ' 5 Customer Review';
-                } else {
-                    icons.firstChild.classList.add("fa-regular")
-                    icons.firstChild.classList.remove("fa-solid")
-                }
-            })
+function productsScoreing(iconsStar, scoreStatus) {
+    let userScoreingNumber
+    iconsStar.forEach((icon, index) => {
+        icon.addEventListener("click", function () {
+            userScoreingNumber = index + 1
+
+            userScoringLogic(iconsStar, userScoreingNumber, scoreStatus)
         })
     })
-
-
 }
 
 // **set Btn Size Active
@@ -241,48 +248,48 @@ function setImgProduct(colorName, imgMainProduct) {
 
 
 // **set Input Number Plus Minus
-function setInputNumberPlusMinus() {
-    btnCurentInputNumberPlus.addEventListener("click", function (params) {
-        +btnCurentInputNumber.value++
-        if (+btnCurentInputNumber.value === 11) {
-            btnCurentInputNumber.value = 10
-            alert("If you need more than 10 products, call the following number: 09309657845")
-        }
-        setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
-    })
-    btnCurentInputNumberMinus.addEventListener("click", function (params) {
-        +btnCurentInputNumber.value--
-        if (+btnCurentInputNumber.value === 0) {
-            btnCurentInputNumber.value = 1
-        }
-        setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
-    })
-}
-setInputNumberPlusMinus()
+// function setInputNumberPlusMinus() {
+//     btnCurentInputNumberPlus.addEventListener("click", function (params) {
+//         +btnCurentInputNumber.value++
+//         if (+btnCurentInputNumber.value === 11) {
+//             btnCurentInputNumber.value = 10
+//             alert("If you need more than 10 products, call the following number: 09309657845")
+//         }
+//         setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
+//     })
+//     btnCurentInputNumberMinus.addEventListener("click", function (params) {
+//         +btnCurentInputNumber.value--
+//         if (+btnCurentInputNumber.value === 0) {
+//             btnCurentInputNumber.value = 1
+//         }
+//         setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
+//     })
+// }
+// setInputNumberPlusMinus()
 
 
 
 // **Product counter local storge
-function setLocalStorgechangeInputCountProduct(btnCurentInputNumbervalue) {
-    localStorage.setItem("setCountProduct", JSON.stringify(btnCurentInputNumbervalue))
-    if (localStorage) {
-        ProductSelectionByUser.count = btnCurentInputNumbervalue
-    }
-    ProductSelectionByUser.count = btnCurentInputNumbervalue
-}
+// function setLocalStorgechangeInputCountProduct(btnCurentInputNumbervalue) {
+//     localStorage.setItem("setCountProduct", JSON.stringify(btnCurentInputNumbervalue))
+//     if (localStorage) {
+//         ProductSelectionByUser.count = btnCurentInputNumbervalue
+//     }
+//     ProductSelectionByUser.count = btnCurentInputNumbervalue
+// }
 
-function GetLocalStorgechangeInputCountProduct() {
-    let getCountProduct = JSON.parse(localStorage.getItem("setCountProduct"))
-    if (getCountProduct) {
-        ProductSelectionByUser.count = getCountProduct
-        btnCurentInputNumber.value = getCountProduct
-    } else {
-        ProductSelectionByUser.count = getCountProduct
-        btnCurentInputNumber.value = getCountProduct
-    }
-    setBtnAddToCart(cartArray)
-}
-window.addEventListener("load", GetLocalStorgechangeInputCountProduct)
+// function GetLocalStorgechangeInputCountProduct() {
+//     let getCountProduct = JSON.parse(localStorage.getItem("setCountProduct"))
+//     if (getCountProduct) {
+//         ProductSelectionByUser.count = getCountProduct
+//         btnCurentInputNumber.value = getCountProduct
+//     } else {
+//         ProductSelectionByUser.count = getCountProduct
+//         btnCurentInputNumber.value = getCountProduct
+//     }
+//     setBtnAddToCart(cartArray)
+// }
+// window.addEventListener("load", GetLocalStorgechangeInputCountProduct)
 
 // **set Img main Products
 
@@ -296,7 +303,6 @@ function setImgProducts(boxImgProduct, imgMainProduct) {
         })
     })
 }
-
 //** */ Exit and entry of the shopping cart
 
 let iconCart = document.querySelector(".icon-container__link--cart")

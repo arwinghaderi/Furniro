@@ -10,8 +10,9 @@ let $ = document
 const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
 
 
-let keeperCartProduct = document.querySelector(".cart-Shop__products")
-let keeperSubTotalBtn = document.querySelector(".cart-Shop__keeper__sub-btn")
+const keeperCartProduct = document.querySelector(".cart-Shop__products")
+const keeperSubTotalBtn = document.querySelector(".cart-Shop__keeper__sub-btn")
+
 
 let subTotalPrice = document.querySelector(".sub-total-box__price")
 
@@ -26,12 +27,17 @@ const AddingPagePathDom = () => {
 }
 
 const addingAllProductPhotos = () => {
-    const imgMain = document.querySelector(".detailes-product-img-main__box")
-    const imgSecoundContainer = document.querySelector(".detailes-product-img-secound")
+    const wrapperMainImage = document.querySelector(".detailes-product-img-main__box")
+    const wrapperSecoundImg = document.querySelector(".detailes-product-img-secound")
 
-    imgMain.insertAdjacentHTML("afterbegin", `<img class="detailes-product-img-main___img" src="${ProductSelectionByUser.imgSecoundMain}" alt="main-product">`)
+    wrapperMainImage.insertAdjacentHTML("afterbegin", `<img class="detailes-product-img-main___img" src="${ProductSelectionByUser.imgSecoundMain}" alt="main-product">`)
 
-    imgSecoundContainer.insertAdjacentHTML("afterbegin", ` <div class="detailes-product-img-secound__box  detailes-product-img-secound__box--active "><img class="detailes-product-img-secound__img" src =" ${ProductSelectionByUser.imgSecoundMain}" alt = "main-product" ></div ><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${ProductSelectionByUser.imgSecound1}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${ProductSelectionByUser.imgSecound2} " alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${ProductSelectionByUser.imgSecound3}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${ProductSelectionByUser.imgSecound4} " alt="detailes-product"></div>`)
+    wrapperSecoundImg.insertAdjacentHTML("afterbegin", ` <div class="detailes-product-img-secound__box  detailes-product-img-secound__box--active "><img class="detailes-product-img-secound__img" src =" ${ProductSelectionByUser.imgSecoundMain}" alt = "main-product" ></div ><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${ProductSelectionByUser.imgSecound1}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${ProductSelectionByUser.imgSecound2} " alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${ProductSelectionByUser.imgSecound3}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${ProductSelectionByUser.imgSecound4} " alt="detailes-product"></div>`)
+
+    const boxImagesSubProduct = document.querySelectorAll(".detailes-product-img-secound__box")
+    const imgProductMain = document.querySelector(".detailes-product-img-main___img")
+
+    selectionSecondaryProductsByUser(boxImagesSubProduct, imgProductMain)
 }
 
 const addingDetailesProduct = () => {
@@ -101,11 +107,11 @@ const addingDetailesProduct = () => {
     const productsSizeButtons = document.querySelectorAll(".detailes-product__size-btn-box")
 
     const ProductsColorButton = document.querySelectorAll(".detailes-product__Color-btn-box ")
-    const imgProductMain = document.querySelector(".detailes-product-img-main___img")
 
     const btnAddProductCount = document.querySelector(".detailes-product-input__quantity__plus")
     const btnReduceNumberProduct = document.querySelector(".detailes-product-input__quantity__minus")
     const productCountInput = document.querySelector(".detailes-product-input__quantity")
+    const imgProductMain = document.querySelector(".detailes-product-img-main___img")
 
 
     productsScoreing(iconsStar, scoreStatus)
@@ -254,24 +260,24 @@ const setMainImage = (colorName, imgProductMain) => {
 
 function selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput) {
 
-        btnAddProductCount.addEventListener("click", () => {
-            +productCountInput.value++
+    btnAddProductCount.addEventListener("click", () => {
+        +productCountInput.value++
 
-            if (+productCountInput.value === 11) {
-                productCountInput.value = 10
-                alert("اگر بیشتر از 10 محصول نیاز دارید  به شماره مورد نظر تماس بگیرید :09308064108")
-            }
-            // setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
-        })
+        if (+productCountInput.value === 11) {
+            productCountInput.value = 10
+            alert("اگر بیشتر از 10 محصول نیاز دارید  به شماره مورد نظر تماس بگیرید :09308064108")
+        }
+        // setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
+    })
 
-        btnReduceNumberProduct.addEventListener("click", () => {
-            +productCountInput.value--
+    btnReduceNumberProduct.addEventListener("click", () => {
+        +productCountInput.value--
 
-            !+productCountInput.value ? productCountInput.value = 1 : +productCountInput.value
+        !+productCountInput.value ? productCountInput.value = 1 : +productCountInput.value
 
-            // setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
-        })
-    }
+        // setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
+    })
+}
 
 
 
@@ -297,18 +303,21 @@ function selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct,
 // }
 // window.addEventListener("load", GetLocalStorgechangeInputCountProduct)
 
-// **set Img main Products
+function selectionSecondaryProductsByUser(boxImagesSubProduct, imgProductMain) {
 
-function setImgProducts(boxImgProduct, imgMainProduct) {
-    boxImgProduct.forEach(function (boxImgProducts) {
-        boxImgProducts.addEventListener("click", function (e) {
+    boxImagesSubProduct.forEach(boxImgProduct => {
+
+        boxImgProduct.addEventListener("click", () => {
             document.querySelector(".detailes-product-img-secound__box--active").classList.remove("detailes-product-img-secound__box--active")
-            boxImgProducts.classList.add("detailes-product-img-secound__box--active")
-            let childeBoxImgProducts = boxImgProducts.children[0].getAttribute("src");
-            imgMainProduct.setAttribute("src", childeBoxImgProducts)
+            boxImgProduct.classList.add("detailes-product-img-secound__box--active")
+
+            const childOfImgBox = boxImgProduct.firstChild.getAttribute("src");
+            imgProductMain.setAttribute("src", childOfImgBox)
         })
     })
 }
+
+
 //** */ Exit and entry of the shopping cart
 
 let iconCart = document.querySelector(".icon-container__link--cart")
@@ -343,13 +352,6 @@ function setBtnAddToCart(cartArray) {
     })
     TotalCalculations(cartArray)
 }
-
-
-
-
-
-
-// **total product price Calculations
 
 function TotalCalculations(cartArray) {
     let priceTotal = 0

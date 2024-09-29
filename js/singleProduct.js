@@ -12,16 +12,12 @@ const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
 
 let keeperCartProduct = document.querySelector(".cart-Shop__products")
 let keeperSubTotalBtn = document.querySelector(".cart-Shop__keeper__sub-btn")
-let btnCurentInputNumberPlus = document.querySelector(".detailes-product-input__quantity__plus")
-let btnCurentInputNumberMinus = document.querySelector(".detailes-product-input__quantity__minus")
-let btnCurentInputNumber = document.querySelector(".detailes-product-input__quantity")
+
 let subTotalPrice = document.querySelector(".sub-total-box__price")
 
-let urlParamsId = getUrlParam("id")
+const urlParamsId = getUrlParam("id")
 
-let ProductSelectionByUser = products.find(function (params) {
-    return params.id === +urlParamsId
-})
+const ProductSelectionByUser = products.find(product => { return product.id === +urlParamsId })
 
 const AddingPagePathDom = () => {
     const routeProduct = document.querySelector(".route-product")
@@ -101,13 +97,19 @@ const addingDetailesProduct = () => {
     }
     const iconsStar = document.querySelectorAll(".btn-icon")
     const scoreStatus = document.querySelector(".detailes-produc-Specifications__status")
+
     const productsSizeButtons = document.querySelectorAll(".detailes-product__size-btn-box")
+
     const ProductsColorButton = document.querySelectorAll(".detailes-product__Color-btn-box ")
     const imgProductMain = document.querySelector(".detailes-product-img-main___img")
+
+   
+
 
     productsScoreing(iconsStar, scoreStatus)
     selctingProductsSizing(productsSizeButtons)
     selctingProductsColor(ProductsColorButton, imgProductMain)
+
 }
 addingDetailesProduct()
 
@@ -194,7 +196,7 @@ getLocalStorgeProductArrayCart()
 
 
 const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
-    iconsStar.forEach(function (icon, index) {
+    iconsStar.forEach((icon, index) => {
         if (userScoreingNumber >= index + 1) {
             icon.firstChild.classList.add("fa-solid")
             icon.firstChild.classList.remove("fa-regular")
@@ -209,7 +211,7 @@ const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
 function productsScoreing(iconsStar, scoreStatus) {
     let userScoreingNumber
     iconsStar.forEach((icon, index) => {
-        icon.addEventListener("click", function () {
+        icon.addEventListener("click", () => {
             userScoreingNumber = index + 1
 
             userScoringLogic(iconsStar, userScoreingNumber, scoreStatus)
@@ -230,47 +232,26 @@ function selctingProductsSizing(productsSizeButtons) {
     })
 }
 
-// **set Btn color Active
-function selctingProductsColor(btnColor, imgMainProduct) {
-    btnColor.forEach(function (btnColor) {
-        btnColor.addEventListener("click", function (e) {
+function selctingProductsColor(ProductsColorButton, imgProductMain) {
+    ProductsColorButton.forEach(button => {
+
+        button.addEventListener("click", event => {
+
             document.querySelector(".detailes-product__Color-btn-box--active").classList.remove("detailes-product__Color-btn-box--active")
-            btnColor.classList.add("detailes-product__Color-btn-box--active")
+            button.classList.add("detailes-product__Color-btn-box--active")
             document.querySelector(".detailes-product-img-secound__box--active").classList.remove
-            setImgProduct(e.target.dataset.color, imgMainProduct)
+
+            setMainImage(event.target.dataset.color, imgProductMain)
         })
     })
 }
 
-
-
-// **set Img Product Btn color
-function setImgProduct(colorName, imgMainProduct) {
-    imgMainProduct.setAttribute("src", "../images/product img " + colorName + " " + ProductSelectionByUser.type + ".webp")
+const setMainImage = (colorName, imgProductMain) => {
+    imgProductMain.setAttribute("src", "../images/product img " + colorName + " " + ProductSelectionByUser.type + ".webp")
 }
 
+// 
 
-
-
-// **set Input Number Plus Minus
-// function setInputNumberPlusMinus() {
-//     btnCurentInputNumberPlus.addEventListener("click", function (params) {
-//         +btnCurentInputNumber.value++
-//         if (+btnCurentInputNumber.value === 11) {
-//             btnCurentInputNumber.value = 10
-//             alert("If you need more than 10 products, call the following number: 09309657845")
-//         }
-//         setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
-//     })
-//     btnCurentInputNumberMinus.addEventListener("click", function (params) {
-//         +btnCurentInputNumber.value--
-//         if (+btnCurentInputNumber.value === 0) {
-//             btnCurentInputNumber.value = 1
-//         }
-//         setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
-//     })
-// }
-// setInputNumberPlusMinus()
 
 
 

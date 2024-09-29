@@ -680,6 +680,7 @@ cart-shop singel-product
     outline: none;
     background-color: transparent;
     border: none;
+    cursor: pointer;
     padding: 0;
 }
 

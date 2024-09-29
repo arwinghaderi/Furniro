@@ -103,13 +103,15 @@ const addingDetailesProduct = () => {
     const ProductsColorButton = document.querySelectorAll(".detailes-product__Color-btn-box ")
     const imgProductMain = document.querySelector(".detailes-product-img-main___img")
 
-   
+    const btnAddProductCount = document.querySelector(".detailes-product-input__quantity__plus")
+    const btnReduceNumberProduct = document.querySelector(".detailes-product-input__quantity__minus")
+    const productCountInput = document.querySelector(".detailes-product-input__quantity")
 
 
     productsScoreing(iconsStar, scoreStatus)
     selctingProductsSizing(productsSizeButtons)
     selctingProductsColor(ProductsColorButton, imgProductMain)
-
+    selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput)
 }
 addingDetailesProduct()
 
@@ -250,8 +252,26 @@ const setMainImage = (colorName, imgProductMain) => {
     imgProductMain.setAttribute("src", "../images/product img " + colorName + " " + ProductSelectionByUser.type + ".webp")
 }
 
-// 
+function selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput) {
 
+        btnAddProductCount.addEventListener("click", () => {
+            +productCountInput.value++
+
+            if (+productCountInput.value === 11) {
+                productCountInput.value = 10
+                alert("اگر بیشتر از 10 محصول نیاز دارید  به شماره مورد نظر تماس بگیرید :09308064108")
+            }
+            // setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
+        })
+
+        btnReduceNumberProduct.addEventListener("click", () => {
+            +productCountInput.value--
+
+            !+productCountInput.value ? productCountInput.value = 1 : +productCountInput.value
+
+            // setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
+        })
+    }
 
 
 

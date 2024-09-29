@@ -99,11 +99,15 @@ const addingDetailesProduct = () => {
         `
         )
     }
-    let iconStar = document.querySelectorAll(".btn-icon")
-    let scoreStatus = document.querySelector(".detailes-produc-Specifications__status")
+    const iconsStar = document.querySelectorAll(".btn-icon")
+    const scoreStatus = document.querySelector(".detailes-produc-Specifications__status")
+    const productsSizeButtons = document.querySelectorAll(".detailes-product__size-btn-box")
+    const ProductsColorButton = document.querySelectorAll(".detailes-product__Color-btn-box ")
+    const imgProductMain = document.querySelector(".detailes-product-img-main___img")
 
-    productsScoreing(iconStar, scoreStatus)
-
+    productsScoreing(iconsStar, scoreStatus)
+    selctingProductsSizing(productsSizeButtons)
+    selctingProductsColor(ProductsColorButton, imgProductMain)
 }
 addingDetailesProduct()
 
@@ -213,20 +217,21 @@ function productsScoreing(iconsStar, scoreStatus) {
     })
 }
 
-// **set Btn Size Active
-function setBtnSize(btnSizeBox) {
-    btnSizeBox.forEach(function (btnSizeBox) {
-        btnSizeBox.addEventListener("click", function (e) {
+function selctingProductsSizing(productsSizeButtons) {
+    productsSizeButtons.forEach(button => {
+        button.addEventListener("click", () => {
+
             document.querySelector(".detailes-product__size-btn-box--active").classList.remove("detailes-product__size-btn-box--active")
             document.querySelector(".detailes-product__size-btn--active").classList.remove("detailes-product__size-btn--active")
-            btnSizeBox.classList.add("detailes-product__size-btn-box--active")
-            btnSizeBox.classList.add("detailes-product__size-btn--active")
+
+            button.classList.add("detailes-product__size-btn-box--active")
+            button.classList.add("detailes-product__size-btn--active")
         })
     })
 }
 
 // **set Btn color Active
-function setBtncolor(btnColor, imgMainProduct) {
+function selctingProductsColor(btnColor, imgMainProduct) {
     btnColor.forEach(function (btnColor) {
         btnColor.addEventListener("click", function (e) {
             document.querySelector(".detailes-product__Color-btn-box--active").classList.remove("detailes-product__Color-btn-box--active")

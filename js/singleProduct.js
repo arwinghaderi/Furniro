@@ -12,21 +12,21 @@ let subTotalPrice = document.querySelector(".sub-total-box__price")
 
 const urlParamsId = getUrlParam("id")
 
-const ProductSelectionByUser = products.find(product => { return product.id === +urlParamsId })
+const productSelectionByUser = products.find(product => { return product.id === +urlParamsId })
 
-const AddingPagePathDom = () => {
+const addingPagePathDom = () => {
     const routeProduct = document.querySelector(".route-product")
 
-    routeProduct.insertAdjacentHTML("afterbegin", `<div class="container"><div class= "route-product__waraper"><p class="route-product__path-name">Home</p><i class="fa-solid fa-angle-right fa-xs"></i><p class="route-product__path-name">Shop</p><i class="fa-solid fa-angle-right fa-xs"></i><div class="route-product__line-col line"></div><p class="route-product__product-name"> ${ProductSelectionByUser.productName}</p></></div >`)
+    routeProduct.insertAdjacentHTML("afterbegin", `<div class="container"><div class= "route-product__waraper"><p class="route-product__path-name">Home</p><i class="fa-solid fa-angle-right fa-xs"></i><p class="route-product__path-name">Shop</p><i class="fa-solid fa-angle-right fa-xs"></i><div class="route-product__line-col line"></div><p class="route-product__product-name"> ${productSelectionByUser.productName}</p></></div >`)
 }
 
 const addingAllProductPhotos = () => {
     const wrapperMainImage = document.querySelector(".detailes-product-img-main__box")
     const wrapperSecoundImg = document.querySelector(".detailes-product-img-secound")
 
-    wrapperMainImage.insertAdjacentHTML("afterbegin", `<img class="detailes-product-img-main___img" src="${ProductSelectionByUser.imgSecoundMain}" alt="main-product">`)
+    wrapperMainImage.insertAdjacentHTML("afterbegin", `<img class="detailes-product-img-main___img" src="${productSelectionByUser.imgSecoundMain}" alt="main-product">`)
 
-    wrapperSecoundImg.insertAdjacentHTML("afterbegin", ` <div class="detailes-product-img-secound__box  detailes-product-img-secound__box--active "><img class="detailes-product-img-secound__img" src =" ${ProductSelectionByUser.imgSecoundMain}" alt = "main-product" ></div ><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${ProductSelectionByUser.imgSecound1}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${ProductSelectionByUser.imgSecound2} " alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${ProductSelectionByUser.imgSecound3}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${ProductSelectionByUser.imgSecound4} " alt="detailes-product"></div>`)
+    wrapperSecoundImg.insertAdjacentHTML("afterbegin", ` <div class="detailes-product-img-secound__box  detailes-product-img-secound__box--active "><img class="detailes-product-img-secound__img" src =" ${productSelectionByUser.imgSecoundMain}" alt = "main-product" ></div ><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${productSelectionByUser.imgSecound1}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${productSelectionByUser.imgSecound2} " alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${productSelectionByUser.imgSecound3}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${productSelectionByUser.imgSecound4} " alt="detailes-product"></div>`)
 
     const boxImagesSubProduct = document.querySelectorAll(".detailes-product-img-secound__box")
     const imgProductMain = document.querySelector(".detailes-product-img-main___img")
@@ -35,22 +35,22 @@ const addingAllProductPhotos = () => {
 }
 
 const addingDetailesProduct = () => {
-    if (ProductSelectionByUser) {
-        let price = +ProductSelectionByUser.price
-        let discountPercent = +ProductSelectionByUser.discountPercent
+    if (productSelectionByUser) {
+        let price = +productSelectionByUser.price
+        let discountPercent = +productSelectionByUser.discountPercent
         let totalDiscount = (price * discountPercent) / 100
         let total = price - totalDiscount
 
         addingAllProductPhotos()
-        AddingPagePathDom()
+        addingPagePathDom()
 
         wrapperDetailesProducts.insertAdjacentHTML('afterbegin',
-            `${ProductSelectionByUser.discount ? `<h3 class="detailes-produc-Specifications__title"> ${ProductSelectionByUser.productIntroduction}</h3>
-                <h5 class= "detailes-produc-Specifications__price-discount" > Rp ${ProductSelectionByUser.price.toLocaleString("en")}</h5>
+            `${productSelectionByUser.discount ? `<h3 class="detailes-produc-Specifications__title"> ${productSelectionByUser.productIntroduction}</h3>
+                <h5 class= "detailes-produc-Specifications__price-discount" > Rp ${productSelectionByUser.price.toLocaleString("en")}</h5>
                 <h5 class="detailes-produc-Specifications__price">Rp  ${total.toLocaleString("en")} </h5>`
                 :
-                `<h3 class="detailes-produc-Specifications__title">${ProductSelectionByUser.productIntroduction}</h3>
-                <h5 class= "detailes-produc-Specifications__price"> Rp ${ProductSelectionByUser.price.toLocaleString("en")}</h5>`}
+                `<h3 class="detailes-produc-Specifications__title">${productSelectionByUser.productIntroduction}</h3>
+                <h5 class= "detailes-produc-Specifications__price"> Rp ${productSelectionByUser.price.toLocaleString("en")}</h5>`}
 
         <div class="detailes-produc-Specifications__customer-review-box">
             <div class="detailes-produc-Specifications__score">
@@ -65,7 +65,7 @@ const addingDetailesProduct = () => {
         </div>   
 
         <div class="detailes-product__description-box">
-          <p class="detailes-product__description">${ProductSelectionByUser.description}</p>
+          <p class="detailes-product__description">${productSelectionByUser.description}</p>
         </div>
 
         <div class="detailes-product__size-box">
@@ -78,7 +78,7 @@ const addingDetailesProduct = () => {
         </div>
 
      <div class="detailes-product__color-box">
-         <span class="detailes-product__Color__name">Color</span><div class="detailes-product__Color-btn-container"> <div data-color="${ProductSelectionByUser.color1}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${ProductSelectionByUser.color1} detailes-product__Color-btn-box--active"> </div> <div data-color="${ProductSelectionByUser.color2}"  class="detailes-product__Color-btn-box detailes-product__size-btn--${ProductSelectionByUser.color2}"> </div><div data-color="${ProductSelectionByUser.color3}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${ProductSelectionByUser.color3}"></div><div data-color="${ProductSelectionByUser.color4}"<div class="detailes-product__Color-btn-box  detailes-product__size-btn--${ProductSelectionByUser.color4}"></div></div>   
+         <span class="detailes-product__Color__name">Color</span><div class="detailes-product__Color-btn-container"> <div data-color="${productSelectionByUser.color1}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color1} detailes-product__Color-btn-box--active"> </div> <div data-color="${productSelectionByUser.color2}"  class="detailes-product__Color-btn-box detailes-product__size-btn--${productSelectionByUser.color2}"> </div><div data-color="${productSelectionByUser.color3}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color3}"></div><div data-color="${productSelectionByUser.color4}"<div class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color4}"></div></div>   
      </div> 
 
      <div class="detailes-product-btn">
@@ -119,52 +119,55 @@ addingDetailesProduct()
 let cartProducts = []
 
 
-let countProductIcon = document.querySelector(".nav-bar__count-Procuct")
-let valuecountProductIcon = +countProductIcon.innerHTML
+let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
+let countProducts = +iconCountProducts.innerHTML
+const countIconCart = () => {
+    iconCountProducts.classList.add("nav-bar__count-Procuct--active")
 
-function countIconCart(countProductIcon) {
-    countProductIcon.classList.add("nav-bar__count-Procuct--active")
+    iconCountProducts.innerHTML = 0
 
-    countProductIcon.innerHTML = 0
-    valuecountProductIcon++
-    countProductIcon.innerHTML = valuecountProductIcon
+    countProducts++
+    iconCountProducts.innerHTML = countProducts
 }
 
 
 function addProductCart(btnAddToCart, productCountInput) {
     btnAddToCart.addEventListener("click", () => {
-        logicAddingProductToCart(ProductSelectionByUser.id, productCountInput)
+        logicAddingProductToCart(productSelectionByUser.id, productCountInput)
     })
 }
 
-const logicAddingProductToCart = (urlParamsId, productCountInput) => {
-    let Product = cartProducts.find(productCart => {
-        return productCart.id === urlParamsId
-    })
+function logicAddingProductToCart(urlParamsId, productCountInput) {
+    let product = cartProducts.find(cartproduct => { return cartproduct.id === urlParamsId })
 
-    if (Product) {
-        Product.count === productCountInput.value ? Product.count++ : Product.count = productCountInput.value
+    if (product) {
+        product.count === productCountInput.value ? product.count++ : product.count = productCountInput.value
 
-        saveToLocalStorage("selectedCountProduct", Product.count)
+        saveToLocalStorage("selectedCountProduct", product.count)
         saveToLocalStorage("cartShopProducts", cartProducts)
         setBtnAddToCart(cartProducts)
         TotalCalculations(cartProducts)
     }
+
     else {
-        cartProducts.push(ProductSelectionByUser)
+        cartProducts.push(productSelectionByUser)
+        console.log(Boolean(productSelectionByUser.count), productCountInput.value);
+        !productSelectionByUser.count ? productSelectionByUser.count = 1 : productCountInput.value
 
-        Product.count = productCountInput.value
-        saveToLocalStorage("selectedCountProduct", Product.count)
+        console.log(productSelectionByUser.count);
+        saveToLocalStorage("selectedCountProduct", productSelectionByUser.count)
         saveToLocalStorage("cartShopProducts", cartProducts)
         setBtnAddToCart(cartProducts)
-        countIconCart(countProductIcon)
+        countIconCart()
         TotalCalculations(cartProducts)
     }
+    if (window.innerWidth > 992) {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }
 
-    window.innerWidth > 992 ? window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    }) : ""
 }
 
 const getingCartProductsByUser = () => {
@@ -172,8 +175,8 @@ const getingCartProductsByUser = () => {
 
     if (getCartProducts) {
         cartProducts = getCartProducts
-        valuecountProductIcon = getCartProducts.length - 1
-        countIconCart(countProductIcon)
+        iconCountProducts = getCartProducts.length - 1
+        countIconCart()
     } else {
         cartProducts = []
     }
@@ -233,7 +236,7 @@ function selctingProductsColor(ProductsColorButton, imgProductMain) {
 }
 
 const setMainImage = (colorName, imgProductMain) => {
-    imgProductMain.setAttribute("src", "../images/product img " + colorName + " " + ProductSelectionByUser.type + ".webp")
+    imgProductMain.setAttribute("src", "../images/product img " + colorName + " " + productSelectionByUser.type + ".webp")
 }
 
 function selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput) {
@@ -261,10 +264,10 @@ function getProductCountByUser(productCountInput) {
     let countProduct = getFromLocalStorage("selectedCountProduct")
 
     if (countProduct) {
-        ProductSelectionByUser.count = countProduct
+        productSelectionByUser.count = countProduct
         productCountInput.value = countProduct
     } else {
-        ProductSelectionByUser.count = countProduct
+        productSelectionByUser.count = countProduct
         productCountInput.value = countProduct
     }
     // setBtnAddToCart(cartProducts)
@@ -343,9 +346,9 @@ function TotalCalculations(cartProducts) {
 //** */ remove btn product  
 
 function setBtnRemove(productId) {
-    countProductIcon.innerHTML -= 1
-    if (countProductIcon.innerHTML === -1) {
-        countProductIcon.innerHTML = 0
+    iconCountProducts.innerHTML -= 1
+    if (iconCountProducts.innerHTML === -1) {
+        iconCountProducts.innerHTML = 0
     }
     cartProducts = cartProducts.filter(function (product) {
         console.log(product.id);

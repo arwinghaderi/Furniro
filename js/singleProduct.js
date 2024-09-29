@@ -121,11 +121,13 @@ const addingDetailesProduct = () => {
 }
 addingDetailesProduct()
 
-let cartArray = []
+let cartProducts = []
+
 
 // **count Icon Cart
 let countProductIcon = document.querySelector(".nav-bar__count-Procuct")
 let valuecountProductIcon = +countProductIcon.innerHTML
+
 function countIconCart(countProductIcon) {
     countProductIcon.classList.add("nav-bar__count-Procuct--active")
     countProductIcon.innerHTML = 0
@@ -142,21 +144,20 @@ function addBtnCart(btnAddToCart) {
 
 // **set Product Dom
 function setProductDom(urlParamsId) {
-    let findProduct = cartArray.find(function (productCart) {
+    let findProduct = cartProducts.find(function (productCart) {
         return productCart.id === urlParamsId
     })
 
-    console.log(findProduct);
     if (findProduct) {
         findProduct.count++
         btnCurentInputNumber.value = findProduct.count
         saveToLocalStorage("selectedCountProduct", findProduct.count)
-        setLocalStorgeProductArrayCart(cartArray)
-        setBtnAddToCart(cartArray)
-        TotalCalculations(cartArray)
+        saveToLocalStorage("cartShopProducts", cartProducts)
+        setBtnAddToCart(cartProducts)
+        TotalCalculations(cartProducts)
     }
     else {
-        cartArray.push(ProductSelectionByUser)
+        cartProducts.push(ProductSelectionByUser)
         if (ProductSelectionByUser.count === null) {
             ProductSelectionByUser.count = 1
         }
@@ -169,10 +170,10 @@ function setProductDom(urlParamsId) {
         }
         ProductSelectionByUser.count = btnCurentInputNumber.value
         saveToLocalStorage("selectedCountProduct", ProductSelectionByUser.count)
-        setBtnAddToCart(cartArray)
-        setLocalStorgeProductArrayCart(cartArray)
+        setBtnAddToCart(cartProducts)
+        saveToLocalStorage("cartShopProducts", cartProducts)
         countIconCart(countProductIcon)
-        TotalCalculations(cartArray)
+        TotalCalculations(cartProducts)
     }
     if (window.innerWidth > 992) {
         window.scrollTo({
@@ -182,23 +183,19 @@ function setProductDom(urlParamsId) {
     }
 }
 
-function setLocalStorgeProductArrayCart(cartArray) {
-    localStorage.setItem("ProductArrayCart", JSON.stringify(cartArray))
-}
+const getingCartProductsByUser = () => {
+    let getCartProducts = getFromLocalStorage("cartShopProducts")
 
-function getLocalStorgeProductArrayCart() {
-    let getCartArray = JSON.parse(localStorage.getItem("ProductArrayCart"))
-    if (getCartArray) {
-        cartArray = getCartArray
-        valuecountProductIcon = cartArray.length - 1
+    if (getCartProducts) {
+        cartProducts = getCartProducts
+        valuecountProductIcon = getCartProducts.length - 1
         countIconCart(countProductIcon)
     } else {
-        cartArray = []
+        cartProducts = []
     }
-    setBtnAddToCart(cartArray)
+    // setBtnAddToCart(cartProducts)
 }
-getLocalStorgeProductArrayCart()
-
+getingCartProductsByUser()
 
 const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
     iconsStar.forEach((icon, index) => {
@@ -276,7 +273,7 @@ function selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct,
     getProductCountByUser(productCountInput)
 }
 
-function getProductCountByUser(productCountInput){
+function getProductCountByUser(productCountInput) {
     let countProduct = getFromLocalStorage("selectedCountProduct")
 
     if (countProduct) {
@@ -286,7 +283,7 @@ function getProductCountByUser(productCountInput){
         ProductSelectionByUser.count = countProduct
         productCountInput.value = countProduct
     }
-    // setBtnAddToCart(cartArray)
+    // setBtnAddToCart(cartProducts)
 }
 
 function selectionSecondaryProductsByUser(boxImagesSubProduct, imgProductMain) {
@@ -322,9 +319,9 @@ iconExit.addEventListener("click", function () {
 
 
 //** */ Shopping cart template
-function setBtnAddToCart(cartArray) {
+function setBtnAddToCart(cartProducts) {
     keeperCartProduct.innerHTML = ""
-    cartArray.forEach(function (product) {
+    cartProducts.forEach(function (product) {
         keeperSubTotalBtn.innerHTML = ""
         let price = +product.price
         let discountPercent = +product.discountPercent
@@ -335,12 +332,12 @@ function setBtnAddToCart(cartArray) {
         keeperSubTotalBtn.insertAdjacentHTML("beforeend", '<div div class= "cart-Shop__btn-keeper-cart" ><div class="cart-Shop__btn-keeper__box-btn-cart"><button class="cart-Shop__btn-keeper__btn-cart">Cart</button></div><div class="cart-Shop__btn-keeper__box-btn"><button class="cart-Shop__btn-keeper__btn">Checkout</button></div><div class="cart-Shop__btn-keeper__box-btn"><button class="cart-Shop__btn-keeper__btn">Comparison</button></div></div> ')
 
     })
-    TotalCalculations(cartArray)
+    TotalCalculations(cartProducts)
 }
 
-function TotalCalculations(cartArray) {
+function TotalCalculations(cartProducts) {
     let priceTotal = 0
-    cartArray.forEach(function (product) {
+    cartProducts.forEach(function (product) {
         let price = +product.price
         let discountPercent = +product.discountPercent
         let totalDiscount = (price * discountPercent) / 100
@@ -366,13 +363,13 @@ function setBtnRemove(productId) {
     if (countProductIcon.innerHTML === -1) {
         countProductIcon.innerHTML = 0
     }
-    cartArray = cartArray.filter(function (product) {
+    cartProducts = cartProducts.filter(function (product) {
         console.log(product.id);
         return product.id !== productId
     })
-    setBtnAddToCart(cartArray)
-    TotalCalculations(cartArray)
-    setLocalStorgeProductArrayCart(cartArray)
+    setBtnAddToCart(cartProducts)
+    TotalCalculations(cartProducts)
+    saveToLocalStorage("cartShopProducts", cartProducts)
 }
 
 window.setBtnRemove = setBtnRemove;

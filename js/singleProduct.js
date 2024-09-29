@@ -1,5 +1,5 @@
 import { products } from "../js/db/data.js"
-import { getUrlParam } from "../js/func/utils.js"
+import { getUrlParam, saveToLocalStorage, getFromLocalStorage } from "../js/func/utils.js"
 
 
 let $ = document
@@ -145,11 +145,12 @@ function setProductDom(urlParamsId) {
     let findProduct = cartArray.find(function (productCart) {
         return productCart.id === urlParamsId
     })
+
     console.log(findProduct);
     if (findProduct) {
         findProduct.count++
         btnCurentInputNumber.value = findProduct.count
-        setLocalStorgechangeInputCountProduct(findProduct.count)
+        saveToLocalStorage("selectedCountProduct", findProduct.count)
         setLocalStorgeProductArrayCart(cartArray)
         setBtnAddToCart(cartArray)
         TotalCalculations(cartArray)
@@ -167,7 +168,7 @@ function setProductDom(urlParamsId) {
             btnCurentInputNumber.value = 1
         }
         ProductSelectionByUser.count = btnCurentInputNumber.value
-        setLocalStorgechangeInputCountProduct(ProductSelectionByUser.count)
+        saveToLocalStorage("selectedCountProduct", ProductSelectionByUser.count)
         setBtnAddToCart(cartArray)
         setLocalStorgeProductArrayCart(cartArray)
         countIconCart(countProductIcon)
@@ -181,12 +182,8 @@ function setProductDom(urlParamsId) {
     }
 }
 
-
-// **set Local Storge Product Array Cart
-
 function setLocalStorgeProductArrayCart(cartArray) {
     localStorage.setItem("ProductArrayCart", JSON.stringify(cartArray))
-    console.log(cartArray);
 }
 
 function getLocalStorgeProductArrayCart() {
@@ -259,7 +256,6 @@ const setMainImage = (colorName, imgProductMain) => {
 }
 
 function selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput) {
-
     btnAddProductCount.addEventListener("click", () => {
         +productCountInput.value++
 
@@ -267,7 +263,7 @@ function selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct,
             productCountInput.value = 10
             alert("اگر بیشتر از 10 محصول نیاز دارید  به شماره مورد نظر تماس بگیرید :09308064108")
         }
-        // setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
+        saveToLocalStorage("selectedCountProduct", productCountInput.value)
     })
 
     btnReduceNumberProduct.addEventListener("click", () => {
@@ -275,36 +271,25 @@ function selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct,
 
         !+productCountInput.value ? productCountInput.value = 1 : +productCountInput.value
 
-        // setLocalStorgechangeInputCountProduct(btnCurentInputNumber.value)
+        saveToLocalStorage("selectedCountProduct", productCountInput.value)
     })
+    getProductCountByUser(productCountInput)
 }
 
+function getProductCountByUser(productCountInput){
+    let countProduct = getFromLocalStorage("selectedCountProduct")
 
-
-// **Product counter local storge
-// function setLocalStorgechangeInputCountProduct(btnCurentInputNumbervalue) {
-//     localStorage.setItem("setCountProduct", JSON.stringify(btnCurentInputNumbervalue))
-//     if (localStorage) {
-//         ProductSelectionByUser.count = btnCurentInputNumbervalue
-//     }
-//     ProductSelectionByUser.count = btnCurentInputNumbervalue
-// }
-
-// function GetLocalStorgechangeInputCountProduct() {
-//     let getCountProduct = JSON.parse(localStorage.getItem("setCountProduct"))
-//     if (getCountProduct) {
-//         ProductSelectionByUser.count = getCountProduct
-//         btnCurentInputNumber.value = getCountProduct
-//     } else {
-//         ProductSelectionByUser.count = getCountProduct
-//         btnCurentInputNumber.value = getCountProduct
-//     }
-//     setBtnAddToCart(cartArray)
-// }
-// window.addEventListener("load", GetLocalStorgechangeInputCountProduct)
+    if (countProduct) {
+        ProductSelectionByUser.count = countProduct
+        productCountInput.value = countProduct
+    } else {
+        ProductSelectionByUser.count = countProduct
+        productCountInput.value = countProduct
+    }
+    // setBtnAddToCart(cartArray)
+}
 
 function selectionSecondaryProductsByUser(boxImagesSubProduct, imgProductMain) {
-
     boxImagesSubProduct.forEach(boxImgProduct => {
 
         boxImgProduct.addEventListener("click", () => {

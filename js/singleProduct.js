@@ -1,15 +1,9 @@
 import { products } from "../js/db/data.js"
 import { getUrlParam, saveToLocalStorage, getFromLocalStorage } from "../js/func/utils.js"
 
-
 let $ = document
 
-// **elment html Single Page Product 
-
-
 const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
-
-
 const keeperCartProduct = document.querySelector(".cart-Shop__products")
 const keeperSubTotalBtn = document.querySelector(".cart-Shop__keeper__sub-btn")
 
@@ -113,74 +107,64 @@ const addingDetailesProduct = () => {
     const productCountInput = document.querySelector(".detailes-product-input__quantity")
     const imgProductMain = document.querySelector(".detailes-product-img-main___img")
 
-
+    const btnAddToCart = document.querySelector(".detailes-product-btn__box-cart")
     productsScoreing(iconsStar, scoreStatus)
     selctingProductsSizing(productsSizeButtons)
     selctingProductsColor(ProductsColorButton, imgProductMain)
     selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput)
+    addProductCart(btnAddToCart, productCountInput)
 }
 addingDetailesProduct()
 
 let cartProducts = []
 
 
-// **count Icon Cart
 let countProductIcon = document.querySelector(".nav-bar__count-Procuct")
 let valuecountProductIcon = +countProductIcon.innerHTML
 
 function countIconCart(countProductIcon) {
     countProductIcon.classList.add("nav-bar__count-Procuct--active")
+
     countProductIcon.innerHTML = 0
     valuecountProductIcon++
     countProductIcon.innerHTML = valuecountProductIcon
 }
 
-function addBtnCart(btnAddToCart) {
-    btnAddToCart.addEventListener("click", () => {
-        setProductDom(ProductSelectionByUser.id)
 
+function addProductCart(btnAddToCart, productCountInput) {
+    btnAddToCart.addEventListener("click", () => {
+        logicAddingProductToCart(ProductSelectionByUser.id, productCountInput)
     })
 }
 
-// **set Product Dom
-function setProductDom(urlParamsId) {
-    let findProduct = cartProducts.find(function (productCart) {
+const logicAddingProductToCart = (urlParamsId, productCountInput) => {
+    let Product = cartProducts.find(productCart => {
         return productCart.id === urlParamsId
     })
 
-    if (findProduct) {
-        findProduct.count++
-        btnCurentInputNumber.value = findProduct.count
-        saveToLocalStorage("selectedCountProduct", findProduct.count)
+    if (Product) {
+        Product.count === productCountInput.value ? Product.count++ : Product.count = productCountInput.value
+
+        saveToLocalStorage("selectedCountProduct", Product.count)
         saveToLocalStorage("cartShopProducts", cartProducts)
         setBtnAddToCart(cartProducts)
         TotalCalculations(cartProducts)
     }
     else {
         cartProducts.push(ProductSelectionByUser)
-        if (ProductSelectionByUser.count === null) {
-            ProductSelectionByUser.count = 1
-        }
-        if (+btnCurentInputNumber.value === 11) {
-            btnCurentInputNumber.value = 10
-            alert("If you need more than 10 products, call the following number: 09309657845")
-        }
-        if (+btnCurentInputNumber.value === 0) {
-            btnCurentInputNumber.value = 1
-        }
-        ProductSelectionByUser.count = btnCurentInputNumber.value
-        saveToLocalStorage("selectedCountProduct", ProductSelectionByUser.count)
-        setBtnAddToCart(cartProducts)
+
+        Product.count = productCountInput.value
+        saveToLocalStorage("selectedCountProduct", Product.count)
         saveToLocalStorage("cartShopProducts", cartProducts)
+        setBtnAddToCart(cartProducts)
         countIconCart(countProductIcon)
         TotalCalculations(cartProducts)
     }
-    if (window.innerWidth > 992) {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        })
-    }
+
+    window.innerWidth > 992 ? window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    }) : ""
 }
 
 const getingCartProductsByUser = () => {
@@ -193,7 +177,7 @@ const getingCartProductsByUser = () => {
     } else {
         cartProducts = []
     }
-    // setBtnAddToCart(cartProducts)
+    setBtnAddToCart(cartProducts)
 }
 getingCartProductsByUser()
 

@@ -1,4 +1,5 @@
-import { productDiscountCalculation } from "../js/func/utils.js"
+import { productDiscountCalculation } from "../func/utils.js"
+
 let total, discountTemplate, newTemplate, discountPrice, element
 const fragment = document.createDocumentFragment();
 

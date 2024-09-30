@@ -155,7 +155,7 @@ function logicAddingProductToCart(urlParamsId, productCountInput) {
         saveToLocalStorage("selectedCountProduct", product.count)
         saveToLocalStorage("cartShopProducts", cartProducts)
         addingProductTemplateToCart(cartProducts)
-        TotalCalculations(cartProducts)
+        calculationTotalCart(cartProducts)
     }
     else {
         cartProducts.push(productSelectionByUser)
@@ -166,7 +166,7 @@ function logicAddingProductToCart(urlParamsId, productCountInput) {
         saveToLocalStorage("cartShopProducts", cartProducts)
         addingProductTemplateToCart(cartProducts)
         countIconCart()
-        TotalCalculations(cartProducts)
+        calculationTotalCart(cartProducts)
     }
     if (window.innerWidth > 992) {
         window.scrollTo({
@@ -308,7 +308,7 @@ iconExit.addEventListener("click", function () {
     wrapperCaverScreen.classList.remove("wrapper--active")
 })
 
-const addingProductTemplateToCart = (cartProducts) => {
+function addingProductTemplateToCart(cartProducts) {
     const keeperCartProduct = document.querySelector(".cart-Shop__products")
     keeperCartProduct.innerHTML = ""
 
@@ -318,23 +318,19 @@ const addingProductTemplateToCart = (cartProducts) => {
         keeperCartProduct.insertAdjacentHTML("afterbegin",
             `<div class="products-keeper"><div class="products-keeper__box-img"><img class="products-keeper__img" src="${product.imgSecoundMain}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title">${product.productName} </h6><div class="box-calculation"><span class="box-calculation__number">${product.count}</span>   <span class="box-calculation__multiplication">X</span><span class="box-calculation__price">Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span></div></div><button onclick=" setBtnRemove(${product.id})" class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
     })
-    TotalCalculations(cartProducts)
+    calculationTotalCart(cartProducts)
 }
 
-function TotalCalculations(cartProducts) {
+function calculationTotalCart(cartProducts) {
     let priceTotal = 0
-    cartProducts.forEach(function (product) {
+    let priceProduct, countProduct
+    cartProducts.forEach(product => {
         total = productDiscountCalculation(+product.price, +product.discountPercent)
 
-        if (product.discount === true) {
-            let priceProduct = total
-            let countProduct = product.count
-            priceTotal += countProduct * priceProduct
-        } else {
-            let priceProduct = product.price
-            let countProduct = product.count
-            priceTotal += countProduct * priceProduct
-        }
+        product.discount ? priceProduct = +total : priceProduct = +product.price
+        countProduct = +product.count
+
+        priceTotal += countProduct * priceProduct
     })
     subTotalPrice.innerHTML = "Rs. " + priceTotal.toLocaleString("en")
 }
@@ -349,7 +345,7 @@ function setBtnRemove(productId) {
         return product.id !== productId
     })
     addingProductTemplateToCart(cartProducts)
-    TotalCalculations(cartProducts)
+    calculationTotalCart(cartProducts)
     saveToLocalStorage("cartShopProducts", cartProducts)
 }
 window.setBtnRemove = setBtnRemove;

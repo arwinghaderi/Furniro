@@ -77,7 +77,7 @@ const addingDetailesProduct = () => {
          <div class="detailes-product-input__box-quantity">
              <div class="detailes-product-input__quantity-Container-input">
                  <span class="detailes-product-input__quantity__minus">-</span>
-                 <input class="detailes-product-input__quantity" type="number" min="1" max="5" >
+                 <input class="detailes-product-input__quantity" type="number" min="1" max="10"  value="1" placeholder="1" >
                  <span class="detailes-product-input__quantity__plus">+</span>
              </div>
          </div>
@@ -100,6 +100,7 @@ const addingDetailesProduct = () => {
     const imgProductMain = document.querySelector(".detailes-product-img-main___img")
 
     const btnAddToCart = document.querySelector(".detailes-product-btn__box-cart")
+
     productsScoreing(iconsStar, scoreStatus)
     selctingProductsSizing(productsSizeButtons)
     selctingProductsColor(ProductsColorButton, imgProductMain)

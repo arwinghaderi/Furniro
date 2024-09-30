@@ -127,14 +127,15 @@ const getCountProductsCart = () => {
         iconCountProducts.classList.add("nav-bar__count-Procuct--active")
         iconCountProducts.innerHTML = countProducts
     } else {
-        iconCountProducts.innerHTML = 0
         iconCountProducts.classList.add("nav-bar__count-Procuct--active")
+        iconCountProducts.innerHTML = 0
     }
 }
 
 window.addEventListener("load", () => {
     addingDetailesProduct()
     getCountProductsCart()
+    getingCartProductsByUser()
 })
 
 function addProductCart(btnAddToCart, productCountInput) {
@@ -147,10 +148,8 @@ function logicAddingProductToCart(urlParamsId, productCountInput) {
     let product = cartProducts.find(cartproduct => { return cartproduct.id === urlParamsId })
 
     if (product) {
-        console.log(product.count, product);
         product.count === productCountInput.value ? productCountInput.value++ : productCountInput.value
         product.count = productCountInput.value
-        console.log(product.count, product);
 
         saveToLocalStorage("selectedCountProduct", product.count)
         saveToLocalStorage("cartShopProducts", cartProducts)
@@ -182,14 +181,11 @@ const getingCartProductsByUser = () => {
 
     if (getCartProducts) {
         cartProducts = getCartProducts
-        // iconCountProducts = getCartProducts.length - 1
-        // countIconCart()
     } else {
         cartProducts = []
     }
     addingProductTemplateToCart(cartProducts)
 }
-getingCartProductsByUser()
 
 const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
     iconsStar.forEach((icon, index) => {
@@ -277,7 +273,7 @@ function getProductCountByUser(productCountInput) {
         productSelectionByUser.count = countProduct
         productCountInput.value = countProduct
     }
-    // addingProductTemplateToCart(cartProducts)
+    addingProductTemplateToCart(cartProducts)
 }
 
 function selectionSecondaryProductsByUser(boxImagesSubProduct, imgProductMain) {
@@ -298,12 +294,12 @@ let cartShop = document.querySelector(".cart-Shop")
 let wrapperCaverScreen = document.querySelector(".wrapper")
 let iconExit = document.querySelector(".cart-Shop__icon-exit-head")
 
-iconCart.addEventListener("click", function () {
+iconCart.addEventListener("click", () => {
     cartShop.classList.add("cart-Shop--active")
     wrapperCaverScreen.classList.add("wrapper--active")
 })
 
-iconExit.addEventListener("click", function () {
+iconExit.addEventListener("click", () => {
     cartShop.classList.remove("cart-Shop--active")
     wrapperCaverScreen.classList.remove("wrapper--active")
 })
@@ -316,7 +312,7 @@ function addingProductTemplateToCart(cartProducts) {
         total = productDiscountCalculation(+product.price, +product.discountPercent)
 
         keeperCartProduct.insertAdjacentHTML("afterbegin",
-            `<div class="products-keeper"><div class="products-keeper__box-img"><img class="products-keeper__img" src="${product.imgSecoundMain}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title">${product.productName} </h6><div class="box-calculation"><span class="box-calculation__number">${product.count}</span>   <span class="box-calculation__multiplication">X</span><span class="box-calculation__price">Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span></div></div><button onclick=" setBtnRemove(${product.id})" class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
+            `<div class="products-keeper"><div class="products-keeper__box-img"><img class="products-keeper__img" src="${product.imgSecoundMain}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title">${product.productName} </h6><div class="box-calculation"><span class="box-calculation__number">${product.count}</span>   <span class="box-calculation__multiplication">X</span><span class="box-calculation__price">Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span></div></div><button onclick=" removeProduct(${product.id})" class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
     })
     calculationTotalCart(cartProducts)
 }
@@ -335,17 +331,16 @@ function calculationTotalCart(cartProducts) {
     subTotalPrice.innerHTML = "Rs. " + priceTotal.toLocaleString("en")
 }
 
-function setBtnRemove(productId) {
-    iconCountProducts.innerHTML -= 1
-    if (iconCountProducts.innerHTML === -1) {
-        iconCountProducts.innerHTML = 0
-    }
-    cartProducts = cartProducts.filter(function (product) {
-        console.log(product.id);
+function removeProduct(productId) {
+    cartProducts = cartProducts.filter(product => {
         return product.id !== productId
     })
-    addingProductTemplateToCart(cartProducts)
-    calculationTotalCart(cartProducts)
+    cartProducts.length ? cartProducts.length : cartProducts.length + 1
+    iconCountProducts.innerHTML--
+
+    saveToLocalStorage("countProductToCart", cartProducts.length)
     saveToLocalStorage("cartShopProducts", cartProducts)
+    calculationTotalCart(cartProducts)
+    addingProductTemplateToCart(cartProducts)
 }
-window.setBtnRemove = setBtnRemove;
+window.removeProduct = removeProduct;

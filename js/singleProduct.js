@@ -3,11 +3,6 @@ import { getUrlParam, saveToLocalStorage, getFromLocalStorage } from "../js/func
 
 let $ = document
 
-const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
-const keeperCartProduct = document.querySelector(".cart-Shop__products")
-const keeperSubTotalBtn = document.querySelector(".cart-Shop__keeper__sub-btn")
-
-
 let subTotalPrice = document.querySelector(".sub-total-box__price")
 
 const urlParamsId = getUrlParam("id")
@@ -36,6 +31,8 @@ const addingAllProductPhotos = () => {
 
 const addingDetailesProduct = () => {
     if (productSelectionByUser) {
+        const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
+
         let price = +productSelectionByUser.price
         let discountPercent = +productSelectionByUser.discountPercent
         let totalDiscount = (price * discountPercent) / 100
@@ -85,7 +82,7 @@ const addingDetailesProduct = () => {
          <div class="detailes-product-input__box-quantity">
              <div class="detailes-product-input__quantity-Container-input">
                  <span class="detailes-product-input__quantity__minus">-</span>
-                 <input class="detailes-product-input__quantity" type="number" placeholder="1" value="1">
+                 <input class="detailes-product-input__quantity" type="number" min="1" max="5" >
                  <span class="detailes-product-input__quantity__plus">+</span>
              </div>
          </div>
@@ -114,22 +111,35 @@ const addingDetailesProduct = () => {
     selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput)
     addProductCart(btnAddToCart, productCountInput)
 }
-addingDetailesProduct()
 
 let cartProducts = []
 
-
 let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
 let countProducts = +iconCountProducts.innerHTML
+
 const countIconCart = () => {
-    iconCountProducts.classList.add("nav-bar__count-Procuct--active")
-
-    iconCountProducts.innerHTML = 0
-
     countProducts++
+    iconCountProducts.classList.add("nav-bar__count-Procuct--active")
     iconCountProducts.innerHTML = countProducts
+    saveToLocalStorage("countProductToCart", countProducts)
 }
 
+const getCountProductsCart = () => {
+    countProducts = getFromLocalStorage("countProductToCart")
+
+    if (countProducts) {
+        iconCountProducts.classList.add("nav-bar__count-Procuct--active")
+        iconCountProducts.innerHTML = countProducts
+    } else {
+        iconCountProducts.innerHTML = 0
+        iconCountProducts.classList.add("nav-bar__count-Procuct--active")
+    }
+}
+
+window.addEventListener("load", () => {
+    addingDetailesProduct()
+    getCountProductsCart()
+})
 
 function addProductCart(btnAddToCart, productCountInput) {
     btnAddToCart.addEventListener("click", () => {
@@ -141,20 +151,21 @@ function logicAddingProductToCart(urlParamsId, productCountInput) {
     let product = cartProducts.find(cartproduct => { return cartproduct.id === urlParamsId })
 
     if (product) {
-        product.count === productCountInput.value ? product.count++ : product.count = productCountInput.value
+        console.log(product.count, product);
+        product.count === productCountInput.value ? productCountInput.value++ : productCountInput.value
+        product.count = productCountInput.value
+        console.log(product.count, product);
 
         saveToLocalStorage("selectedCountProduct", product.count)
         saveToLocalStorage("cartShopProducts", cartProducts)
         setBtnAddToCart(cartProducts)
         TotalCalculations(cartProducts)
     }
-
     else {
         cartProducts.push(productSelectionByUser)
-        console.log(Boolean(productSelectionByUser.count), productCountInput.value);
-        !productSelectionByUser.count ? productSelectionByUser.count = 1 : productCountInput.value
+        !productCountInput.value ? productCountInput.value = 1 : productCountInput.value
+        productSelectionByUser.count = productCountInput.value
 
-        console.log(productSelectionByUser.count);
         saveToLocalStorage("selectedCountProduct", productSelectionByUser.count)
         saveToLocalStorage("cartShopProducts", cartProducts)
         setBtnAddToCart(cartProducts)
@@ -175,8 +186,8 @@ const getingCartProductsByUser = () => {
 
     if (getCartProducts) {
         cartProducts = getCartProducts
-        iconCountProducts = getCartProducts.length - 1
-        countIconCart()
+        // iconCountProducts = getCartProducts.length - 1
+        // countIconCart()
     } else {
         cartProducts = []
     }
@@ -235,7 +246,7 @@ function selctingProductsColor(ProductsColorButton, imgProductMain) {
     })
 }
 
-const setMainImage = (colorName, imgProductMain) => {
+function setMainImage(colorName, imgProductMain) {
     imgProductMain.setAttribute("src", "../images/product img " + colorName + " " + productSelectionByUser.type + ".webp")
 }
 
@@ -286,9 +297,6 @@ function selectionSecondaryProductsByUser(boxImagesSubProduct, imgProductMain) {
     })
 }
 
-
-//** */ Exit and entry of the shopping cart
-
 let iconCart = document.querySelector(".icon-container__link--cart")
 let cartShop = document.querySelector(".cart-Shop")
 let wrapperCaverScreen = document.querySelector(".wrapper")
@@ -304,9 +312,9 @@ iconExit.addEventListener("click", function () {
     wrapperCaverScreen.classList.remove("wrapper--active")
 })
 
-
-//** */ Shopping cart template
 function setBtnAddToCart(cartProducts) {
+    const keeperCartProduct = document.querySelector(".cart-Shop__products")
+    const keeperSubTotalBtn = document.querySelector(".cart-Shop__keeper__sub-btn")
     keeperCartProduct.innerHTML = ""
     cartProducts.forEach(function (product) {
         keeperSubTotalBtn.innerHTML = ""
@@ -342,9 +350,6 @@ function TotalCalculations(cartProducts) {
     subTotalPrice.innerHTML = "Rs. " + priceTotal.toLocaleString("en")
 }
 
-
-//** */ remove btn product  
-
 function setBtnRemove(productId) {
     iconCountProducts.innerHTML -= 1
     if (iconCountProducts.innerHTML === -1) {
@@ -358,5 +363,4 @@ function setBtnRemove(productId) {
     TotalCalculations(cartProducts)
     saveToLocalStorage("cartShopProducts", cartProducts)
 }
-
 window.setBtnRemove = setBtnRemove;

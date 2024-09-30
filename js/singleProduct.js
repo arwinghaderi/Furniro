@@ -1,11 +1,10 @@
 import { products } from "../js/db/data.js"
 import { getUrlParam, saveToLocalStorage, getFromLocalStorage, productDiscountCalculation } from "../js/func/utils.js"
 
-let $ = document
-let total
-let subTotalPrice = document.querySelector(".sub-total-box__price")
-
+const $ = document
 const urlParamsId = getUrlParam("id")
+let total
+let cartProducts = []
 
 const productSelectionByUser = products.find(product => { return product.id === +urlParamsId })
 
@@ -105,10 +104,8 @@ const addingDetailesProduct = () => {
     selctingProductsSizing(productsSizeButtons)
     selctingProductsColor(ProductsColorButton, imgProductMain)
     selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput)
-    addProductCart(btnAddToCart, productCountInput)
+    addingProductToCart(btnAddToCart, productCountInput)
 }
-
-let cartProducts = []
 
 let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
 let countProducts = +iconCountProducts.innerHTML
@@ -132,19 +129,13 @@ const getCountProductsCart = () => {
     }
 }
 
-window.addEventListener("load", () => {
-    addingDetailesProduct()
-    getCountProductsCart()
-    getingCartProductsByUser()
-})
-
-function addProductCart(btnAddToCart, productCountInput) {
+const addingProductToCart = (btnAddToCart, productCountInput) => {
     btnAddToCart.addEventListener("click", () => {
         logicAddingProductToCart(productSelectionByUser.id, productCountInput)
     })
 }
 
-function logicAddingProductToCart(urlParamsId, productCountInput) {
+const logicAddingProductToCart = (urlParamsId, productCountInput) => {
     let product = cartProducts.find(cartproduct => { return cartproduct.id === urlParamsId })
 
     if (product) {
@@ -173,7 +164,6 @@ function logicAddingProductToCart(urlParamsId, productCountInput) {
             behavior: "smooth"
         })
     }
-
 }
 
 const getingCartProductsByUser = () => {
@@ -186,6 +176,12 @@ const getingCartProductsByUser = () => {
     }
     addingProductTemplateToCart(cartProducts)
 }
+
+window.addEventListener("load", () => {
+    addingDetailesProduct()
+    getCountProductsCart()
+    getingCartProductsByUser()
+})
 
 const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
     iconsStar.forEach((icon, index) => {
@@ -200,7 +196,7 @@ const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
     })
 }
 
-function productsScoreing(iconsStar, scoreStatus) {
+const productsScoreing = (iconsStar, scoreStatus) => {
     let userScoreingNumber
     iconsStar.forEach((icon, index) => {
         icon.addEventListener("click", () => {
@@ -211,7 +207,7 @@ function productsScoreing(iconsStar, scoreStatus) {
     })
 }
 
-function selctingProductsSizing(productsSizeButtons) {
+const selctingProductsSizing = (productsSizeButtons) => {
     productsSizeButtons.forEach(button => {
         button.addEventListener("click", () => {
 
@@ -224,7 +220,7 @@ function selctingProductsSizing(productsSizeButtons) {
     })
 }
 
-function selctingProductsColor(ProductsColorButton, imgProductMain) {
+const selctingProductsColor = (ProductsColorButton, imgProductMain) => {
     ProductsColorButton.forEach(button => {
 
         button.addEventListener("click", event => {
@@ -238,11 +234,11 @@ function selctingProductsColor(ProductsColorButton, imgProductMain) {
     })
 }
 
-function setMainImage(colorName, imgProductMain) {
+const setMainImage = (colorName, imgProductMain) => {
     imgProductMain.setAttribute("src", "../images/product img " + colorName + " " + productSelectionByUser.type + ".webp")
 }
 
-function selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput) {
+const selectingcountproductByUser = (btnAddProductCount, btnReduceNumberProduct, productCountInput) => {
     btnAddProductCount.addEventListener("click", () => {
         +productCountInput.value++
 
@@ -263,7 +259,7 @@ function selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct,
     getProductCountByUser(productCountInput)
 }
 
-function getProductCountByUser(productCountInput) {
+const getProductCountByUser = (productCountInput) => {
     let countProduct = getFromLocalStorage("selectedCountProduct")
 
     if (countProduct) {
@@ -276,7 +272,7 @@ function getProductCountByUser(productCountInput) {
     addingProductTemplateToCart(cartProducts)
 }
 
-function selectionSecondaryProductsByUser(boxImagesSubProduct, imgProductMain) {
+const selectionSecondaryProductsByUser = (boxImagesSubProduct, imgProductMain) => {
     boxImagesSubProduct.forEach(boxImgProduct => {
 
         boxImgProduct.addEventListener("click", () => {
@@ -304,7 +300,7 @@ iconExit.addEventListener("click", () => {
     wrapperCaverScreen.classList.remove("wrapper--active")
 })
 
-function addingProductTemplateToCart(cartProducts) {
+const addingProductTemplateToCart = (cartProducts) => {
     const keeperCartProduct = document.querySelector(".cart-Shop__products")
     keeperCartProduct.innerHTML = ""
 
@@ -317,7 +313,8 @@ function addingProductTemplateToCart(cartProducts) {
     calculationTotalCart(cartProducts)
 }
 
-function calculationTotalCart(cartProducts) {
+const calculationTotalCart = (cartProducts) => {
+    const subTotalPrice = document.querySelector(".sub-total-box__price")
     let priceTotal = 0
     let priceProduct, countProduct
     cartProducts.forEach(product => {
@@ -331,7 +328,7 @@ function calculationTotalCart(cartProducts) {
     subTotalPrice.innerHTML = "Rs. " + priceTotal.toLocaleString("en")
 }
 
-function removeProduct(productId) {
+const removeProduct = (productId) => {
     cartProducts = cartProducts.filter(product => {
         return product.id !== productId
     })

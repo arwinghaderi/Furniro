@@ -72,6 +72,13 @@ const getUrlParam = (key) => {
     return urlParams.get(key)
 }
 
+const productDiscountCalculation = (price, discountPercent) => {
+    let totalDiscount = (price * discountPercent) / 100
+    let total = price - totalDiscount
+
+    return total
+}
+
 export {
     paginationCalculations,
     saveToLocalStorage,
@@ -80,5 +87,6 @@ export {
     ProductsWithPaginationCalculations,
     getCurrentPageAndShowCountProducts,
     calculateProductsShowMoreButton,
-    getUrlParam
+    getUrlParam,
+    productDiscountCalculation
 }

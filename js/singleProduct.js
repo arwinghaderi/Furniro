@@ -28,6 +28,18 @@ const addingAllProductPhotos = () => {
     selectionSecondaryProductsByUser(boxImagesSubProduct, imgProductMain)
 }
 
+const productSpecifications = () => {
+    const wrapperProductSpecifications = $.querySelector(".Supplementary-specifications__value-box");
+
+    wrapperProductSpecifications.insertAdjacentHTML("afterbegin",
+        `<span class="Supplementary-specifications__value">SS00${productSelectionByUser.id} </span><span class="Supplementary-specifications__value">${productSelectionByUser.type}  </span ><span class="Supplementary-specifications__value">Sofa, Chair, Home, Shop</span>  
+            
+            <div class="Supplementary-specifications__box-icon">
+              <div class="box-Icon-social"><i class="fa-brands fa-facebook-f Icon-social"></i></div>
+              <div class="box-Icon-social box-Icon-social--linkdin"><i class="fa-brands fa-linkedin-in Icon-social"></i></div>
+              <div class="box-Icon-social"><i class="fa-brands fa-twitter Icon-social"></i></div>
+            </div >`)
+}
 const addingDetailesProduct = () => {
     if (productSelectionByUser) {
         const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
@@ -35,6 +47,8 @@ const addingDetailesProduct = () => {
 
         addingAllProductPhotos()
         addingPagePathDom()
+        productSpecifications()
+
 
         wrapperDetailesProducts.insertAdjacentHTML('afterbegin',
             `${productSelectionByUser.discount ? `<h3 class="detailes-produc-Specifications__title"> ${productSelectionByUser.productIntroduction}</h3>

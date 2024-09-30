@@ -54,10 +54,7 @@ const addingProductsTemplateCol = (product) => {
     newTemplate = ` <div class="Discount-product Discount-product--green "><span class="Discount-product__number">NEW</span></div>`
     discountPrice = `</span > <span class="product-discountPrice">Rp ${product.price}</span>`
 
-    price = +product.price
-    discountPercent = +product.discountPercent
-    totalDiscount = (price * discountPercent) / 100
-    total = price - totalDiscount
+    total = productDiscountCalculation(+product.price, +product.discountPercent)
 
     element.innerHTML = `<div class="product-box product-box-col"  id="discount"><div   
      class="img-box-overlay img-box-overlay-col "><img class="product__img" src="${product.img}" alt="product img"><div class="product-overlay">

@@ -6,14 +6,12 @@ const paginationCalculations = (products, numberRow, currentPage, resultShowProd
     indexEnd = numberRow * currentPage
     indexStart = indexEnd - numberRow
 
-
     resultShowProducts.innerHTML = `Showing  ${indexStart}  --   ${indexEnd > products.length ? products.length : indexEnd}   of  ${products.length}  results`
 
     let paginationProducts = copyProducts.slice(indexStart, indexEnd)
 
     return paginationProducts
 }
-
 
 const saveToLocalStorage = (key, value) => {
     return localStorage.setItem(key, JSON.stringify(value))

@@ -943,6 +943,17 @@ cart-shop singel-product
     padding-left: 1rem;
 }
 
+.box-remove-product {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+    background-color: #9F9F9F;
+}
+
+.icon-close {
+    color: #ffffff;
+}
+
 
 .Supplementary-specifications__box-icon {
     display: flex;

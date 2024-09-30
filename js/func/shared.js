@@ -1,5 +1,5 @@
-
-let price, discountPercent, totalDiscount, total, discountTemplate, newTemplate, discountPrice, element
+import { productDiscountCalculation } from "../js/func/utils.js"
+let total, discountTemplate, newTemplate, discountPrice, element
 const fragment = document.createDocumentFragment();
 
 const addingProductsTemplate = (products, productsStructure, productsWrapper) => {
@@ -26,10 +26,7 @@ const addingProductsTemplateRow = (product) => {
     newTemplate = ` <div class="Discount-product Discount-product--green "><span class="Discount-product__number">NEW</span></div>`
     discountPrice = `</span > <span class="product-discountPrice ">Rp ${product.price}</span>`
 
-    price = +product.price
-    discountPercent = +product.discountPercent
-    totalDiscount = (price * discountPercent) / 100
-    total = price - totalDiscount
+    total = productDiscountCalculation(+product.price, +product.discountPercent)
 
     element.innerHTML = `<div class="product-box"  id="discount"><div   
      class="img-box-overlay"><img class="product__img product__img-col" src="${product.img}" alt="product img"><div class="product-overlay">

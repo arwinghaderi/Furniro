@@ -2,19 +2,22 @@ import { getFromLocalStorage, productDiscountCalculation, saveToLocalStorage } f
 
 let $ = document
 let productsCart = getFromLocalStorage("cartShopProducts")
-let keeperProductPageCart = document.querySelector(".cart-shop-section__shop")
-let total
-
+const fragment = document.createDocumentFragment()
+let total, element
 const addingCartProductsTemplate = () => {
+    let keeperProductPageCart = document.querySelector(".cart-shop-section__shop")
     if (productsCart) {
         productsCart.forEach(product => {
             total = productDiscountCalculation(+product.price, +product.discountPercent)
+            element = document.createElement("div")
 
-            keeperProductPageCart.insertAdjacentHTML("beforeend", ` <div class="cart-shop-section__details-product"><div div class= "cart-shop-section__box-img"><img class="cart-shop-section__img" src="${product.imgSecoundMain}  " alt="product Image"></div><span class="cart-shop-section__product-name"> ${product.productName} </span><span class="cart-shop-section__product-price"> Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span><div class="cart-shop-section__product-Quantity-box"><input min="1" max="10" oninput="selectionNumberProductsByUser(event,${product.id})" class="cart-shop-section__product-Quantity" type="number" value="${product.count}"></div><span class="cart-shop-section__product-Subtotal"> Rs. ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")}</span><i class="fa-solid fa-trash fa-sm icon-delte"></i></div > `)
+            element.innerHTML = `<div class="cart-shop-section__details-product"><div div class="cart-shop-section__box-img"><img class="cart-shop-section__img" src="${product.imgSecoundMain}  " alt="product Image"></div><span class="cart-shop-section__product-name"> ${product.productName} </span><span class="cart-shop-section__product-price"> Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span><div class="cart-shop-section__product-Quantity-box"><input min="1" max="10" oninput="selectionNumberProductsByUser(event,${product.id})" class="cart-shop-section__product-Quantity" type="number" value="${product.count}"></div><span class="cart-shop-section__product-Subtotal"> Rs. ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")}</span><i class="fa-solid fa-trash fa-sm icon-delte"></i></div > `
+            fragment.append(element)
         });
     } else {
-        keeperProductPageCart.insertAdjacentHTML("beforeend", `<div class="alert alert-danger"> <p>(:هیچ محصولی در سبد خرید شما وجود نداد</p> </div>`)
+        keeperProductPageCart.insertAdjacentHTML("beforeend", `<div div class="alert alert-danger" > <p>(:هیچ محصولی در سبد خرید شما وجود نداد</p> </div > `)
     }
+    keeperProductPageCart.append(fragment)
 }
 
 const selectionNumberProductsByUser = (event, productId) => {
@@ -33,8 +36,8 @@ const calculationTotalCart = () => {
     const subTotalPrice = document.querySelector(".cart-shop-section__sub-total-price")
 
     let priceTotal = 0
-    const fragment = document.createDocumentFragment()
-    let priceProduct, countProduct, priceSubTotal, element
+
+    let priceProduct, countProduct, priceSubTotal
 
     subTotalPrice.innerHTML = ""
     productsCart.forEach(product => {
@@ -48,10 +51,10 @@ const calculationTotalCart = () => {
 
         priceTotal += countProduct * priceProduct
         priceSubTotal = priceProduct * countProduct
-        element.innerHTML = `<p class="subTotal-Calculate">${product.productName}  = Rs. ${priceSubTotal.toLocaleString("en")}</p>`
+        element.innerHTML = `<p p class="subTotal-Calculate" > ${product.productName}  = Rs.${priceSubTotal.toLocaleString("en")}</p > `
         fragment.append(element)
     })
-    TotalPrice.innerHTML = `Rs. ${priceTotal.toLocaleString("en")}`
+    TotalPrice.innerHTML = `Rs.${priceTotal.toLocaleString("en")} `
     subTotalPrice.append(fragment)
 }
 

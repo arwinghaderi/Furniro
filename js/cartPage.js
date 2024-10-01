@@ -1,4 +1,4 @@
-import { getFromLocalStorage, productDiscountCalculation } from "../js/func/utils.js"
+import { getFromLocalStorage, productDiscountCalculation, saveToLocalStorage } from "../js/func/utils.js"
 
 let $ = document
 let productsCart = getFromLocalStorage("cartShopProducts")
@@ -16,6 +16,26 @@ const addingCartProductsTemplate = () => {
         keeperProductPageCart.insertAdjacentHTML("beforeend", `<div class="alert alert-danger"> <p>(:هیچ محصولی در سبد خرید شما وجود نداد</p> </div>`)
     }
 
+    let productCountInput = $.querySelector(".cart-shop-section__product-Quantity")
+    selectionNumberProductsByUser(productCountInput)
+}
+
+const selectionNumberProductsByUser = (productCountInput) => {
+    productCountInput.addEventListener("input", () => {
+        productCountInput.value = productCountInput.value
+
+        saveToLocalStorage("selectedCountProduct", productCountInput.value)
+    })
+    getProductCountByUser(productCountInput)
+}
+const getProductCountByUser = (productCountInput) => {
+    let countProduct = getFromLocalStorage("selectedCountProduct")
+
+    if (countProduct) {
+        productCountInput.value = countProduct
+    } else {
+        productCountInput.value = countProduct
+    }
 }
 
 window.addEventListener("load", () => {

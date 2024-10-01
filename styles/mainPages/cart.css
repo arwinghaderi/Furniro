@@ -196,3 +196,8 @@ cart-shop page-cart
     font-family: var(--primary-font);
     cursor: pointer;
 }
+
+.icon-delte {
+    color: var(--Primary-color);
+    cursor: pointer;
+}

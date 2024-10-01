@@ -28,7 +28,7 @@ const addingAllProductPhotos = () => {
     selectionSecondaryProductsByUser(boxImagesSubProduct, imgProductMain)
 }
 
-const productSpecifications = () => {
+const addingProductSpecifications = () => {
     const wrapperProductSpecifications = $.querySelector(".Supplementary-specifications__value-box");
 
     wrapperProductSpecifications.insertAdjacentHTML("afterbegin",
@@ -40,6 +40,7 @@ const productSpecifications = () => {
               <div class="box-Icon-social"><i class="fa-brands fa-twitter Icon-social"></i></div>
             </div >`)
 }
+
 const addingDetailesProduct = () => {
     if (productSelectionByUser) {
         const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
@@ -47,7 +48,7 @@ const addingDetailesProduct = () => {
 
         addingAllProductPhotos()
         addingPagePathDom()
-        productSpecifications()
+        addingProductSpecifications()
 
 
         wrapperDetailesProducts.insertAdjacentHTML('afterbegin',

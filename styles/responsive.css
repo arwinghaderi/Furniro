@@ -538,6 +538,7 @@
 
     .cart-shop-section__img {
         width: 4.6rem;
+        height: 4rem;
     }
 
     .cart-shop-section__product-Quantity {
@@ -563,6 +564,7 @@
         bottom: 10%;
         width: 14rem;
     }
+
 
     .swiper-horizontal>.swiper-pagination-bullets,
     .swiper-pagination-bullets.swiper-pagination-horizontal,

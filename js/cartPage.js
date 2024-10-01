@@ -33,10 +33,12 @@ const calculationTotalCart = () => {
     const subTotalPrice = document.querySelector(".cart-shop-section__sub-total-price")
 
     let priceTotal = 0
-    let priceProduct, countProduct, priceSubTotal
-    
+    const fragment = document.createDocumentFragment()
+    let priceProduct, countProduct, priceSubTotal, element
+
     subTotalPrice.innerHTML = ""
     productsCart.forEach(product => {
+        element = document.createElement("div")
         total = productDiscountCalculation(+product.price, +product.discountPercent)
 
         product.discount ? priceProduct = +total : priceProduct = +product.price
@@ -46,9 +48,11 @@ const calculationTotalCart = () => {
 
         priceTotal += countProduct * priceProduct
         priceSubTotal = priceProduct * countProduct
-        subTotalPrice.insertAdjacentHTML('beforeend', `<p class="subTotal-Calculate">${product.productName}  = Rs. ${priceSubTotal.toLocaleString("en")}</p>`)
+        element.innerHTML = `<p class="subTotal-Calculate">${product.productName}  = Rs. ${priceSubTotal.toLocaleString("en")}</p>`
+        fragment.append(element)
     })
     TotalPrice.innerHTML = `Rs. ${priceTotal.toLocaleString("en")}`
+    subTotalPrice.append(fragment)
 }
 
 window.addEventListener("load", () => {

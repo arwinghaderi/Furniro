@@ -1,9 +1,10 @@
-import { products} from "../js/db/data.js"
+import { products } from "../js/db/data.js"
 import { addingProductsTemplate } from "./func/shared.js"
 import {
     saveToLocalStorage,
     getFromLocalStorage,
-    calculateProductsShowMoreButton
+    calculateProductsShowMoreButton,
+    getCountProductsCart
 } from "./func/utils.js"
 
 let productsWrapper = document.querySelector(".row-container")
@@ -73,4 +74,5 @@ window.addEventListener('load', function name(params) {
     } else {
         addingProductsByUser(products)
     }
+    getCountProductsCart()
 })

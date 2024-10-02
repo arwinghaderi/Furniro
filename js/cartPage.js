@@ -41,10 +41,9 @@ const calculationTotalCart = () => {
     const subTotalPrice = document.querySelector(".cart-shop-section__sub-total-price")
 
     let priceTotal = 0
-
     let priceProduct, countProduct, priceSubTotal
-
     subTotalPrice.innerHTML = ""
+
     productsCart.forEach(product => {
         element = document.createElement("div")
         total = productDiscountCalculation(+product.price, +product.discountPercent)
@@ -62,7 +61,6 @@ const calculationTotalCart = () => {
     TotalPrice.innerHTML = `Rs.${priceTotal.toLocaleString("en")} `
     subTotalPrice.append(fragment)
 }
-let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
 
 window.addEventListener("load", () => {
     addingCartProductsTemplate(productsCart)
@@ -71,10 +69,12 @@ window.addEventListener("load", () => {
 })
 
 const removeProductByUser = (productId) => {
+    let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
+
     productsCart = productsCart.filter(product => {
         return product.id !== productId
     })
-     productsCart.length ? productsCart.length : productsCart.length + 1
+    productsCart.length ? productsCart.length : productsCart.length + 1
     iconCountProducts.innerHTML = productsCart.length
 
     saveToLocalStorage("countProductToCart", productsCart.length)

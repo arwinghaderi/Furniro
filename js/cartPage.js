@@ -6,11 +6,11 @@ let productsCart = getFromLocalStorage("cartShopProducts")
 const fragment = document.createDocumentFragment()
 
 const addingCartProductsTemplate = (productsCart) => {
-    let keeperProductPageCart = document.querySelector(".cart-shop-section__shop")
-    keeperProductPageCart.innerHTML = ""
+    let keeperProductCart = document.querySelector(".product-cart")
+
+    keeperProductCart.innerHTML = ""
 
     if (productsCart && productsCart.length) {
-
         productsCart.forEach(product => {
             total = productDiscountCalculation(+product.price, +product.discountPercent)
             element = document.createElement("div")
@@ -18,11 +18,10 @@ const addingCartProductsTemplate = (productsCart) => {
             element.innerHTML = `<div class="cart-shop-section__details-product"><div div class="cart-shop-section__box-img"><img class="cart-shop-section__img" src="${product.imgSecoundMain}  " alt="product Image"></div><span class="cart-shop-section__product-name"> ${product.productName} </span><span class="cart-shop-section__product-price"> Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span><div class="cart-shop-section__product-Quantity-box"><input min="1" max="10" oninput="selectionNumberProductsByUser(event,${product.id})" class="cart-shop-section__product-Quantity" type="number" value="${product.count}"></div><span class="cart-shop-section__product-Subtotal"> Rs. ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")}</span><i onclick="removeProductByUser(${product.id})"  class="fa-solid fa-trash fa-sm icon-delte"></i></div > `
             fragment.append(element)
         });
-
+        keeperProductCart.append(fragment)
     } else {
-        keeperProductPageCart.insertAdjacentHTML("beforeend", `<div div class="alert alert-danger" > <p>(:هیچ محصولی در سبد خرید شما وجود نداد</p> </div > `)
+        keeperProductCart.insertAdjacentHTML("beforeend", `<div div class="alert alert-danger" > <p>(:هیچ محصولی در سبد خرید شما وجود نداد</p> </div > `)
     }
-    keeperProductPageCart.append(fragment)
 }
 
 const selectionNumberProductsByUser = (event, productId) => {
@@ -42,24 +41,31 @@ const calculationTotalCart = () => {
 
     let priceTotal = 0
     let priceProduct, countProduct, priceSubTotal
+
     subTotalPrice.innerHTML = ""
+    TotalPrice.innerHTML = ""
 
-    productsCart.forEach(product => {
-        element = document.createElement("div")
-        total = productDiscountCalculation(+product.price, +product.discountPercent)
+    if (productsCart && productsCart.length) {
+        productsCart.forEach(product => {
+            element = document.createElement("div")
+            total = productDiscountCalculation(+product.price, +product.discountPercent)
 
-        product.discount ? priceProduct = +total : priceProduct = +product.price
-        product.count < 1 ? product.count = 1 : product.count
-        product.count > 10 ? product.count = 10 : product.count
-        countProduct = +product.count
+            product.discount ? priceProduct = +total : priceProduct = +product.price
+            product.count < 1 ? product.count = 1 : product.count
+            product.count > 10 ? product.count = 10 : product.count
+            countProduct = +product.count
 
-        priceTotal += countProduct * priceProduct
-        priceSubTotal = priceProduct * countProduct
-        element.innerHTML = `<p p class="subTotal-Calculate" > ${product.productName}  = Rs.${priceSubTotal.toLocaleString("en")}</p > `
-        fragment.append(element)
-    })
-    TotalPrice.innerHTML = `Rs.${priceTotal.toLocaleString("en")} `
-    subTotalPrice.append(fragment)
+            priceTotal += countProduct * priceProduct
+            priceSubTotal = priceProduct * countProduct
+            element.innerHTML = `<p class="subTotal-Calculate" > ${product.productName}  = Rs.${priceSubTotal.toLocaleString("en")}</p >`
+            fragment.append(element)
+        })
+        TotalPrice.innerHTML = `Rs.${priceTotal.toLocaleString("en")} `
+        subTotalPrice.append(fragment)
+    } else {
+        TotalPrice.innerHTML = `Rs.0`
+        subTotalPrice.innerHTML = `Rs.0`
+    }
 }
 
 window.addEventListener("load", () => {

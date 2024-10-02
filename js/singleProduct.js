@@ -324,7 +324,7 @@ const addingProductTemplateToCart = (cartProducts) => {
         total = productDiscountCalculation(+product.price, +product.discountPercent)
 
         keeperCartProduct.insertAdjacentHTML("afterbegin",
-            `<div class="products-keeper"><div class="products-keeper__box-img"><img class="products-keeper__img" src="${product.imgSecoundMain}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title">${product.productName} </h6><div class="box-calculation"><span class="box-calculation__number">${product.count}</span>   <span class="box-calculation__multiplication">X</span><span class="box-calculation__price">Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span></div></div><button onclick=" removeProduct(${product.id})" class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
+            `<div class="products-keeper"><div class="products-keeper__box-img"><img class="products-keeper__img" src="${product.imgSecoundMain}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title">${product.productName} </h6><div class="box-calculation"><span class="box-calculation__number">${product.count}</span>   <span class="box-calculation__multiplication">X</span><span class="box-calculation__price">Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span></div></div><button onclick=" removeProductByUserByUser(${product.id})" class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
     })
     calculationTotalCart(cartProducts)
 }
@@ -344,7 +344,7 @@ const calculationTotalCart = (cartProducts) => {
     subTotalPrice.innerHTML = "Rs. " + priceTotal.toLocaleString("en")
 }
 
-const removeProduct = (productId) => {
+const removeProductByUserByUser = (productId) => {
     cartProducts = cartProducts.filter(product => {
         return product.id !== productId
     })
@@ -356,4 +356,4 @@ const removeProduct = (productId) => {
     calculationTotalCart(cartProducts)
     addingProductTemplateToCart(cartProducts)
 }
-window.removeProduct = removeProduct;
+window.removeProductByUserByUser = removeProductByUserByUser;

@@ -4,7 +4,7 @@ import { getUrlParam, saveToLocalStorage, getFromLocalStorage, productDiscountCa
 const $ = document
 const urlParamsId = getUrlParam("id")
 let total
-let cartProducts = []
+let productsCart = []
 
 const productSelectionByUser = products.find(product => { return product.id === +urlParamsId })
 
@@ -127,8 +127,8 @@ let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
 
 const countIconCart = () => {
     iconCountProducts.classList.add("nav-bar__count-Procuct--active")
-    iconCountProducts.innerHTML = cartProducts.length
-    saveToLocalStorage("countProductToCart", cartProducts.length)
+    iconCountProducts.innerHTML = productsCart.length
+    saveToLocalStorage("countProductToCart", productsCart.length)
 }
 
 const addingProductToCart = (btnAddToCart, productCountInput) => {
@@ -138,27 +138,27 @@ const addingProductToCart = (btnAddToCart, productCountInput) => {
 }
 
 const logicAddingProductToCart = (urlParamsId, productCountInput) => {
-    let product = cartProducts.find(cartproduct => { return cartproduct.id === urlParamsId })
+    let product = productsCart.find(cartproduct => { return cartproduct.id === urlParamsId })
 
     if (product) {
         product.count === productCountInput.value ? productCountInput.value++ : productCountInput.value
         product.count = productCountInput.value
 
         saveToLocalStorage("selectedCountProduct", product.count)
-        saveToLocalStorage("cartShopProducts", cartProducts)
-        addingProductTemplateToCart(cartProducts)
-        calculationTotalCart(cartProducts)
+        saveToLocalStorage("cartShopProducts", productsCart)
+        addingProductTemplateToCart(productsCart)
+        calculationTotalCart(productsCart)
     }
     else {
-        cartProducts.push(productSelectionByUser)
+        productsCart.push(productSelectionByUser)
         !productCountInput.value ? productCountInput.value = 1 : productCountInput.value
         productSelectionByUser.count = productCountInput.value
 
         saveToLocalStorage("selectedCountProduct", productSelectionByUser.count)
-        saveToLocalStorage("cartShopProducts", cartProducts)
-        addingProductTemplateToCart(cartProducts)
+        saveToLocalStorage("cartShopProducts", productsCart)
+        addingProductTemplateToCart(productsCart)
         countIconCart()
-        calculationTotalCart(cartProducts)
+        calculationTotalCart(productsCart)
     }
     if (window.innerWidth > 992) {
         window.scrollTo({
@@ -168,21 +168,21 @@ const logicAddingProductToCart = (urlParamsId, productCountInput) => {
     }
 }
 
-const getingCartProductsByUser = () => {
-    let getCartProducts = getFromLocalStorage("cartShopProducts")
+const getingproductsCartByUser = () => {
+    let getproductsCart = getFromLocalStorage("cartShopProducts")
 
-    if (getCartProducts) {
-        cartProducts = getCartProducts
+    if (getproductsCart) {
+        productsCart = getproductsCart
     } else {
-        cartProducts = []
+        productsCart = []
     }
-    addingProductTemplateToCart(cartProducts)
+    addingProductTemplateToCart(productsCart)
 }
 
 window.addEventListener("load", () => {
     addingDetailesProduct()
     getCountProductsCart()
-    getingCartProductsByUser()
+    getingproductsCartByUser()
 })
 
 const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
@@ -271,7 +271,7 @@ const getProductCountByUser = (productCountInput) => {
         productSelectionByUser.count = countProduct
         productCountInput.value = countProduct
     }
-    addingProductTemplateToCart(cartProducts)
+    addingProductTemplateToCart(productsCart)
 }
 
 const selectionSecondaryProductsByUser = (boxImagesSubProduct, imgProductMain) => {
@@ -302,24 +302,24 @@ iconExit.addEventListener("click", () => {
     wrapperCaverScreen.classList.remove("wrapper--active")
 })
 
-const addingProductTemplateToCart = (cartProducts) => {
+const addingProductTemplateToCart = (productsCart) => {
     const keeperCartProduct = document.querySelector(".cart-Shop__products")
     keeperCartProduct.innerHTML = ""
 
-    cartProducts.forEach(product => {
+    productsCart.forEach(product => {
         total = productDiscountCalculation(+product.price, +product.discountPercent)
 
         keeperCartProduct.insertAdjacentHTML("afterbegin",
             `<div class="products-keeper"><div class="products-keeper__box-img"><img class="products-keeper__img" src="${product.imgSecoundMain}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title">${product.productName} </h6><div class="box-calculation"><span class="box-calculation__number">${product.count}</span>   <span class="box-calculation__multiplication">X</span><span class="box-calculation__price">Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span></div></div><button onclick=" removeProductByUserByUser(${product.id})" class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
     })
-    calculationTotalCart(cartProducts)
+    calculationTotalCart(productsCart)
 }
 
-const calculationTotalCart = (cartProducts) => {
+const calculationTotalCart = (productsCart) => {
     const subTotalPrice = document.querySelector(".sub-total-box__price")
     let priceTotal = 0
     let priceProduct, countProduct
-    cartProducts.forEach(product => {
+    productsCart.forEach(product => {
         total = productDiscountCalculation(+product.price, +product.discountPercent)
 
         product.discount ? priceProduct = +total : priceProduct = +product.price
@@ -331,15 +331,15 @@ const calculationTotalCart = (cartProducts) => {
 }
 
 const removeProductByUserByUser = (productId) => {
-    cartProducts = cartProducts.filter(product => {
+    productsCart = productsCart.filter(product => {
         return product.id !== productId
     })
-    cartProducts.length ? cartProducts.length : cartProducts.length + 1
-    iconCountProducts.innerHTML = cartProducts.length 
+    productsCart.length ? productsCart.length : productsCart.length + 1
+    iconCountProducts.innerHTML = productsCart.length 
 
-    saveToLocalStorage("countProductToCart", cartProducts.length)
-    saveToLocalStorage("cartShopProducts", cartProducts)
-    calculationTotalCart(cartProducts)
-    addingProductTemplateToCart(cartProducts)
+    saveToLocalStorage("countProductToCart", productsCart.length)
+    saveToLocalStorage("cartShopProducts", productsCart)
+    calculationTotalCart(productsCart)
+    addingProductTemplateToCart(productsCart)
 }
 window.removeProductByUserByUser = removeProductByUserByUser;

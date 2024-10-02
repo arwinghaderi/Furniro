@@ -6,7 +6,8 @@ import {
     getFromLocalStorage,
     searchInProducts,
     ProductsWithPaginationCalculations,
-    getCurrentPageAndShowCountProducts
+    getCurrentPageAndShowCountProducts,
+    getCountProductsCart
 } from "./func/utils.js"
 
 let $ = document
@@ -309,4 +310,5 @@ window.addEventListener('load', function () {
         ChangeInputPlaceholderToUserChange()
         addingProductsFilteredbyUser()
     }
+    getCountProductsCart()
 })

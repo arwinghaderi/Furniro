@@ -1,5 +1,5 @@
 import { products } from "../js/db/data.js"
-import { getUrlParam, saveToLocalStorage, getFromLocalStorage, productDiscountCalculation } from "../js/func/utils.js"
+import { getUrlParam, saveToLocalStorage, getFromLocalStorage, productDiscountCalculation, getCountProductsCart } from "../js/func/utils.js"
 
 const $ = document
 const urlParamsId = getUrlParam("id")
@@ -124,25 +124,11 @@ const addingDetailesProduct = () => {
 }
 
 let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
-let countProducts = +iconCountProducts.innerHTML
 
 const countIconCart = () => {
-    countProducts++
     iconCountProducts.classList.add("nav-bar__count-Procuct--active")
-    iconCountProducts.innerHTML = countProducts
-    saveToLocalStorage("countProductToCart", countProducts)
-}
-
-const getCountProductsCart = () => {
-    countProducts = getFromLocalStorage("countProductToCart")
-
-    if (countProducts) {
-        iconCountProducts.classList.add("nav-bar__count-Procuct--active")
-        iconCountProducts.innerHTML = countProducts
-    } else {
-        iconCountProducts.classList.add("nav-bar__count-Procuct--active")
-        iconCountProducts.innerHTML = 0
-    }
+    iconCountProducts.innerHTML = cartProducts.length
+    saveToLocalStorage("countProductToCart", cartProducts.length)
 }
 
 const addingProductToCart = (btnAddToCart, productCountInput) => {
@@ -349,7 +335,7 @@ const removeProductByUserByUser = (productId) => {
         return product.id !== productId
     })
     cartProducts.length ? cartProducts.length : cartProducts.length + 1
-    iconCountProducts.innerHTML--
+    iconCountProducts.innerHTML = cartProducts.length 
 
     saveToLocalStorage("countProductToCart", cartProducts.length)
     saveToLocalStorage("cartShopProducts", cartProducts)

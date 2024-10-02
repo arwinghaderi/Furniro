@@ -76,6 +76,18 @@ const productDiscountCalculation = (price, discountPercent) => {
 
     return total
 }
+const getCountProductsCart = () => {
+    let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
+    let countProducts = getFromLocalStorage("countProductToCart")
+
+    if (countProducts) {
+        iconCountProducts.classList.add("nav-bar__count-Procuct--active")
+        iconCountProducts.innerHTML = countProducts
+    } else {
+        iconCountProducts.classList.add("nav-bar__count-Procuct--active")
+        iconCountProducts.innerHTML = 0
+    }
+}
 
 export {
     paginationCalculations,
@@ -86,5 +98,6 @@ export {
     getCurrentPageAndShowCountProducts,
     calculateProductsShowMoreButton,
     getUrlParam,
-    productDiscountCalculation
+    productDiscountCalculation,
+    getCountProductsCart
 }

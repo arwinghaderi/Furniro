@@ -1,4 +1,4 @@
-import { getFromLocalStorage, productDiscountCalculation, saveToLocalStorage } from "../js/func/utils.js"
+import { getFromLocalStorage, productDiscountCalculation, saveToLocalStorage, getCountProductsCart } from "../js/func/utils.js"
 
 let $ = document
 let total, element
@@ -62,18 +62,20 @@ const calculationTotalCart = () => {
     TotalPrice.innerHTML = `Rs.${priceTotal.toLocaleString("en")} `
     subTotalPrice.append(fragment)
 }
+let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
 
 window.addEventListener("load", () => {
     addingCartProductsTemplate(productsCart)
     calculationTotalCart()
+    getCountProductsCart()
 })
 
 const removeProductByUser = (productId) => {
     productsCart = productsCart.filter(product => {
         return product.id !== productId
     })
-    // cartProducts.length ? cartProducts.length : cartProducts.length + 1
-    // iconCountProducts.innerHTML--
+     productsCart.length ? productsCart.length : productsCart.length + 1
+    iconCountProducts.innerHTML = productsCart.length
 
     saveToLocalStorage("countProductToCart", productsCart.length)
     saveToLocalStorage("cartShopProducts", productsCart)

@@ -55,6 +55,11 @@
         width: 17rem;
     }
 
+    .wrapper-Detailes-Products {
+        margin-left: 0;
+        align-items: center;
+    }
+
 }
 
 @media screen and (max-width:1200px) {
@@ -67,21 +72,6 @@
         align-items: center;
         text-align: center;
     }
-
-
-    /* .slaider-img {
-        width: calc(100% /1.2);
-        height: 48.6rem;
-        object-fit: cover;
-        position: relative;
-    } */
-
-
-    /* .slaider-img--active {
-        width: calc(100% /1);
-        height: 58.2rem;
-        object-fit: cover;
-    } */
 
     .shop-filter {
         height: 40rem;
@@ -577,6 +567,10 @@
 
         right: 1rem;
         bottom: -0.2rem
+    }
+
+    .slaider-content-img-arrow {
+        display: none;
     }
 
 }

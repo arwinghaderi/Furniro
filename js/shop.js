@@ -1,7 +1,6 @@
 import { addingProductsTemplate, productsSorting } from "../js/func/shared.js"
 import { products } from "../js/db/data.js"
 import {
-    paginationCalculations,
     saveToLocalStorage,
     getFromLocalStorage,
     searchInProducts,
@@ -23,7 +22,7 @@ iconFilter.addEventListener("click", function (event) {
 })
 
 const productsWrapper = $.querySelector(".row-container")
-const containerPagination = $.querySelector(".shop-products__number-pagination")
+const wrapperPagination = $.querySelector(".shop-products__number-pagination")
 const numberShowProduct = $.querySelector(".shop-filter__input--number")
 const resultShowProducts = document.querySelector(".shop-filter__result-text")
 let filteredProductPagination, productsBasedPagination, filterProducts
@@ -51,7 +50,7 @@ optionSelect.addEventListener('change', function (event) {
     saveToLocalStorage("FilteredProducts", productsFilter)
 
 
-    filteredProductPagination = ProductsWithPaginationCalculations(productsFilter, resultShowProducts)
+    filteredProductPagination = ProductsWithPaginationCalculations(productsFilter, resultShowProducts, wrapperPagination)
 
     setpagination(productsFilter)
     showProductsCount(productsFilter)
@@ -85,7 +84,7 @@ const showProductsCount = (products) => {
 }
 
 function setpagination(products) {
-    containerPagination.innerHTML = ""
+    wrapperPagination.innerHTML = ""
     let numberpagination = Math.ceil(products.length / numberProductsShown)
     for (let i = 1; i < numberpagination + 1; i++) {
         setBtnDom(i, products)
@@ -113,7 +112,7 @@ function setBtnDom(i, products) {
         console.log(currentPage, i);
         currentPage = i
 
-        filteredProductPagination = paginationCalculations(products, numberProductsShown, currentPage, resultShowProducts)
+        filteredProductPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
 
         saveToLocalStorage("currentPage", currentPage)
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
@@ -144,7 +143,7 @@ function setBtnDom(i, products) {
             divBtnPrev.style.display = "none"
         }
     })
-    containerPagination.append(divelmnt)
+    wrapperPagination.append(divelmnt)
 }
 
 //** SetBtnNextPrev*/
@@ -219,7 +218,7 @@ const addingProductsFilteredbyUser = () => {
     getCurrentPageAndShowCountProducts(currentPage, numberProductsShown)
 
     if (filterProducts) {
-        filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts)
+        filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts, wrapperPagination)
 
         setpagination(filterProducts)
         showProductsCount(filterProducts)
@@ -227,7 +226,7 @@ const addingProductsFilteredbyUser = () => {
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
     }
     else {
-        productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+        productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
 
         saveToLocalStorage("FilteredProducts", products)
         setpagination(products)
@@ -249,7 +248,7 @@ structhreIcons.forEach((icon) => {
 })
 
 const addingTemplatesBasedOnProductStructure = (target) => {
-    productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+    productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
 
     if (target === "row") {
         productsStructure = "row"
@@ -267,7 +266,7 @@ searchInput.addEventListener("input", (event) => {
     let copyProducts = [...products]
 
     let productsSearchResult = searchInProducts(copyProducts, event.target.value, "productIntroduction")
-    productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts)
+    productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
 
     if (event.target.value === "") {
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
@@ -287,7 +286,7 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
         saveToLocalStorage("showCountProducts", numberProductsShown)
         ChangeInputPlaceholderToUserChange()
 
-        let productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts)
+        let productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts, wrapperPagination)
         saveToLocalStorage("FilteredProducts", productsSearchResult)
         setpagination(productsSearchResult)
         showProductsCount(productsSearchResult)

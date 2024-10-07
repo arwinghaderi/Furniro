@@ -1,17 +1,56 @@
-const paginationCalculations = (products, numberRow, currentPage, resultShowProducts) => {
-
+const paginationCalculations = (products, numberProductsShown, currentPage, resultShowProducts, wrapperPagination) => {
+    wrapperPagination.innerHTML = ""
     let indexEnd, indexStart
     let copyProducts = [...products]
 
-    indexEnd = numberRow * currentPage
-    indexStart = indexEnd - numberRow
+    indexEnd = numberProductsShown * currentPage
+    indexStart = indexEnd - numberProductsShown
+
 
     resultShowProducts.innerHTML = `Showing  ${indexStart}  --   ${indexEnd > products.length ? products.length : indexEnd}   of  ${products.length}  results`
 
     let paginationProducts = copyProducts.slice(indexStart, indexEnd)
+    let numberOfPagesOfCourses = Math.ceil(products.length / numberProductsShown)
 
+    for (let counter = 1; counter < numberOfPagesOfCourses + 1; counter++) {
+        wrapperPagination.insertAdjacentHTML('beforeend', `
+        <li class="courses__pagination-item">
+        ${counter === Number(currentPage) ? `
+            <a onclick="addParamToUrl('page', ${counter})" class="courses__pagination-link courses__pagination-link--active">
+              ${counter}
+            </a>
+          ` : `
+            <a onclick="addParamToUrl('page', ${counter})" class="courses__pagination-link">
+              ${counter}
+            </a>
+          `
+            }
+         
+        </li>
+    `)
+        // setBtnDom(i, products, wrapperPagination, currentPage)
+    }
     return paginationProducts
 }
+
+// const addingPaginationTemplate = (counter, products, wrapperPagination, currentPage) => {
+
+//     wrapperPagination.insertAdjacentHTML('beforeend', `
+//         <li class="courses__pagination-item">
+//         ${counter === Number(currentPage) ? `
+//             <a onclick="addParamToUrl('page', ${counter})" class="courses__pagination-link courses__pagination-link--active">
+//               ${counter}
+//             </a>
+//           ` : `
+//             <a onclick="addParamToUrl('page', ${counter})" class="courses__pagination-link">
+//               ${counter}
+//             </a>
+//           `
+//         }
+
+//         </li>
+//     `)
+// }
 
 const saveToLocalStorage = (key, value) => {
     return localStorage.setItem(key, JSON.stringify(value))
@@ -38,7 +77,7 @@ const getCurrentPageAndShowCountProducts = (currentPage, showCountProducts) => {
     showCountProducts ? showCountProducts : showCountProducts = 8
 }
 
-const ProductsWithPaginationCalculations = (products, resultShowProducts) => {
+const ProductsWithPaginationCalculations = (products, resultShowProducts, wrapperPagination) => {
     let filterProducts = getFromLocalStorage('FilteredProducts')
     let currentPage = getFromLocalStorage("currentPage")
     let showCountProducts = getFromLocalStorage("showCountProducts")
@@ -46,12 +85,12 @@ const ProductsWithPaginationCalculations = (products, resultShowProducts) => {
     getCurrentPageAndShowCountProducts(currentPage, showCountProducts)
 
     if (filterProducts) {
-        let filteredProductsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, resultShowProducts)
+        let filteredProductsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, resultShowProducts, wrapperPagination)
         return filteredProductsBasedPagination
 
     } else {
         console.log(currentPage, showCountProducts);
-        let productsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, resultShowProducts)
+        let productsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, resultShowProducts, wrapperPagination)
         return productsBasedPagination
     }
 }

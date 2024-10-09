@@ -14,24 +14,23 @@ const paginationCalculations = (products, numberProductsShown, currentPage, resu
 
     for (let counter = 1; counter < numberOfPagesOfCourses + 1; counter++) {
         wrapperPagination.insertAdjacentHTML('beforeend', `
-        <li class="courses__pagination-item">
+       
         ${counter === Number(currentPage) ? `
-            <a onclick="addParamToUrl('page', ${counter})" class="courses__pagination-link courses__pagination-link--active">
-              ${counter}
-            </a>
+            <div div class="shop-products__pagination-box-btn shop-products__pagination-box--active" > <button class="shop-product-button shop-product-button--active">${counter}</button></div >
           ` : `
-            <a onclick="addParamToUrl('page', ${counter})" class="courses__pagination-link">
-              ${counter}
-            </a>
+            <div class="shop-products__pagination-box-btn"><button class="shop-product-button">${counter}</button></div>
           `
             }
          
-        </li>
+     
     `)
         // setBtnDom(i, products, wrapperPagination, currentPage)
     }
     return paginationProducts
 }
+
+
+
 
 // const addingPaginationTemplate = (counter, products, wrapperPagination, currentPage) => {
 

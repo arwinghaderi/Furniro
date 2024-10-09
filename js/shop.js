@@ -11,6 +11,8 @@ import {
 
 let $ = document
 
+   
+
 let shopFilterbox = $.querySelector(".shop-filter")
 let boxFilterSelect = $.querySelector(".box-filter__select")
 let iconFilter = $.querySelector(".shop-filter__svg-icon--filter")
@@ -83,13 +85,13 @@ const showProductsCount = (products) => {
     })
 }
 
-function setpagination(products) {
-    wrapperPagination.innerHTML = ""
-    let numberpagination = Math.ceil(products.length / numberProductsShown)
-    for (let i = 1; i < numberpagination + 1; i++) {
-        setBtnDom(i, products)
-    }
-}
+// function setpagination(products) {
+//     wrapperPagination.innerHTML = ""
+//     let numberpagination = Math.ceil(products.length / numberProductsShown)
+//     for (let i = 1; i < numberpagination + 1; i++) {
+//         setBtnDom(i, products)
+//     }
+// }
 //**setBtnDom
 function setBtnDom(i, products) {
     let divelmnt = $.createElement("div")

@@ -10,10 +10,6 @@ import {
 } from "./func/utils.js"
 
 let $ = document
-
-window.selectionPaginationPageByUser = selectionPaginationPageByUser;
-
-
 let shopFilterbox = $.querySelector(".shop-filter")
 let boxFilterSelect = $.querySelector(".box-filter__select")
 let iconFilter = $.querySelector(".shop-filter__svg-icon--filter")
@@ -315,3 +311,4 @@ window.addEventListener('load', function () {
     }
     getCountProductsCart()
 })
+window.selectionPaginationPageByUser = selectionPaginationPageByUser;

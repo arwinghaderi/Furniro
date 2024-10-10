@@ -1,3 +1,5 @@
+import { addingProductsTemplate } from "../func/shared.js"
+
 const paginationCalculations = (products, numberProductsShown, currentPage, resultShowProducts, wrapperPagination) => {
     wrapperPagination.innerHTML = ""
     let indexEnd, indexStart
@@ -13,9 +15,7 @@ const paginationCalculations = (products, numberProductsShown, currentPage, resu
     let productsInformation = {
         products, numberProductsShown, currentPage, wrapperPagination, resultShowProducts
     }
-
     calculationNumberOfPaginationPages(productsInformation)
-
     return paginationProducts
 }
 
@@ -53,7 +53,8 @@ const addingPaginationTemplate = (productsInformation, counter) => {
 
 const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) => {
     const fragment = document.createDocumentFragment();
-    paginationTemaplte.btnElm.addEventListener("click", () => {
+
+    paginationTemaplte.paginationButton.addEventListener("click", () => {
         const productsWrapper = $.querySelector(".row-container")
         let productsStructure = "row"
 
@@ -62,13 +63,13 @@ const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) 
 
         let filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.resultShowProducts, productsInformation.wrapperPagination)
 
-        paginationTemaplte.divelmnt.classList.add("shop-products__pagination-box--active")
-        paginationTemaplte.btnElm.classList.add("shop-product-button--active")
+        paginationTemaplte.paginationBox.classList.add("shop-products__pagination-box--active")
+        paginationTemaplte.paginationButton.classList.add("shop-product-button--active")
 
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
 
-        fragment.append(paginationTemaplte.divelmnt)
     })
+    fragment.append(paginationTemaplte.paginationBox)
     productsInformation.wrapperPagination.append(fragment)
 }
 

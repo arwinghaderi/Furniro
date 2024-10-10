@@ -6,12 +6,13 @@ import {
     searchInProducts,
     ProductsWithPaginationCalculations,
     getCurrentPageAndShowCountProducts,
-    getCountProductsCart
+    getCountProductsCart, selectionPaginationPageByUser
 } from "./func/utils.js"
 
 let $ = document
 
-   
+window.selectionPaginationPageByUser = selectionPaginationPageByUser;
+
 
 let shopFilterbox = $.querySelector(".shop-filter")
 let boxFilterSelect = $.querySelector(".box-filter__select")
@@ -54,7 +55,7 @@ optionSelect.addEventListener('change', function (event) {
 
     filteredProductPagination = ProductsWithPaginationCalculations(productsFilter, resultShowProducts, wrapperPagination)
 
-    setpagination(productsFilter)
+    //setpagination(productsFilter)
     showProductsCount(productsFilter)
 
     addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
@@ -85,7 +86,7 @@ const showProductsCount = (products) => {
     })
 }
 
-// function setpagination(products) {
+// function //setpagination(products) {
 //     wrapperPagination.innerHTML = ""
 //     let numberpagination = Math.ceil(products.length / numberProductsShown)
 //     for (let i = 1; i < numberpagination + 1; i++) {
@@ -93,60 +94,60 @@ const showProductsCount = (products) => {
 //     }
 // }
 //**setBtnDom
-function setBtnDom(i, products) {
-    let divelmnt = $.createElement("div")
-    divelmnt.className = "shop-products__pagination-box-btn"
+// function setBtnDom(i, products) {
+//     let divelmnt = $.createElement("div")
+//     divelmnt.className = "shop-products__pagination-box-btn"
 
-    let btnElm = $.createElement("button")
-    btnElm.className = "shop-product-button"
+//     let btnElm = $.createElement("button")
+//     btnElm.className = "shop-product-button"
 
-    btnElm.innerHTML = i
+//     btnElm.innerHTML = i
 
-    divelmnt.append(btnElm)
+//     divelmnt.append(btnElm)
 
-    if (i === currentPage) {
-        divelmnt.classList.add("shop-products__pagination-box--active")
-        btnElm.classList.add("shop-product-button--active")
-    }
+//     if (i === currentPage) {
+//         divelmnt.classList.add("shop-products__pagination-box--active")
+//         btnElm.classList.add("shop-product-button--active")
+//     }
 
 
-    btnElm.addEventListener("click", function () {
-        console.log(currentPage, i);
-        currentPage = i
+//     btnElm.addEventListener("click", function () {
+//         console.log(currentPage, i);
+//         currentPage = i
 
-        filteredProductPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
+//         filteredProductPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
 
-        saveToLocalStorage("currentPage", currentPage)
-        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
+//         saveToLocalStorage("currentPage", currentPage)
+//         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
 
-        let btnActive = $.querySelector(".shop-product-button.shop-product-button--active")
-        let btnDivActive = $.querySelector(".shop-products__pagination-box-btn.shop-products__pagination-box--active")
-        btnActive.classList.remove("shop-product-button--active")
-        btnDivActive.classList.remove("shop-products__pagination-box--active")
-        divelmnt.classList.add("shop-products__pagination-box--active")
-        btnElm.classList.add("shop-product-button--active")
-        let divBtnPrev = $.querySelector(".shop-products__prev-btn-box")
-        let nextDivElem = $.querySelector(".shop-products__next-btn-box")
-        let numberpagination = Math.ceil(products.length / numberProductsShown)
-        if (currentPage === numberpagination) {
-            nextDivElem.style.display = "none"
-        }
-        if (currentPage > 1) {
-            divBtnPrev.style.display = "flex"
-        }
-        if (currentPage === 1) {
-            divBtnPrev.style.display = "none"
-        }
-        if (currentPage < numberpagination) {
-            nextDivElem.style.display = "flex"
-        }
-        if (numberpagination === 1) {
-            nextDivElem.style.display = "none"
-            divBtnPrev.style.display = "none"
-        }
-    })
-    wrapperPagination.append(divelmnt)
-}
+//         let btnActive = $.querySelector(".shop-product-button.shop-product-button--active")
+//         let btnDivActive = $.querySelector(".shop-products__pagination-box-btn.shop-products__pagination-box--active")
+//         btnActive.classList.remove("shop-product-button--active")
+//         btnDivActive.classList.remove("shop-products__pagination-box--active")
+//         divelmnt.classList.add("shop-products__pagination-box--active")
+//         btnElm.classList.add("shop-product-button--active")
+//         let divBtnPrev = $.querySelector(".shop-products__prev-btn-box")
+//         let nextDivElem = $.querySelector(".shop-products__next-btn-box")
+//         let numberpagination = Math.ceil(products.length / numberProductsShown)
+//         if (currentPage === numberpagination) {
+//             nextDivElem.style.display = "none"
+//         }
+//         if (currentPage > 1) {
+//             divBtnPrev.style.display = "flex"
+//         }
+//         if (currentPage === 1) {
+//             divBtnPrev.style.display = "none"
+//         }
+//         if (currentPage < numberpagination) {
+//             nextDivElem.style.display = "flex"
+//         }
+//         if (numberpagination === 1) {
+//             nextDivElem.style.display = "none"
+//             divBtnPrev.style.display = "none"
+//         }
+//     })
+//     wrapperPagination.append(divelmnt)
+// }
 
 //** SetBtnNextPrev*/
 let nextContainer = $.querySelector(".shop-products__Next")
@@ -184,7 +185,7 @@ function setBtnNextPrevDom(productArrayFilter) {
         }
         addingProductsTemplate(productArrayFilter, productsStructure, productsWrapper)
 
-        setpagination(productArrayFilter)
+        //setpagination(productArrayFilter)
         saveToLocalStorage("currentPage", currentPage)
     })
     divBtnPrev.addEventListener("click", function (event) {
@@ -197,7 +198,7 @@ function setBtnNextPrevDom(productArrayFilter) {
             nextDivElem.style.display = "flex"
         }
         addingProductsTemplate(productArrayFilter, productsStructure, productsWrapper)
-        setpagination(productArrayFilter)
+        //setpagination(productArrayFilter)
         saveToLocalStorage("currentPage", currentPage)
     })
 }
@@ -221,8 +222,9 @@ const addingProductsFilteredbyUser = () => {
 
     if (filterProducts) {
         filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts, wrapperPagination)
+        console.log(filteredProductPagination);
 
-        setpagination(filterProducts)
+        //setpagination(filterProducts)
         showProductsCount(filterProducts)
         addingActiveOptionInSelectBoxByUser()
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
@@ -231,7 +233,7 @@ const addingProductsFilteredbyUser = () => {
         productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
 
         saveToLocalStorage("FilteredProducts", products)
-        setpagination(products)
+        //setpagination(products)
         showProductsCount(products)
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
     }
@@ -272,7 +274,7 @@ searchInput.addEventListener("input", (event) => {
 
     if (event.target.value === "") {
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-        setpagination(products)
+        //setpagination(products)
         optionSelect.value = "All"
     } else {
         handlingProductsBasedOnUserSearch(productsSearchResult)
@@ -290,13 +292,13 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
 
         let productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts, wrapperPagination)
         saveToLocalStorage("FilteredProducts", productsSearchResult)
-        setpagination(productsSearchResult)
+        //setpagination(productsSearchResult)
         showProductsCount(productsSearchResult)
         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
     } else {
         productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`
         resultShowProducts.innerHTML = ""
-        setpagination(productsSearchResult)
+        //setpagination(productsSearchResult)
     }
 }
 

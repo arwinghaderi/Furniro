@@ -48,6 +48,28 @@ const addingPaginationTemplate = (productsInformation, counter) => {
         paginationButton.className = "shop-product-button"
     }
     paginationBox.append(paginationButton)
+    selectionPaginationPageByUser(productsInformation, paginationTemaplte)
+}
+
+const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) => {
+    const fragment = document.createDocumentFragment();
+    paginationTemaplte.btnElm.addEventListener("click", () => {
+        const productsWrapper = $.querySelector(".row-container")
+        let productsStructure = "row"
+
+        productsInformation.currentPage = paginationTemaplte.counter
+        saveToLocalStorage("currentPage", productsInformation.currentPage)
+
+        let filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.resultShowProducts, productsInformation.wrapperPagination)
+
+        paginationTemaplte.divelmnt.classList.add("shop-products__pagination-box--active")
+        paginationTemaplte.btnElm.classList.add("shop-product-button--active")
+
+        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
+
+        fragment.append(paginationTemaplte.divelmnt)
+    })
+    productsInformation.wrapperPagination.append(fragment)
 }
 
 const saveToLocalStorage = (key, value) => {

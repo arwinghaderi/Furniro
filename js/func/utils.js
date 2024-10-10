@@ -27,7 +27,28 @@ const calculationNumberOfPaginationPages = (productsInformation) => {
     }
 }
 
+const addingPaginationTemplate = (productsInformation, counter) => {
+    const paginationBox = $.createElement("div")
+    paginationBox.className = "shop-products__pagination-box-btn"
 
+    const paginationButton = $.createElement("button")
+    paginationButton.className = "shop-product-button"
+
+    paginationButton.innerHTML = counter
+
+    const paginationTemaplte = {
+        paginationButton, paginationBox, counter
+    }
+
+    if (counter === Number(productsInformation.currentPage)) {
+        paginationBox.classList.add("shop-products__pagination-box--active")
+        paginationButton.classList.add("shop-product-button--active")
+    } else {
+        paginationBox.className = "shop-products__pagination-box-btn"
+        paginationButton.className = "shop-product-button"
+    }
+    paginationBox.append(paginationButton)
+}
 
 const saveToLocalStorage = (key, value) => {
     return localStorage.setItem(key, JSON.stringify(value))

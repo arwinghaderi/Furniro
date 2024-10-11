@@ -26,6 +26,8 @@ const numberShowProduct = $.querySelector(".shop-filter__input--number")
 const resultShowProducts = document.querySelector(".shop-filter__result-text")
 let filteredProductPagination, productsBasedPagination, filterProducts
 
+let paginationTool = { wrapperPagination, resultShowProducts }
+
 let numberProductsShown = 8
 let currentPage = 1
 let productsStructure = 'row'
@@ -49,7 +51,7 @@ optionSelect.addEventListener('change', function (event) {
     saveToLocalStorage("FilteredProducts", productsFilter)
 
 
-    filteredProductPagination = ProductsWithPaginationCalculations(productsFilter, resultShowProducts, wrapperPagination)
+    filteredProductPagination = ProductsWithPaginationCalculations(productsFilter, paginationTool)
 
     //setpagination(productsFilter)
     showProductsCount(productsFilter)
@@ -175,7 +177,7 @@ const addingProductsFilteredbyUser = () => {
     getCurrentPageAndShowCountProducts(currentPage, numberProductsShown)
 
     if (filterProducts) {
-        filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts, wrapperPagination)
+        filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, paginationTool)
         console.log(filteredProductPagination);
 
         //setpagination(filterProducts)
@@ -184,7 +186,7 @@ const addingProductsFilteredbyUser = () => {
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
     }
     else {
-        productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
+        productsBasedPagination = ProductsWithPaginationCalculations(products, paginationTool)
 
         saveToLocalStorage("FilteredProducts", products)
         //setpagination(products)
@@ -207,7 +209,7 @@ structhreIcons.forEach((icon) => {
 
 const addingTemplatesBasedOnProductStructure = (target) => {
     filterProducts = getFromLocalStorage('FilteredProducts')
-    productsBasedPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts, wrapperPagination)
+    productsBasedPagination = ProductsWithPaginationCalculations(filterProducts, paginationTool)
 
     if (target === "row") {
         productsStructure = "row"
@@ -225,7 +227,7 @@ searchInput.addEventListener("input", (event) => {
     let copyProducts = [...products]
 
     let productsSearchResult = searchInProducts(copyProducts, event.target.value, "productIntroduction")
-    productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
+    productsBasedPagination = ProductsWithPaginationCalculations(products, paginationTool)
 
     if (event.target.value === "") {
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
@@ -246,13 +248,13 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
         saveToLocalStorage("showCountProducts", numberProductsShown)
         ChangeInputPlaceholderToUserChange()
 
-        productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts, wrapperPagination)
+        productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, paginationTool)
         saveToLocalStorage("FilteredProducts", productsSearchResult)
 
         showProductsCount(productsSearchResult)
         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
     } else {
-        productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts, wrapperPagination)
+        productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult,paginationTool)
         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
 
         productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`

@@ -99,6 +99,19 @@ const addingPrevNextButtonTemplate = (productsInformation, numberOfPagesOfCourse
 
     productsInformation.currentPage === 1 ? pervBtn.style.display = "none" : pervBtn.style.display = "flex"
     productsInformation.currentPage === numberOfPagesOfCourses ? nextBtn.style.display = "none" : nextBtn.style.display = "flex"
+
+    handlerNextButtonByUser(productsInformation, nextPrevTemaplte)
+}
+
+const handlerNextButtonByUser = (productsInformation, nextPrevTemaplte) => {
+    nextPrevTemaplte.nextBtn.addEventListener("click", () => {
+        productsInformation.currentPage++
+        saveToLocalStorage("currentPage", productsInformation.currentPage)
+
+        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.resultShowProducts, productsInformation.wrapperPagination)
+
+        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
+    })
 }
 
 const saveToLocalStorage = (key, value) => {

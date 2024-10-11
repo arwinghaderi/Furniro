@@ -155,49 +155,7 @@ function setBtnNextPrev(products) {
         setBtnNextPrevDom(products)
     }
 }
-function setBtnNextPrevDom(productArrayFilter) {
-    prevContainer.insertAdjacentHTML("afterbegin", '<div class="shop-products__prev-btn-box">     <button class="shop-products__button-prev-text">Prev</button></div > ')
-    nextContainer.insertAdjacentHTML("beforeend", ' <div class="shop-products__next-btn-box"> <button class="shop-products__button-next-text">Next</button></div > ')
-    let nextDivElem = $.querySelector(".shop-products__next-btn-box")
-    let divBtnPrev = $.querySelector(".shop-products__prev-btn-box")
-    let numberpagination = Math.ceil(productArrayFilter.length / numberProductsShown)
-    if (numberpagination === 1) {
-        nextDivElem.style.display = "none"
-        divBtnPrev.style.display = "none"
-    }
-    if (currentPage === 1) {
-        divBtnPrev.style.display = "none"
-    }
-    if (currentPage === numberpagination) {
-        nextDivElem.style.display = "none"
-    }
-    nextDivElem.addEventListener("click", function () {
-        currentPage++
-        if (currentPage === numberpagination) {
-            nextDivElem.style.display = "none"
-        }
-        if (currentPage > 1) {
-            divBtnPrev.style.display = "flex"
-        }
-        addingProductsTemplate(productArrayFilter, productsStructure, productsWrapper)
 
-        //setpagination(productArrayFilter)
-        saveToLocalStorage("currentPage", currentPage)
-    })
-    divBtnPrev.addEventListener("click", function (event) {
-        event.preventDefault()
-        currentPage--
-        let numberpagination = Math.ceil(products.length / numberProductsShown)
-        if (currentPage === 1) {
-            divBtnPrev.style.display = "none"
-        } if (currentPage < numberpagination) {
-            nextDivElem.style.display = "flex"
-        }
-        addingProductsTemplate(productArrayFilter, productsStructure, productsWrapper)
-        //setpagination(productArrayFilter)
-        saveToLocalStorage("currentPage", currentPage)
-    })
-}
 
 const addingActiveOptionInSelectBoxByUser = () => {
     let data = getFromLocalStorage("optionActiveSelectBox")

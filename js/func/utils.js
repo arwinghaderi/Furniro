@@ -1,7 +1,16 @@
 import { addingProductsTemplate } from "../func/shared.js"
+let filteredProductPagination
+
+const productsWrapper = $.querySelector(".row-container")
+const nextContainer = $.querySelector(".shop-products__Next")
+const prevContainer = $.querySelector(".shop-products__prev")
+const productsStructure = "row"
 
 const paginationCalculations = (products, numberProductsShown, currentPage, resultShowProducts, wrapperPagination) => {
     wrapperPagination.innerHTML = ""
+    nextContainer.innerHTML = ""
+    prevContainer.innerHTML = ""
+
     let indexEnd, indexStart
     let copyProducts = [...products]
 
@@ -21,6 +30,7 @@ const paginationCalculations = (products, numberProductsShown, currentPage, resu
 
 const calculationNumberOfPaginationPages = (productsInformation) => {
     let numberOfPagesOfCourses = Math.ceil(productsInformation.products.length / productsInformation.numberProductsShown)
+    addingPrevNextButtonTemplate(productsInformation, numberOfPagesOfCourses)
 
     for (let counter = 1; counter < numberOfPagesOfCourses + 1; counter++) {
         addingPaginationTemplate(productsInformation, counter)
@@ -55,22 +65,40 @@ const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) 
     const fragment = document.createDocumentFragment();
 
     paginationTemaplte.paginationButton.addEventListener("click", () => {
-        const productsWrapper = $.querySelector(".row-container")
-        let productsStructure = "row"
-
         productsInformation.currentPage = paginationTemaplte.counter
         saveToLocalStorage("currentPage", productsInformation.currentPage)
 
-        let filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.resultShowProducts, productsInformation.wrapperPagination)
+        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.resultShowProducts, productsInformation.wrapperPagination)
 
         paginationTemaplte.paginationBox.classList.add("shop-products__pagination-box--active")
         paginationTemaplte.paginationButton.classList.add("shop-product-button--active")
 
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
-
     })
     fragment.append(paginationTemaplte.paginationBox)
     productsInformation.wrapperPagination.append(fragment)
+}
+
+const addingPrevNextButtonTemplate = (productsInformation, numberOfPagesOfCourses) => {
+    prevContainer.insertAdjacentHTML("afterbegin", `<div class="shop-products__prev-btn-box"><button class="shop-products__button-prev-text">Prev</button></div >`)
+
+    nextContainer.insertAdjacentHTML("beforeend", `<div class="shop-products__next-btn-box"> <button class="shop-products__button-next-text">Next</button></div > `)
+
+    let nextBtn = $.querySelector(".shop-products__next-btn-box")
+    let pervBtn = $.querySelector(".shop-products__prev-btn-box")
+
+    if (numberOfPagesOfCourses === 1) {
+        nextBtn.style.display = "none"
+        pervBtn.style.display = "none"
+    } else {
+        nextBtn.style.display = "flex"
+        pervBtn.style.display = "flex"
+    }
+
+    const nextPrevTemaplte = { nextBtn, pervBtn }
+
+    productsInformation.currentPage === 1 ? pervBtn.style.display = "none" : pervBtn.style.display = "flex"
+    productsInformation.currentPage === numberOfPagesOfCourses ? nextBtn.style.display = "none" : nextBtn.style.display = "flex"
 }
 
 const saveToLocalStorage = (key, value) => {

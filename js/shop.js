@@ -24,9 +24,12 @@ const productsWrapper = $.querySelector(".row-container")
 const wrapperPagination = $.querySelector(".shop-products__number-pagination")
 const numberShowProduct = $.querySelector(".shop-filter__input--number")
 const resultShowProducts = document.querySelector(".shop-filter__result-text")
+const nextContainer = $.querySelector(".shop-products__Next")
+const prevContainer = $.querySelector(".shop-products__prev")
+
 let filteredProductPagination, productsBasedPagination, filterProducts
 
-let paginationTool = { wrapperPagination, resultShowProducts }
+let paginationTool = { wrapperPagination, resultShowProducts, nextContainer, prevContainer }
 
 let numberProductsShown = 8
 let currentPage = 1
@@ -148,15 +151,15 @@ const showProductsCount = (products) => {
 // }
 
 //** SetBtnNextPrev*/
-let nextContainer = $.querySelector(".shop-products__Next")
-let prevContainer = $.querySelector(".shop-products__prev")
-function setBtnNextPrev(products) {
-    nextContainer.innerHTML = ""
-    prevContainer.innerHTML = ""
-    for (let i = 1; i < 2; i++) {
-        setBtnNextPrevDom(products)
-    }
-}
+// let nextContainer = $.querySelector(".shop-products__Next")
+// let prevContainer = $.querySelector(".shop-products__prev")
+// function setBtnNextPrev(products) {
+//     nextContainer.innerHTML = ""
+//     prevContainer.innerHTML = ""
+//     for (let i = 1; i < 2; i++) {
+//         setBtnNextPrevDom(products)
+//     }
+// }
 
 
 const addingActiveOptionInSelectBoxByUser = () => {
@@ -254,7 +257,7 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
         showProductsCount(productsSearchResult)
         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
     } else {
-        productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult,paginationTool)
+        productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, paginationTool)
         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
 
         productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`

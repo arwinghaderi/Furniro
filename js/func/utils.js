@@ -2,15 +2,12 @@ import { addingProductsTemplate } from "../func/shared.js"
 let filteredProductPagination
 
 const productsWrapper = $.querySelector(".row-container")
-const nextContainer = $.querySelector(".shop-products__Next")
-const prevContainer = $.querySelector(".shop-products__prev")
 const productsStructure = "row"
 
 const paginationCalculations = (products, numberProductsShown, currentPage, paginationTool) => {
-    console.log(paginationTool.resultShowProducts);
     paginationTool.wrapperPagination.innerHTML = ""
-    nextContainer.innerHTML = ""
-    prevContainer.innerHTML = ""
+    paginationTool.nextContainer.innerHTML = ""
+    paginationTool.prevContainer.innerHTML = ""
 
     let indexEnd, indexStart
     let copyProducts = [...products]
@@ -82,9 +79,9 @@ const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) 
 }
 
 const addingPrevNextButtonTemplate = (productsInformation, numberOfPagesOfCourses) => {
-    prevContainer.insertAdjacentHTML("afterbegin", `<div class="shop-products__prev-btn-box"><button class="shop-products__button-prev-text">Prev</button></div >`)
+    productsInformation.paginationTool.prevContainer.insertAdjacentHTML("afterbegin", `<div class="shop-products__prev-btn-box"><button class="shop-products__button-prev-text">Prev</button></div >`)
 
-    nextContainer.insertAdjacentHTML("beforeend", `<div class="shop-products__next-btn-box"> <button class="shop-products__button-next-text">Next</button></div > `)
+    productsInformation.paginationTool.nextContainer.insertAdjacentHTML("beforeend", `<div class="shop-products__next-btn-box"> <button class="shop-products__button-next-text">Next</button></div > `)
 
     let nextBtn = $.querySelector(".shop-products__next-btn-box")
     let pervBtn = $.querySelector(".shop-products__prev-btn-box")

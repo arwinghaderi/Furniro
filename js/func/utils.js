@@ -130,12 +130,12 @@ const getFromLocalStorage = (key) => {
     return JSON.parse(localStorage.getItem(key))
 }
 
-const searchInProducts = (products, valueSearch, productsKey) => {
-    let valueSearchLoewr = valueSearch.toLowerCase().trim()
-    console.log(valueSearch);
-    let searchProducts = products.filter((product) => product[productsKey].includes(valueSearchLoewr))
+const searchInProducts = (products, SearchValue, productsKey) => {
+    let SearchValueLoewr = SearchValue.toLowerCase().trim()
+    console.log(SearchValue);
+    let searchProducts = products.filter((product) => product[productsKey].includes(SearchValueLoewr))
 
-    if (valueSearch) {
+    if (SearchValue) {
         return searchProducts
     } else {
         return products

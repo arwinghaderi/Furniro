@@ -6,8 +6,9 @@ const nextContainer = $.querySelector(".shop-products__Next")
 const prevContainer = $.querySelector(".shop-products__prev")
 const productsStructure = "row"
 
-const paginationCalculations = (products, numberProductsShown, currentPage, resultShowProducts, wrapperPagination) => {
-    wrapperPagination.innerHTML = ""
+const paginationCalculations = (products, numberProductsShown, currentPage, paginationTool) => {
+    console.log(paginationTool.resultShowProducts);
+    paginationTool.wrapperPagination.innerHTML = ""
     nextContainer.innerHTML = ""
     prevContainer.innerHTML = ""
 
@@ -17,18 +18,19 @@ const paginationCalculations = (products, numberProductsShown, currentPage, resu
     indexEnd = numberProductsShown * currentPage
     indexStart = indexEnd - numberProductsShown
 
-    resultShowProducts.innerHTML = `Showing  ${indexStart}  --   ${indexEnd > products.length ? products.length : indexEnd}   of  ${products.length}  results`
+    paginationTool.resultShowProducts.innerHTML = `Showing  ${indexStart}  --   ${indexEnd > products.length ? products.length : indexEnd}   of  ${products.length}  results`
 
     let paginationProducts = copyProducts.slice(indexStart, indexEnd)
 
     let productsInformation = {
-        products, numberProductsShown, currentPage, wrapperPagination, resultShowProducts
+        products, numberProductsShown, currentPage, paginationTool,
     }
     calculationNumberOfPaginationPages(productsInformation)
     return paginationProducts
 }
 
 const calculationNumberOfPaginationPages = (productsInformation) => {
+
     let numberOfPagesOfCourses = Math.ceil(productsInformation.products.length / productsInformation.numberProductsShown)
     addingPrevNextButtonTemplate(productsInformation, numberOfPagesOfCourses)
 
@@ -68,7 +70,7 @@ const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) 
         productsInformation.currentPage = paginationTemaplte.counter
         saveToLocalStorage("currentPage", productsInformation.currentPage)
 
-        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.resultShowProducts, productsInformation.wrapperPagination)
+        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.paginationTool)
 
         paginationTemaplte.paginationBox.classList.add("shop-products__pagination-box--active")
         paginationTemaplte.paginationButton.classList.add("shop-product-button--active")
@@ -76,7 +78,7 @@ const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) 
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
     })
     fragment.append(paginationTemaplte.paginationBox)
-    productsInformation.wrapperPagination.append(fragment)
+    productsInformation.paginationTool.wrapperPagination.append(fragment)
 }
 
 const addingPrevNextButtonTemplate = (productsInformation, numberOfPagesOfCourses) => {
@@ -109,7 +111,7 @@ const handlerNextButtonByUser = (productsInformation, nextPrevTemaplte) => {
         productsInformation.currentPage++
         saveToLocalStorage("currentPage", productsInformation.currentPage)
 
-        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.resultShowProducts, productsInformation.wrapperPagination)
+        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.paginationTool)
 
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
     })
@@ -120,7 +122,7 @@ const handlerPrevButtonByUser = (productsInformation, nextPrevTemaplte) => {
         productsInformation.currentPage--
         saveToLocalStorage("currentPage", productsInformation.currentPage)
 
-        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.resultShowProducts, productsInformation.wrapperPagination)
+        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.paginationTool)
 
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
     })
@@ -151,7 +153,7 @@ const getCurrentPageAndShowCountProducts = (currentPage, showCountProducts) => {
     showCountProducts ? showCountProducts : showCountProducts = 8
 }
 
-const ProductsWithPaginationCalculations = (products, resultShowProducts, wrapperPagination) => {
+const ProductsWithPaginationCalculations = (products, paginationTool) => {
     let filterProducts = getFromLocalStorage('FilteredProducts')
     let currentPage = getFromLocalStorage("currentPage")
     let showCountProducts = getFromLocalStorage("showCountProducts")
@@ -159,12 +161,11 @@ const ProductsWithPaginationCalculations = (products, resultShowProducts, wrappe
     getCurrentPageAndShowCountProducts(currentPage, showCountProducts)
 
     if (filterProducts) {
-        let filteredProductsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, resultShowProducts, wrapperPagination)
+        let filteredProductsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, paginationTool)
         return filteredProductsBasedPagination
 
     } else {
-        console.log(currentPage, showCountProducts);
-        let productsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, resultShowProducts, wrapperPagination)
+        let productsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, paginationTool)
         return productsBasedPagination
     }
 }

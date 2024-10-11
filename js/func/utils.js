@@ -198,7 +198,6 @@ const getCountProductsCart = () => {
 }
 
 export {
-    paginationCalculations,
     saveToLocalStorage,
     getFromLocalStorage,
     searchInProducts,

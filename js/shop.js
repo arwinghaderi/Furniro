@@ -180,6 +180,8 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
 
         productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`
         resultShowProducts.innerHTML = ""
+        nextContainer.innerHTML = ""
+        prevContainer.innerHTML = ""
     }
 }
 

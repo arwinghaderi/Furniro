@@ -248,7 +248,8 @@ structhreIcons.forEach((icon) => {
 })
 
 const addingTemplatesBasedOnProductStructure = (target) => {
-    productsBasedPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
+    filterProducts = getFromLocalStorage('FilteredProducts')
+    productsBasedPagination = ProductsWithPaginationCalculations(filterProducts, resultShowProducts, wrapperPagination)
 
     if (target === "row") {
         productsStructure = "row"
@@ -278,6 +279,7 @@ searchInput.addEventListener("input", (event) => {
 })
 
 const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
+    let productsSearchPagination
     if (productsSearchResult.length) {
         currentPage = 1
         saveToLocalStorage("currentPage", currentPage)
@@ -286,15 +288,17 @@ const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
         saveToLocalStorage("showCountProducts", numberProductsShown)
         ChangeInputPlaceholderToUserChange()
 
-        let productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts, wrapperPagination)
+        productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts, wrapperPagination)
         saveToLocalStorage("FilteredProducts", productsSearchResult)
-        //setpagination(productsSearchResult)
+
         showProductsCount(productsSearchResult)
         addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
     } else {
+        productsSearchPagination = ProductsWithPaginationCalculations(productsSearchResult, resultShowProducts, wrapperPagination)
+        addingProductsTemplate(productsSearchPagination, productsStructure, productsWrapper)
+
         productsWrapper.innerHTML = `<div class="alert alert-danger">هیچ محصولی برای این جستوجوی  شما  وجود ندارد :/</div>`
         resultShowProducts.innerHTML = ""
-        //setpagination(productsSearchResult)
     }
 }
 

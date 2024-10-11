@@ -28,16 +28,14 @@ const nextContainer = $.querySelector(".shop-products__Next")
 const prevContainer = $.querySelector(".shop-products__prev")
 
 let filteredProductPagination, productsBasedPagination, filterProducts
-
-let paginationTool = { wrapperPagination, resultShowProducts, nextContainer, prevContainer }
-
 let numberProductsShown = 8
 let currentPage = 1
 let productsStructure = 'row'
+let paginationTool = { wrapperPagination, resultShowProducts, nextContainer, prevContainer, productsWrapper, productsStructure }
 
 const optionSelect = $.querySelector(".box-filter__select")
 
-optionSelect.addEventListener('change', function (event) {
+optionSelect.addEventListener('change', event => {
     currentPage = 1
     saveToLocalStorage("currentPage", currentPage)
 
@@ -49,14 +47,11 @@ optionSelect.addEventListener('change', function (event) {
     saveToLocalStorage("showCountProducts", numberProductsShown)
     ChangeInputPlaceholderToUserChange()
 
-
     const productsFilter = productsSorting(products, optionActive)
     saveToLocalStorage("FilteredProducts", productsFilter)
 
-
     filteredProductPagination = ProductsWithPaginationCalculations(productsFilter, paginationTool)
 
-    //setpagination(productsFilter)
     showProductsCount(productsFilter)
 
     addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
@@ -87,81 +82,6 @@ const showProductsCount = (products) => {
     })
 }
 
-// function //setpagination(products) {
-//     wrapperPagination.innerHTML = ""
-//     let numberpagination = Math.ceil(products.length / numberProductsShown)
-//     for (let i = 1; i < numberpagination + 1; i++) {
-//         setBtnDom(i, products)
-//     }
-// }
-//**setBtnDom
-// function setBtnDom(i, products) {
-//     let divelmnt = $.createElement("div")
-//     divelmnt.className = "shop-products__pagination-box-btn"
-
-//     let btnElm = $.createElement("button")
-//     btnElm.className = "shop-product-button"
-
-//     btnElm.innerHTML = i
-
-//     divelmnt.append(btnElm)
-
-//     if (i === currentPage) {
-//         divelmnt.classList.add("shop-products__pagination-box--active")
-//         btnElm.classList.add("shop-product-button--active")
-//     }
-
-
-//     btnElm.addEventListener("click", function () {
-//         console.log(currentPage, i);
-//         currentPage = i
-
-//         filteredProductPagination = ProductsWithPaginationCalculations(products, resultShowProducts, wrapperPagination)
-
-//         saveToLocalStorage("currentPage", currentPage)
-//         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
-
-//         let btnActive = $.querySelector(".shop-product-button.shop-product-button--active")
-//         let btnDivActive = $.querySelector(".shop-products__pagination-box-btn.shop-products__pagination-box--active")
-//         btnActive.classList.remove("shop-product-button--active")
-//         btnDivActive.classList.remove("shop-products__pagination-box--active")
-//         divelmnt.classList.add("shop-products__pagination-box--active")
-//         btnElm.classList.add("shop-product-button--active")
-//         let divBtnPrev = $.querySelector(".shop-products__prev-btn-box")
-//         let nextDivElem = $.querySelector(".shop-products__next-btn-box")
-//         let numberpagination = Math.ceil(products.length / numberProductsShown)
-//         if (currentPage === numberpagination) {
-//             nextDivElem.style.display = "none"
-//         }
-//         if (currentPage > 1) {
-//             divBtnPrev.style.display = "flex"
-//         }
-//         if (currentPage === 1) {
-//             divBtnPrev.style.display = "none"
-//         }
-//         if (currentPage < numberpagination) {
-//             nextDivElem.style.display = "flex"
-//         }
-//         if (numberpagination === 1) {
-//             nextDivElem.style.display = "none"
-//             divBtnPrev.style.display = "none"
-//         }
-//     })
-//     wrapperPagination.append(divelmnt)
-// }
-
-//** SetBtnNextPrev*/
-// let nextContainer = $.querySelector(".shop-products__Next")
-// let prevContainer = $.querySelector(".shop-products__prev")
-// function setBtnNextPrev(products) {
-//     nextContainer.innerHTML = ""
-//     prevContainer.innerHTML = ""
-//     for (let i = 1; i < 2; i++) {
-//         setBtnNextPrevDom(products)
-//     }
-// }
-
-
 const addingActiveOptionInSelectBoxByUser = () => {
     let data = getFromLocalStorage("optionActiveSelectBox")
     if (data) {
@@ -181,9 +101,7 @@ const addingProductsFilteredbyUser = () => {
 
     if (filterProducts) {
         filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, paginationTool)
-        console.log(filteredProductPagination);
 
-        //setpagination(filterProducts)
         showProductsCount(filterProducts)
         addingActiveOptionInSelectBoxByUser()
         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
@@ -192,7 +110,7 @@ const addingProductsFilteredbyUser = () => {
         productsBasedPagination = ProductsWithPaginationCalculations(products, paginationTool)
 
         saveToLocalStorage("FilteredProducts", products)
-        //setpagination(products)
+
         showProductsCount(products)
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
     }
@@ -234,7 +152,7 @@ searchInput.addEventListener("input", (event) => {
 
     if (event.target.value === "") {
         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-        //setpagination(products)
+
         optionSelect.value = "All"
     } else {
         handlingProductsBasedOnUserSearch(productsSearchResult)

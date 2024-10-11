@@ -1,9 +1,6 @@
 import { addingProductsTemplate } from "../func/shared.js"
 let filteredProductPagination
 
-const productsWrapper = $.querySelector(".row-container")
-const productsStructure = "row"
-
 const paginationCalculations = (products, numberProductsShown, currentPage, paginationTool) => {
     paginationTool.wrapperPagination.innerHTML = ""
     paginationTool.nextContainer.innerHTML = ""
@@ -72,7 +69,7 @@ const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) 
         paginationTemaplte.paginationBox.classList.add("shop-products__pagination-box--active")
         paginationTemaplte.paginationButton.classList.add("shop-product-button--active")
 
-        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
+        addingProductsTemplate(filteredProductPagination, productsInformation.paginationTool.productsStructure, productsInformation.paginationTool.productsWrapper)
     })
     fragment.append(paginationTemaplte.paginationBox)
     productsInformation.paginationTool.wrapperPagination.append(fragment)
@@ -110,7 +107,7 @@ const handlerNextButtonByUser = (productsInformation, nextPrevTemaplte) => {
 
         filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.paginationTool)
 
-        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
+        addingProductsTemplate(filteredProductPagination, productsInformation.paginationTool.productsStructure, productsInformation.paginationTool.productsWrapper)
     })
 }
 
@@ -121,7 +118,7 @@ const handlerPrevButtonByUser = (productsInformation, nextPrevTemaplte) => {
 
         filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.paginationTool)
 
-        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
+        addingProductsTemplate(filteredProductPagination, productsInformation.paginationTool.productsStructure, productsInformation.paginationTool.productsWrapper)
     })
 }
 

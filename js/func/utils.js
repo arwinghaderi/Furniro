@@ -101,11 +101,23 @@ const addingPrevNextButtonTemplate = (productsInformation, numberOfPagesOfCourse
     productsInformation.currentPage === numberOfPagesOfCourses ? nextBtn.style.display = "none" : nextBtn.style.display = "flex"
 
     handlerNextButtonByUser(productsInformation, nextPrevTemaplte)
+    handlerPrevButtonByUser(productsInformation, nextPrevTemaplte)
 }
 
 const handlerNextButtonByUser = (productsInformation, nextPrevTemaplte) => {
     nextPrevTemaplte.nextBtn.addEventListener("click", () => {
         productsInformation.currentPage++
+        saveToLocalStorage("currentPage", productsInformation.currentPage)
+
+        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.resultShowProducts, productsInformation.wrapperPagination)
+
+        addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
+    })
+}
+
+const handlerPrevButtonByUser = (productsInformation, nextPrevTemaplte) => {
+    nextPrevTemaplte.pervBtn.addEventListener("click", () => {
+        productsInformation.currentPage--
         saveToLocalStorage("currentPage", productsInformation.currentPage)
 
         filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.resultShowProducts, productsInformation.wrapperPagination)

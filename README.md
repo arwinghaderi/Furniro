@@ -10,12 +10,13 @@
   >![CSS3](https://a11ybadges.com/badge?logo=css3)
   >![JavaScript](https://a11ybadges.com/badge?logo=javascript)
   >![Swiper](https://a11ybadges.com/badge?logo=swiper)
+  >![Font Awesome](https://a11ybadges.com/badge?logo=fontawesome)
 
 - ⚙️ &nbsp;Softwares(نرم افزار ها)  
    >![Figma](https://a11ybadges.com/badge?logo=figma)
    >![Visual Studio Code](https://a11ybadges.com/badge?logo=visualstudiocode)
 
-- 🕓 &nbsp; Version Control :
+- 🕓 &nbsp; Version Control(کنترل نسخه):
 
   >![Git](https://a11ybadges.com/badge?logo=git)
   >![GitHub](https://a11ybadges.com/badge?logo=github)

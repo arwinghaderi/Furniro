@@ -463,6 +463,8 @@
 
         width: 18rem;
     }
+
+
 }
 
 @media screen and (max-width:576px) {
@@ -598,8 +600,4 @@
     .product-price {
         font-size: 1.6rem;
     }
-
-
-
-
 }

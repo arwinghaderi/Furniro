@@ -1,12 +1,10 @@
 # Furniture store...
 
-<h2 align="right">
- در حال ریفکتور و ایجاد پروژه قوی تر با جاوا اسکریپت خام🔥🔥🔥</h2>
+<p align="left">❤Hello, welcome to the furniture selling project repo, I hope you enjoy it❤</p>
+<p>❤سلام، به مخزن پروژه فروش مبلمان خوش آمدید، امیدوارم از آن لذت ببرید❤</p>
 
 
-<p align="right">
-  پروژه در سطح مهارت ضعیف من بدون git ایجاد شد و در حال بازسازی است و پروژه در سطح پیشرفته تری نسبت به خودم ادامه می یابد....
-</p>
+ <h2 >👀 Online project Link... (لینک پروژه)</h2> 
 
 <img src="./Screenshot (41).png" alt="img-project">
 

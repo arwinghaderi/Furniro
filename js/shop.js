@@ -155,15 +155,16 @@ searchInput.addEventListener("input", (event) => {
 
         optionSelect.value = "All"
     } else {
-        handlingProductsBasedOnUserSearch(productsSearchResult)
+        handlingProductsBasedOnUserSearch(productsSearchResult, event.target.value)
     }
 })
 
-const handlingProductsBasedOnUserSearch = (productsSearchResult) => {
+const handlingProductsBasedOnUserSearch = (productsSearchResult, serachValue) => {
     let productsSearchPagination
     if (productsSearchResult.length) {
         currentPage = 1
         saveToLocalStorage("currentPage", currentPage)
+        optionSelect.value = serachValue
 
         numberProductsShown = 8
         saveToLocalStorage("showCountProducts", numberProductsShown)

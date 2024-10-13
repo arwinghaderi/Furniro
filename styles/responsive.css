@@ -472,6 +472,7 @@
 
     .home {
         padding: 0;
+        height: auto;
     }
 
     .design-header__title {

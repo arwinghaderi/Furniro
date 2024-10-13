@@ -9,10 +9,22 @@
 
 - 📝 &nbsp;Project decription (توضیحات پروژه ):
   
-   - <p align="center">
+   >Dedicated system grid(گرید سیستم اختصاصی)
+   
+   >All features are fully dynamic(همه ویژگی ها کاملا پویا هستند)
+   
+   >The project is done in a modular way (پروژه به صورت  ماژولار انجام شده)
+   
+   >Fully responsive on all devices(کاملا واکنش گرا در تمامی دستگاه ها)
+   
+   >I tried to write the codes cleanly, refer to Uncle Bob(سعی کردم کدها را تمیز بنویسم به عمو باب مراجعه کنید)
+
+
+   <p align="center">
      The furniture store project is built with raw JS and JS library and so far 60% of the project is done and every feature has been tried to be fully dynamic.
+      And the project is still being developed
   </p>
-  <p align="center"> پروژه فروشگاه مبلمان با JS خام و  کتابخانه  JS  ساخته شده است و تاکنون 60 درصد پروژه انجام شده است و سعی شده هر ویژگی کاملا پویا باشد</p>
+    <p align="center">  پروژه فروشگاه مبلمان با JS خام و  کتابخانه  JS  ساخته شده است و تاکنون 60 درصد پروژه انجام شده است و سعی شده هر ویژگی کاملا پویا باشد و این پروژه همچنان در حال توسعه است </p>
   
 - 📋 &nbsp;Languages and Tools (زبان ها و ابزار ها):
   

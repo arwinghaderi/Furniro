@@ -184,16 +184,22 @@ const productDiscountCalculation = (price, discountPercent) => {
 
     return total
 }
+
 const getCountProductsCart = () => {
-    let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
+    let iconCountProducts = document.querySelector(".nav-bar__count-Product")
+    let iconCountProductsMobail = document.querySelector(".nav-bar__count-Product_mobail")
     let countProducts = getFromLocalStorage("countProductToCart")
 
     if (countProducts) {
-        iconCountProducts.classList.add("nav-bar__count-Procuct--active")
+        iconCountProducts.classList.add("nav-bar__count-Product--active")
+        iconCountProductsMobail.classList.add("nav-bar__count-Product_mobail--active")
         iconCountProducts.innerHTML = countProducts
+        iconCountProductsMobail.innerHTML = countProducts
     } else {
-        iconCountProducts.classList.add("nav-bar__count-Procuct--active")
+        iconCountProducts.classList.add("nav-bar__count-Product--active")
+        iconCountProductsMobail.classList.add("nav-bar__count-Product_mobail--active")
         iconCountProducts.innerHTML = 0
+        iconCountProductsMobail.innerHTML = 0
     }
 }
 

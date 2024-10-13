@@ -123,10 +123,10 @@ const addingDetailesProduct = () => {
     addingProductToCart(btnAddToCart, productCountInput)
 }
 
-let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
+let iconCountProducts = document.querySelector(".nav-bar__count-Product")
 
 const countIconCart = () => {
-    iconCountProducts.classList.add("nav-bar__count-Procuct--active")
+    iconCountProducts.classList.add("nav-bar__count-Product--active")
     iconCountProducts.innerHTML = productsCart.length
     saveToLocalStorage("countProductToCart", productsCart.length)
 }
@@ -335,7 +335,7 @@ const removeProductByUserByUser = (productId) => {
         return product.id !== productId
     })
     productsCart.length ? productsCart.length : productsCart.length + 1
-    iconCountProducts.innerHTML = productsCart.length 
+    iconCountProducts.innerHTML = productsCart.length
 
     saveToLocalStorage("countProductToCart", productsCart.length)
     saveToLocalStorage("cartShopProducts", productsCart)

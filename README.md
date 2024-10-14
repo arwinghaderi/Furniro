@@ -21,7 +21,7 @@
    
    >Fully responsive on all devices(کاملا واکنش گرا در تمامی دستگاه ها)
    
-   >I tried to write the codes cleanly, refer to Uncle Bob(سعی کردم کدها را تمیز بنویسم به عمو باب مراجعه کنید)
+   >I tried to write the codes cleanly, refer to Uncle Bob(سعی کردم کدها را تمیز بنویسم مرجع  عمو باب  )
 
 
    <p align="center">

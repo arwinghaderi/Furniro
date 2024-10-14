@@ -75,7 +75,7 @@ window.addEventListener("load", () => {
 })
 
 const removeProductByUser = (productId) => {
-    let iconCountProducts = document.querySelector(".nav-bar__count-Procuct")
+    let iconCountProducts = document.querySelector(".nav-bar__count-Product")
 
     productsCart = productsCart.filter(product => {
         return product.id !== productId

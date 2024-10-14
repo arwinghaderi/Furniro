@@ -486,6 +486,11 @@
 }
 
 @media screen and (max-width:576px) {
+    *,
+    .icon {
+        cursor: none;
+    }
+
     .home__content-box {
         width: 100%;
     }

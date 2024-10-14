@@ -11,6 +11,10 @@
   
    >Dedicated system grid(گرید سیستم اختصاصی)
    
+   >Pagination and filter of exclusive and dynamic products(صفحه بندی و فیلتر محصولات اختصاصی و کاملا پویا)
+
+   >Fully dynamic and exclusive slider(اسلایدر کاملا داینامیک و اختصاصی )
+   
    >All features are fully dynamic(همه ویژگی ها کاملا پویا هستند)
    
    >The project is done in a modular way (پروژه به صورت  ماژولار انجام شده)

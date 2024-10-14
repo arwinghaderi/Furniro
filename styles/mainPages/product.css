@@ -551,7 +551,6 @@ cart-shop singel-product
 
 .detailes-product-container-img-secoun-img-main {
     display: flex;
-
     gap: 3rem;
 }
 
@@ -605,12 +604,8 @@ cart-shop singel-product
 }
 
 .wrapper-Detailes-Products {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     margin-left: 8rem;
-    gap: 3rem;
-    height: 52rem;
+    margin-bottom: 2rem;
 }
 
 .detailes-produc-Specifications__price,
@@ -618,6 +613,7 @@ cart-shop singel-product
     color: var(--gray-color);
     font-size: 2.4rem;
     font-family: "Poppins-Medium";
+    margin: 2rem 0 2rem 0;
 }
 
 .detailes-produc-Specifications__price-discount {
@@ -627,13 +623,14 @@ cart-shop singel-product
 .detailes-product__description-box {
     display: flex;
     align-items: center;
-
+    margin: 2rem 0 2rem 0;
 }
 
 .detailes-produc-Specifications__customer-review-box {
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin: 2rem 0 2rem 0;
 }
 
 .detailes-produc-Specifications__score {
@@ -734,8 +731,7 @@ cart-shop singel-product
 
 .detailes-product__color-box {
     font-family: var(--primary-font);
-
-
+    margin: 2rem 0 2rem 0;
 }
 
 .detailes-product__Color__name {
@@ -921,11 +917,21 @@ cart-shop singel-product
 
 .Supplementary-specifications {
     display: flex;
+    justify-content: end;
     font-family: var(--primary-font);
     color: var(--gray-color);
 }
 
-.Supplementary-specifications__title {}
+.wrapper-Supplementary-specifications-right {
+    flex-basis: 50%;
+}
+
+.wrapper-Supplementary-specifications-right {
+    display: flex;
+    align-items: center;
+    flex-basis: 50%;
+    margin-bottom: 7rem;
+}
 
 .Supplementary-specifications__title-box,
 .Supplementary-specifications__value-box,

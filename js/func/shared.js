@@ -3,7 +3,7 @@ import { productDiscountCalculation } from "../func/utils.js"
 let total, discountTemplate, newTemplate, discountPrice, element
 const fragment = document.createDocumentFragment();
 
-const addingProductsTemplate = (products, productsStructure ="row", productsWrapper) => {
+const addingProductsTemplate = (products, productsStructure = "row", productsWrapper) => {
     let fragment
     if (productsStructure === 'row') {
         productsWrapper.innerHTML = '';
@@ -22,6 +22,8 @@ const addingProductsTemplate = (products, productsStructure ="row", productsWrap
 const addingProductsTemplateRow = (product) => {
     element = document.createElement("div")
     element.className = `col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show `
+    element.setAttribute("data-aos", "zoom-in")
+    element.setAttribute("data-aos-delay", "400")
 
     discountTemplate = `<div class="Discount-product"><span class="Discount-product__number">${product.discountPercent}%</span></div>`
     newTemplate = ` <div class="Discount-product Discount-product--green "><span class="Discount-product__number">NEW</span></div>`
@@ -51,6 +53,9 @@ const addingProductsTemplateCol = (product) => {
 
     element = document.createElement("div")
     element.className = `col col-lg-12 product-main-box product-main-box__shop product-main-box__shop--show `
+    element.setAttribute("data-aos", "zoom-in")
+    element.setAttribute("data-aos-delay", "400")
+
     discountTemplate = `<div class="Discount-product"><span class="Discount-product__number">${product.discountPercent}%</span></div>`
     newTemplate = ` <div class="Discount-product Discount-product--green "><span class="Discount-product__number">NEW</span></div>`
     discountPrice = `</span > <span class="product-discountPrice">Rp ${product.price}</span>`

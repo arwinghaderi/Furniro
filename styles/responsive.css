@@ -82,6 +82,11 @@
         width: 70%;
         height: 70%;
     }
+
+    .wrapper-title,
+    .wrapper-link {
+        flex-wrap: wrap;
+    }
 }
 
 @media screen and (max-width:1200px) {

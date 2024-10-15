@@ -10,7 +10,7 @@
 */
 .shop,
 .cart {
-    background: url("/Furniro/images/Rectangle\ 1.png") no-repeat center;
+    background: url("../../images/Rectangle\ 1.png") no-repeat center;
     width: 100%;
     background-size: cover;
     height: 34.5rem;

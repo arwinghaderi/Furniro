@@ -73,6 +73,10 @@
         align-items: center;
     }
 
+    .services {
+        justify-content: flex-start;
+        padding: 8rem 2rem 8rem 2rem;
+    }
 }
 
 @media screen and (max-width:1200px) {
@@ -486,6 +490,7 @@
 }
 
 @media screen and (max-width:576px) {
+
     *,
     .icon {
         cursor: none;

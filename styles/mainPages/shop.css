@@ -326,6 +326,7 @@
     background-color: #FAF3EA;
     margin-top: 10rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 9rem;

@@ -77,6 +77,11 @@
         justify-content: flex-start;
         padding: 8rem 2rem 8rem 2rem;
     }
+
+    .wrapper-title-img {
+        width: 70%;
+        height: 70%;
+    }
 }
 
 @media screen and (max-width:1200px) {
@@ -602,6 +607,10 @@
 
     .slaider-content-img-arrow {
         display: none;
+    }
+
+    .wrapper-link a {
+        font-size: 2rem;
     }
 
 }

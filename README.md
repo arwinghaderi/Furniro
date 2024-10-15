@@ -51,7 +51,7 @@
  <h2 >👀 Online project Link... (لینک پروژه)</h2> 
  
 <p align="center">
- <a href="furniro-j2w5ncz25-arwinghaderis-projects.vercel.app">Check the project (پروژه را چک کنید)</a>
+ <a href="https://furniro-blue.vercel.app/">Check the project (پروژه را چک کنید)</a>
 </p>
 <img src="./Screenshot (41).png" alt="img-project">
 

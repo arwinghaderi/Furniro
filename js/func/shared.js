@@ -3,7 +3,7 @@ import { productDiscountCalculation } from "../func/utils.js"
 let total, discountTemplate, newTemplate, discountPrice, element
 const fragment = document.createDocumentFragment();
 
-const addingProductsTemplate = (products, productsStructure = "row", productsWrapper) => {
+const addingProductsTemplate = (products, productsStructure = "row", productsWrapper, pageRoute) => {
     let fragment
     if (productsStructure === 'row') {
         productsWrapper.innerHTML = '';

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniro</title>
+    <link rel="icon" href="../images/icon.logo.png">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/grid.css">
+    <link rel="stylesheet" href="../styles/font.css">
+    <link rel="stylesheet" href="../vendor/FontAwesome5/all.min.css" />
+    <link rel="stylesheet" href="../vendor/swiperSlider/swiper.css" />
+    <link rel="stylesheet" href="../vendor/aos.js/aos.css">
+    <link rel="stylesheet" href="../styles/mainPages/home.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="nav-bar">
+
+            <img class="nav-bar__logo-img" src="../images/logoNavbar.jpg" alt="Logo">
+            <ul class="list-menu">
+                <li class="list-menu__item"><a class="list-menu-item__link  list-menu-item__link--active"
+                        href="./home.html">Home</a></li>
+                <li class="list-menu__item"><a class="list-menu-item__link" href="./shop.html">Shop</a>
+                </li>
+                <li class="list-menu__item"><a class="list-menu-item__link" href="./about.html">About</a></li>
+                <li class="list-menu__item"><a class="list-menu-item__link" href="./contact.html">Contact</a></li>
+            </ul>
+
+            <div class="icon-container-option">
+                <a class="icon-container__link" href="#">
+                    <svg class="icon-container__svg" width="24" height="20" viewBox="0 0 24 20" fill="none">
+                        <path
+                            d="M21.3333 10V4.16669H23.6666V11.1667H21.3333M21.3333 15.8334H23.6666V13.5H21.3333M9.66665 11.1667C12.7816 11.1667 19 12.73 19 15.8334V19.3334H0.333313V15.8334C0.333313 12.73 6.55165 11.1667 9.66665 11.1667ZM9.66665 0.666687C10.9043 0.666687 12.0913 1.15835 12.9665 2.03352C13.8416 2.90869 14.3333 4.09568 14.3333 5.33335C14.3333 6.57103 13.8416 7.75802 12.9665 8.63319C12.0913 9.50836 10.9043 10 9.66665 10C8.42897 10 7.24198 9.50836 6.36681 8.63319C5.49164 7.75802 4.99998 6.57103 4.99998 5.33335C4.99998 4.09568 5.49164 2.90869 6.36681 2.03352C7.24198 1.15835 8.42897 0.666687 9.66665 0.666687ZM9.66665 13.3834C6.20165 13.3834 2.54998 15.0867 2.54998 15.8334V17.1167H16.7833V15.8334C16.7833 15.0867 13.1316 13.3834 9.66665 13.3834ZM9.66665 2.88335C9.01687 2.88335 8.3937 3.14148 7.93423 3.60094C7.47477 4.06041 7.21665 4.68357 7.21665 5.33335C7.21665 5.98313 7.47477 6.6063 7.93423 7.06577C8.3937 7.52523 9.01687 7.78335 9.66665 7.78335C10.3164 7.78335 10.9396 7.52523 11.3991 7.06577C11.8585 6.6063 12.1166 5.98313 12.1166 5.33335C12.1166 4.68357 11.8585 4.06041 11.3991 3.60094C10.9396 3.14148 10.3164 2.88335 9.66665 2.88335Z"
+                            fill="black" />
+                    </svg>
+                </a>
+                <a class="icon-container__link" href="./search.html">
+                    <svg class="icon-container__svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path
+                            d="M23.5 23.5L18.2663 18.257M21.1666 11.25C21.1666 13.88 20.1219 16.4024 18.2621 18.2621C16.4024 20.1219 13.88 21.1666 11.25 21.1666C8.61992 21.1666 6.09757 20.1219 4.23784 18.2621C2.3781 16.4024 1.33331 13.88 1.33331 11.25C1.33331 8.61992 2.3781 6.09757 4.23784 4.23784C6.09757 2.3781 8.61992 1.33331 11.25 1.33331C13.88 1.33331 16.4024 2.3781 18.2621 4.23784C20.1219 6.09757 21.1666 8.61992 21.1666 11.25V11.25Z"
+                            stroke="black" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </a>
+
+                <a class="icon-container__link" href="./favorite.html">
+                    <svg class="icon-container__svg" width="26" height="24" viewBox="0 0 26 24" fill="none">
+                        <path
+                            d="M7.16668 1.5C3.94551 1.5 1.33334 4.08533 1.33334 7.275C1.33334 9.84983 2.35418 15.9608 12.4027 22.1383C12.5827 22.2479 12.7893 22.3058 13 22.3058C13.2107 22.3058 13.4173 22.2479 13.5973 22.1383C23.6458 15.9608 24.6667 9.84983 24.6667 7.275C24.6667 4.08533 22.0545 1.5 18.8333 1.5C15.6122 1.5 13 5 13 5C13 5 10.3878 1.5 7.16668 1.5Z"
+                            stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+                <a class="icon-container__link" href="./cart.html">
+                    <svg class="icon-container__svg" width="26" height="23" viewBox="0 0 26 23" fill="none">
+                        <path
+                            d="M24.2355 16.1926H7.95234L8.76991 14.5273L22.3543 14.5027C22.8137 14.5027 23.2074 14.1746 23.2894 13.7207L25.1707 3.19062C25.2199 2.91445 25.1461 2.63008 24.9656 2.41406C24.8764 2.30775 24.7652 2.22211 24.6396 2.16309C24.514 2.10407 24.377 2.07308 24.2383 2.07227L6.95702 2.01484L6.80937 1.32031C6.7164 0.877344 6.31718 0.554688 5.86328 0.554688H1.63867C1.38267 0.554688 1.13716 0.656381 0.956142 0.837398C0.775125 1.01841 0.673431 1.26393 0.673431 1.51992C0.673431 1.77592 0.775125 2.02143 0.956142 2.20245C1.13716 2.38346 1.38267 2.48516 1.63867 2.48516H5.08124L5.72656 5.55312L7.31523 13.2449L5.26992 16.5836C5.1637 16.727 5.09972 16.8972 5.08523 17.075C5.07073 17.2528 5.10629 17.4312 5.18788 17.5898C5.35195 17.9152 5.68281 18.1203 6.04921 18.1203H7.7664C7.40032 18.6065 7.20258 19.1988 7.20312 19.8074C7.20312 21.3551 8.46093 22.6129 10.0086 22.6129C11.5562 22.6129 12.8141 21.3551 12.8141 19.8074C12.8141 19.1977 12.6117 18.6043 12.2508 18.1203H16.6559C16.2898 18.6065 16.092 19.1988 16.0926 19.8074C16.0926 21.3551 17.3504 22.6129 18.898 22.6129C20.4457 22.6129 21.7035 21.3551 21.7035 19.8074C21.7035 19.1977 21.5012 18.6043 21.1402 18.1203H24.2383C24.7687 18.1203 25.2035 17.6883 25.2035 17.1551C25.2019 16.8994 25.0993 16.6546 24.9179 16.4743C24.7366 16.294 24.4913 16.1927 24.2355 16.1926V16.1926ZM7.35898 3.91797L23.1035 3.96992L21.5613 12.6051L9.19374 12.627L7.35898 3.91797ZM10.0086 20.6715C9.53281 20.6715 9.14452 20.2832 9.14452 19.8074C9.14452 19.3316 9.53281 18.9434 10.0086 18.9434C10.4844 18.9434 10.8726 19.3316 10.8726 19.8074C10.8726 20.0366 10.7816 20.2564 10.6196 20.4184C10.4575 20.5805 10.2378 20.6715 10.0086 20.6715V20.6715ZM18.898 20.6715C18.4223 20.6715 18.034 20.2832 18.034 19.8074C18.034 19.3316 18.4223 18.9434 18.898 18.9434C19.3738 18.9434 19.7621 19.3316 19.7621 19.8074C19.7621 20.0366 19.6711 20.2564 19.509 20.4184C19.347 20.5805 19.1272 20.6715 18.898 20.6715V20.6715Z"
+                            fill="black" />
+                    </svg>
+                    <span class="nav-bar__count-Product " value="0">0</span>
+                </a>
+            </div>
+
+            <!-- ** mobail -->
+            <div class="contener-menu-mobail">
+                <ul class="list-menu-mobail">
+                    <li class="list-menu__item-mobail"><a class="list-menu-item__link-mobail"
+                            href="./home.html">Home</a>
+                    </li>
+                    <li class="list-menu__item-mobail"><a class="list-menu-item__link-mobail"
+                            href="./shop.html">Shop</a></li>
+                    <li class="list-menu__item-mobail"><a class="list-menu-item__link-mobail"
+                            href="./about.html">About</a>
+                    </li>
+                    <li class="list-menu__item-mobail"><a class="list-menu-item__link-mobail"
+                            href="./contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="hamburger">
+                <div class="hamburger__line"></div>
+            </div>
+        </nav>
+    </div>
+    <!--** home -->
+    <header class="home">
+        <div class="home__content-box">
+            <p class="home__heading">New Arrival</p>
+            <h1 class="home__title">Discover Our New Collection</h1>
+            <p class="home__caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
+                ullamcorper mattis.</p>
+            <div class="home__btn-box">
+                <a class="btn-link" href="./shop.html">BUY Now</a>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="range-title-box">
+            <h2 class=" title   range-title">Browse The Range</h2>
+            <p class="range-secondary-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <section class="range-container">
+
+            <div class="row">
+                <div class="col  col-xxl-4 " data-aos="fade-up" data-aos-delay="300">
+                    <img class="range-img" src="../images/Dining.jpg" alt="dining">
+                    <p class="range-description">Dining</p>
+
+                </div>
+                <div class="col  col-xxl-4 " data-aos="fade-up" data-aos-delay="300">
+                    <img class="range-img" src="../images/Image-living room.jpg" alt="living">
+                    <p class="range-description">Living</p>
+                </div>
+                <div class="col col-xxl-4 " data-aos="fade-up" data-aos-delay="300">
+                    <img class="range-img" src="../images/Bedroom.jpg" alt="bedroom">
+                    <p class="range-description">Bedroom</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <!-- **Our Products -->
+    <div class="container">
+        <section class="ourProduct">
+            <h2 class="ourProduct__title">Our Products</h2>
+            <div iv class="ourProduct__box">
+                <div class="row row-container">
+
+                </div>
+            </div>
+            <div class="box-btn-show-more">
+                <button class="show-more">Show More</button>
+                <svg class="show-more__loder" cl viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="100"
+                    height="100" style="shape-rendering: auto; display: none; background: rgb(255, 255, 255);">
+                    <g>
+                        <path stroke="none" fill="#b88e2f" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
+                            <animateTransform values="0 50 51;360 50 51" keyTimes="0;1" repeatCount="indefinite"
+                                dur="1s" type="rotate" attributeName="transform"></animateTransform>
+                        </path>
+                        <g></g>
+                    </g>
+                </svg>
+
+            </div>
+        </section>
+    </div>
+    <!-- **slaidr -->
+
+    <section class="slaisder-section">
+        <div class="slaider-contant">
+            <h4 class="slaider-contant__title">50+ Beautiful rooms inspiration</h4>
+            <p class="slaider-contant__caption">Our designer already made a lot of beautiful prototipe of rooms that
+                inspire you</p>
+            <div class="slaider-btn-box">
+                <a href="./shop.html">
+                    <button class="slaider-contant__btn">Explore More</button>
+                </a>
+            </div>
+        </div>
+        <div class="swiper mySwiper ">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="box-contant-img-slaider">
+                        <p class="box-contant-img-slaider__introduction">01___Second bedroom</p>
+                        <h5 class="box-contant-img-slaider__title">pleasant</h5>
+                    </div>
+
+                    <img id="active" class="slaider-img" src="../images/Rectangle 24.jpg">
+                </div>
+                <div class="swiper-slide">
+                    <div class="box-contant-img-slaider">
+                        <p class="box-contant-img-slaider__introduction">02___bed Room</p>
+                        <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
+                    </div>
+
+                    <img class="slaider-img " src="../images/Rectangle 25.jpg" alt="imgSlaider">
+                </div>
+                <div class="swiper-slide">
+                    <div class="box-contant-img-slaider">
+                        <p class="box-contant-img-slaider__introduction">03___work room</p>
+                        <h5 class="box-contant-img-slaider__title">cute</h5>
+                    </div>
+                    <img class="slaider-img " src="../images/Rectangle 26.jpg" alt="imgSlaider">
+                </div>
+                <div class="swiper-slide">
+                    <div class="box-contant-img-slaider">
+                        <p class="box-contant-img-slaider__introduction">04___bed Room</p>
+                        <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
+                    </div>
+                    <img class="slaider-img " src="../images/Rectangle 25.jpg" alt="imgSlaider">
+                </div>
+            </div>
+
+            <div class="autoplay-progress">
+                <svg viewBox="0 0 48 48">
+                    <circle cx="24" cy="24" r="20"></circle>
+                </svg>
+                <span></span>
+            </div>
+            <div class="swiper-button-next slaider-content-img-arrow"></div>
+            <div class="swiper-button-prev slaider-content-img-arrow"></div>
+            <div class="swiper-pagination custom-input-radio"></div>
+        </div>
+    </section>
+    <!-- ** designs-->
+    <section class="designs">
+        <div class="design-header">
+            <p class="design-header__caption">Share your setup with</p>
+            <h3 class="design-header__title">#FuniroFurniture</h3>
+        </div>
+        <div class="designs-items">
+            <div class="designs-items-row1">
+                <div class="designs-items--1-2">
+                    <div class="designs-items__item">
+                        <img class="designs__items__img" src="../images/Rectangle 36.jpg" alt="imgDesigns-1">
+                    </div>
+                    <div class="designs-items__item">
+                        <img class="designs__items__img" src="../images/Rectangle 38.jpg" alt="imgDesigns-2">
+                    </div>
+                </div>
+                <div class="designs-items--6-7">
+                    <div class="designs-items__item">
+                        <img class="designs__items__img" src="../images/Rectangle 37.jpg" alt="imgDesigns-6">
+                    </div>
+                    <div class="designs-items__item-top">
+                        <img class="designs__items__img" src="../images/Rectangle 39.jpg" alt="imgDesigns-7">
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="designs-items-row2">
+                <div class="designs-items--3">
+                    <div class="designs-items__item">
+                        <img class="designs__items__img" src="../images/Rectangle 40.jpg" alt="imgDesigns-3">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="designs-items-row3">
+                <div class="designs-items--4-5">
+                    <div class="designs-items__item ">
+                        <img class="designs__items__img" src="../images/Rectangle 40.jpg" alt="imgDesigns-4">
+                    </div>
+                    <div class="designs-items__item">
+                        <img class="designs__items__img" src="../images/Rectangle 45.jpg" alt="imgDesigns-5">
+                    </div>
+                </div>
+
+                <div class="designs-items--8-9">
+                    <div class="designs-items__item">
+                        <img class="designs__items__img" src="../images/Rectangle 41.jpg" alt="imgDesigns-8">
+                    </div>
+                    <div class="designs-items__item-top">
+                        <img class="designs__items__img" src="../images/Rectangle 44.jpg" alt="imgDesigns-9">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+    <footer class="footer">
+        <hr>
+        <div class="container">
+            <div class="footer-items">
+                <div class="items-introduction">
+                    <h5 class="item-introduction__name">Funiro.</h5>
+                    <p class="item-introduction__address">400 University Drive Suite 200 Coral <br>
+                        Gables <br>
+                        ,FL 33134 USA</p>
+                </div>
+                <div class="container-links-helps">
+                    <ul class="items-links">
+                        <p class="items-links__title">Links</p>
+                        <li class="item-links__item"><a class="item-links__link " href="./home.html">Home</a></li>
+                        <li class="item-links__item"><a class="item-links__link" href="./Pages/shop.html">Shop</a></li>
+                        <li class="item-links__item"><a class="item-links__link" href="./about.html">About</a></li>
+                        <li class="item-links__item"><a class="item-links__link" href="./contact.html">Contact</a></li>
+                    </ul>
+                    <ul class="items-helps">
+                        <p class="items-helps__title">Help</p>
+                        <li class="item-helps__item"><a class="item-helps__link" href="#">Payment Options</a></li>
+                        <li class="item-helps__item"><a class="item-helps__link" href="#">Returns</a></li>
+                        <li class="item-helps__item"><a class="item-helps__link" href="#">Privacy Policies</a></li>
+                    </ul>
+                </div>
+                <div class="items-Newsletter">
+                    <p class="items-Newsletter__title">Newsletter</p>
+                    <form class="form-newsLetter">
+                        <div class="items-Newsletter__box-input">
+                            <input class="items-Newsletter__input-email" type="email" name="" id=""
+                                placeholder="Enter Your Email Address">
+                        </div>
+                        <div class="items-Newsletter__box-button">
+                            <button class="items-Newsletter__subscribe">SUBSCRIBE</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+            <hr>
+            <div class="box-copt-right">
+                <p class="copt-right-text">2023 furino. All rights reverved</p>
+            </div>
+        </div>
+
+    </footer>
+
+
+
+
+
+    <script src="../vendor/FontAwesome5/all.min.js"></script>
+    <script src="../vendor/swiperSlider/swiper.js"></script>
+    <script src="../vendor/aos.js/aos.js"></script>
+    <script src="../js/aos.js"></script>
+    <script src="../js/slaider.js"></script>
+    <script src="../js/shared.js"></script>
+    <script src="../js/home.js" type="module"></script>
+</body>
+
+</html>

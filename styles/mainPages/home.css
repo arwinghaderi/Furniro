@@ -66,28 +66,6 @@
     RANGE
 ==============
 */
-.range-title-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 5rem;
-}
-
-
-
-.range-title {
-    font-size: 3.2rem;
-    font-family: "Poppins-Bold";
-
-}
-
-.range-secondary-title {
-    font-size: 2rem;
-    font-family: var(--primary-font);
-    color: #666666;
-}
-
 .range-img {
     width: 100%;
     object-fit: contain;

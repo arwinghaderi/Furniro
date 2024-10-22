@@ -4,11 +4,31 @@
 @import url(../Features/service.css);
 @import url(../defaults.css);
 
+
+.about-title-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+
+.about-title {
+    font-size: 3.2rem;
+    font-family: "Poppins-Bold";
+}
+
+.about-secondary-title {
+    font-size: 2rem;
+    font-family: var(--primary-font);
+    color: #666666;
+}
+
 .about-us {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10rem;
+    margin-top: 5rem;
     gap: 3rem;
 }
 

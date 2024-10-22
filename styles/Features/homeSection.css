@@ -1,13 +1,9 @@
-@import url(../Features/navBar.css);
-@import url(../defaults.css);
-
 /* 
 ===================
-  #SHOP--HoME
+  HoME section
 =================
 */
-.shop,
-.cart {
+.home-section {
     background: url("../../images/Rectangle\ 1.png") no-repeat center;
     width: 100%;
     background-size: cover;
@@ -19,26 +15,22 @@
     gap: 1rem;
 }
 
-.shop__title,
-.cart__title {
+.home-section__title {
     font-size: 4.8rem;
     font-family: "Poppins-Medium";
 }
 
-.shop-container-description,
-.cart-container-description {
+.home-section-container-description {
     display: flex;
     gap: 1rem;
     align-items: center;
     justify-content: space-between;
 }
 
-.shop-container-description__befor,
-.cart-container-description__befor {
+.home-section-container-description__befor {
     font-family: "Poppins-Medium";
 }
 
-.shop-container-description__now,
-.cart-container-description__now {
+.home-section-container-description__now {
     font-family: var(--primary-font);
 }

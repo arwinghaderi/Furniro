@@ -3,7 +3,7 @@
 @import url(../Features/products.css);
 @import url(../defaults.css);
 
-.home {
+.home-section {
     background: url("../../images/img.png")center no-repeat;
     background-size: cover;
     display: flex;
@@ -13,7 +13,6 @@
     height: 100vh;
     width: 100%;
 }
-
 
 .home__content-box {
     max-width: 58.3rem;

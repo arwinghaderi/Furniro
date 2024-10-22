@@ -401,6 +401,10 @@
     .cart-shop-section__box-total {
         margin-bottom: 15rem;
     }
+
+    .title-box--contact {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:768px) {

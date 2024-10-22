@@ -1,2 +1,13 @@
 @import url(../Features/navBar.css);
 @import url(../defaults.css);
+@import url(../Features/homeSection.css);
+
+.title-box--contact {
+    width: 58%;
+}
+
+.wrapper-title-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

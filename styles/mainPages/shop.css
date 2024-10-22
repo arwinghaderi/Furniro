@@ -2,6 +2,7 @@
 @import url(../Features/footer.css);
 @import url(../Features/products.css);
 @import url(../Features/homeSection.css);
+@import url(../Features/service.css);
 @import url(../defaults.css);
 
 /* 
@@ -275,56 +276,6 @@
 .product__img-col {
     height: 100%;
 }
-
-/* ================
-      services
-================ */
-
-.services {
-    width: 100%;
-    background-color: #FAF3EA;
-    margin-top: 10rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 5rem;
-    padding: 8rem 5rem 8rem 5rem;
-}
-
-.service {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-
-
-.service__box-description {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    padding-left: 1rem;
-}
-
-.service__title {
-    font-size: 2.5rem;
-    font-family: "Poppins-SemiBold";
-    color: #242424;
-}
-
-.service__caption {
-    color: #898989;
-    font-size: 2rem;
-    font-family: "Poppins-Medium";
-}
-
-/* ================
-      footer
-================ */
-
 
 .footer-Shop {
     margin-bottom: 2rem;

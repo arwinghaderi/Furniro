@@ -1,5 +1,7 @@
 @import url(../Features/navBar.css);
 @import url(../Features/homeSection.css);
+@import url(../Features/footer.css);
+@import url(../Features/service.css);
 @import url(../defaults.css);
 
 .about-us {
@@ -9,9 +11,6 @@
     margin-top: 10rem;
     gap: 3rem;
 }
-
-.about-us__img-box,
-.about-us__description-box {}
 
 .about-us__description-box {
     background-color: #f9f1e7;

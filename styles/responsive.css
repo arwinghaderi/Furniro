@@ -401,6 +401,10 @@
     .cart-shop-section__box-total {
         margin-bottom: 15rem;
     }
+
+    .title-box--contact {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:768px) {
@@ -510,6 +514,10 @@
 @media screen and (max-width:576px) {
     .home__content-box {
         width: 100%;
+    }
+
+    .home-section {
+        padding: 0;
     }
 
     .home {

@@ -191,9 +191,34 @@
         width: 120%;
     }
 
+    .contact-us,
+    .form-contact-us {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
+    }
 
+    .form-contact-us,
+    .Specifications-contact {
+        margin-top: 3rem;
+        width: 100%;
+    }
 
+    .Specifications-contact__box,
+    .form-contact-us__input-box,
+    .Specifications-contact {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Specifications-contact__description {
+        padding: 1rem;
+    }
 }
 
 @media screen and (max-width:992px) {

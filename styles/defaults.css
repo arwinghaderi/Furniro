@@ -37,6 +37,15 @@ a {
     height: 1.4rem;
 }
 
+.menu-icon {
+    color: var(--dark-color);
+    font-size: 2.25rem;
+}
+
+.menu-icon--active {
+    color: var(--Primary-color);
+}
+
 .alert {
     color: var(--white-color);
     font-size: 2.5rem;
@@ -46,6 +55,7 @@ a {
     align-items: center;
     justify-content: center;
     margin: 3rem;
+    border-radius: 1rem;
 }
 
 .row-container .alert {

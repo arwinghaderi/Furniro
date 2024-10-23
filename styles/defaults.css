@@ -53,3 +53,24 @@ a {
     align-items: center;
     justify-content: center;
 }
+
+.title-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+
+.title {
+    font-size: 3.2rem;
+    text-align: center;
+    font-family: "Poppins-Bold";
+}
+
+.secondary-title {
+    font-size: 2rem;
+    text-align: center;
+    font-family: var(--primary-font);
+    color: #666666;
+}

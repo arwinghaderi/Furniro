@@ -1,6 +1,8 @@
 @import url(../Features/navBar.css);
-@import url(../defaults.css);
 @import url(../Features/homeSection.css);
+@import url(../Features/service.css);
+@import url(../Features/footer.css);
+@import url(../defaults.css);
 
 .title-box--contact {
     width: 58%;
@@ -85,7 +87,7 @@
 }
 
 .form-contact-us__Message {
-    resize: vertical;
+    resize: none;
     padding: 3rem;
 }
 

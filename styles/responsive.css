@@ -35,7 +35,7 @@
     }
 
     .detailes-product__description-box {
-        padding: 0 1rem 0 1rem ;
+        padding: 0;
     }
 
     .detailes-product__size-box,
@@ -517,7 +517,7 @@
     }
 
     .home-section {
-        padding: 0;
+        padding: 0 1rem 0 1rem;
     }
 
     .home {

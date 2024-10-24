@@ -1,6 +1,7 @@
 @import url(../Features/navBar.css);
 @import url(../defaults.css);
 @import url(../Features/homeSection.css);
+@import url(../Features/footer.css);
 
 .search-section {
     background-color: #F9F1E7;

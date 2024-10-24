@@ -56,6 +56,8 @@ a {
     justify-content: center;
     margin: 3rem;
     border-radius: 1rem;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 .row-container .alert {

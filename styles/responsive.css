@@ -677,4 +677,12 @@
     .product-price {
         font-size: 1.6rem;
     }
+
+    .auth-title {
+        font-size: 2.5rem;
+    }
+
+    .auth-wrapper {
+        padding: 1rem;
+    }
 }

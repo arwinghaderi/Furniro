@@ -11,7 +11,7 @@ body {
     height: 100vh;
 }
 
-.wrapper {
+.auth-wrapper {
     max-width: 39rem;
     overflow: hidden;
     background: #fff;
@@ -24,7 +24,7 @@ body {
     width: 200%;
 }
 
-.title {
+.auth-title {
     font-size: 3.5rem;
     font-family: "Poppins-SemiBold";
     width: 50%;
@@ -123,6 +123,7 @@ body {
     width: 100%;
     height: 5rem;
 }
+
 .btn {
     width: 100%;
     height: 100%;

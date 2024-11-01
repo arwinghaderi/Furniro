@@ -17,7 +17,6 @@ btnsAuth.forEach((btn) => {
 })
 
 const togglingAuthPage = (authData) => {
-    console.log(authData);
     if (authData === "signIn") {
         formSignIn.style.marginLeft = "0"
         signInTitle.style.marginLeft = "0"

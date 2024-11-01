@@ -1,0 +1,165 @@
+@import url(../defaults.css);
+
+body {
+    background-color: #FAF3EA;
+}
+
+.auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.auth-wrapper {
+    max-width: 39rem;
+    overflow: hidden;
+    background: #fff;
+    padding: 3rem;
+    border-radius: 1rem;
+}
+
+.form-title {
+    display: flex;
+    width: 200%;
+}
+
+.auth-title {
+    font-size: 3.5rem;
+    font-family: "Poppins-SemiBold";
+    width: 50%;
+    text-align: center;
+}
+
+.signIn-title {
+    margin-left: 0%;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-container {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.form-slide-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 5rem;
+    border: lightgrey 0.025rem solid;
+    font-family: "Poppins-Regular";
+    border-radius: 1rem;
+    font-size: 1.8rem;
+    gap: 3rem;
+}
+
+.btn-signIn,
+.btn-signUp {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn-signIn--active {
+    background-color: var(--Primary-color);
+    width: 50%;
+    border-radius: 1rem;
+    color: #fff;
+}
+
+.form-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    width: 200%;
+}
+
+.form-signIn {
+    margin-left: 0%;
+}
+
+.form-signIn,
+.form-signUp {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.input-box {
+    border: 1px solid lightgrey;
+    border-bottom-width: 2px;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input {
+    outline: none;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    font-family: "Poppins-Regular";
+    transition: all 0.3s ease;
+}
+
+.input-box:focus-within {
+    border-color: var(--Primary-color);
+}
+
+::placeholder {
+    color: #999;
+}
+
+#input-password-icon {
+    color: #999;
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.input-box {
+    color: var(--Primary-color);
+}
+
+.input-box:focus-within #input-password-icon {
+    color: var(--Primary-color);
+}
+
+.input:focus::placeholder {
+    color: var(--Primary-color);
+}
+
+.btn-box {
+    width: 100%;
+    height: 5rem;
+}
+
+.btn {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: var(--Primary-color);
+    border-radius: 1rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.signup-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

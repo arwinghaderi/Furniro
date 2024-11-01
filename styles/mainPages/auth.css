@@ -93,26 +93,48 @@ body {
     transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+.input-box {
+    border: 1px solid lightgrey;
+    border-bottom-width: 2px;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .input {
     outline: none;
     width: 100%;
     height: 100%;
-    border: 1px solid lightgrey;
     background: transparent;
-    border-bottom-width: 2px;
-    border-radius: 1rem;
-    padding: 1rem;
+    border: none;
     font-size: 1.8rem;
     font-family: "Poppins-Regular";
     transition: all 0.3s ease;
 }
 
-.input:focus {
+.input-box:focus-within {
     border-color: var(--Primary-color);
 }
 
 ::placeholder {
     color: #999;
+}
+
+#input-password-icon {
+    color: #999;
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.input-box {
+    color: var(--Primary-color);
+}
+
+.input-box:focus-within #input-password-icon {
+    color: var(--Primary-color);
 }
 
 .input:focus::placeholder {

@@ -14,3 +14,4 @@ menuLink.forEach(function (menuLink) {
         menuLink.classList.add("list-menu-item__link--active")
     })
 })
+

@@ -1,0 +1,36 @@
+/* 
+===================
+  HoME section
+=================
+*/
+.home-section {
+    background: url("../../images/Rectangle\ 1.png") no-repeat center;
+    width: 100%;
+    background-size: cover;
+    height: 34.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.home-section__title {
+    font-size: 4.8rem;
+    font-family: "Poppins-Medium";
+}
+
+.home-section-container-description {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.home-section-container-description__befor {
+    font-family: "Poppins-Medium";
+}
+
+.home-section-container-description__now {
+    font-family: var(--primary-font);
+}

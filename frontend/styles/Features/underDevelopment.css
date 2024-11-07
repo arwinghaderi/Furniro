@@ -1,0 +1,29 @@
+@import url(../defaults.css);
+
+/* body {
+    padding: 5rem;
+} */
+
+.wrapper-title,
+.wrapper-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+}
+
+.wrapper-title__box-text {
+    width: 100%;
+    background-color: var(--Primary-color);
+    padding: 2rem;
+    border-radius: 5rem;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.wrapper-link a {
+    margin-top: 3rem;
+    font-size: 3rem;
+    color: rgb(255, 255, 255);
+}

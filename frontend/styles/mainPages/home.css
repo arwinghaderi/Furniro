@@ -1,0 +1,392 @@
+@import url(../Features/navBar.css);
+@import url(../Features/footer.css);
+@import url(../Features/products.css);
+@import url(../defaults.css);
+
+.home-section {
+    background: url("../../images/img.png")center no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 0 5rem 0 5rem;
+    height: 100vh;
+    width: 100%;
+}
+
+.home__content-box {
+    max-width: 58.3rem;
+    max-height: 44.3rem;
+    background-color: rgb(255, 244, 229, 100%);
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0rem 0.4rem 0.4rem rgb(0, 0, 0, 25%);
+
+}
+
+.home__heading {
+    font-family: "Poppins-SemiBold";
+    margin-top: 4rem;
+
+}
+
+.home__title {
+    font-family: "Poppins-Bold";
+    font-size: 4.2rem;
+    color: var(--Primary-color);
+    padding-right: 18rem;
+}
+
+.home__caption {
+
+    font-family: "Poppins-Medium";
+    font-size: 1.8rem;
+}
+
+.home__btn-box {
+    max-width: 20.2rem;
+    height: 7rem;
+    background-color: var(--Primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+    box-shadow: 0rem 0.4rem 0.4rem rgb(0, 0, 0, 25%);
+
+}
+
+.btn-link {
+    color: #ffff;
+    font-family: "Poppins-Bold";
+}
+/* 
+============== 
+    RANGE
+==============
+*/
+.range-img {
+    width: 100%;
+    object-fit: contain;
+
+}
+
+.range-description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    font-family: "Poppins-SemiBold";
+    margin-top: 2rem;
+}
+
+/* 
+============== 
+   btn-show-more
+==============
+*/
+
+
+.box-btn-show-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.show-more {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border: 0.1rem solid var(--Primary-color);
+    width: 24.8rem;
+    height: 4.8rem;
+    color: var(--Primary-color);
+    font-family: "Poppins-Bold";
+    cursor: pointer;
+}
+
+.show-more__loder {
+    display: none;
+}
+
+/* 
+===================
+slaisder-section
+=================
+*/
+
+.slaisder-section {
+    width: 100%;
+    height: 62rem;
+    margin-top: 10rem;
+    padding: 5rem 0 5rem 5rem;
+    background-color: var(--secondary-color);
+    display: flex;
+    gap: 10rem;
+}
+
+.slaider-contant {
+    flex-basis: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.slaider-contant__title {
+    font-family: "Poppins-Bold";
+    font-size: 4rem;
+}
+
+.slaider-btn-box {
+    width: 17.6rem;
+    height: 4.8rem;
+    background-color: var(--Primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slaider-contant__btn {
+    color: #ffff;
+    font-family: "Poppins-SemiBold";
+    outline: none;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.slaider-conatiner {
+    flex-basis: 65%;
+    position: relative;
+}
+
+.swiper-wrapper {
+    display: flex;
+    scroll-behavior: smooth;
+    user-select: none;
+}
+
+.slaider-img {
+    width: 100%;
+    height: 45.6rem;
+    margin-right: 10rem;
+    position: relative;
+    filter: blur(0.3rem);
+    transition: all 0.5s ease-in;
+}
+
+.swiper-slide-active .slaider-img {
+    width: 100%;
+    height: 52.6rem;
+    object-fit: fill;
+    filter: blur(0);
+    position: relative;
+}
+
+.swiper-slide-active .box-contant-img-slaider {
+    opacity: 1;
+    transition: all ease-in-out 0.8s;
+}
+
+.box-contant-img-slaider {
+    opacity: 0;
+}
+
+.box-contant-img-slaider {
+    width: 20rem;
+    height: 10rem;
+    padding: 4rem 2rem;
+    background-color: rgb(255, 255, 255, 72%);
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    bottom: 5%;
+    z-index: 100;
+
+}
+
+.box-contant-img-slaider__introduction {
+    color: #616161;
+}
+
+.box-contant-img-slaider__title {
+    font-size: 2.8rem;
+    font-family: "Poppins-SemiBold";
+}
+
+.slaider-content-img-arrow {
+    width: 4.8rem;
+    height: 4.8rem;
+    background-color: var(--white-color);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--Primary-color);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 2rem;
+}
+
+.custom-input-radio {
+    width: 2.7rem;
+    height: 2.7rem;
+    border: 0.2rem solid transparent;
+    border-radius: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiper-pagination-bullet {
+    width: 2rem;
+    height: 2rem;
+    background-color: #D8D8D8;
+    border-radius: 100%;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    width: 3rem;
+    height: 3rem;
+    border: 0.2rem solid var(--Primary-color);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet::before {
+    content: "";
+    width: 2.7rem;
+    height: 2.7rem;
+    border: 0.2rem solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    cursor: pointer;
+
+}
+
+.swiper-pagination-bullet-active::before {
+    content: "";
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--Primary-color);
+    border-radius: 100%;
+}
+
+.autoplay-progress {
+    position: absolute;
+    right: 5.5rem;
+    bottom: 0px;
+    z-index: 10;
+    width: 4.8rem;
+    height: 4.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--Primary-color);
+}
+
+.autoplay-progress svg {
+    --progress: 0;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    stroke-width: 4px;
+    stroke: var(--Primary-color);
+    fill: none;
+    stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+    stroke-dasharray: 125.6;
+    transform: rotate(-90deg);
+}
+
+/* 
+===================
+    Designs
+=================
+*/
+
+.designs {
+    margin-top: 8rem;
+
+
+}
+
+.design-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.design-header__caption {
+    color: #616161;
+    font-size: 2rem;
+    font-family: "Poppins-SemiBold";
+}
+
+.design-header__title {
+    color: var(--text-Secondary-color);
+    font-size: 4rem;
+    font-family: "Poppins-Bold";
+}
+
+.designs-items {
+    display: flex;
+    justify-content: space-between;
+}
+
+.designs-items-row1,
+.designs-items-row3 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.designs-items-row2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+
+.designs-items__item {
+    display: flex;
+    align-items: end;
+}
+
+.designs-items--1-2,
+.designs-items--3,
+.designs-items--4-5,
+.designs-items--6-7,
+.designs-items--8-9 {
+    display: flex;
+    gap: 1rem;
+}
+
+
+
+
+.designs__items__img {
+    width: 100%;
+
+    object-fit: cover;
+}

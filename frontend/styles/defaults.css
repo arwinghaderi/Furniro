@@ -1,0 +1,88 @@
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+:root {
+    --text-color: #333333;
+    --text-Secondary-color: #3A3A3A;
+    --Primary-color: #B88E2F;
+    --secondary-color: #FAF3EA;
+    --dark-color: #000000;
+    --gray-color: #9F9F9F;
+    --white-color: #FFFFFF;
+    --primary-font: "Poppins-Regular";
+}
+
+*::after,
+*::before {
+    box-sizing: inherit;
+    font-family: var(--primary-font);
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    font-family: "Poppins-Medium";
+    color: var(--text-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+.icon {
+    color: var(--white-color);
+    width: 1.4rem;
+    height: 1.4rem;
+}
+
+.menu-icon {
+    color: var(--dark-color);
+    font-size: 2.25rem;
+}
+
+.menu-icon--active {
+    color: var(--Primary-color);
+}
+
+.alert {
+    color: var(--white-color);
+    font-size: 2.5rem;
+    background-color: #ff0000;
+    font-family: var(--primary-font);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem;
+    border-radius: 1rem;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.row-container .alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+
+.title {
+    font-size: 3.2rem;
+    text-align: center;
+    font-family: "Poppins-Bold";
+}
+
+.secondary-title {
+    font-size: 2rem;
+    text-align: center;
+    font-family: var(--primary-font);
+    color: #666666;
+}

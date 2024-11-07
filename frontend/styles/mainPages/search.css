@@ -1,0 +1,45 @@
+@import url(../Features/navBar.css);
+@import url(../defaults.css);
+@import url(../Features/homeSection.css);
+@import url(../Features/footer.css);
+
+.search-section {
+    background-color: #F9F1E7;
+    padding: 3rem 0 3rem 0;
+    height: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-box {
+    width: 70%;
+    height: 7rem;
+    background-color: rgb(184, 143, 47, 90%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+
+.input-search {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: var(--white-color);
+    width: 100%;
+    height: 100%;
+    font-size: 2rem;
+}
+
+::placeholder,
+.icon-search {
+    color: var(--white-color);
+    font-size: 2rem;
+}
+
+.icon-not-equal {
+    color: var(--white-color);
+    font-size: 10rem;
+}

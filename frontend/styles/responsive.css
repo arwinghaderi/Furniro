@@ -93,6 +93,10 @@
         align-items: center;
         justify-content: center;
     }
+
+    .full-name-input-box {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:1200px) {
@@ -218,6 +222,38 @@
 
     .Specifications-contact__description {
         padding: 1rem;
+    }
+
+    .billing-details {
+        flex-direction: column;
+    }
+
+    .billing-details {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .checkOut-details {
+        margin-top: 4rem;
+    }
+
+    .payment-method {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .checkOut-description {
+        text-align: center;
+    }
+
+    .receiver-information,
+    .checkOut {
+        width: 100%;
+        padding: 0;
+    }
+
+    .title-billing-details {
+        text-align: center;
     }
 }
 
@@ -652,6 +688,12 @@
     .wrapper-link a {
         font-size: 2rem;
     }
+
+    .total-price {
+        font-size: 1.6rem;
+    }
+
+
 
 }
 

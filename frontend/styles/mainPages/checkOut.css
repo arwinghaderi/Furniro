@@ -1,6 +1,7 @@
 @import url(../Features/navBar.css);
 @import url(../Features/homeSection.css);
 @import url(../Features/service.css);
+@import url(../Features/footer.css);
 @import url(../defaults.css);
 
 .billing-details {
@@ -8,9 +9,6 @@
     display: flex;
     margin-top: 10rem;
 }
-
-.parent-billing-details {}
-
 .title-billing-details {
     font-size: 3.6rem;
     font-family: "Poppins-SemiBold";
@@ -90,8 +88,6 @@
     gap: 2rem;
 }
 
-.checkOut-details__title {}
-
 .Product-name-quantity {
     color: var(--gray-color);
 }
@@ -112,16 +108,11 @@
     font-family: "Poppins-Regular";
 }
 
-.products-price-total {}
-
 .total-price {
     font-size: 2.4rem;
     font-family: "Poppins-Bold";
     color: var(--Primary-color);
 }
-
-
-.wrapper-checkbox {}
 
 .input-radio-label {
     color: var(--gray-color);

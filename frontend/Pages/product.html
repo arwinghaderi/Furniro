@@ -12,6 +12,38 @@
     <link rel="stylesheet" href="../vendor/FontAwesome5/all.min.css">
     <link rel="stylesheet" href="../styles/mainPages/product.css">
     <link rel="stylesheet" href="../styles/responsive.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+    
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+    
+        th {
+            background-color: #f2f2f2;
+        }
+    
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    
+        tbody tr td:first-child {
+            font-weight: bold;
+            width: 30%;
+        }
+    </style>
 </head>
 
 <body>
@@ -146,7 +178,7 @@
         <hr class="Supplementary-specifications__line">
 
 
-        <div class="Supplementary-specifications">
+        <section class="Supplementary-specifications">
 
 
             <div class="wrapper-Supplementary-specifications-left">
@@ -179,28 +211,68 @@
                     </div>
                 </div>
             </div>
+        </section>
+    </div>
 
+<!-- **product-infomation -->
+    <div class="container">
+        <section class="product-infomation">
+            <ul class="product-infomation-menu">
+                <li class="product-infomation-menu__item">Description</li>
+                <li class="product-infomation-menu__item">Additional Information</li>
+            </ul>
+            <div class="product-description-box">
+                <p class="product-description">Embodying the raw, wayward spirit of rock ‘n’ roll, the Kilburn portable active stereo speaker takes the unmistakable
+                look and sound of Marshall, unplugs the chords, and takes the show on the road.</p>
+                <p class="product-description">Weighing in under 7 pounds, the Kilburn is a lightweight piece of vintage styled engineering. Setting the bar as one of
+                the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts
+                a clear midrange and extended highs for a sound that is both articulate and pronounced. The analogue knobs allow you to
+                fine tune the controls to your personal preferences while the guitar-influenced leather strap enables easy and stylish
+                travel.</p>
+            </div>
+            <div class="additional-information">
+                <table class="additional-information__table">
+                    <thead class="additional-information__head" >
+                        <tr class="column-head">
+                            <th class="column-head__content">ویژگی</th>
+                            <th class="column-head__content">مقدار</th>
+                        </tr>
+                    </thead>
+                    <tbody class="additional-information__body">
+                        <tr class="column-body">
+                            <td class="column-body__content">لپ‌تاپ ایسوس</td>
+                            <td class="column-body__content">نام محصول</td>
+                        </tr>
+                        <tr class="column-body">
+                            <td class="column-body__content">قیمت</td>
+                            <td class="column-body__content">۳۰ میلیون</td>
+                        </tr>
+                        <tr class="column-body">
+                            <td class="column-body__content">توضیحات</td>
+                            <td class="column-body__content">لپ‌تاپ قدرتمند با پردازنده i7</td>
+                        </tr>
+            </div>
 
+            <div class="product-img-section">
+                <div class="product-img-box">
+                    <img class="product-img" src="../images/Asgaard sofa 3.png" alt="">
+                </div>
+                <div class="product-img-box">
+                    <img class="product-img" src="../images/Asgaard sofa 3.png" alt="">
+                </div>
+            </div>
 
-
-        </div>
+        </section>
     </div>
 
 
 
-    </div>
-    <div class="wrapper"></div>
-    <script type="module" src="../js/singleProduct.js"></script>
-    <script src="../vendor/FontAwesome5/all.min.js"></script>
-    <script src="../js/shared.js" type="module"></script>
 
 </body>
-
-
-
-
-
-
-
+</div>
+<div class="wrapper"></div>
+<script type="module" src="../js/singleProduct.js"></script>
+<script src="../vendor/FontAwesome5/all.min.js"></script>
+<script src="../js/shared.js" type="module"></script>
 
 </html>

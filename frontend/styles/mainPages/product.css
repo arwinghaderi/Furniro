@@ -641,18 +641,120 @@ cart-shop singel-product
     padding-left: 1rem;
 }
 
-.product-infomation {}
-.product-infomation-menu{
-}
-.product-infomation-menu__item{}
-.product-description-box{}
-.product-description{}
-.additional-information{}
-.additional-information__head{}
-.column-head{}
-.column-head__content{}
-.additional-information__body{}
-.column-body{}
-.column-body__content{
+/* **product-infomation  */
 
+.product-infomation {
+    border-top: 0.1rem solid;
+}
+
+.product-infomation-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    margin-top: 6rem;
+}
+
+.product-infomation-menu__item {
+    cursor: pointer;
+    color: var(--gray-color);
+    font-family: "Poppins-Regular";
+    font-size: 2.4rem;
+}
+
+.product-infomation-menu__item--active {
+    color: #000000;
+}
+
+.product-description-box {
+    margin-top: 5rem;
+}
+
+.product-description {
+    color: var(--gray-color);
+}
+
+.additional-information {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-description-sub {
+    margin-top: 3rem;
+}
+
+.additional-information__table {
+    width: 80%;
+    border-collapse: collapse;
+    font-size: 18px;
+    text-align: left;
+}
+
+.column-head:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.column-head:hover {
+    background-color: #f1f1f1;
+}
+
+.additional-information__body {
+    font-weight: bold;
+    width: 30%;
+}
+
+.column-body__content,
+.column-head__content {
+    padding: 2.5rem 5rem;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.column-head__content {
+
+    background-color: #f2f2f2;
+}
+
+.information-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.content--active {
+    width: 80%;
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+.product-img-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
+.product-img-box {
+    width: 60%;
+    background-color: #FAF3EA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    margin-top: 5rem;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
 }

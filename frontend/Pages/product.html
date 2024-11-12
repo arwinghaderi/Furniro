@@ -184,14 +184,15 @@
     </div>
     <!-- **product-infomation -->
     <section class="product-infomation">
-    <div class="container">
+        <div class="container">
             <ul class="product-infomation-menu">
-                <li class="product-infomation-menu__item product-infomation-menu__item--active">Description</li>
-                <li class="product-infomation-menu__item">Additional Information</li>
+                <li data-set="#description" class="product-infomation-menu__item product-infomation-menu__item--active">
+                    Description</li>
+                <li data-set="#Information" class="product-infomation-menu__item">Additional Information</li>
             </ul>
 
-            <div class="information-content">
-                <div class="content product-description-box">
+            <div class="information-content ">
+                <div class="content content--active  product-description-box" id="description">
                     <p class="product-description">Embodying the raw, wayward spirit of rock ‘n’ roll, the Kilburn
                         portable
                         active stereo speaker takes the unmistakable
@@ -211,7 +212,7 @@
                         travel.</p>
                 </div>
 
-                <div class="content content--active  additional-information">
+                <div class="content  additional-information" id="Information">
                     <table class="additional-information__table">
                         <thead class="additional-information__head">
                             <tr class="column-head">
@@ -245,7 +246,7 @@
                 </div>
             </div>
 
-        </section>
+    </section>
     </div>
 
 

@@ -660,6 +660,7 @@ cart-shop singel-product
     color: var(--gray-color);
     font-family: "Poppins-Regular";
     font-size: 2.4rem;
+    transition: all 1000ms ease-in-out;
 }
 
 .product-infomation-menu__item--active {
@@ -718,6 +719,7 @@ cart-shop singel-product
 
 .information-content {
     width: 100%;
+    height: 33rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -728,6 +730,7 @@ cart-shop singel-product
     height: 0;
     opacity: 0;
     visibility: hidden;
+    transition: opacity 500ms ease-in-out;
 }
 
 .content--active {

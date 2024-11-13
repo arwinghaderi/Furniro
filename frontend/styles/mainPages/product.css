@@ -280,7 +280,6 @@ cart-shop singel-product
 
 .wrapper-Detailes-Products {
     margin-left: 8rem;
-    margin-bottom: 2rem;
 }
 
 .detailes-produc-Specifications__price,
@@ -586,6 +585,7 @@ cart-shop singel-product
     justify-content: end;
     font-family: var(--primary-font);
     color: var(--gray-color);
+    margin-top: 5rem;
 }
 
 .wrapper-Supplementary-specifications-right {
@@ -643,6 +643,7 @@ cart-shop singel-product
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     gap: 5rem;
     margin-top: 6rem;
 }
@@ -682,6 +683,7 @@ cart-shop singel-product
     border-collapse: collapse;
     font-size: 18px;
     text-align: left;
+    font-family: "Poppins-Regular";
 }
 
 .column-head:nth-child(even) {
@@ -693,7 +695,6 @@ cart-shop singel-product
 }
 
 .additional-information__body {
-    font-weight: bold;
     width: 30%;
 }
 

@@ -1,9 +1,8 @@
-.ourProduct {
-    margin-top: 10rem;
-
+.products-section{
+    margin-top: 8rem;
 }
 
-.ourProduct__title {
+.product__title {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,7 +15,6 @@
     background-color: #F4F5F7;
     position: relative;
 }
-
 
 .product__img {
     width: 100%;
@@ -91,7 +89,6 @@
     justify-content: center;
 }
 
-
 .Discount-product--green {
     background-color: #2EC1AC;
 }
@@ -114,7 +111,6 @@
     color: #898989;
     margin: 1rem 0rem 1rem 0rem;
 }
-
 
 .product-price-box {
     display: flex;
@@ -144,4 +140,32 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* 
+============== 
+   btn-show-more
+==============
+*/
+.box-btn-show-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.show-more {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border: 0.1rem solid var(--Primary-color);
+    width: 24.8rem;
+    height: 4.8rem;
+    color: var(--Primary-color);
+    font-family: "Poppins-Bold";
+    cursor: pointer;
+}
+
+.show-more__loder {
+    display: none;
 }

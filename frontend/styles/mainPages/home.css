@@ -80,36 +80,6 @@
 }
 
 /* 
-============== 
-   btn-show-more
-==============
-*/
-
-
-.box-btn-show-more {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
-}
-
-.show-more {
-    outline: none;
-    background-color: transparent;
-    border: none;
-    border: 0.1rem solid var(--Primary-color);
-    width: 24.8rem;
-    height: 4.8rem;
-    color: var(--Primary-color);
-    font-family: "Poppins-Bold";
-    cursor: pointer;
-}
-
-.show-more__loder {
-    display: none;
-}
-
-/* 
 ===================
 slaisder-section
 =================

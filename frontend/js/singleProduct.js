@@ -5,6 +5,23 @@ const $ = document
 const urlParamsId = getUrlParam("id")
 let total
 let productsCart = []
+let informationMenuItems = document.querySelectorAll(".product-infomation-menu__item")
+
+informationMenuItems.forEach(infomationMenuItem => {
+    infomationMenuItem.addEventListener("click", (event) => {
+        document.querySelector(".product-infomation-menu__item--active").classList.remove("product-infomation-menu__item--active")
+        infomationMenuItem.classList.add("product-infomation-menu__item--active")
+
+        swapContent(event.target.dataset.set)
+    })
+})
+
+const swapContent = (dataSetcontent) => {
+    const content = document.querySelector(dataSetcontent)
+
+    document.querySelector(".content--active").classList.remove('content--active')
+    content.classList.add('content--active')
+}
 
 const productSelectionByUser = products.find(product => { return product.id === +urlParamsId })
 

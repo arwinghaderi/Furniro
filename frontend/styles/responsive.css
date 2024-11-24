@@ -97,6 +97,10 @@
     .full-name-input-box {
         width: 100%;
     }
+
+    .product-price-box {
+        gap: 1rem;
+    }
 }
 
 @media screen and (max-width:1200px) {

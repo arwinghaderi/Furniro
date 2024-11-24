@@ -75,6 +75,7 @@
 
     .services {
         justify-content: center;
+        flex-wrap: wrap;
         padding: 8rem 2rem 8rem 2rem;
     }
 

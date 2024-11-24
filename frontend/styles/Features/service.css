@@ -12,16 +12,14 @@
 
 .service {
     display: flex;
-    justify-content: center;
     align-items: center;
-
+    width: 35rem;
 }
 
 .service__box-description {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     padding-left: 1rem;
 }
 

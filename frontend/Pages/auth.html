@@ -36,6 +36,9 @@
                             <div class="input-box">
                                 <input type="email" class="input signIn-Email" placeholder="Email Address">
                             </div>
+                            <span class="Email-validation-Valid">Valid Email Address</span>
+                            <span class="Email-validation-invalid">Invalid Email Address</span>
+
                             <div class="input-box">
                                 <input type="password" class="input signIn-password" id="password"
                                     placeholder="Password">
@@ -43,12 +46,14 @@
                                     <i class="fas fa-eye" id="input-password-icon"></i>
                                 </div>
                             </div>
+                            <span class="password-validation-Valid">Valid password Address</span>
+                            <span class="password-validation-invalid">Invalid password Address</span>
                             <div>
                                 <a class="forgot-password" href="../Pages/forgotStop1.html">Forgot password?</a>
                             </div>
 
                             <div class="btn-box btn-signIn-box">
-                                <button class="btn-signIn btn">signIn</button>
+                                <button class="btn-signIn-register btn">signIn</button>
                             </div>
                             <div class="signup-link">Not a member? <a href="#" class="signup-now">Signup now</a></div>
                         </form>
@@ -56,6 +61,8 @@
                             <div class="input-box">
                                 <input type="email" class="input signUp-Email" placeholder="Email Address">
                             </div>
+                            <span class="Email-validation-Valid">Valid Email Address</span>
+                            <span class="Email-validation-invalid">Invalid Email Address</span>
                             <div class="input-box">
                                 <input type="password" class="input signUp-password" id="password"
                                     placeholder=" Password">
@@ -63,6 +70,17 @@
                                     <i class="fas fa-eye" id="input-password-icon"></i>
                                 </div>
                             </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" id="passwordProgressBar">75%</div>
+                            </div>
+                            <ul class="rules">
+                                <li id="length" class="invalid">Be at least 8 characters long</li>
+                                <li id="uppercase" class="invalid">Contain at least one uppercase letter</li>
+                                <li id="lowercase" class="invalid">Contain at least one lowercase letter</li>
+                                <li id="number" class="invalid">Contain at least one number</li>
+                                <li id="special" class="invalid">Contain at least one special character (!, @, #, $,
+                                    etc.)</li>
+                            </ul>
                             <div class="input-box">
                                 <input type="password" class="input signUp-confirm" id="password"
                                     placeholder="Confirm password">
@@ -70,6 +88,8 @@
                                     <i class="fas fa-eye" id="input-password-icon"></i>
                                 </div>
                             </div>
+                            <span class="password-validation-Valid">Valid password Address</span>
+                            <span class="password-validation-invalid">Invalid password Address</span>
                             <div class="btn-box btn-signUp-box">
                                 <button class="btn-signUp btn">signUp</button>
                             </div>
@@ -83,7 +103,7 @@
 
 
 <script src="../vendor/FontAwesome5/all.min.js"></script>
-<script src="../js/auth.js"></script>
+<script src="../js/auth/auth.js"></script>
 <script src="../js/funcAuth.js"></script>
 
 

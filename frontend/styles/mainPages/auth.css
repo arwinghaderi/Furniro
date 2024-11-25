@@ -163,3 +163,48 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+
+.Email-validation-Valid,
+.password-validation-Valid {
+    color: green;
+    display: none;
+}
+
+.Email-validation-invalid,
+.password-validation-invalid {
+    color: red;
+    display: none;
+}
+
+
+.progress-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 25px;
+}
+
+.progress-container:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-bar {
+    width: 75%;
+    height: 20px;
+    background-color: #4caf50;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+}
+
+.rules {
+    padding: 0;
+    display: none;
+}
+
+.rules li {
+    margin: 5px 0;
+}

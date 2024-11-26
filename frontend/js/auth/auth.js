@@ -78,7 +78,7 @@ const inputs = [
         regex: passwordRegex,
         validationEntries: {
             valid: document.querySelector(".password-validation-Valid"),
-            invalid: document.getElementById('passwordSigninInvalid')
+            invalid: document.querySelector('.password-validation-invalid')
         }
     },
     {

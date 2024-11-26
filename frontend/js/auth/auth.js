@@ -7,7 +7,7 @@ const btnSignUp = document.querySelector(".btn-signUp ")
 
 
 
-btnsAuthش.forEach((btn) => {
+btnsAuth.forEach((btn) => {
     btn.addEventListener("click", (event) => {
         let dataset = event.target.dataset.auth
 

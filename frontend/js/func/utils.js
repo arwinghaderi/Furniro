@@ -192,10 +192,26 @@ const getCountProductsCart = () => {
     if (countProducts) {
         iconCountProducts.classList.add("nav-bar__count-Product--active")
         iconCountProducts.innerHTML = countProducts
-   
+
     } else {
         iconCountProducts.classList.add("nav-bar__count-Product--active")
         iconCountProducts.innerHTML = 0
+    }
+}
+
+const setDisplay = (element, display) => {
+    element.style.display = display
+}
+
+const validation = (value, regex, input) => {
+    const isEmailValid = regex.test(value);
+
+    if (!value) {
+        setDisplay(input.valid, "none")
+        setDisplay(input.invalid, "none")
+    } else {
+        setDisplay(input.valid, isEmailValid ? "flex" : "none")
+        setDisplay(input.invalid, isEmailValid ? "none" : "flex")
     }
 }
 
@@ -208,5 +224,5 @@ export {
     calculateProductsShowMoreButton,
     getUrlParam,
     productDiscountCalculation,
-    getCountProductsCart, selectionPaginationPageByUser
+    getCountProductsCart, selectionPaginationPageByUser, validation
 }

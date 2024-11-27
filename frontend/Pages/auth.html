@@ -72,16 +72,22 @@
                                 </div>
                             </div>
                             <div class="progress-container">
-                                <div class="progress-bar" id="passwordProgressBar">75%</div>
+                                <div class="progress-bar" id="passwordProgressBar">0%</div>
                             </div>
-                            <ul class="rules">
-                                <li id="length" class="invalid">Be at least 8 characters long</li>
-                                <li id="uppercase" class="invalid">Contain at least one uppercase letter</li>
-                                <li id="lowercase" class="invalid">Contain at least one lowercase letter</li>
-                                <li id="number" class="invalid">Contain at least one number</li>
-                                <li id="special" class="invalid">Contain at least one special character (!, @, #, $,
-                                    etc.)</li>
-                            </ul>
+                            <div class="password-checker-container">
+                                <ul class="criteria">
+                                    <li class="criteria-item length"><span class="icon">🔒</span> At least 8 characters
+                                        (e.g., password123!)</li>
+                                    <li class="criteria-item uppercase"><span class="icon">🔒</span> At least one
+                                        uppercase letter (e.g., Password)</li>
+                                    <li class="criteria-item lowercase"><span class="icon">🔒</span> At least one
+                                        lowercase letter (e.g., password)</li>
+                                    <li class="criteria-item number"><span class="icon">🔒</span> At least one number
+                                        (e.g., password1)</li>
+                                    <li class="criteria-item special"><span class="icon">🔒</span> At least one special
+                                        character (e.g., password@)</li>
+                                </ul>
+                            </div>
                             <div class="input-box">
                                 <input type="password" class="input signUp-confirm" id="password"
                                     placeholder="Confirm password">

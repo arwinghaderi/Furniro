@@ -1,14 +1,11 @@
 
+import { validation } from "../func/utils.js"
+
 const btnsAuth = document.querySelectorAll(".btn-Auth")
 const formSignIn = document.querySelector(".form-signIn")
 const signInTitle = document.querySelector(".signIn-title")
 const signupNow = document.querySelector(".signup-now")
 const btnSignUp = document.querySelector(".btn-signUp ")
-import { validation } from "../func/utils.js"
-
-
-
-
 
 btnsAuth.forEach((btn) => {
     btn.addEventListener("click", (event) => {
@@ -118,5 +115,64 @@ btnSignIn.addEventListener("click", (event) => {
     } else {
         console.log("ثبت نشد ");
     }
+})
+
+
+const password = document.querySelector('.signUp-password');
+const passwordCheckerContaine = document.querySelector('.password-checker-container');
+const checkPassword = (password) => {
+    const progressBar = document.getElementById('passwordProgressBar');
+
+    const criteria = [
+        { class: '.length', regex: /.{8,}/ },
+        { class: '.uppercase', regex: /[A-Z]/ },
+        { class: '.lowercase', regex: /[a-z]/ },
+        { class: '.number', regex: /\d/ },
+        { class: '.special', regex: /[@$!%*?&]/ }
+    ];
+    let validCount = 0;
+    criteria.forEach(criterion => {
+        const element = document.querySelector(criterion.class);
+
+        if (criterion.regex.test(password)) {
+            element.classList.add('valid');
+            validCount++;
+        } else {
+            element.classList.remove('valid');
+        }
+    });
+
+    const progressPercentage = (validCount / criteria.length) * 100;
+    progressBar.dataset.target = Number(progressPercentage)
+    updateProgress(progressBar)
+}
+
+
+const updateProgress = (progressBar) => {
+    const targetWidth = Number(progressBar.dataset.target);
+    const currentWidth = Number(progressBar.style.width.slice(0, -1));
+    const step = 1;
+
+    if (currentWidth < targetWidth) {
+        progressBar.style.width = `${(currentWidth + step)}%`;
+        progressBar.textContent = `${Math.round(currentWidth + step)}%`;
+
+        setTimeout(() => updateProgress(progressBar), 75);
+    } else {
+        progressBar.style.width = `${Math.round(targetWidth)}%`;
+        progressBar.textContent = `${targetWidth.toFixed(0)}%`;
+        progressBar.style.backgroundColor = targetWidth === 100 ? 'green' : 'red';
+    }
+}
+
+
+password.addEventListener("input", (event) => {
+    checkPassword(event.target.value)
+})
+password.addEventListener("blur", () => {
+    passwordCheckerContaine.classList.remove("password-checker-container--active")
+})
+password.addEventListener("focus", () => {
+    passwordCheckerContaine.classList.add("password-checker-container--active")
 })
 

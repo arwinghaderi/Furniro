@@ -1,5 +1,6 @@
 
 import { validation } from "../func/utils.js"
+import { showSwal } from "../func/utils.js"
 
 const btnsAuth = document.querySelectorAll(".btn-Auth")
 const formSignIn = document.querySelector(".form-signIn")
@@ -39,6 +40,8 @@ const btnSignIn = document.querySelector(".btn-signIn-register")
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const loginEmailInput = document.querySelector(".signIn-Email")
+const loginPasswordInput = document.querySelector(".signIn-password")
 
 const gettingUserInformation = () => {
     const userInformation = {
@@ -111,9 +114,9 @@ btnSignIn.addEventListener("click", (event) => {
     console.log(isEmailValid, isPasswordValid);
 
     if (isEmailValid && isPasswordValid) {
-        console.log("ثبت شد ");
+        showSwal("ثبت شد ", "success", "ورود به پنل", "/Furniro/frontend/index.html")
     } else {
-        console.log("ثبت نشد ");
+        showSwal("ثبت نشد ", "error", 'تصحیح اطلاعات', "/Furniro/frontend/Pages/auth.html")
     }
 })
 
@@ -175,4 +178,3 @@ password.addEventListener("blur", () => {
 password.addEventListener("focus", () => {
     passwordCheckerContaine.classList.add("password-checker-container--active")
 })
-

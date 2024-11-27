@@ -191,20 +191,42 @@ body {
 }
 
 .progress-bar {
-    width: 75%;
+    width: 0%;
     height: 20px;
     background-color: #4caf50;
     border-radius: 25px;
     text-align: center;
     line-height: 20px;
-    color: white;
+    color: #1a1a1a;
+    transition: width 75ms ease-in-out, background-color 0.3s ease-in-out;
 }
 
-.rules {
+.password-checker-container {
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
+    margin-bottom: -2rem;
+    transition: height 1000ms ease-in-out, opacity 1000ms ease-in-out, visibility 1000ms ease-in-out;
+}
+
+.password-checker-container--active {
+    height: 26.5rem;
+    visibility: visible;
+    margin-bottom: 0;
+    overflow-y: auto;
+    opacity: 1;
+}
+
+.criteria {
     padding: 0;
-    display: none;
+    margin-top: 1rem;
 }
 
-.rules li {
-    margin: 5px 0;
+.criteria-item {
+    color: red;
+}
+
+.valid {
+    color: green;
 }

@@ -2,13 +2,14 @@
 
 body {
     background-color: #FAF3EA;
+    padding: 5rem 0;
 }
 
 .auth-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
 }
 
 .auth-wrapper {
@@ -180,7 +181,7 @@ body {
 
 .progress-container {
     width: 100%;
-    background-color: #f3f3f3;
+    background-color: #d0d0d0;
     border-radius: 25px;
 }
 
@@ -197,7 +198,7 @@ body {
     border-radius: 25px;
     text-align: center;
     line-height: 20px;
-    color: #1a1a1a;
+    color: #eeeeee;
     transition: width 75ms ease-in-out, background-color 0.3s ease-in-out;
 }
 

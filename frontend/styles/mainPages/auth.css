@@ -3,13 +3,14 @@
 body {
     background-color: #FAF3EA;
     padding: 5rem 0;
+    min-height: 100vh;
 }
 
 .auth-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    min-height: 100vh;
 }
 
 .auth-wrapper {

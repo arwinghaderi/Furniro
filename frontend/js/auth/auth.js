@@ -1,6 +1,5 @@
 
-import { validation } from "../func/utils.js"
-import { showSwal } from "../func/utils.js"
+import { validation, showSwal } from "../func/utils.js"
 
 const btnsAuth = document.querySelectorAll(".btn-Auth")
 const formSignIn = document.querySelector(".form-signIn")
@@ -36,33 +35,15 @@ signupNow.addEventListener("click", () => {
     btnSignUp.classList.add("btn-signIn--active")
 })
 
-const btnSignIn = document.querySelector(".btn-signIn-register")
-
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const btnSignIn = document.querySelector(".btn-signIn-register")
 const loginEmailInput = document.querySelector(".signIn-Email")
 const loginPasswordInput = document.querySelector(".signIn-password")
-
-const gettingUserInformation = () => {
-    const userInformation = {
-        email: loginEmailInput.value.trim(),
-        password: loginPasswordInput.value.trim()
-    }
-
-    let isEmailValid = validateEmail(userInformation.email)
-    let isPasswordValid = validatePassword(userInformation.password)
-
-    return { isEmailValid, isPasswordValid }
-}
-
-
-
-const validateEmail = (email) => {
-    return emailRegex.test(email);
-}
-const validatePassword = (password) => {
-    return passwordRegex.test(password);
-}
+const signUpPassword = document.querySelector(".signUp-password")
+const signUpConfirmPassword = document.querySelector(".signUp-confirm")
+const signUpEmail = document.querySelector(".signUp-Email")
+const btnRegister = document.querySelector(".btn-Register")
 
 const inputs = [
     {
@@ -106,24 +87,8 @@ inputs.forEach(input => {
     });
 });
 
-btnSignIn.addEventListener("click", (event) => {
-    event.preventDefault()
-    const { isEmailValid, isPasswordValid } = gettingUserInformation()
-
-
-    console.log(isEmailValid, isPasswordValid);
-
-    if (isEmailValid && isPasswordValid) {
-        showSwal("ثبت شد ", "success", "ورود به پنل", "/Furniro/frontend/index.html")
-    } else {
-        showSwal("ثبت نشد ", "error", 'تصحیح اطلاعات', "/Furniro/frontend/Pages/auth.html")
-    }
-})
-
-
-const password = document.querySelector('.signUp-password');
 const passwordCheckerContaine = document.querySelector('.password-checker-container');
-const checkPassword = (password) => {
+const checkPassword = (PasswordValue) => {
     const progressBar = document.getElementById('passwordProgressBar');
 
     const criteria = [
@@ -133,11 +98,13 @@ const checkPassword = (password) => {
         { class: '.number', regex: /\d/ },
         { class: '.special', regex: /[@$!%*?&]/ }
     ];
+
     let validCount = 0;
+
     criteria.forEach(criterion => {
         const element = document.querySelector(criterion.class);
 
-        if (criterion.regex.test(password)) {
+        if (criterion.regex.test(PasswordValue)) {
             element.classList.add('valid');
             validCount++;
         } else {
@@ -150,6 +117,17 @@ const checkPassword = (password) => {
     updateProgress(progressBar)
 }
 
+signUpPassword.addEventListener("input", (event) => {
+    checkPassword(event.target.value)
+})
+
+signUpPassword.addEventListener("blur", () => {
+    passwordCheckerContaine.classList.remove("password-checker-container--active")
+})
+
+signUpPassword.addEventListener("focus", () => {
+    passwordCheckerContaine.classList.add("password-checker-container--active")
+})
 
 const updateProgress = (progressBar) => {
     const targetWidth = Number(progressBar.dataset.target);
@@ -168,13 +146,63 @@ const updateProgress = (progressBar) => {
     }
 }
 
+const getingUserLoginInformation = (loginEmailInput, loginPasswordInput) => {
+    const userInformation = {
+        email: loginEmailInput.value.trim(),
+        password: loginPasswordInput.value.trim()
+    }
 
-password.addEventListener("input", (event) => {
-    checkPassword(event.target.value)
+    let isEmailValid = validateEmail(userInformation.email)
+    let isPasswordValid = validatePassword(userInformation.password)
+
+    return { isEmailValid, isPasswordValid }
+}
+
+const getingUserRegistrationInformation = (signUpEmail, signUpPassword, signUpConfirm) => {
+    const userInformation = {
+        email: signUpEmail.value.trim(),
+        password: signUpPassword.value.trim(),
+        confirmPassword: signUpConfirm.value.trim()
+    }
+
+    let isEmailValid = validateEmail(userInformation.email)
+    let isPasswordValid = validatePassword(userInformation.password)
+    let isConfirmPassword = validateConfrimPassword(userInformation.password, userInformation.confirmPassword)
+
+    return { isEmailValid, isPasswordValid, isConfirmPassword }
+}
+
+const validateEmail = (email) => {
+    return emailRegex.test(email);
+}
+
+const validatePassword = (password) => {
+    return passwordRegex.test(password);
+}
+
+const validateConfrimPassword = (password, confirmPassword) => {
+    return password === confirmPassword
+}
+
+btnSignIn.addEventListener("click", (event) => {
+    event.preventDefault()
+
+    const { isEmailValid, isPasswordValid } = getingUserLoginInformation(loginEmailInput, loginPasswordInput)
+
+    if (isEmailValid && isPasswordValid) {
+        showSwal("ورود با موفقیت انجام شد! خوش آمدید", "success", "ورود به پنل", "../../index.html")
+    } else {
+        showSwal("اطلاعات شما صحیح نمی باشد", "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+    }
 })
-password.addEventListener("blur", () => {
-    passwordCheckerContaine.classList.remove("password-checker-container--active")
-})
-password.addEventListener("focus", () => {
-    passwordCheckerContaine.classList.add("password-checker-container--active")
+
+btnRegister.addEventListener("click", (event) => {
+    event.preventDefault()
+    const { isEmailValid, isPasswordValid, isConfirmPassword } = getingUserRegistrationInformation(signUpEmail, signUpPassword, signUpConfirmPassword)
+
+    if (isEmailValid && isPasswordValid && isConfirmPassword) {
+        showSwal("ثبت نام با موفقیت انجام شد لطفا  اطلاعات خود را در قسمت ورود وارد کنید ", "success", "ورود به سیستم", "../../Pages/auth.html")
+    } else {
+        showSwal("اطلاعات شما صحیح نمی باشد", "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+    }
 })

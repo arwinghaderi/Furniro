@@ -214,7 +214,7 @@ const validation = (value, regex, input) => {
         setDisplay(input.invalid, isEmailValid ? "none" : "flex")
     }
 }
-async function showSwal(title, icon, confirmButtonText, url) {
+const showSwal = async (title, icon, confirmButtonText, url) => {
     let response = await swal.fire({
         title: title,
         icon: icon,
@@ -232,5 +232,5 @@ export {
     calculateProductsShowMoreButton,
     getUrlParam,
     productDiscountCalculation,
-    getCountProductsCart, selectionPaginationPageByUser, validation, showSwal
+    getCountProductsCart, selectionPaginationPageByUser, validation, showSwal,
 }

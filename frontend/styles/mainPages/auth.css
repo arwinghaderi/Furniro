@@ -231,3 +231,8 @@ body {
 .valid {
     color: green;
 }
+.show-more__loder{
+    height: 100%;
+    width: 100%;
+    background-color: var(--Primary-color);
+}

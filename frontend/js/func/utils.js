@@ -223,6 +223,11 @@ const showSwal = async (title, icon, confirmButtonText, url) => {
     response ? location.href = url : location.href = url
 }
 
+const checkingLoginStatus = () => {
+    const userInfos = localStorage.getItem("Access-Token");
+    return userInfos ? true : false;
+};
+
 export {
     saveToLocalStorage,
     getFromLocalStorage,
@@ -232,5 +237,5 @@ export {
     calculateProductsShowMoreButton,
     getUrlParam,
     productDiscountCalculation,
-    getCountProductsCart, selectionPaginationPageByUser, validation, showSwal,
+    getCountProductsCart, selectionPaginationPageByUser, validation, showSwal, checkingLoginStatus
 }

@@ -184,17 +184,58 @@ const validateConfrimPassword = (password, confirmPassword) => {
     return password === confirmPassword
 }
 
-btnSignIn.addEventListener("click", (event) => {
+btnSignIn.addEventListener("click", async (event) => {
     event.preventDefault()
+
 
     const { isEmailValid, isPasswordValid } = getingUserLoginInformation(loginEmailInput, loginPasswordInput)
 
     if (isEmailValid && isPasswordValid) {
-        showSwal("ورود با موفقیت انجام شد! خوش آمدید", "success", "ورود به پنل", "../../index.html")
+
+        fetchAndSendLoginData()
     } else {
         showSwal("اطلاعات شما صحیح نمی باشد", "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
     }
 })
+
+
+const fetchAndSendLoginData = async () => {
+    const showMoreLoder = document.querySelector(".show-more__loder")
+    showMoreLoder.style.display = 'flex';
+
+    const userInformation = {
+        email: loginEmailInput.value.trim(),
+        password: loginPasswordInput.value.trim()
+    }
+
+    try {
+        let response = await fetch("http://localhost:3000/auth/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userInformation),
+        })
+        console.log(response);
+        if (!response.ok) {
+            throw new Error('Correction of information');
+        }
+
+        showSwal("ورود با موفقیت انجام شد! خوش آمدید", "success", "ورود به پنل", "../../index.html")
+
+
+        const data = await response.json();
+        
+    } catch (error) {
+        showSwal(`${error}`, "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+    } finally {
+        showMoreLoder.style.display = 'none';
+    }
+};
+
+
+
+
 
 btnRegister.addEventListener("click", (event) => {
     event.preventDefault()

@@ -1,6 +1,6 @@
 
 import { showSwal, saveToLocalStorage, } from "../func/utils.js"
-import { getDefaultLoginErrorMessage, loginErrorMessages, validation } from "./utils.js"
+import { getDefaultErrorMessage, loginErrorMessages, registerErrorMessages, validation } from "./utils.js"
 
 const btnsAuth = document.querySelectorAll(".btn-Auth")
 const formSignIn = document.querySelector(".form-signIn")
@@ -192,13 +192,11 @@ btnSignIn.addEventListener("click", async (event) => {
     const { isEmailValid, isPasswordValid } = getingUserLoginInformation(loginEmailInput, loginPasswordInput)
 
     if (isEmailValid && isPasswordValid) {
-
         fetchAndSendLoginData()
     } else {
         showSwal("اطلاعات شما صحیح نمی باشد", "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
     }
 })
-
 
 const fetchAndSendLoginData = async () => {
     const showMoreLoder = document.querySelector(".show-more__loder")
@@ -217,17 +215,14 @@ const fetchAndSendLoginData = async () => {
             },
             body: JSON.stringify(userInformation),
         })
-        console.log(response);
         if (!response.ok) {
-            const message = loginErrorMessages[response.status] || getDefaultLoginErrorMessage();
+            const message = loginErrorMessages[response.status] || getDefaultErrorMessage();
             throw new Error(message);
-        } else {
-            showSwal("ورود با موفقیت انجام شد! خوش آمدید", "success", "ورود به پنل", "../../index.html")
-            const data = await response.json();
-            saveToLocalStorage("Access-Token", data.payload.access_token)
-            console.log(data);
         }
-
+        showSwal("ورود با موفقیت انجام شد! خوش آمدید", "success", "ورود به پنل", "../../index.html")
+        const data = await response.json();
+        console.log(data.payload.access_token);
+        saveToLocalStorage("Access-Token", data.payload.access_token)
     } catch (error) {
         showSwal(`${error.message}`, "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
     } finally {
@@ -235,15 +230,47 @@ const fetchAndSendLoginData = async () => {
     }
 };
 
-
-
-btnRegister.addEventListener("click", (event) => {
+btnRegister.addEventListener("click", async (event) => {
     event.preventDefault()
+    const showMoreLoder = document.querySelector(".loder-sign-up")
+    showMoreLoder.style.display = 'flex';
+
     const { isEmailValid, isPasswordValid, isConfirmPassword } = getingUserRegistrationInformation(signUpEmail, signUpPassword, signUpConfirmPassword)
 
     if (isEmailValid && isPasswordValid && isConfirmPassword) {
-        showSwal("ثبت نام با موفقیت انجام شد لطفا  اطلاعات خود را در قسمت ورود وارد کنید ", "success", "ورود به سیستم", "../../Pages/auth.html")
+
+        fetchAndSendRegisterData()
     } else {
         showSwal("اطلاعات شما صحیح نمی باشد", "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
     }
 })
+
+const fetchAndSendRegisterData = async () => {
+    let userSignUpInformation = {
+        email: signUpEmail.value,
+        password: signUpPassword.value
+    }
+    try {
+
+        let response = await fetch("http://localhost:3000/user/api/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userSignUpInformation)
+        })
+
+        if (!response.ok) {
+            const message = registerErrorMessages[response.status] || getDefaultErrorMessage()
+            throw new Error(message)
+        }
+
+        const data = await response.json()
+        showSwal("ثبت نام با موفقیت انجام شد لطفا  اطلاعات خود را در قسمت ورود وارد کنید ", "success", "ورود به سیستم", "../../Pages/auth.html")
+        
+    } catch (error) {
+        showSwal(`${error.message}`, "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+    } finally {
+        showMoreLoder.style.display = 'none';
+    }
+}

@@ -1,3 +1,4 @@
+import { getingUaerInformation } from "./auth/utils.js"
 const $ = document
 const hamburger = $.querySelector(".hamburger")
 const contenerMenuMobail = $.querySelector(".contener-menu-mobail ")
@@ -15,3 +16,6 @@ menuLink.forEach(function (menuLink) {
     })
 })
 
+getingUaerInformation().then((data) => {
+    console.log(data);
+})

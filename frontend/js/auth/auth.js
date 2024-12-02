@@ -235,6 +235,7 @@ const fetchAndSendLoginData = async () => {
 };
 
 
+
 btnRegister.addEventListener("click", (event) => {
     event.preventDefault()
     const { isEmailValid, isPasswordValid, isConfirmPassword } = getingUserRegistrationInformation(signUpEmail, signUpPassword, signUpConfirmPassword)

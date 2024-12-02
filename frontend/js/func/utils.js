@@ -203,7 +203,8 @@ const showSwal = async (title, icon, confirmButtonText, url) => {
     let response = await swal.fire({
         title: title,
         icon: icon,
-        confirmButtonText: confirmButtonText
+        confirmButtonText: confirmButtonText,
+        confirmButtonColor: "#B88E2F",
     })
     response ? location.href = url : location.href = url
 }

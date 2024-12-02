@@ -1,7 +1,7 @@
 .nav-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 2rem 0rem 2rem 0rem;
 }
 
@@ -30,17 +30,13 @@
 
 .icon-container-option {
     display: flex;
+    gap: 5rem;
     align-items: center;
 }
 
 .icon-container__link {
-    margin-left: 5rem;
     position: relative;
     cursor: pointer;
-}
-
-.icon-container__link:first-child {
-    margin-left: 0rem;
 }
 
 .nav-bar__count-Product,

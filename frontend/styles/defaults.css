@@ -37,10 +37,6 @@ a {
     height: 1.4rem;
 }
 
-.sign-in-icon {
-    font-size: 2.25rem;
-}
-
 .icon-container__link--login {
     color: var(--dark-color);
     font-size: 20px;
@@ -100,4 +96,15 @@ a {
     text-align: center;
     font-family: var(--primary-font);
     color: #666666;
+}
+
+.dont-login,
+.login-successfully {
+    display: none;
+}
+
+#icon-login,
+#user-icon {
+    font-size: 2.25rem;
+    font-family: "Poppins-Regular";
 }

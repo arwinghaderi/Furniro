@@ -1,7 +1,7 @@
-import { getingUaerInformation } from "./auth/utils.js"
+import { getingUaerInformation, checkingLoginStatus } from "./auth/utils.js"
 const $ = document
 const hamburger = $.querySelector(".hamburger")
-const contenerMenuMobail = $.querySelector(".contener-menu-mobail ")
+const contenerMenuMobail = $.querySelector(".contener-menu-mobail")
 const menuLink = $.querySelectorAll(".list-menu-item__link")
 
 hamburger.addEventListener("click", function () {
@@ -15,7 +15,21 @@ menuLink.forEach(function (menuLink) {
         menuLink.classList.add("list-menu-item__link--active")
     })
 })
+const dontLogin = $.querySelector(".dont-login")
+const loginSuccessfully = $.querySelector(".login-successfully")
+const navbarSuccessfullyRegisterText = $.querySelector(".navbar-successfully-Register-text")
+const navbarDontRegisterText = $.querySelector(".navbar-dont-Register-text")
 
-getingUaerInformation().then((data) => {
-    console.log(data);
-})
+const isLogin = checkingLoginStatus()
+if (isLogin) {
+    getingUaerInformation().then((data) => {
+        const email = data.payload.email
+        const username = email.split('@')[0]
+
+        loginSuccessfully.style.display = "flex"
+        navbarSuccessfullyRegisterText.innerHTML = username
+    })
+} else {
+    navbarDontRegisterText.innerHTML = `sign In/sign Up`
+    dontLogin.style.display = "flex"
+}

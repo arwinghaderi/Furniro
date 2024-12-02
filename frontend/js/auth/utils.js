@@ -26,7 +26,14 @@ export const loginErrorMessages = {
     504: 'Gateway timeout. Please try again later.'
 };
 
-export const getDefaultLoginErrorMessage = () => 'An error occurred. Please try again later.';
+export const registerErrorMessages = {
+    400: 'Bad Request. Please check your input and try again.',
+    409: 'Email already exists. Please use a different email or login.',
+    500: 'Server error. Please try again later.'
+};
+
+export const getDefaultErrorMessage = () => 'An error occurred. Please try again later.';
+
 
 export const checkingLoginStatus = () => {
     const userInfos = localStorage.getItem("Access-Token");
@@ -38,6 +45,7 @@ export const getingUaerInformation = async () => {
     if (!token) {
         return false
     }
+    console.log(token);
     const response = await fetch(`http://localhost:3000/user/api/get-user-info`, {
         method: "POST",
         headers: {
@@ -47,5 +55,6 @@ export const getingUaerInformation = async () => {
     })
 
     const data = await response.json()
+    console.log(data);
     return data
 }

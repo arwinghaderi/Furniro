@@ -1,5 +1,6 @@
 
-import { validation, showSwal, saveToLocalStorage, getDefaultLoginErrorMessage, loginErrorMessages } from "../func/utils.js"
+import { showSwal, saveToLocalStorage, } from "../func/utils.js"
+import { getDefaultLoginErrorMessage, loginErrorMessages, validation } from "./utils.js"
 
 const btnsAuth = document.querySelectorAll(".btn-Auth")
 const formSignIn = document.querySelector(".form-signIn")

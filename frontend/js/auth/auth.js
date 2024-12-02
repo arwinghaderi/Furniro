@@ -1,5 +1,5 @@
 
-import { validation, showSwal, saveToLocalStorage } from "../func/utils.js"
+import { validation, showSwal, saveToLocalStorage, getDefaultLoginErrorMessage, loginErrorMessages } from "../func/utils.js"
 
 const btnsAuth = document.querySelectorAll(".btn-Auth")
 const formSignIn = document.querySelector(".form-signIn")
@@ -216,24 +216,23 @@ const fetchAndSendLoginData = async () => {
             },
             body: JSON.stringify(userInformation),
         })
+        console.log(response);
         if (!response.ok) {
-            throw new Error('Correction of information');
+            const message = loginErrorMessages[response.status] || getDefaultLoginErrorMessage();
+            throw new Error(message);
         } else {
             showSwal("ورود با موفقیت انجام شد! خوش آمدید", "success", "ورود به پنل", "../../index.html")
-
             const data = await response.json();
-
-            saveToLocalStorage("Access-Token", data.access_token)
+            saveToLocalStorage("Access-Token", data.payload.access_token)
+            console.log(data);
         }
+
     } catch (error) {
-        showSwal(`${error}`, "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+        showSwal(`${error.message}`, "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
     } finally {
         showMoreLoder.style.display = 'none';
     }
 };
-
-
-
 
 
 btnRegister.addEventListener("click", (event) => {

@@ -228,6 +228,24 @@ const checkingLoginStatus = () => {
     return userInfos ? true : false;
 };
 
+const loginErrorMessages = {
+    401: 'Invalid email or password. Please check your credentials and try again.',
+    403: 'Access denied. Please contact support if you believe this is an error.',
+    404: 'Email not found. Please sign up.',
+    500: 'Server error. Please try again later.',
+    502: 'Bad gateway. Please try again later.',
+    503: 'Service unavailable. Please try again later.',
+    504: 'Gateway timeout. Please try again later.'
+};
+
+const getDefaultLoginErrorMessage = () => 'An error occurred. Please try again later.';
+
+const getToken = () => {
+    const userToken = JSON.parse(localStorage.getItem("Access-Token"));
+    console.log(userToken);
+    return userToken ? userToken : null
+};
+
 export {
     saveToLocalStorage,
     getFromLocalStorage,
@@ -237,5 +255,10 @@ export {
     calculateProductsShowMoreButton,
     getUrlParam,
     productDiscountCalculation,
-    getCountProductsCart, selectionPaginationPageByUser, validation, showSwal, checkingLoginStatus
+    getCountProductsCart,
+    selectionPaginationPageByUser,
+    validation, showSwal, checkingLoginStatus,
+    loginErrorMessages,
+    getDefaultLoginErrorMessage,
+    getToken,
 }

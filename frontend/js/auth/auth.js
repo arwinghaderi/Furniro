@@ -194,7 +194,7 @@ btnSignIn.addEventListener("click", async (event) => {
     if (isEmailValid && isPasswordValid) {
         fetchAndSendLoginData()
     } else {
-        showSwal("اطلاعات شما صحیح نمی باشد", "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+        showSwal("Your information is not correct.", "error", ' Correction of information', "../../Pages/auth.html")
     }
 })
 
@@ -219,12 +219,13 @@ const fetchAndSendLoginData = async () => {
             const message = loginErrorMessages[response.status] || getDefaultErrorMessage();
             throw new Error(message);
         }
-        showSwal("ورود با موفقیت انجام شد! خوش آمدید", "success", "ورود به پنل", "../../index.html")
         const data = await response.json();
-        console.log(data.payload.access_token);
+        const email = data.payload.email
+        const username = email.split('@')[0]
         saveToLocalStorage("Access-Token", data.payload.access_token)
+        showSwal(`Your login was successful. Welcome ${username} .`, "success", "Go to HomePage", "../../index.html")
     } catch (error) {
-        showSwal(`${error.message}`, "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+        showSwal(`${error.message}`, "error", ' Correction of information', "../../Pages/auth.html")
     } finally {
         showMoreLoder.style.display = 'none';
     }
@@ -232,20 +233,18 @@ const fetchAndSendLoginData = async () => {
 
 btnRegister.addEventListener("click", async (event) => {
     event.preventDefault()
-    const showMoreLoder = document.querySelector(".loder-sign-up")
-    showMoreLoder.style.display = 'flex';
-
     const { isEmailValid, isPasswordValid, isConfirmPassword } = getingUserRegistrationInformation(signUpEmail, signUpPassword, signUpConfirmPassword)
 
     if (isEmailValid && isPasswordValid && isConfirmPassword) {
-
         fetchAndSendRegisterData()
     } else {
-        showSwal("اطلاعات شما صحیح نمی باشد", "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+        showSwal("Your email or password or password confirmation is invalid.", "error", "Correction of information", "../../Pages/auth.html")
     }
 })
 
 const fetchAndSendRegisterData = async () => {
+    const showMoreLoder = document.querySelector(".loder-sign-up")
+    showMoreLoder.style.display = 'flex';
     let userSignUpInformation = {
         email: signUpEmail.value,
         password: signUpPassword.value
@@ -266,10 +265,10 @@ const fetchAndSendRegisterData = async () => {
         }
 
         const data = await response.json()
-        showSwal("ثبت نام با موفقیت انجام شد لطفا  اطلاعات خود را در قسمت ورود وارد کنید ", "success", "ورود به سیستم", "../../Pages/auth.html")
-        
+        showSwal("Registration was successful. Please enter your information in the login section.", "success", "Login", "../../Pages/auth.html")
+
     } catch (error) {
-        showSwal(`${error.message}`, "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+        showSwal(`${error.message}`, "error", "Correction of information", "../../Pages/auth.html")
     } finally {
         showMoreLoder.style.display = 'none';
     }

@@ -108,3 +108,18 @@ a {
     font-size: 2.25rem;
     font-family: "Poppins-Regular";
 }
+
+.custom-swal2 .swal2-styled {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.custom-swal2 .swal2-confirm {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.custom-swal2 .swal2-cancel {
+    border: none !important;
+    box-shadow: none !important;
+}

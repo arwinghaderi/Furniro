@@ -23,7 +23,10 @@ exports.registerValidator = yup.object({
     ),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password"), null], "The code of worship does not match")
+    .oneOf(
+      [yup.ref("password"), null],
+      "The Password does not match with Confirm Password"
+    )
     .required(),
 });
 

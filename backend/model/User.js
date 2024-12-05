@@ -4,10 +4,18 @@ const schema = mongoose.Schema({
   fullname: {
     type: String,
     required: true,
+    trim: true,
+  },
+  role: {
+    type: String,
+    enum: ["ADMIN", "USER"],
+    required: true,
   },
   email: {
     type: String,
     required: true,
+    trim: true,
+    unique: true,
   },
   password: {
     type: String,

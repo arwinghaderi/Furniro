@@ -1,3 +1,6 @@
 backend/node_modules/
 backend/dist/
+<<<<<<< HEAD
 backend/src/
+=======
+>>>>>>> feature/signup

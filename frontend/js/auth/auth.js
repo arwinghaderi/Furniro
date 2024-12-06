@@ -1,5 +1,6 @@
 
-import { validation, showSwal } from "../func/utils.js"
+import { showSwal, saveToLocalStorage, } from "../func/utils.js"
+import { getDefaultErrorMessage, loginErrorMessages, registerErrorMessages, validation } from "./utils.js"
 
 const btnsAuth = document.querySelectorAll(".btn-Auth")
 const formSignIn = document.querySelector(".form-signIn")
@@ -191,13 +192,11 @@ btnSignIn.addEventListener("click", async (event) => {
     const { isEmailValid, isPasswordValid } = getingUserLoginInformation(loginEmailInput, loginPasswordInput)
 
     if (isEmailValid && isPasswordValid) {
-
         fetchAndSendLoginData()
     } else {
-        showSwal("اطلاعات شما صحیح نمی باشد", "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+        showSwal("Your information is not correct.", "error", ' Correction of information', "../../Pages/auth.html")
     }
 })
-
 
 const fetchAndSendLoginData = async () => {
     const showMoreLoder = document.querySelector(".show-more__loder")
@@ -216,34 +215,61 @@ const fetchAndSendLoginData = async () => {
             },
             body: JSON.stringify(userInformation),
         })
-        console.log(response);
         if (!response.ok) {
-            throw new Error('Correction of information');
+            const message = loginErrorMessages[response.status] || getDefaultErrorMessage();
+            throw new Error(message);
         }
-
-        showSwal("ورود با موفقیت انجام شد! خوش آمدید", "success", "ورود به پنل", "../../index.html")
-
-
         const data = await response.json();
-        
+        const email = data.payload.email
+        const username = email.split('@')[0]
+        saveToLocalStorage("Access-Token", data.payload.access_token)
+        showSwal(`Your login was successful. Welcome ${username} .`, "success", "Go to HomePage", "../../index.html")
     } catch (error) {
-        showSwal(`${error}`, "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+        showSwal(`${error.message}`, "error", ' Correction of information', "../../Pages/auth.html")
     } finally {
         showMoreLoder.style.display = 'none';
     }
 };
 
-
-
-
-
-btnRegister.addEventListener("click", (event) => {
+btnRegister.addEventListener("click", async (event) => {
     event.preventDefault()
     const { isEmailValid, isPasswordValid, isConfirmPassword } = getingUserRegistrationInformation(signUpEmail, signUpPassword, signUpConfirmPassword)
 
     if (isEmailValid && isPasswordValid && isConfirmPassword) {
-        showSwal("ثبت نام با موفقیت انجام شد لطفا  اطلاعات خود را در قسمت ورود وارد کنید ", "success", "ورود به سیستم", "../../Pages/auth.html")
+        fetchAndSendRegisterData()
     } else {
-        showSwal("اطلاعات شما صحیح نمی باشد", "error", 'تصحیح اطلاعات', "../../Pages/auth.html")
+        showSwal("Your email or password or password confirmation is invalid.", "error", "Correction of information", "../../Pages/auth.html")
     }
 })
+
+const fetchAndSendRegisterData = async () => {
+    const showMoreLoder = document.querySelector(".loder-sign-up")
+    showMoreLoder.style.display = 'flex';
+    let userSignUpInformation = {
+        email: signUpEmail.value,
+        password: signUpPassword.value
+    }
+    try {
+
+        let response = await fetch("http://localhost:3000/user/api/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userSignUpInformation)
+        })
+
+        if (!response.ok) {
+            const message = registerErrorMessages[response.status] || getDefaultErrorMessage()
+            throw new Error(message)
+        }
+
+        const data = await response.json()
+        showSwal("Registration was successful. Please enter your information in the login section.", "success", "Login", "../../Pages/auth.html")
+
+    } catch (error) {
+        showSwal(`${error.message}`, "error", "Correction of information", "../../Pages/auth.html")
+    } finally {
+        showMoreLoder.style.display = 'none';
+    }
+}

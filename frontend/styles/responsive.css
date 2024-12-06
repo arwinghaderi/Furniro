@@ -98,6 +98,15 @@
     .full-name-input-box {
         width: 100%;
     }
+
+    .navbar-successfully-Register-text,
+    .navbar-dont-Register-text {
+        display: inline-block;
+        max-width: 54px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 @media screen and (max-width:1200px) {
@@ -256,6 +265,14 @@
     .title-billing-details {
         text-align: center;
     }
+
+    .navbar-Register-text {
+        display: none;
+    }
+
+
+
+
 }
 
 @media screen and (max-width:992px) {
@@ -263,6 +280,10 @@
     .list-menu,
     .icon-container {
         display: none;
+    }
+
+    .nav-bar {
+        justify-content: space-between;
     }
 
     .contener-menu-mobail {
@@ -466,6 +487,10 @@
 
     .title-box--contact {
         width: 100%;
+    }
+
+    .navbar-dont-Register-text {
+        display: none;
     }
 }
 

@@ -37,6 +37,17 @@ a {
     height: 1.4rem;
 }
 
+.icon-container__link--login {
+    color: var(--dark-color);
+    font-size: 20px;
+    font-family: "Poppins-Regular";
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
 .menu-icon {
     color: var(--dark-color);
     font-size: 2.25rem;
@@ -85,4 +96,30 @@ a {
     text-align: center;
     font-family: var(--primary-font);
     color: #666666;
+}
+
+.dont-login,
+.login-successfully {
+    display: none;
+}
+
+#icon-login,
+#user-icon {
+    font-size: 2.25rem;
+    font-family: "Poppins-Regular";
+}
+
+.custom-swal2 .swal2-styled {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.custom-swal2 .swal2-confirm {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.custom-swal2 .swal2-cancel {
+    border: none !important;
+    box-shadow: none !important;
 }

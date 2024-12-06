@@ -1,5 +1,6 @@
 import { addingProductsTemplate } from "../func/shared.js"
 let filteredProductPagination
+const $ = document
 
 const paginationCalculations = (products, numberProductsShown, currentPage, paginationTool) => {
     paginationTool.wrapperPagination.innerHTML = ""
@@ -132,7 +133,6 @@ const getFromLocalStorage = (key) => {
 
 const searchInProducts = (products, SearchValue, productsKey) => {
     let SearchValueLoewr = SearchValue.toLowerCase().trim()
-    console.log(SearchValue);
     let searchProducts = products.filter((product) => product[productsKey].includes(SearchValueLoewr))
 
     if (SearchValue) {
@@ -199,29 +199,20 @@ const getCountProductsCart = () => {
     }
 }
 
-const setDisplay = (element, display) => {
-    element.style.display = display
-}
-
-const validation = (value, regex, input) => {
-    const isEmailValid = regex.test(value);
-
-    if (!value) {
-        setDisplay(input.valid, "none")
-        setDisplay(input.invalid, "none")
-    } else {
-        setDisplay(input.valid, isEmailValid ? "flex" : "none")
-        setDisplay(input.invalid, isEmailValid ? "none" : "flex")
-    }
-}
-async function showSwal(title, icon, confirmButtonText, url) {
+const showSwal = async (title, icon, confirmButtonText, url) => {
     let response = await swal.fire({
         title: title,
         icon: icon,
-        confirmButtonText: confirmButtonText
+        confirmButtonText: confirmButtonText,
+        confirmButtonColor: "#B88E2F",
     })
     response ? location.href = url : location.href = url
 }
+
+const getToken = () => {
+    const userToken = JSON.parse(localStorage.getItem("Access-Token"));
+    return userToken ? userToken : null
+};
 
 export {
     saveToLocalStorage,
@@ -232,5 +223,8 @@ export {
     calculateProductsShowMoreButton,
     getUrlParam,
     productDiscountCalculation,
-    getCountProductsCart, selectionPaginationPageByUser, validation, showSwal
+    getCountProductsCart,
+    selectionPaginationPageByUser,
+    showSwal,
+    getToken,
 }

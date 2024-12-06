@@ -1,7 +1,9 @@
 const { errorResponse, successResponse } = require("../helper/responses");
 const { generateAccessToken } = require("../helper/token");
+const { use } = require("../routes/auth");
 const User = require("./../model/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.userRegister = async (req, res, next) => {
   try {
@@ -22,12 +24,17 @@ exports.userRegister = async (req, res, next) => {
       role: userCount >= 1 ? "USER" : "ADMIN",
     });
 
-    const accessToken = generateAccessToken({ id: user.id, role: user.role });
-    const refreshToken = generateAccessToken({ id: user.id, role: user.role });
+    const accessToken = generateAccessToken({ id: user.id });
+    const refreshToken = generateAccessToken({ id: user.id });
 
-    return successResponse(res, 200, {
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true, // جلوگیری از دسترسی جاوااسکریپت
+      sameSite: "strict", // محافظت در برابر حملات CSRF
+      maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
+    });
+
+    return successResponse(res, 201, {
       accessToken,
-      refreshToken,
     });
   } catch (err) {
     next(err);
@@ -36,7 +43,55 @@ exports.userRegister = async (req, res, next) => {
 
 exports.userLogin = async (req, res, next) => {
   try {
-    //
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return errorResponse(res, 403, "Invalid Email Or Password !!");
+    }
+
+    const comparePassword = await bcrypt.compare(password, user.password);
+    if (!comparePassword) {
+      return errorResponse(res, 403, "Invalid Email Or Password !!");
+    }
+
+    const accessToken = generateAccessToken(user.id);
+    const refreshToken = generateAccessToken(user.id);
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true, // جلوگیری از دسترسی جاوااسکریپت
+      sameSite: "strict", // محافظت در برابر حملات CSRF
+      maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
+    });
+    console.log(refreshToken);
+
+    return successResponse(res, 200, {
+      accessToken,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getNewAccessToken = async (req, res, next) => {
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) {
+    return errorResponse(res, 401, "'Refresh token not provided'");
+  }
+
+  try {
+    const { id } = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+
+    const user = await User.findById(id);
+    if (!user) {
+      return errorResponse(res, 404, "User Not Found");
+    }
+
+    const accessToken = generateAccessToken(user.id);
+
+    return successResponse(res, 200, {
+      accessToken,
+    });
   } catch (err) {
     next(err);
   }

@@ -1,0 +1,21 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "< furniro - Shop APIS ❤️💻 >",
+    "description": "",
+    "version": "1.0.0"
+  },
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "User token for authentication: **Bearer [user_token]**"
+      }
+    }
+  },
+
+  "paths": {}
+}

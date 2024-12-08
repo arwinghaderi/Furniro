@@ -4,6 +4,7 @@ const { setHeaders } = require("./middleware/setHeaders");
 
 // Routers
 const authRouter = require("./routes/auth");
+const apiDocRouter = require("./routes/swagger");
 
 const app = express();
 
@@ -15,5 +16,6 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use("/images", express.static(path.resolve(__dirname, "public/images")));
 
 app.use("/auth", authRouter);
+app.use("/apis", apiDocRouter);
 
 module.exports = app;

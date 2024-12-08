@@ -1,8 +1,10 @@
 const { default: mongoose } = require("mongoose");
 const app = require("./app");
+const path = require("path");
+
 require("dotenv").config();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 function startServer() {
   app.listen(port, () => {

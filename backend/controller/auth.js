@@ -1,6 +1,5 @@
 const { errorResponse, successResponse } = require("../helper/responses");
 const { generateAccessToken } = require("../helper/token");
-const { use } = require("../routes/auth");
 const User = require("./../model/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -24,8 +23,8 @@ exports.userRegister = async (req, res, next) => {
       role: userCount >= 1 ? "USER" : "ADMIN",
     });
 
-    const accessToken = generateAccessToken({ id: user.id });
-    const refreshToken = generateAccessToken({ id: user.id });
+    const accessToken = generateAccessToken(user.id);
+    const refreshToken = generateAccessToken(user.id);
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true, // جلوگیری از دسترسی جاوااسکریپت
@@ -63,7 +62,6 @@ exports.userLogin = async (req, res, next) => {
       sameSite: "strict", // محافظت در برابر حملات CSRF
       maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
     });
-    console.log(refreshToken);
 
     return successResponse(res, 200, {
       accessToken,
@@ -92,6 +90,23 @@ exports.getNewAccessToken = async (req, res, next) => {
     return successResponse(res, 200, {
       accessToken,
     });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getMe = async (req, res, next) => {
+  try {
+    const user = req.user;
+    if (!user) {
+      return errorResponse(res, 404, {
+        message: "User Not found Or Token Not Valid!! , Plz login First",
+      });
+    }
+
+    user.password = undefined;
+
+    return successResponse(res, 200, { user });
   } catch (err) {
     next(err);
   }

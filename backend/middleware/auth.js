@@ -33,13 +33,12 @@ exports.auth = async (req, res, next) => {
         message: "Token Expired already, Plz Login first",
       });
     }
-    console.log(decoded.id);
 
     const userId = decoded.id;
 
     const user = await userModel.findById(userId);
     if (!user) {
-      return errorResponse(res, 401, {
+      return errorResponse(res, 404, {
         message: "User Not found , Plz Send Valid token",
       });
     }

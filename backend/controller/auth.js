@@ -125,7 +125,7 @@ exports.getResetPasswordCode = async (req, res, next) => {
 
     const resetCode = Math.floor(Math.random() * 99999);
 
-    const resetTokenExpireTime = Date.now() + 1000 * 60 * 3;
+    const resetTokenExpireTime = Date.now() + 1000;
 
     const resetPassword = new resetPasswordModel({
       user: user._id,
@@ -172,12 +172,16 @@ exports.verifyResetPasswordCode = async (req, res, next) => {
 
     const findCode = await resetPasswordModel.findOne({ user: user._id });
     if (!findCode) {
-      return errorResponse(res, 404, "User Not Found!!");
+      return errorResponse(res, 400, "The entered code is not correct");
     }
 
-    if (findCode.expireIn.getTime() < Date.now()) {
+    if (code === findCode.code && findCode.expireIn.getTime() < Date.now()) {
       await resetPasswordModel.findByIdAndDelete({ _id: findCode._id });
-      return successResponse(res, 403, "The Time of Code has expired");
+      return successResponse(
+        res,
+        403,
+        "The Time of Code has expired , Plz Get a new one"
+      );
     }
 
     if (code === findCode.code && findCode.expireIn.getTime() > Date.now()) {

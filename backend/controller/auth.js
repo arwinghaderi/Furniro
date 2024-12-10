@@ -65,6 +65,7 @@ exports.userLogin = async (req, res, next) => {
       sameSite: "strict", // محافظت در برابر حملات CSRF
       maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
     });
+    console.log(refreshToken);
 
     return successResponse(res, 200, {
       accessToken,

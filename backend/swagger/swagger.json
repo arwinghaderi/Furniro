@@ -104,7 +104,7 @@
     },
 
     "/auth/refresh": {
-      "get": {
+      "post": {
         "summary": "Get New Access Token",
         "description": "Retrieves a new access token using the refresh token stored in cookies.",
         "operationId": "getNewAccessToken",

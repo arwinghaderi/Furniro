@@ -14,8 +14,134 @@
         "bearerFormat": "JWT",
         "description": "User token for authentication: **Bearer [user_token]**"
       }
+    },
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "refreshToken",
+        "description": "The refresh token for generating a new access token."
+      }
     }
   },
 
-  "paths": {}
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth 🔐"],
+        "summary": "For User Register",
+        "description": "Default OTP: 1111",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fullname": {
+                    "type": "string",
+                    "example": "mehranKhodaei"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "khodaei.dev@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "@Mehran1212"
+                  },
+                  "confirmPassword": {
+                    "type": "string",
+                    "example": "@Mehran1212"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success Register User, (Returned AccessToken)  and Saved Refreshtoken in Cookies"
+          },
+          "401": {
+            "description": "Email Already exist"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth 🔐"],
+        "summary": "For User Login",
+        "description": "For User Login with username and paassword",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "khodaei.dev@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "@Mehran1212"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "user logged in successfully ,(Returned AccessToken) and Saved Refreshtoken in Cookies"
+          },
+          "403": {
+            "description": "Invalid Data (Email Or Password)"
+          }
+        }
+      }
+    },
+
+    "/auth/refresh": {
+      "get": {
+        "summary": "Get New Access Token",
+        "description": "Retrieves a new access token using the refresh token stored in cookies.",
+        "operationId": "getNewAccessToken",
+        "tags": ["Authentication"],
+        "parameters": [
+          {
+            "name": "refreshToken",
+            "in": "cookie",
+            "required": true,
+            "description": "Refresh token for generating a new access token.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New access token generated successfully."
+          },
+          "401": {
+            "description": "Refresh token not provided or invalid."
+          },
+          "404": {
+            "description": "User not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ]
+      }
+    }
+  }
 }

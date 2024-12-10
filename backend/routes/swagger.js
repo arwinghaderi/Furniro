@@ -11,7 +11,7 @@ const swaggetOptions = {
 
 router.use("/", swaggerUi.serve);
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "production") {
   router.get("/", swaggerUi.setup(swaggerDocuments, swaggetOptions));
 } else {
   router.get("/", swaggerUi.setup(swaggerDocuments, swaggetOptions));

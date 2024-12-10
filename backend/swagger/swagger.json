@@ -13,12 +13,6 @@
         "scheme": "bearer",
         "bearerFormat": "JWT",
         "description": "User token for authentication: **Bearer [user_token]**"
-      },
-      "cookieAuth": {
-        "type": "apiKey",
-        "in": "cookie",
-        "name": "refreshToken",
-        "description": "The refresh token for generating a new access token."
       }
     }
   },
@@ -122,12 +116,166 @@
           "500": {
             "description": "Internal server error."
           }
-        },
+        }
+      }
+    },
+
+    "/auth/me": {
+      "get": {
+        "summary": "Get Authenticated User Information",
+        "description": "Returns information about the currently authenticated user.",
+        "tags": ["Auth 🔐"],
         "security": [
           {
-            "cookieAuth": []
+            "bearerAuth": []
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "User information retrieved successfully."
+          },
+          "401": {
+            "description": "Unauthorized - Token not provided or invalid(add Bearer in first of token)."
+          },
+          "403": {
+            "description": "Unauthorized -  token expire"
+          },
+          "404": {
+            "description": "User not found or token invalid."
+          }
+        }
+      }
+    },
+
+    "/auth/getCode": {
+      "post": {
+        "summary": "Request Reset Password Code",
+        "description": "Generates a reset password code and sends it to the provided email address.",
+        "tags": ["Auth 🔐"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "khodaei.dev@gmail.com"
+                  }
+                },
+                "required": ["email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reset password code sent successfully."
+          },
+          "404": {
+            "description": "Email not valid."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+
+    "/auth/verifyCode": {
+      "post": {
+        "summary": "Verify Reset Password Code",
+        "description": "Verifies the reset password code sent to the user's email and generates a token if successful.",
+        "tags": ["Auth 🔐"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "khodaei.dev@gmail.com"
+                  },
+                  "code": {
+                    "type": "string",
+                    "example": "12345"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Code verified successfully, returns a user token."
+          },
+          "400": {
+            "description": "The entered code is not correct."
+          },
+          "403": {
+            "description": "The code has expired, please request a new one."
+          },
+          "404": {
+            "description": "Email not valid."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/auth/reset-password/{token}": {
+      "post": {
+        "summary": "Reset Password",
+        "description": "Resets the user's password using a valid reset token.",
+        "tags": ["Auth 🔐"],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "description": "The reset password token.",
+            "schema": {
+              "type": "string",
+              "example": "a1b2c3d4e5f6g7h8i9j0"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "example": "newStrongPassword123!"
+                  },
+                  "confirmPassword": {
+                    "type": "string",
+                    "example": "newStrongPassword123!"
+                  }
+                },
+                "required": ["password", "confirmPassword"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password updated successfully."
+          },
+          "403": {
+            "description": "Invalid token or User not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
       }
     }
   }

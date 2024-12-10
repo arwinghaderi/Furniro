@@ -66,7 +66,6 @@ exports.userLogin = async (req, res, next) => {
       sameSite: "strict", // محافظت در برابر حملات CSRF
       maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
     });
-    console.log(refreshToken);
 
     return successResponse(res, 200, {
       accessToken,
@@ -216,7 +215,7 @@ exports.resetPassword = async (req, res, next) => {
 
     const verifyUser = await resetPasswordModel.findOne({ token });
     if (!verifyUser) {
-      return errorResponse(res, 404, "User Not Found");
+      return errorResponse(res, 403, "Invalid token or User not found");
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);

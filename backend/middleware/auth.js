@@ -29,7 +29,7 @@ exports.auth = async (req, res, next) => {
     const decoded = await jwt.decode(tokenValue, process.env.JWT_ACCESS_SECRET);
 
     if (!decoded) {
-      return errorResponse(res, 401, {
+      return errorResponse(res, 403, {
         message: "Token Expired already, Plz Login first",
       });
     }

@@ -10,6 +10,11 @@ const swaggetOptions = {
 };
 
 router.use("/", swaggerUi.serve);
-router.get("/", swaggerUi.setup(swaggerDocuments, swaggetOptions));
+
+if (process.env.NODE_ENV !== "production") {
+  router.get("/", swaggerUi.setup(swaggerDocuments, swaggetOptions));
+} else {
+  router.get("/", swaggerUi.setup(swaggerDocuments, swaggetOptions));
+}
 
 module.exports = router;

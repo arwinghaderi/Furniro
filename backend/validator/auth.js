@@ -43,3 +43,10 @@ exports.loginValidator = yup.object({
       "The password must contain at least one capital letter, one number, one special character and at least 8 characters"
     ),
 });
+
+exports.getResetPassCodeValidator = yup.object({
+  email: yup
+    .string()
+    .matches(emailRegex, "The email entered is not valid.")
+    .required(),
+});

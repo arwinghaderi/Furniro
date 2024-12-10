@@ -1,8 +1,10 @@
 const { errorResponse, successResponse } = require("../helper/responses");
 const { generateAccessToken } = require("../helper/token");
 const User = require("./../model/User");
+const resetPasswordModel = require("./../model/resetPassword");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodeMailer = require("nodemailer");
 
 exports.userRegister = async (req, res, next) => {
   try {
@@ -107,6 +109,90 @@ exports.getMe = async (req, res, next) => {
     user.password = undefined;
 
     return successResponse(res, 200, { user });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getResetPasswordCode = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return errorResponse(res, 404, "Email not Valid!!");
+    }
+
+    const resetCode = Math.floor(Math.random() * 99999);
+
+    const resetTokenExpireTime = Date.now() + 1000 * 60 * 3;
+
+    const resetPassword = new resetPasswordModel({
+      user: user._id,
+      code: resetCode,
+      expireIn: resetTokenExpireTime,
+    });
+
+    resetPassword.save();
+
+    const transporter = nodeMailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.APP_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: "Reset Password Code For Your Forniro Recovery Password",
+      html: `
+       <h2>Hi, ${user.fullname}</h2>
+       <h3> Your Recovery Password Code is ${resetCode} ✌️❤️</h3>
+      `,
+    };
+
+    transporter.sendMail(mailOptions);
+
+    return successResponse(res, 200, { message: "Reset Password Code Sent" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.verifyResetPasswordCode = async (req, res, next) => {
+  try {
+    const { code, email } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return errorResponse(res, 404, "Email not Valid!!");
+    }
+
+    const findCode = await resetPasswordModel.findOne({ user: user._id });
+    if (!findCode) {
+      return errorResponse(res, 404, "User Not Found!!");
+    }
+
+    if (findCode.expireIn.getTime() < Date.now()) {
+      await resetPasswordModel.findByIdAndDelete({ _id: findCode._id });
+      return successResponse(res, 403, "The Time of Code has expired");
+    }
+
+    if (code === findCode.code && findCode.expireIn.getTime() > Date.now()) {
+      await resetPasswordModel.deleteMany({ user: user._id });
+      return successResponse(res, 200, "Verified Code Successfully");
+    }
+
+    return errorResponse(res, 400, "The entered code is not correct");
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.resetPassword = async (req, res, next) => {
+  try {
   } catch (err) {
     next(err);
   }

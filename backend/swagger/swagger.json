@@ -108,18 +108,7 @@
         "summary": "Get New Access Token",
         "description": "Retrieves a new access token using the refresh token stored in cookies.",
         "operationId": "getNewAccessToken",
-        "tags": ["Authentication"],
-        "parameters": [
-          {
-            "name": "refreshToken",
-            "in": "cookie",
-            "required": true,
-            "description": "Refresh token for generating a new access token.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "tags": ["Auth 🔐"],
         "responses": {
           "200": {
             "description": "New access token generated successfully."

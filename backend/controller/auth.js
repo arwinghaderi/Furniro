@@ -62,6 +62,7 @@ exports.userLogin = async (req, res, next) => {
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true, // جلوگیری از دسترسی جاوااسکریپت
+      secure: true,
       sameSite: "strict", // محافظت در برابر حملات CSRF
       maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
     });
@@ -76,7 +77,7 @@ exports.userLogin = async (req, res, next) => {
 };
 
 exports.getNewAccessToken = async (req, res, next) => {
-  const refreshToken = req.cookies.refreshToken;
+  const refreshToken = req.cookies?.refreshToken;
   if (!refreshToken) {
     return errorResponse(res, 401, "'Refresh token not provided'");
   }

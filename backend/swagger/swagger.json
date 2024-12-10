@@ -13,9 +13,7 @@
         "scheme": "bearer",
         "bearerFormat": "JWT",
         "description": "User token for authentication: **Bearer [user_token]**"
-      }
-    },
-    "securitySchemes": {
+      },
       "cookieAuth": {
         "type": "apiKey",
         "in": "cookie",

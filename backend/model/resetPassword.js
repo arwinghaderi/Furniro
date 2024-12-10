@@ -11,6 +11,9 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    token: {
+      type: String,
+    },
     expireIn: {
       type: Date,
       required: true,

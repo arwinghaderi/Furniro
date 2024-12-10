@@ -5,6 +5,7 @@ const resetPasswordModel = require("./../model/resetPassword");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodeMailer = require("nodemailer");
+const crypto = require("crypto");
 
 exports.userRegister = async (req, res, next) => {
   try {
@@ -125,7 +126,7 @@ exports.getResetPasswordCode = async (req, res, next) => {
 
     const resetCode = Math.floor(Math.random() * 99999);
 
-    const resetTokenExpireTime = Date.now() + 1000;
+    const resetTokenExpireTime = Date.now() + 1000 * 60 * 3;
 
     const resetPassword = new resetPasswordModel({
       user: user._id,
@@ -185,8 +186,19 @@ exports.verifyResetPasswordCode = async (req, res, next) => {
     }
 
     if (code === findCode.code && findCode.expireIn.getTime() > Date.now()) {
-      await resetPasswordModel.deleteMany({ user: user._id });
-      return successResponse(res, 200, "Verified Code Successfully");
+      const userToken = crypto.randomBytes(24).toString("hex");
+
+      await resetPasswordModel.findOneAndUpdate(
+        { user: user._id },
+        {
+          $set: { token: userToken },
+        }
+      );
+
+      return successResponse(res, 200, {
+        message: "Verified Code Successfully",
+        userToken,
+      });
     }
 
     return errorResponse(res, 400, "The entered code is not correct");
@@ -197,6 +209,31 @@ exports.verifyResetPasswordCode = async (req, res, next) => {
 
 exports.resetPassword = async (req, res, next) => {
   try {
+    const { password } = req.body;
+    const { token } = req.params;
+
+    const verifyUser = await resetPasswordModel.findOne({ token });
+    if (!verifyUser) {
+      return errorResponse(res, 404, "User Not Found");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const user = await User.findOneAndUpdate(
+      { _id: verifyUser.user },
+      {
+        $set: { password: hashedPassword },
+      },
+      { new: true }
+    );
+
+    user.password = undefined;
+
+    await resetPasswordModel.findByIdAndDelete({ _id: verifyUser._id });
+
+    return successResponse(res, 200, {
+      message: "Password Updated Successfully",
+      user,
+    });
   } catch (err) {
     next(err);
   }

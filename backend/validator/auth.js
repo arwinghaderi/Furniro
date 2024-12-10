@@ -50,3 +50,20 @@ exports.getResetPassCodeValidator = yup.object({
     .matches(emailRegex, "The email entered is not valid.")
     .required(),
 });
+
+exports.resetPasswordValidator = yup.object({
+  password: yup
+    .string()
+    .required()
+    .matches(
+      passwordRegex,
+      "The password must contain at least one capital letter, one number, one special character and at least 8 characters"
+    ),
+  confirmPassword: yup
+    .string()
+    .oneOf(
+      [yup.ref("password"), null],
+      "The Password does not match with Confirm Password"
+    )
+    .required(),
+});

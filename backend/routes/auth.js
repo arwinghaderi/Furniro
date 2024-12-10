@@ -12,6 +12,7 @@ const validator = require("./../middleware/validator");
 const {
   registerValidator,
   getResetPassCodeValidator,
+  resetPasswordValidator,
 } = require("../validator/auth");
 const { auth } = require("../middleware/auth");
 
@@ -27,7 +28,11 @@ router.route("/me").get(auth, getMe);
 router
   .route("/getCode")
   .post(validator(getResetPassCodeValidator), getResetPasswordCode);
+
 router.route("/verifyCode").post(verifyResetPasswordCode);
-router.route("/reset-password").post(resetPassword);
+
+router
+  .route("/reset-password/:token")
+  .post(validator(resetPasswordValidator), resetPassword);
 
 module.exports = router;

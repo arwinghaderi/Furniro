@@ -34,9 +34,11 @@ exports.userRegister = async (req, res, next) => {
       sameSite: "strict", // محافظت در برابر حملات CSRF
       maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
     });
+    user.password = undefined;
 
     return successResponse(res, 201, {
       accessToken,
+      user,
     });
   } catch (err) {
     next(err);
@@ -66,9 +68,11 @@ exports.userLogin = async (req, res, next) => {
       sameSite: "strict", // محافظت در برابر حملات CSRF
       maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
     });
+    user.password = undefined;
 
     return successResponse(res, 200, {
       accessToken,
+      user,
     });
   } catch (err) {
     next(err);

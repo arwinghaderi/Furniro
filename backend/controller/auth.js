@@ -13,7 +13,7 @@ exports.userRegister = async (req, res, next) => {
 
     const isExistUser = await User.findOne({ email });
     if (isExistUser) {
-      return errorResponse(res, 401, "User Email has Exist");
+      return errorResponse(res, 401, { message: "User Email has Exist" });
     }
 
     const hashPassword = await bcrypt.hash(password, 12);
@@ -51,12 +51,16 @@ exports.userLogin = async (req, res, next) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return errorResponse(res, 403, "Invalid Email Or Password !!");
+      return errorResponse(res, 403, {
+        message: "Invalid Email Or Password !!",
+      });
     }
 
     const comparePassword = await bcrypt.compare(password, user.password);
     if (!comparePassword) {
-      return errorResponse(res, 403, "Invalid Email Or Password !!");
+      return errorResponse(res, 403, {
+        message: "Invalid Email Or Password !!",
+      });
     }
 
     const accessToken = generateAccessToken(user.id);
@@ -82,7 +86,7 @@ exports.userLogin = async (req, res, next) => {
 exports.getNewAccessToken = async (req, res, next) => {
   const refreshToken = req.cookies?.refreshToken;
   if (!refreshToken) {
-    return errorResponse(res, 401, "'Refresh token not provided'");
+    return errorResponse(res, 401, { message: "Refresh token not provided" });
   }
 
   try {
@@ -90,7 +94,7 @@ exports.getNewAccessToken = async (req, res, next) => {
 
     const user = await User.findById(id);
     if (!user) {
-      return errorResponse(res, 404, "User Not Found");
+      return errorResponse(res, 404, { message: "User Not Found" });
     }
 
     const accessToken = generateAccessToken(user.id);
@@ -126,7 +130,7 @@ exports.getResetPasswordCode = async (req, res, next) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return errorResponse(res, 404, "Email not Valid!!");
+      return errorResponse(res, 404, { message: "Email not Valid!!" });
     }
 
     const resetCode = Math.floor(Math.random() * 99999);
@@ -173,21 +177,21 @@ exports.verifyResetPasswordCode = async (req, res, next) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return errorResponse(res, 404, "Email not Valid!!");
+      return errorResponse(res, 404, { message: "Email not Valid!!" });
     }
 
     const findCode = await resetPasswordModel.findOne({ user: user._id });
     if (!findCode) {
-      return errorResponse(res, 400, "The entered code is not correct");
+      return errorResponse(res, 400, {
+        message: "The entered code is not correct",
+      });
     }
 
     if (code === findCode.code && findCode.expireIn.getTime() < Date.now()) {
       await resetPasswordModel.findByIdAndDelete({ _id: findCode._id });
-      return successResponse(
-        res,
-        403,
-        "The Time of Code has expired , Plz Get a new one"
-      );
+      return successResponse(res, 403, {
+        message: "The Time of Code has expired , Plz Get a new one",
+      });
     }
 
     if (code === findCode.code && findCode.expireIn.getTime() > Date.now()) {
@@ -206,7 +210,9 @@ exports.verifyResetPasswordCode = async (req, res, next) => {
       });
     }
 
-    return errorResponse(res, 400, "The entered code is not correct");
+    return errorResponse(res, 400, {
+      message: "The entered code is not correct",
+    });
   } catch (err) {
     next(err);
   }
@@ -219,7 +225,9 @@ exports.resetPassword = async (req, res, next) => {
 
     const verifyUser = await resetPasswordModel.findOne({ token });
     if (!verifyUser) {
-      return errorResponse(res, 403, "Invalid token or User not found");
+      return errorResponse(res, 403, {
+        message: "Invalid token or User not found",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -236,7 +244,7 @@ exports.resetPassword = async (req, res, next) => {
     await resetPasswordModel.findByIdAndDelete({ _id: verifyUser._id });
 
     return successResponse(res, 200, {
-      message: "Password Updated Successfully",
+      message: { message: "Password Updated Successfully" },
       user,
     });
   } catch (err) {
@@ -248,7 +256,7 @@ exports.logOut = async (req, res, next) => {
   const refreshToken = req.cookies?.refreshToken;
 
   if (!refreshToken) {
-    return errorResponse(res, 400, "No token found");
+    return errorResponse(res, 400, { message: "No token found" });
   }
 
   try {

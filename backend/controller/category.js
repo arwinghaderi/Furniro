@@ -9,7 +9,9 @@ exports.createCategory = async (req, res, next) => {
       $or: [{ title }, { href }],
     });
     if (isExistCategory) {
-      return errorResponse(res, 400, "Category title or href Already exist");
+      return errorResponse(res, 400, {
+        message: "Category title or href Already exist",
+      });
     }
 
     const category = await categoryModel.create({
@@ -29,7 +31,7 @@ exports.getAllCategories = async (req, res, next) => {
       .find({})
       .select("-createdAt -updatedAt -__v");
     if (!categories) {
-      return errorResponse(res, 404, "Category Not Found!!");
+      return errorResponse(res, 404, { message: "Category Not Found!!" });
     }
 
     return successResponse(res, 200, { categories });

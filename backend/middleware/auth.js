@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("./../model/User");
-const { successResponse, errorResponse } = require("./../helper/token");
+const { errorResponse } = require("../helper/responses");
 
 exports.auth = async (req, res, next) => {
   try {

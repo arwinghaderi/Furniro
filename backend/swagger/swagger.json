@@ -277,6 +277,29 @@
           }
         }
       }
+    },
+    "/auth/log-out": {
+      "post": {
+        "summary": "Log out user",
+        "description": "Clears the refresh token from cookie .",
+        "tags": ["Auth 🔐"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logout successful"
+          },
+          "400": {
+            "description": "No token found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
     }
   }
 }

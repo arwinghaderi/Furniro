@@ -7,6 +7,7 @@ const {
   resetPassword,
   verifyResetPasswordCode,
   getResetPasswordCode,
+  logOut,
 } = require("./../controller/auth");
 const validator = require("./../middleware/validator");
 const {
@@ -34,5 +35,7 @@ router.route("/verifyCode").post(verifyResetPasswordCode);
 router
   .route("/reset-password/:token")
   .post(validator(resetPasswordValidator), resetPassword);
+
+router.route("/log-out").post(auth, logOut);
 
 module.exports = router;

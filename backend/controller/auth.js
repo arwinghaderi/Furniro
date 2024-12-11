@@ -243,3 +243,19 @@ exports.resetPassword = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.logOut = async (req, res, next) => {
+  const refreshToken = req.cookies?.refreshToken;
+
+  if (!refreshToken) {
+    return errorResponse(res, 400, "No token found");
+  }
+
+  try {
+    res.clearCookie("refreshToken", { httpOnly: true, sameSite: "strict" });
+
+    return successResponse(res, 200, "You Logout Successfully");
+  } catch (err) {
+    next(err);
+  }
+};

@@ -47,7 +47,7 @@ export const getingUaerInformation = async () => {
     }
 
     const response = await fetch(`https://furniro-6x7f.onrender.com/auth/me`, {
-        method: "POST",
+        method: "GET",
         headers: {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${token}`

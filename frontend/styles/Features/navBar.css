@@ -91,3 +91,10 @@
 .hamburger {
     display: none;
 }
+
+.navbar-successfully-Register-Loading {
+    background-color: #ffff;
+    color: black;
+    width: 4rem;
+    height: 4rem
+}

@@ -206,7 +206,7 @@ const fetchAndSendLoginData = async () => {
         email: loginEmailInput.value.trim(),
         password: loginPasswordInput.value.trim()
     }
-    
+
     try {
         let response = await fetch("https://furniro-6x7f.onrender.com/auth/login", {
             method: "POST",
@@ -215,14 +215,15 @@ const fetchAndSendLoginData = async () => {
             },
             body: JSON.stringify(userInformation),
         })
+        const loginData = await response.json();
         if (!response.ok) {
-            const message = loginErrorMessages[response.status] || getDefaultErrorMessage();
+            const message = loginData.error.message;
             throw new Error(message);
         }
-        const loginData = await response.json();
+
         const fullName = loginData.data.user.fullname
         saveToLocalStorage("Access-Token", loginData.data.accessToken)
-        showSwal(`Your login was successful. Welcome ${fullName} .`, "success", "Go to HomePage", "../../index.html")
+        showSwal(`Your login was successful. Welcome ${fullName} .`, "success", "Go to HomePage", "../index.html")
     } catch (error) {
         showSwal(`${error.message}`, "error", ' Correction of information', "../../Pages/auth.html")
     } finally {

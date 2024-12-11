@@ -1,4 +1,5 @@
 import { getingUaerInformation, checkingLoginStatus } from "./auth/utils.js"
+import { showSwal } from "./func/utils.js"
 const $ = document
 const hamburger = $.querySelector(".hamburger")
 const contenerMenuMobail = $.querySelector(".contener-menu-mobail")
@@ -18,26 +19,39 @@ menuLink.forEach(function (menuLink) {
 const dontLogin = $.querySelector(".dont-login")
 const loginSuccessfully = $.querySelector(".login-successfully")
 const navbarSuccessfullyRegisterText = $.querySelector(".navbar-successfully-Register-text")
+const navbarSuccessfullyRegisterLoading = $.querySelector(".navbar-successfully-Register-Loading")
 const navbarDontRegisterText = $.querySelector(".navbar-dont-Register-text")
 
-
-const handleUserAuthentication = () => {
-    const isLogin = checkingLoginStatus()
-    if (isLogin) {
-        getingUaerInformation().then((data) => {
-            const email = data.payload.email
-            const username = email.split('@')[0]
-
-            loginSuccessfully.style.display = "flex"
-            dontLogin.style.display = "none"
-            navbarSuccessfullyRegisterText.innerHTML = username
-        })
-    } else {
-        navbarDontRegisterText.innerHTML = `sign In/sign Up`
-        dontLogin.style.display = "flex"
-        loginSuccessfully.style.display = "none"
+const handleUserAuthentication = async () => {
+    const isLogin = checkingLoginStatus();
+    navbarSuccessfullyRegisterLoading.style.display = "flex";
+    console.log(navbarSuccessfullyRegisterLoading);
+    try {
+        if (isLogin) {
+            try {
+                const userData = await getingUaerInformation();
+                if (userData && userData.success) {
+                    const fullName = userData.data.user.fullname;
+                    loginSuccessfully.style.display = "flex";
+                    dontLogin.style.display = "none";
+                    navbarSuccessfullyRegisterText.innerHTML = fullName;
+                } else {
+                    throw new Error(userData.error.message);
+                }
+            } catch (Error) {
+                showSwal(`${Error}`, "error", 'Correction of information', "../../Pages/auth.html");
+            }
+        } else {
+            navbarDontRegisterText.innerHTML = `Sign In/Sign Up`;
+            dontLogin.style.display = "flex";
+            loginSuccessfully.style.display = "none";
+        }
+    } catch (error) {
+        console.error(error);
+        showSwal(`${error.message}`, "error", 'Correction of information', "../../Pages/auth.html");
+    } finally {
+        navbarSuccessfullyRegisterLoading.style.display = "none";
     }
-
 }
 
 loginSuccessfully.addEventListener("click", () => {

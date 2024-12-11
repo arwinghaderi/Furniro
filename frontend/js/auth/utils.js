@@ -45,12 +45,12 @@ export const getingUaerInformation = async () => {
     if (!token) {
         return false
     }
-    console.log(token);
-    const response = await fetch(`http://localhost:3000/user/api/get-user-info`, {
+
+    const response = await fetch(`https://furniro-6x7f.onrender.com/auth/me`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
-            'access_token': `Bearer ${token}`
+            'authorization': `Bearer ${token}`
         }
     })
 

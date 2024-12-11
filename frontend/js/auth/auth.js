@@ -208,7 +208,7 @@ const fetchAndSendLoginData = async () => {
     }
 
     try {
-        let response = await fetch("http://localhost:3000/auth/api/login", {
+        let response = await fetch("https://furniro-6x7f.onrender.com/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

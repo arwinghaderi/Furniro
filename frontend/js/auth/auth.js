@@ -216,6 +216,7 @@ const fetchAndSendLoginData = async () => {
             body: JSON.stringify(userInformation),
         })
         const loginData = await response.json();
+        console.log(loginData);
         if (!response.ok) {
             const message = loginData.error.message;
             throw new Error(message);

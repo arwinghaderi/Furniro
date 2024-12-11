@@ -1,5 +1,6 @@
 import { getingUaerInformation, checkingLoginStatus } from "./auth/utils.js"
 import { showSwal } from "./func/utils.js"
+import { getToken } from "./func/utils.js"
 const $ = document
 const hamburger = $.querySelector(".hamburger")
 const contenerMenuMobail = $.querySelector(".contener-menu-mobail")
@@ -22,39 +23,51 @@ const navbarSuccessfullyRegisterText = $.querySelector(".navbar-successfully-Reg
 const navbarSuccessfullyRegisterLoading = $.querySelector(".navbar-successfully-Register-Loading")
 const navbarDontRegisterText = $.querySelector(".navbar-dont-Register-text")
 
+
+const fetchLogoutUser = async () => {
+    const token = getToken()
+    console.log(token);
+    if (!token) {
+        return false
+    }
+
+    const response = await fetch("https://furniro-6x7f.onrender.com/auth/log-out", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`
+        },
+        credentials: "include"
+    })
+    const userData = await response.json()
+    console.log(userData);
+    return userData
+}
+
 const handleUserAuthentication = async () => {
     const isLogin = checkingLoginStatus();
     navbarSuccessfullyRegisterLoading.style.display = "flex";
-    console.log(navbarSuccessfullyRegisterLoading);
-    try {
-        if (isLogin) {
-            try {
-                const userData = await getingUaerInformation();
-                if (userData && userData.success) {
-                    const fullName = userData.data.user.fullname;
-                    loginSuccessfully.style.display = "flex";
-                    dontLogin.style.display = "none";
-                    navbarSuccessfullyRegisterText.innerHTML = fullName;
-                } else {
-                    throw new Error(userData.error.message);
-                }
-            } catch (Error) {
-                showSwal(`${Error}`, "error", 'Correction of information', "../../Pages/auth.html");
-            }
-        } else {
-            navbarDontRegisterText.innerHTML = `Sign In/Sign Up`;
-            dontLogin.style.display = "flex";
-            loginSuccessfully.style.display = "none";
-        }
-    } catch (error) {
-        console.error(error);
-        showSwal(`${error.message}`, "error", 'Correction of information', "../../Pages/auth.html");
-    } finally {
-        navbarSuccessfullyRegisterLoading.style.display = "none";
+
+    if (isLogin) {
+        const userData = await getingUaerInformation();
+
+        const fullName = userData.data.user.fullname;
+        loginSuccessfully.style.display = "flex";
+        dontLogin.style.display = "none";
+        navbarSuccessfullyRegisterText.innerHTML = fullName;
+
+    } else {
+        navbarDontRegisterText.innerHTML = `Sign In/Sign Up`;
+        dontLogin.style.display = "flex";
+        loginSuccessfully.style.display = "none";
     }
+
+    navbarSuccessfullyRegisterLoading.style.display = "none";
 }
 
-loginSuccessfully.addEventListener("click", () => {
+loginSuccessfully.addEventListener("click", async () => {
+
+
     Swal.fire({
         title: "Exit Account?",
         text: "Click here to securely log out of your account.",
@@ -64,19 +77,20 @@ loginSuccessfully.addEventListener("click", () => {
         confirmButtonColor: "#B88E2F",
         cancelButtonColor: "red",
         confirmButtonText: "Log Out"
-    }).then((result) => {
+    }).then(async (result) => {
         if (result.isConfirmed) {
-            localStorage.removeItem('Access-Token');
-            handleUserAuthentication()
-
-            Swal.fire({
-                title: "Logged Out Successfully",
-                text: "You have been logged out. Thank you for visiting. Have a great day!",
-                icon: "success",
-                customClass: { popup: 'custom-swal2' },
-                confirmButtonText: 'ok',
-                confirmButtonColor: "#B88E2F",
-            });
+            const userData = await fetchLogoutUser();
+            console.log(userData);
+            // localStorage.removeItem('Access-Token');
+            //   handleUserAuthentication()
+            // Swal.fire({
+            //     title: "Logged Out Successfully",
+            //     text: "You have been logged out. Thank you for visiting. Have a great day!",
+            //     icon: "success",
+            //     customClass: { popup: 'custom-swal2' },
+            //     confirmButtonText: 'ok',
+            //     confirmButtonColor: "#B88E2F",
+            // });
         }
     });
 })

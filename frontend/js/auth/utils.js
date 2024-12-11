@@ -50,7 +50,7 @@ export const getingUaerInformation = async () => {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
-            'authorization ': `Bearer ${token}`
+            'authorization': `Bearer ${token}`
         }
     })
 

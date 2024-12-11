@@ -300,6 +300,60 @@
           }
         }
       }
+    },
+
+    "/category/": {
+      "post": {
+        "summary": "Create a new category",
+        "description": "Creates a new category if the title or href does not already exist.",
+        "tags": ["Admin Dashboard 📈"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string", "example": "sofas" },
+                  "href": { "type": "string", "example": "sofas" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Category created successfully."
+          },
+          "400": {
+            "description": "Category title or href already exists."
+          },
+          "401": {
+            "description": "Token not found , or You can't Access this routes"
+          },
+          "404": {
+            "description": "User Not found , Plz Send Valid token"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all categories",
+        "description": "Returns a list of all categories.",
+        "tags": ["Category 📂"],
+        "responses": {
+          "200": {
+            "description": "List of categories retrieved successfully."
+          },
+          "404": {
+            "description": "No categories found."
+          }
+        }
+      }
     }
   }
 }

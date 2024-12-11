@@ -68,7 +68,7 @@ exports.userLogin = async (req, res, next) => {
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true, // جلوگیری از دسترسی جاوااسکریپت
-      secure: true,
+      // secure: true,
       sameSite: "strict", // محافظت در برابر حملات CSRF
       maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
     });

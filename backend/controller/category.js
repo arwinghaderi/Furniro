@@ -22,3 +22,18 @@ exports.createCategory = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getAllCategories = async (req, res, next) => {
+  try {
+    const categories = await categoryModel
+      .find({})
+      .select("-createdAt -updatedAt -__v");
+    if (!categories) {
+      return errorResponse(res, 404, "Category Not Found!!");
+    }
+
+    return successResponse(res, 200, { categories });
+  } catch (err) {
+    next(err);
+  }
+};

@@ -278,11 +278,11 @@
         }
       }
     },
-    "/log-out": {
+    "/auth/log-out": {
       "post": {
         "summary": "User Logout",
         "description": "Logs out a user by deleting the provided refresh token.",
-        "tags": ["Authentication"],
+        "tags": ["Auth 🔐"],
         "security": [
           {
             "bearerAuth": []

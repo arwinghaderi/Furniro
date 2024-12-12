@@ -60,6 +60,8 @@ exports.userLogin = async (req, res, next) => {
       });
     }
 
+    await refreshTokenModel.findOneAndDelete({ user: user._id });
+
     const accessToken = generateAccessToken(user.id);
     const refreshToken = await refreshTokenModel.createToken(user);
 

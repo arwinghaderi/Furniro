@@ -30,7 +30,7 @@ exports.auth = async (req, res, next) => {
 
     if (!decoded) {
       return errorResponse(res, 403, {
-        message: "Unauthorized !! Token Expired - Plz login first",
+        message: "Unauthorized !! Token Expired",
       });
     }
 

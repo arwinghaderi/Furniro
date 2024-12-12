@@ -88,7 +88,7 @@ exports.getNewAccessToken = async (req, res, next) => {
     const userId = await refreshTokenModel.verifyToken(refreshToken);
     if (!userId) {
       return errorResponse(res, 401, {
-        message: "Plz Login or register first",
+        message: "Refresh token not provided or Invalid",
       });
     }
 

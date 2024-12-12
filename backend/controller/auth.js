@@ -2,6 +2,7 @@ const { errorResponse, successResponse } = require("../helper/responses");
 const { generateAccessToken } = require("../helper/token");
 const User = require("./../model/User");
 const resetPasswordModel = require("./../model/resetPassword");
+const refreshTokenModel = require("./../model/refreshToken");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodeMailer = require("nodemailer");
@@ -27,17 +28,13 @@ exports.userRegister = async (req, res, next) => {
     });
 
     const accessToken = generateAccessToken(user.id);
-    const refreshToken = generateAccessToken(user.id);
+    const refreshToken = await refreshTokenModel.createToken(user);
 
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true, // جلوگیری از دسترسی جاوااسکریپت
-      sameSite: "strict", // محافظت در برابر حملات CSRF
-      maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
-    });
     user.password = undefined;
 
     return successResponse(res, 201, {
       accessToken,
+      refreshToken,
       user,
     });
   } catch (err) {
@@ -64,18 +61,13 @@ exports.userLogin = async (req, res, next) => {
     }
 
     const accessToken = generateAccessToken(user.id);
-    const refreshToken = generateAccessToken(user.id);
+    const refreshToken = await refreshTokenModel.createToken(user);
 
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true, // جلوگیری از دسترسی جاوااسکریپت
-      secure: true,
-      sameSite: "strict", // محافظت در برابر حملات CSRF
-      maxAge: 10 * 24 * 60 * 60 * 1000, // مدت اعتبار (مثلاً 7 روز)
-    });
     user.password = undefined;
 
     return successResponse(res, 200, {
       accessToken,
+      refreshToken,
       user,
     });
   } catch (err) {
@@ -84,15 +76,21 @@ exports.userLogin = async (req, res, next) => {
 };
 
 exports.getNewAccessToken = async (req, res, next) => {
-  const refreshToken = req.cookies?.refreshToken;
-  if (!refreshToken) {
-    return errorResponse(res, 401, { message: "Refresh token not provided" });
-  }
-
   try {
-    const { id } = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+    const { refreshToken } = req.body;
 
-    const user = await User.findById(id);
+    if (!refreshToken) {
+      return errorResponse(res, 401, { message: "Refresh token not provided" });
+    }
+
+    const userId = await refreshTokenModel.verifyToken(refreshToken);
+    if (userId) {
+      return errorResponse(res, 401, {
+        message: "Plz Login or register first",
+      });
+    }
+
+    const user = await User.findById(userId);
     if (!user) {
       return errorResponse(res, 404, { message: "User Not Found" });
     }
@@ -253,14 +251,14 @@ exports.resetPassword = async (req, res, next) => {
 };
 
 exports.logOut = async (req, res, next) => {
-  const refreshToken = req.cookies?.refreshToken;
-
-  if (!refreshToken) {
-    return errorResponse(res, 400, { message: "No token found" });
-  }
-
   try {
-    res.clearCookie("refreshToken", { httpOnly: true, sameSite: "strict" });
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      return errorResponse(res, 400, { message: "No token found" });
+    }
+
+    await refreshTokenModel.findOneAndDelete({ token: refreshToken });
 
     return successResponse(res, 200, "You Logout Successfully");
   } catch (err) {

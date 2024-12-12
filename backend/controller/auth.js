@@ -110,11 +110,6 @@ exports.getNewAccessToken = async (req, res, next) => {
 exports.getMe = async (req, res, next) => {
   try {
     const user = req.user;
-    if (!user) {
-      return errorResponse(res, 404, {
-        message: "User Not found Or Token Not Valid!! , Plz login First",
-      });
-    }
 
     user.password = undefined;
 

@@ -255,7 +255,9 @@ exports.logOut = async (req, res, next) => {
     const { refreshToken } = req.body;
 
     if (!refreshToken) {
-      return errorResponse(res, 400, { message: "No token found" });
+      return errorResponse(res, 400, {
+        message: "refreshToken dont Receive from Body",
+      });
     }
 
     await refreshTokenModel.findOneAndDelete({ token: refreshToken });

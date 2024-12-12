@@ -30,7 +30,7 @@ exports.auth = async (req, res, next) => {
 
     if (!decoded) {
       return errorResponse(res, 403, {
-        message: "Token Expired already, Plz Login first",
+        message: "Plz Login first",
       });
     }
 
@@ -39,7 +39,7 @@ exports.auth = async (req, res, next) => {
     const user = await userModel.findById(userId);
     if (!user) {
       return errorResponse(res, 404, {
-        message: "User Not found , Plz Send Valid token",
+        message: "User Not found",
       });
     }
 

@@ -53,7 +53,7 @@
         },
         "responses": {
           "201": {
-            "description": "Success Register User, (Returned AccessToken)  and Saved Refreshtoken in Cookies"
+            "description": "Success Register User, (Returned AccessToken and RefreshToken)  and Saved Refreshtoken in Cookies"
           },
           "401": {
             "description": "Email Already exist"
@@ -88,7 +88,7 @@
         },
         "responses": {
           "200": {
-            "description": "user logged in successfully ,(Returned AccessToken) and Saved Refreshtoken in Cookies"
+            "description": "user logged in successfully ,(Returned AccessToken and refreshToken) and Saved Refreshtoken in Cookies"
           },
           "403": {
             "description": "Invalid Data (Email Or Password)"
@@ -278,22 +278,46 @@
         }
       }
     },
-    "/auth/log-out": {
+    "/log-out": {
       "post": {
-        "summary": "Log out user",
-        "description": "Clears the refresh token from cookie .",
-        "tags": ["Auth 🔐"],
+        "summary": "User Logout",
+        "description": "Logs out a user by deleting the provided refresh token.",
+        "tags": ["Authentication"],
         "security": [
           {
             "bearerAuth": []
           }
         ],
+        "requestBody": {
+          "description": "Refresh token to be invalidated",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "type": "string",
+                    "example": "your_refresh_token_here"
+                  }
+                },
+                "required": ["refreshToken"]
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Logout successful"
+            "description": "Successful logout"
           },
           "400": {
-            "description": "No token found"
+            "description": "refreshToken dont Receive from Body"
+          },
+          "403": {
+            "description": "Plz Login first"
+          },
+          "404": {
+            "description": "User Not Found"
           },
           "500": {
             "description": "Internal server error"
@@ -301,7 +325,6 @@
         }
       }
     },
-
     "/category/": {
       "post": {
         "summary": "Create a new category",

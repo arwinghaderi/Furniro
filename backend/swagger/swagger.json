@@ -105,7 +105,7 @@
         "tags": ["Auth 🔐"],
         "responses": {
           "200": {
-            "description": "New access token generated successfully."
+            "description": "New access and Refreshtoken generated successfully."
           },
           "401": {
             "description": "Refresh token not provided or invalid."

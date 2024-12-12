@@ -86,7 +86,7 @@ exports.getNewAccessToken = async (req, res, next) => {
     }
 
     const userId = await refreshTokenModel.verifyToken(refreshToken);
-    if (userId) {
+    if (!userId) {
       return errorResponse(res, 401, {
         message: "Plz Login or register first",
       });
@@ -96,11 +96,14 @@ exports.getNewAccessToken = async (req, res, next) => {
     if (!user) {
       return errorResponse(res, 404, { message: "User Not Found" });
     }
+    await refreshTokenModel.findOneAndDelete({ token: refreshToken });
 
-    const accessToken = generateAccessToken(user.id);
+    const newAccessToken = generateAccessToken(user.id);
+    const newRefreshToken = await refreshTokenModel.createToken(user);
 
     return successResponse(res, 200, {
-      accessToken,
+      newAccessToken,
+      newRefreshToken,
     });
   } catch (err) {
     next(err);

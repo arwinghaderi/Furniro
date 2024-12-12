@@ -6,7 +6,9 @@ exports.isAdmin = (req, res, next) => {
     if (user.role === "ADMIN") {
       return next();
     }
-    return errorResponse(res, 401, { message: "You can't Access this routes" });
+    return errorResponse(res, 403, {
+      message: "Forbidden. Only admins can access this route",
+    });
   } catch (err) {
     next(err);
   }

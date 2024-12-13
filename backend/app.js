@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const authRouter = require("./routes/auth");
 const categoryRouter = require("./routes/category");
 const newsletterRouter = require("./routes/newsletter");
+const concatRouter = require("./routes/contact");
 const apiDocRouter = require("./routes/swagger");
 const { errorResponse } = require("./helper/responses");
 const { errorHandler } = require("./middleware/errorHandler");
@@ -24,6 +25,7 @@ app.use("/images", express.static(path.resolve(__dirname, "public/images")));
 app.use("/auth", authRouter);
 app.use("/category", categoryRouter);
 app.use("/newsletter", newsletterRouter);
+app.use("/concat", concatRouter);
 app.use("/apis", apiDocRouter);
 app.use("*", (req, res) => {
   return errorResponse(res, 404, {

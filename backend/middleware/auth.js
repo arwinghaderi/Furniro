@@ -7,7 +7,7 @@ exports.auth = async (req, res, next) => {
     const token = req.headers["authorization"];
     if (!token) {
       return errorResponse(res, 401, {
-        message: "Token not found , Plz Login or Register first",
+        message: "Unauthorized !! - token Not Found",
       });
     }
     const validToken = token.split(" ");
@@ -22,7 +22,7 @@ exports.auth = async (req, res, next) => {
 
     if (!tokenValue) {
       return errorResponse(res, 401, {
-        message: "Token not found , Plz Login or Register first",
+        message: "Unauthorized !! - Token not correct Format",
       });
     }
 
@@ -30,7 +30,7 @@ exports.auth = async (req, res, next) => {
 
     if (!decoded) {
       return errorResponse(res, 403, {
-        message: "Token Expired already, Plz Login first",
+        message: "Unauthorized !! Token Expired",
       });
     }
 
@@ -39,7 +39,7 @@ exports.auth = async (req, res, next) => {
     const user = await userModel.findById(userId);
     if (!user) {
       return errorResponse(res, 404, {
-        message: "User Not found , Plz Send Valid token",
+        message: "User Not found",
       });
     }
 

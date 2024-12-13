@@ -22,7 +22,7 @@
       "post": {
         "tags": ["Auth 🔐"],
         "summary": "For User Register",
-        "description": "Default OTP: 1111",
+        "description": "User rigister routes",
         "requestBody": {
           "required": true,
           "content": {
@@ -53,7 +53,24 @@
         },
         "responses": {
           "201": {
-            "description": "Success Register User, (Returned AccessToken)  and Saved Refreshtoken in Cookies"
+            "description": "Success Register User, (Returned AccessToken and RefreshToken)  and Saved Refreshtoken in Cookies",
+            "content": {
+              "application/json": {
+                "example": {
+                  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                  "AccessToken-expiresIn": "14 minute",
+                  "refreshToken": "dcbdc-kjcjdsc-cjdc-sjjdsc",
+                  "RefreshToken-expiresIn": "7 day",
+                  "user": {
+                    "_id": "37266829r8ucuef327",
+                    "fullname": "mehran",
+                    "role": "USER",
+                    "email": "example@gmail.com",
+                    "__v": 0
+                  }
+                }
+              }
+            }
           },
           "401": {
             "description": "Email Already exist"
@@ -65,7 +82,7 @@
       "post": {
         "tags": ["Auth 🔐"],
         "summary": "For User Login",
-        "description": "For User Login with username and paassword",
+        "description": "For User Login with email and paassword",
         "requestBody": {
           "required": true,
           "content": {
@@ -88,7 +105,24 @@
         },
         "responses": {
           "200": {
-            "description": "user logged in successfully ,(Returned AccessToken) and Saved Refreshtoken in Cookies"
+            "description": "user logged in successfully ,(Returned AccessToken and refreshToken) and Saved Refreshtoken in Cookies",
+            "content": {
+              "application/json": {
+                "example": {
+                  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                  "AccessToken-expiresIn": "14 minute",
+                  "refreshToken": "dcbdc-kjcjdsc-cjdc-sjjdsc",
+                  "RefreshToken-expiresIn": "7 day",
+                  "user": {
+                    "_id": "37266829r8ucuef327",
+                    "fullname": "mehran",
+                    "role": "USER",
+                    "email": "example@gmail.com",
+                    "__v": 0
+                  }
+                }
+              }
+            }
           },
           "403": {
             "description": "Invalid Data (Email Or Password)"
@@ -103,9 +137,36 @@
         "description": "Retrieves a new access token using the refresh token stored in cookies.",
         "operationId": "getNewAccessToken",
         "tags": ["Auth 🔐"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "type": "string",
+                    "example": "djhdi-dehdhi-ajeucm-alcsaxclamxj"
+                  }
+                },
+                "required": ["refreshToken"]
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "New access token generated successfully."
+            "description": "New access and Refreshtoken generated successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                  "AccessToken-expiresIn": "14 minute",
+                  "refreshToken": "dcbdc-kjcjdsc-cjdc-sjjdsc",
+                  "RefreshToken-expiresIn": "7 day"
+                }
+              }
+            }
           },
           "401": {
             "description": "Refresh token not provided or invalid."
@@ -132,16 +193,50 @@
         ],
         "responses": {
           "200": {
-            "description": "User information retrieved successfully."
+            "description": "User information retrieved successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "user": {
+                    "_id": "37266829r8ucuef327",
+                    "fullname": "mehran",
+                    "role": "USER",
+                    "email": "example@gmail.com",
+                    "__v": 0
+                  }
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized - Token not provided or invalid(add Bearer in first of token)."
+            "description": "Unauthorized - Token not found or invalid.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Unauthorized !! - token Not Found"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Unauthorized -  token expire"
+            "description": "Forbidden - Token expired.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Unauthorized !! Token Expired"
+                }
+              }
+            }
           },
           "404": {
-            "description": "User not found or token invalid."
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User Not found"
+                }
+              }
+            }
           }
         }
       }
@@ -280,20 +375,44 @@
     },
     "/auth/log-out": {
       "post": {
-        "summary": "Log out user",
-        "description": "Clears the refresh token from cookie .",
+        "summary": "User Logout",
+        "description": "Logs out a user by deleting the provided refresh token.",
         "tags": ["Auth 🔐"],
         "security": [
           {
             "bearerAuth": []
           }
         ],
+        "requestBody": {
+          "description": "Refresh token to be invalidated",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "type": "string",
+                    "example": "your_refresh_token_here"
+                  }
+                },
+                "required": ["refreshToken"]
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Logout successful"
+            "description": "Successful logout"
           },
           "400": {
-            "description": "No token found"
+            "description": "refreshToken dont Receive from Body"
+          },
+          "403": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "User Not Found"
           },
           "500": {
             "description": "Internal server error"
@@ -334,10 +453,10 @@
             "description": "Category title or href already exists."
           },
           "401": {
-            "description": "Token not found , or You can't Access this routes"
+            "description": "Forbidden. Only admins can access this route"
           },
           "404": {
-            "description": "User Not found , Plz Send Valid token"
+            "description": "User Not found - Unauthorized"
           }
         }
       },
@@ -347,10 +466,379 @@
         "tags": ["Category 📂"],
         "responses": {
           "200": {
-            "description": "List of categories retrieved successfully."
+            "description": "List of categories retrieved successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "categories": [
+                    {
+                      "_id": "23dsfbgngrngnh446gnry6fh65",
+                      "title": "test",
+                      "href": "test"
+                    },
+                    {
+                      "_id": "456287ds45236hg45",
+                      "title": "test1",
+                      "href": "test1"
+                    }
+                  ]
+                }
+              }
+            }
           },
           "404": {
             "description": "No categories found."
+          }
+        }
+      }
+    },
+    "/category/{categoryId}": {
+      "delete": {
+        "summary": "Remove a category",
+        "description": "Deletes a category by its ID. Requires admin privileges.",
+        "tags": ["Admin Dashboard 📈"],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the category to delete",
+            "schema": {
+              "type": "string",
+              "example": "60f7f0b8f1a2c3d4e5f67890"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Category removed successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Category Removed successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid category ID format.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Category ObjectId not valid !!"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Token not provided or invalid.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Unauthorized !! - token Not Found"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Admin privileges required.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden - Admin access required"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Category Not Found!",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Category Not Found!"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a category",
+        "description": "Updates the title and href of a category by its ID. Requires admin privileges.",
+        "tags": ["Admin Dashboard 📈"],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the category to update",
+            "schema": {
+              "type": "string",
+              "example": "60f7f0b8f1a2c3d4e5f67890"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Updated Category Title"
+                  },
+                  "href": {
+                    "type": "string",
+                    "example": "updated-category-url"
+                  }
+                },
+                "required": ["title", "href"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Category updated successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Category Updated successfully",
+                  "updateCategory": {
+                    "_id": "60f7f0b8f1a2c3d4e5f67890",
+                    "title": "Updated Category Title",
+                    "href": "updated-category-url"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid category ID format.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Category ObjectId not valid !!"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Token not provided or invalid.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Unauthorized !! - token Not Found"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Admin privileges required.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden - Admin access required"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Category not found.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Category Not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/newsletter/": {
+      "post": {
+        "summary": "Add email to newsletter list",
+        "description": "Add a new email to the newsletter list if it doesn't already exist.",
+        "tags": ["Newsletter 📰"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "example@example.com"
+                  }
+                },
+                "required": ["email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Email added to newsletter list successfully."
+          },
+          "403": {
+            "description": "Email already exists in newsletter list."
+          },
+          "500": {
+            "description": "Server error."
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all newsletter emails",
+        "description": "Retrieve a list of all emails in the newsletter.",
+        "tags": ["Admin Dashboard 📈"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of newsletter emails returned successfully."
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden. Only admins can access this route."
+          },
+          "500": {
+            "description": "Server error."
+          }
+        }
+      }
+    },
+
+    "/concat/": {
+      "post": {
+        "summary": "Create a new contact message",
+        "description": "Creates a new contact message with name, email, subject, and message. (Subject is a Optional Field)",
+        "tags": ["Concat 📩"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "johndoe@example.com"
+                  },
+                  "subject": {
+                    "type": "string",
+                    "example": "Inquiry",
+                    "required": false
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "I would like more information."
+                  }
+                },
+                "required": ["name", "email", "message"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Contact message successfully sent.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Your Concat Message Sent"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error or bad request."
+          },
+          "500": {
+            "description": "Server error."
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieve all contact messages",
+        "description": "Fetches all contact messages. Requires admin privileges.",
+        "tags": ["Admin Dashboard 📈"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all contact messages.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "concats": [
+                    {
+                      "name": "Jane Doe",
+                      "email": "janedoe@example.com",
+                      "subject": "Feedback",
+                      "message": "Great service!"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access."
+          },
+          "403": {
+            "description": "Forbidden. Admin privileges required."
+          },
+          "500": {
+            "description": "Server error."
           }
         }
       }

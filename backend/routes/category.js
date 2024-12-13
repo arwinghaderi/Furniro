@@ -5,9 +5,13 @@ const {
   createCategory,
   getAllCategories,
   removeCategory,
+  updateCategoryInfo,
 } = require("../controller/category");
 const validator = require("../middleware/validator");
-const { createCategoryValidator } = require("../validator/category");
+const {
+  createCategoryValidator,
+  updateCategoryValidator,
+} = require("../validator/category");
 
 const router = express.Router();
 
@@ -16,6 +20,9 @@ router
   .post(auth, isAdmin, validator(createCategoryValidator), createCategory)
   .get(getAllCategories);
 
-router.route("/:categoryId").delete(auth, isAdmin, removeCategory);
+router
+  .route("/:categoryId")
+  .delete(auth, isAdmin, removeCategory)
+  .put(auth, isAdmin, validator(updateCategoryValidator), updateCategoryInfo);
 
 module.exports = router;

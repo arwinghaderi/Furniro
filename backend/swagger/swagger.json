@@ -576,6 +576,116 @@
             }
           }
         }
+      },
+      "put": {
+        "summary": "Update a category",
+        "description": "Updates the title and href of a category by its ID. Requires admin privileges.",
+        "tags": ["Admin Dashboard 📈"],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the category to update",
+            "schema": {
+              "type": "string",
+              "example": "60f7f0b8f1a2c3d4e5f67890"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Updated Category Title"
+                  },
+                  "href": {
+                    "type": "string",
+                    "example": "updated-category-url"
+                  }
+                },
+                "required": ["title", "href"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Category updated successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Category Updated successfully",
+                  "updateCategory": {
+                    "_id": "60f7f0b8f1a2c3d4e5f67890",
+                    "title": "Updated Category Title",
+                    "href": "updated-category-url"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid category ID format.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Category ObjectId not valid !!"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Token not provided or invalid.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Unauthorized !! - token Not Found"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Admin privileges required.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden - Admin access required"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Category not found.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Category Not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
       }
     },
 

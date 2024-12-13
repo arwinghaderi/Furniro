@@ -64,3 +64,36 @@ exports.removeCategory = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateCategoryInfo = async (req, res, next) => {
+  try {
+    const { categoryId } = req.params;
+    const { title, href } = req.body;
+
+    if (!isValidObjectId(categoryId)) {
+      return errorResponse(res, 400, {
+        nessage: "Category ObjectId not valid !!",
+      });
+    }
+
+    const findAndUpdateCategory = await categoryModel.findOneAndUpdate(
+      {
+        _id: categoryId,
+      },
+      { title, href },
+      { new: true }
+    );
+    if (!findAndUpdateCategory) {
+      return errorResponse(res, 404, {
+        message: "Category Not found",
+      });
+    }
+
+    return successResponse(res, 200, {
+      message: "Category Updated successfully",
+      updateCategory: findAndUpdateCategory,
+    });
+  } catch (err) {
+    next(err);
+  }
+};

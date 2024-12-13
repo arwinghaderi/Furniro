@@ -1,12 +1,37 @@
-node_modules
-package-lock.json
-yarn.lock
-/.env
-*.log
-/.vscode/
-/.idea/
-/*.swp
-/build
-/dist
-*.bak
-*.tmp
+# نادیده گرفتن پوشه‌های node_modules در هر دو پوشه فرانت‌اند و بک‌اند
+/frontend/node_modules
+/backend/node_modules
+
+# نادیده گرفتن فایل‌های .env در هر دو پوشه فرانت‌اند و بک‌اند
+/frontend/.env
+backend/.env
+
+# نادیده گرفتن فایل‌های package-lock.json و package.json در هر دو پوشه فرانت‌اند و بک‌اند
+/frontend/package-lock.json
+/backend/package-lock.json
+/frontend/package.json
+/backend/package.json
+
+# نادیده گرفتن فایل‌های لاگ در هر دو پوشه فرانت‌اند و بک‌اند
+/frontend/*.log
+/backend/*.log
+
+# نادیده گرفتن فایل‌های ساخت و باینری در هر دو پوشه فرانت‌اند و بک‌اند
+/frontend/build
+/backend/build
+/frontend/dist
+/backend/dist
+
+# نادیده گرفتن فایل‌های تنظیمات IDE و ویرایشگرهای متن در هر دو پوشه فرانت‌اند و بک‌اند
+/frontend/.vscode/
+/backend/.vscode/
+/frontend/.idea/
+/backend/.idea/
+/frontend/*.swp
+/backend/*.swp
+
+# نادیده گرفتن فایل‌های پشتیبانی موقت و بک‌آپ در هر دو پوشه فرانت‌اند و بک‌اند
+/frontend/*.bak
+/backend/*.bak
+/frontend/*.tmp
+/backend/*.tmp

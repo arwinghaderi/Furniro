@@ -214,6 +214,37 @@ const getToken = () => {
     return userToken ? userToken : null
 };
 
+
+const storeAccessTokenWithExpiry = (accessToken, expiresInMinutes) => {
+    const expiresInMilliseconds = expiresInMinutes * 60 * 1000;
+    const expiryTime = Date.now() + expiresInMilliseconds;
+    saveToLocalStorage("Access-Token", accessToken)
+    saveToLocalStorage("Access-Token-Expiry", expiryTime)
+}
+
+const setSecureCookie = (name, value, days) => {
+    let expires = "";
+
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
+
+    const secure = "; Secure";
+    const httpOnly = "; HttpOnly";
+    const sameSite = "; SameSite=Strict";
+    document.cookie = `${name} = ${value} ${expires} ${secure}  ${sameSite}; path=/ `
+}
+
+const getCookieValue = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+
+    if (parts.length === 2) {
+        return parts.pop().split(';').shift();
+    }
+    return null;
+};
+
 export {
     saveToLocalStorage,
     getFromLocalStorage,
@@ -227,4 +258,7 @@ export {
     selectionPaginationPageByUser,
     showSwal,
     getToken,
+    storeAccessTokenWithExpiry,
+    setSecureCookie,
+    getCookieValue
 }

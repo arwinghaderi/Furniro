@@ -1,6 +1,6 @@
-import { getingUaerInformation, checkingLoginStatus } from "./auth/utils.js"
-import { showSwal } from "./func/utils.js"
-import { getToken } from "./func/utils.js"
+import { getingUaerInformation, checkingLoginStatus, errorMessagesLogout } from "./auth/utils.js"
+import { getToken, getCookieValue, showSwal } from "./func/utils.js"
+
 const $ = document
 const hamburger = $.querySelector(".hamburger")
 const contenerMenuMobail = $.querySelector(".contener-menu-mobail")
@@ -23,13 +23,14 @@ const navbarSuccessfullyRegisterText = $.querySelector(".navbar-successfully-Reg
 const navbarSuccessfullyRegisterLoading = $.querySelector(".navbar-successfully-Register-Loading")
 const navbarDontRegisterText = $.querySelector(".navbar-dont-Register-text")
 
-
 const fetchLogoutUser = async () => {
     const token = getToken()
-    console.log(token);
     if (!token) {
         return false
     }
+
+    const refreshToken = getCookieValue("Refresh-Token")
+    const tokenRefreshData = { "refreshToken": refreshToken };
 
     const response = await fetch("https://furniro-6x7f.onrender.com/auth/log-out", {
         method: "POST",
@@ -37,10 +38,9 @@ const fetchLogoutUser = async () => {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${token}`
         },
-        credentials: "include"
+        body: JSON.stringify(tokenRefreshData)
     })
     const userData = await response.json()
-    console.log(userData);
     return userData
 }
 
@@ -65,8 +65,35 @@ const handleUserAuthentication = async () => {
     navbarSuccessfullyRegisterLoading.style.display = "none";
 }
 
-loginSuccessfully.addEventListener("click", async () => {
+const handleErrors = (response) => {
+    const message = errorMessagesLogout[response.status] || errorMessagesLogout.default;
 
+    if (response.status === 500) {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Internal server error. Please try again later.',
+            icon: 'error', confirmButtonText: 'Try Again'
+        });
+    } else {
+        Swal.fire({
+            title: "Error!",
+            text: message,
+            icon: "error",
+            customClass: { popup: 'custom-swal2' },
+            confirmButtonText: 'OK',
+            confirmButtonColor: "#B88E2F",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('Access-Token');
+                localStorage.removeItem('Access-Token-Expiry');
+                document.cookie = 'Refresh-Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                window.location.href = '/Furniro/frontend/index.html';
+            }
+        })
+    }
+};
+
+loginSuccessfully.addEventListener("click", async () => {
 
     Swal.fire({
         title: "Exit Account?",
@@ -80,17 +107,25 @@ loginSuccessfully.addEventListener("click", async () => {
     }).then(async (result) => {
         if (result.isConfirmed) {
             const userData = await fetchLogoutUser();
-            console.log(userData);
-            // localStorage.removeItem('Access-Token');
-            //   handleUserAuthentication()
-            // Swal.fire({
-            //     title: "Logged Out Successfully",
-            //     text: "You have been logged out. Thank you for visiting. Have a great day!",
-            //     icon: "success",
-            //     customClass: { popup: 'custom-swal2' },
-            //     confirmButtonText: 'ok',
-            //     confirmButtonColor: "#B88E2F",
-            // });
+
+            if (userData.success) {
+                localStorage.removeItem('Access-Token');
+                localStorage.removeItem('Access-Token-Expiry');
+                document.cookie = 'Refresh-Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                window.location.href = '../index.html';
+                handleUserAuthentication()
+                Swal.fire({
+                    title: "Logged Out Successfully",
+                    text: "You have been logged out. Thank you for visiting. Have a great day!",
+                    icon: "success",
+                    customClass: { popup: 'custom-swal2' },
+                    confirmButtonText: 'ok',
+                    confirmButtonColor: "#B88E2F",
+                });
+
+            } else {
+                handleErrors(userData.status);
+            }
         }
     });
 })

@@ -32,8 +32,15 @@ export const registerErrorMessages = {
     500: 'Server error. Please try again later.'
 };
 
-export const getDefaultErrorMessage = () => 'An error occurred. Please try again later.';
+export const errorMessagesLogout = {
+    400: 'Request failed: refreshToken is missing. Redirecting to login.',
+    403: 'Unauthorized access. Redirecting to login.',
+    404: 'User not found. Redirecting to login.',
+    500: 'Internal server error. Please try again later.',
+    default: 'An unexpected error occurred. Redirecting to login.'
+};
 
+export const getDefaultErrorMessage = () => 'An error occurred. Please try again later.';
 
 export const checkingLoginStatus = () => {
     const userInfos = localStorage.getItem("Access-Token");

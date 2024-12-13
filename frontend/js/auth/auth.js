@@ -216,11 +216,12 @@ const fetchAndSendLoginData = async () => {
             body: JSON.stringify(userInformation),
         })
 
+        const loginData = await response.json();
+        
         if (!response.ok) {
             const message = loginData.error.message;
             throw new Error(message);
         }
-        const loginData = await response.json();
         const fullName = loginData.data.user.fullname
 
         setSecureCookie("Refresh-Token", loginData.data.refreshToken, 7)

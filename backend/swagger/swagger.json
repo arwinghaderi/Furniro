@@ -53,7 +53,24 @@
         },
         "responses": {
           "201": {
-            "description": "Success Register User, (Returned AccessToken and RefreshToken)  and Saved Refreshtoken in Cookies"
+            "description": "Success Register User, (Returned AccessToken and RefreshToken)  and Saved Refreshtoken in Cookies",
+            "content": {
+              "application/json": {
+                "example": {
+                  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                  "AccessToken-expiresIn": "14 minute",
+                  "refreshToken": "dcbdc-kjcjdsc-cjdc-sjjdsc",
+                  "RefreshToken-expiresIn": "7 day",
+                  "user": {
+                    "_id": "37266829r8ucuef327",
+                    "fullname": "mehran",
+                    "role": "USER",
+                    "email": "example@gmail.com",
+                    "__v": 0
+                  }
+                }
+              }
+            }
           },
           "401": {
             "description": "Email Already exist"
@@ -88,7 +105,24 @@
         },
         "responses": {
           "200": {
-            "description": "user logged in successfully ,(Returned AccessToken and refreshToken) and Saved Refreshtoken in Cookies"
+            "description": "user logged in successfully ,(Returned AccessToken and refreshToken) and Saved Refreshtoken in Cookies",
+            "content": {
+              "application/json": {
+                "example": {
+                  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                  "AccessToken-expiresIn": "14 minute",
+                  "refreshToken": "dcbdc-kjcjdsc-cjdc-sjjdsc",
+                  "RefreshToken-expiresIn": "7 day",
+                  "user": {
+                    "_id": "37266829r8ucuef327",
+                    "fullname": "mehran",
+                    "role": "USER",
+                    "email": "example@gmail.com",
+                    "__v": 0
+                  }
+                }
+              }
+            }
           },
           "403": {
             "description": "Invalid Data (Email Or Password)"
@@ -103,9 +137,36 @@
         "description": "Retrieves a new access token using the refresh token stored in cookies.",
         "operationId": "getNewAccessToken",
         "tags": ["Auth 🔐"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "type": "string",
+                    "example": "djhdi-dehdhi-ajeucm-alcsaxclamxj"
+                  }
+                },
+                "required": ["refreshToken"]
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "New access and Refreshtoken generated successfully."
+            "description": "New access and Refreshtoken generated successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                  "AccessToken-expiresIn": "14 minute",
+                  "refreshToken": "dcbdc-kjcjdsc-cjdc-sjjdsc",
+                  "RefreshToken-expiresIn": "7 day"
+                }
+              }
+            }
           },
           "401": {
             "description": "Refresh token not provided or invalid."
@@ -132,16 +193,50 @@
         ],
         "responses": {
           "200": {
-            "description": "User information retrieved successfully."
+            "description": "User information retrieved successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "user": {
+                    "_id": "37266829r8ucuef327",
+                    "fullname": "mehran",
+                    "role": "USER",
+                    "email": "example@gmail.com",
+                    "__v": 0
+                  }
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized "
+            "description": "Unauthorized - Token not found or invalid.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Unauthorized !! - token Not Found"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Unauthorized -  token expire"
+            "description": "Forbidden - Token expired.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Unauthorized !! Token Expired"
+                }
+              }
+            }
           },
           "404": {
-            "description": "User not found or token invalid."
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User Not found"
+                }
+              }
+            }
           }
         }
       }
@@ -371,7 +466,25 @@
         "tags": ["Category 📂"],
         "responses": {
           "200": {
-            "description": "List of categories retrieved successfully."
+            "description": "List of categories retrieved successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "categories": [
+                    {
+                      "_id": "23dsfbgngrngnh446gnry6fh65",
+                      "title": "test",
+                      "href": "test"
+                    },
+                    {
+                      "_id": "456287ds45236hg45",
+                      "title": "test1",
+                      "href": "test1"
+                    }
+                  ]
+                }
+              }
+            }
           },
           "404": {
             "description": "No categories found."

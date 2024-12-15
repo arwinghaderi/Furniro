@@ -225,7 +225,7 @@ const fetchAndSendLoginData = async () => {
         const fullName = loginData.data.user.fullname
 
         setSecureCookie("Refresh-Token", loginData.data.refreshToken, 7)
-        storeAccessTokenWithExpiry(loginData.data.accessToken, 14)
+        storeAccessTokenWithExpiry(loginData.data.accessToken,14)
         showSwal(`Your login was successful. Welcome ${fullName} .`, "success", "Go to HomePage", "../index.html")
     } catch (error) {
         showSwal(`${error.message}`, "error", ' Correction of information', "../../Pages/auth.html")

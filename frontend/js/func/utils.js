@@ -233,6 +233,7 @@ const setSecureCookie = (name, value, days) => {
     const httpOnly = "; HttpOnly";
     const sameSite = "; SameSite=Strict";
     document.cookie = `${name} = ${value} ${expires} ${secure}  ${sameSite}; path=/ `
+    document.cookie = `Refresh-Token-Expiry=${expires}; path=/; ${secure} ${sameSite}`;
 }
 
 const getCookieValue = (name) => {
@@ -244,6 +245,8 @@ const getCookieValue = (name) => {
     }
     return null;
 };
+
+const deleteCookie = (name) => { document.cookie = name + '=; Max-Age=0; path=/; Secure; SameSite=Strict;'; }
 
 export {
     saveToLocalStorage,
@@ -260,5 +263,6 @@ export {
     getToken,
     storeAccessTokenWithExpiry,
     setSecureCookie,
-    getCookieValue
+    getCookieValue,
+    deleteCookie
 }

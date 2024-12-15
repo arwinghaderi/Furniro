@@ -112,7 +112,6 @@ loginSuccessfully.addEventListener("click", async () => {
                 localStorage.removeItem('Access-Token');
                 localStorage.removeItem('Access-Token-Expiry');
                 document.cookie = 'Refresh-Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                window.location.href = '../index.html';
                 handleUserAuthentication()
                 Swal.fire({
                     title: "Logged Out Successfully",
@@ -121,7 +120,11 @@ loginSuccessfully.addEventListener("click", async () => {
                     customClass: { popup: 'custom-swal2' },
                     confirmButtonText: 'ok',
                     confirmButtonColor: "#B88E2F",
-                });
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/Furniro/frontend/index.html';
+                    }
+                })
 
             } else {
                 handleErrors(userData.status);
@@ -209,7 +212,6 @@ const redirectToLogin = () => {
             window.location.href = '/Furniro/frontend/index.html';
         }
     });
-
 }
 
 const executeTokenCheck = async () => {

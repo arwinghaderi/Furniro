@@ -1,4 +1,4 @@
-import { getToken } from "../func/utils.js";
+import { getToken, handleError } from "../func/utils.js";
 
 const setDisplay = (element, display) => {
     element.style.display = display
@@ -48,19 +48,29 @@ export const checkingLoginStatus = () => {
 };
 
 export const getingUaerInformation = async () => {
-    const token = getToken()
+    const token = getToken();
     if (!token) {
-        return false
+        return false;
     }
 
-    const response = await fetch(`https://furniro-6x7f.onrender.com/auth/me`, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-            'authorization': `Bearer ${token}`
-        }
-    })
+    try {
+        const response = await fetch(`https://furniro-6x7f.onrender.com/auth/me`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${5555555}`
+            }
+        });
 
-    const data = await response.json()
-    return data
-}
+        if (!response.ok) {
+            throw response
+        }
+
+        const data = await response.json();
+        return data;
+        
+    } catch (error) {
+        handleError(error, errorMessagesLogout);
+    }
+};
+

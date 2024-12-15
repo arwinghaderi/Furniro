@@ -248,6 +248,37 @@ const getCookieValue = (name) => {
 
 const deleteCookie = (name) => { document.cookie = name + '=; Max-Age=0; path=/; Secure; SameSite=Strict;'; }
 
+const handleError = (error, errorMessages) => {
+    let message = errorMessages.default;
+
+    if (error && error.status) {
+        message = errorMessages[error.status] || errorMessages.default;
+    }
+
+    Swal.fire({
+        title: "Error",
+        text: message,
+        icon: "error",
+        customClass: { popup: 'custom-swal2' },
+        showCancelButton: true,
+        confirmButtonText: 'Login Again',
+        cancelButtonText: 'Go to Home Page',
+        confirmButtonColor: "#B88E2F",
+        cancelButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/Furniro/frontend/Pages/auth.html';
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            window.location.href = '/Furniro/frontend/index.html';
+        }
+        localStorage.removeItem('Access-Token');
+        localStorage.removeItem('Access-Token-Expiry');
+        deleteCookie("Refresh-Token")
+        deleteCookie("Refresh-Token-Expiry")
+
+    });
+};
+
 export {
     saveToLocalStorage,
     getFromLocalStorage,
@@ -264,5 +295,5 @@ export {
     storeAccessTokenWithExpiry,
     setSecureCookie,
     getCookieValue,
-    deleteCookie
+    deleteCookie, handleError
 }

@@ -58,7 +58,7 @@ export const getingUaerInformation = async () => {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${5555555}`
+                'authorization': `Bearer ${token}`
             }
         });
 

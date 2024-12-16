@@ -174,7 +174,7 @@ const calculateProductsShowMoreButton = (products, curentItem, currentPage) => {
 }
 
 const getUrlParam = (key) => {
-    const urlParams = new URLSearchParams(window.location.search)
+    const urlParams = new URLSearchParams(location.search)
     return urlParams.get(key)
 }
 
@@ -200,13 +200,16 @@ const getCountProductsCart = () => {
 }
 
 const showSwal = async (title, icon, confirmButtonText, url) => {
-    let response = await swal.fire({
+    await swal.fire({
         title: title,
         icon: icon,
         confirmButtonText: confirmButtonText,
         confirmButtonColor: "#B88E2F",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.href = url
+        }
     })
-    response ? location.href = url : location.href = url
 }
 
 const getToken = () => {
@@ -269,9 +272,9 @@ const handleError = (error, errorMessages) => {
         cancelButtonColor: "#d33",
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = '../../Pages/auth.html';
+        location.href = '../../Pages/auth.html';
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.href = '../../index.html';
+        location.href = '../../index.html';
         }
         localStorage.removeItem('Access-Token');
         localStorage.removeItem('Access-Token-Expiry');

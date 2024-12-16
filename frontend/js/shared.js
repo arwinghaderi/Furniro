@@ -95,7 +95,7 @@ loginSuccessfully.addEventListener("click", async () => {
                     confirmButtonColor: "#B88E2F",
                 }).then(async (result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '../index.html';
+                        location.href = '../index.html';
                     }
                 })
 
@@ -127,11 +127,9 @@ const fetchRefreshToken = async () => {
             },
             body: JSON.stringify(tokenRefreshData),
         });
-        console.log(response);
 
         if (response.ok) {
             const RefreshTokenData = await response.json();
-            console.log(RefreshTokenData);
             return { AccessToken: RefreshTokenData.data.newAccessToken, RefreshToken: RefreshTokenData.data.newRefreshToken };
         } else {
             redirectToLogin();
@@ -180,9 +178,9 @@ const redirectToLogin = () => {
         cancelButtonColor: "#d33",
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = '../Pages/auth.html';
+            location.href = '../Pages/auth.html';
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.href = '../index.html';
+            location.href = '../index.html';
         }
     });
 }

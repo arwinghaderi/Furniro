@@ -276,13 +276,17 @@ const fetchAndSendRegisterData = async () => {
             body: JSON.stringify(userSignUpInformation)
         })
 
-        const RegisterData = await response.json()
+        const registerData = await response.json()
         if (!response.ok) {
-            const message = RegisterData.error.message;
+            const message = registerData.error.message;
             throw new Error(message);
         }
 
-        showSwal("Registration was successful. Please enter your information in the login section.", "success", "Login", "../../Pages/auth.html")
+        setSecureCookie("Refresh-Token", registerData.data.refreshToken, 7)
+        storeAccessTokenWithExpiry(registerData.data.accessToken, 14)
+        const fullName = registerData.data.user.fullname
+
+        showSwal(`Your registration has been successfully completed. Welcome. ${fullName} .`, "success", "Go to HomePage", "../index.html")
 
     } catch (error) {
         showSwal(`${error.message}`, "error", "Correction of information", "../../Pages/auth.html")

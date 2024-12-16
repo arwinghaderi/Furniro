@@ -1,6 +1,6 @@
 
-import { showSwal, saveToLocalStorage, storeAccessTokenWithExpiry, setSecureCookie } from "../func/utils.js"
-import { getDefaultErrorMessage, loginErrorMessages, registerErrorMessages, validation, } from "./utils.js"
+import { showSwal, storeAccessTokenWithExpiry, setSecureCookie } from "../func/utils.js"
+import { validation } from "./utils.js"
 
 const btnsAuth = document.querySelectorAll(".btn-Auth")
 const formSignIn = document.querySelector(".form-signIn")
@@ -38,12 +38,14 @@ signupNow.addEventListener("click", () => {
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const fullNameRegex = /^[A-Za-z._\-\s]+$/;
 const btnSignIn = document.querySelector(".btn-signIn-register")
 const loginEmailInput = document.querySelector(".signIn-Email")
 const loginPasswordInput = document.querySelector(".signIn-password")
 const signUpPassword = document.querySelector(".signUp-password")
 const signUpConfirmPassword = document.querySelector(".signUp-confirm")
 const signUpEmail = document.querySelector(".signUp-Email")
+const signUpFullName = document.querySelector(".signUp-fullName")
 const btnRegister = document.querySelector(".btn-Register")
 
 const inputs = [
@@ -77,6 +79,14 @@ const inputs = [
         validationEntries: {
             valid: document.querySelector(".password-confrim-Valid"),
             invalid: document.querySelector(".password-confrim-invalid")
+        }
+    },
+    {
+        element: document.querySelector(".signUp-fullName"),
+        regex: fullNameRegex,
+        validationEntries: {
+            valid: document.querySelector(".fullName-signUp-Valid"),
+            invalid: document.querySelector(".fullName-signUp-InValid ")
         }
     },
 ]
@@ -217,7 +227,7 @@ const fetchAndSendLoginData = async () => {
         })
 
         const loginData = await response.json();
-        
+
         if (!response.ok) {
             const message = loginData.error.message;
             throw new Error(message);
@@ -248,13 +258,17 @@ btnRegister.addEventListener("click", async (event) => {
 const fetchAndSendRegisterData = async () => {
     const showMoreLoder = document.querySelector(".loder-sign-up")
     showMoreLoder.style.display = 'flex';
+
     let userSignUpInformation = {
+        fullname: signUpFullName.value,
         email: signUpEmail.value,
-        password: signUpPassword.value
+        password: signUpPassword.value,
+        confirmPassword: signUpConfirmPassword.value
     }
+
     try {
 
-        let response = await fetch("http://localhost:3000/user/api/signup", {
+        let response = await fetch("https://furniro-6x7f.onrender.com/auth/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -262,13 +276,17 @@ const fetchAndSendRegisterData = async () => {
             body: JSON.stringify(userSignUpInformation)
         })
 
+        const registerData = await response.json()
         if (!response.ok) {
-            const message = registerErrorMessages[response.status] || getDefaultErrorMessage()
-            throw new Error(message)
+            const message = registerData.error.message;
+            throw new Error(message);
         }
 
-        const data = await response.json()
-        showSwal("Registration was successful. Please enter your information in the login section.", "success", "Login", "../../Pages/auth.html")
+        setSecureCookie("Refresh-Token", registerData.data.refreshToken, 7)
+        storeAccessTokenWithExpiry(registerData.data.accessToken, 14)
+        const fullName = registerData.data.user.fullname
+
+        showSwal(`Your registration has been successfully completed. Welcome. ${fullName} .`, "success", "Go to HomePage", "../index.html")
 
     } catch (error) {
         showSwal(`${error.message}`, "error", "Correction of information", "../../Pages/auth.html")

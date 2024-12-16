@@ -14,11 +14,11 @@ body {
 }
 
 .auth-wrapper {
-    max-width: 39rem;
+    max-width: 45rem;
     overflow: hidden;
     background: #fff;
     padding: 3rem;
-    border-radius: 1rem;
+    border-radius: 2rem;
 }
 
 .form-title {
@@ -76,9 +76,8 @@ body {
 
 .form-wrapper {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
-    margin-top: 2rem;
     width: 200%;
 }
 
@@ -93,6 +92,10 @@ body {
     flex-direction: column;
     gap: 2rem;
     transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-signUp {
+    margin-top: 2rem;
 }
 
 .input-box {
@@ -164,21 +167,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
 }
 
 
 .Email-validation-Valid,
-.password-validation-Valid {
+.password-validation-Valid,
+.fullName-validation-valid {
     color: green;
     display: none;
 }
 
 .Email-validation-invalid,
-.password-validation-invalid {
+.password-validation-invalid,
+.fullName-validation-invalid {
     color: red;
     display: none;
 }
-
 
 .progress-container {
     width: 100%;
@@ -213,7 +218,8 @@ body {
 }
 
 .password-checker-container--active {
-    height: 26.5rem;
+    height: 20rem;
+    padding: 1rem;
     visibility: visible;
     margin-bottom: 0;
     overflow-y: auto;

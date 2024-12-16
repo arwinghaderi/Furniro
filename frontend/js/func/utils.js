@@ -174,7 +174,7 @@ const calculateProductsShowMoreButton = (products, curentItem, currentPage) => {
 }
 
 const getUrlParam = (key) => {
-    const urlParams = new URLSearchParams(window.location.search)
+    const urlParams = new URLSearchParams(location.search)
     return urlParams.get(key)
 }
 
@@ -200,13 +200,16 @@ const getCountProductsCart = () => {
 }
 
 const showSwal = async (title, icon, confirmButtonText, url) => {
-    let response = await swal.fire({
+    await swal.fire({
         title: title,
         icon: icon,
         confirmButtonText: confirmButtonText,
         confirmButtonColor: "#B88E2F",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.href = url
+        }
     })
-    response ? location.href = url : location.href = url
 }
 
 const getToken = () => {
@@ -233,6 +236,7 @@ const setSecureCookie = (name, value, days) => {
     const httpOnly = "; HttpOnly";
     const sameSite = "; SameSite=Strict";
     document.cookie = `${name} = ${value} ${expires} ${secure}  ${sameSite}; path=/ `
+    document.cookie = `Refresh-Token-Expiry=${expires}; path=/; ${secure} ${sameSite}`;
 }
 
 const getCookieValue = (name) => {
@@ -243,6 +247,40 @@ const getCookieValue = (name) => {
         return parts.pop().split(';').shift();
     }
     return null;
+};
+
+const deleteCookie = (name) => {
+    document.cookie = name + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
+}
+
+const handleError = (error, errorMessages) => {
+    let message = errorMessages.default;
+
+    if (error && error.status) {
+        message = errorMessages[error.status] || errorMessages.default;
+    }
+
+    Swal.fire({
+        title: "Error",
+        text: message,
+        icon: "error",
+        customClass: { popup: 'custom-swal2' },
+        showCancelButton: true,
+        confirmButtonText: 'Login Again',
+        cancelButtonText: 'Go to Home Page',
+        confirmButtonColor: "#B88E2F",
+        cancelButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+        location.href = '../../Pages/auth.html';
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        location.href = '../../index.html';
+        }
+        localStorage.removeItem('Access-Token');
+        localStorage.removeItem('Access-Token-Expiry');
+        deleteCookie("Refresh-Token")
+        deleteCookie('Refresh-Token-Expiry');
+    });
 };
 
 export {
@@ -260,5 +298,6 @@ export {
     getToken,
     storeAccessTokenWithExpiry,
     setSecureCookie,
-    getCookieValue
+    getCookieValue,
+    deleteCookie, handleError
 }

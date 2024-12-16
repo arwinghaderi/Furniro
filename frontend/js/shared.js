@@ -1,5 +1,5 @@
-import { getingUaerInformation, checkingLoginStatus, errorMessagesLogout } from "./auth/utils.js"
-import { getToken, getCookieValue, showSwal } from "./func/utils.js"
+import { getingUaerInformation, checkingLoginStatus, errorMessagesLogout, } from "./auth/utils.js"
+import { getToken, getCookieValue, setSecureCookie, storeAccessTokenWithExpiry, getFromLocalStorage, deleteCookie, handleError } from "./func/utils.js"
 
 const $ = document
 const hamburger = $.querySelector(".hamburger")
@@ -25,11 +25,11 @@ const navbarDontRegisterText = $.querySelector(".navbar-dont-Register-text")
 
 const fetchLogoutUser = async () => {
     const token = getToken()
-    if (!token) {
+    const refreshToken = getCookieValue("Refresh-Token")
+    if (!token && !refreshToken) {
         return false
     }
 
-    const refreshToken = getCookieValue("Refresh-Token")
     const tokenRefreshData = { "refreshToken": refreshToken };
 
     const response = await fetch("https://furniro-6x7f.onrender.com/auth/log-out", {
@@ -55,7 +55,7 @@ const handleUserAuthentication = async () => {
         loginSuccessfully.style.display = "flex";
         dontLogin.style.display = "none";
         navbarSuccessfullyRegisterText.innerHTML = fullName;
-
+        setTimeout(executeTokenCheck, 14 * 60 * 1000);
     } else {
         navbarDontRegisterText.innerHTML = `Sign In/Sign Up`;
         dontLogin.style.display = "flex";
@@ -64,34 +64,6 @@ const handleUserAuthentication = async () => {
 
     navbarSuccessfullyRegisterLoading.style.display = "none";
 }
-
-const handleErrors = (response) => {
-    const message = errorMessagesLogout[response.status] || errorMessagesLogout.default;
-
-    if (response.status === 500) {
-        Swal.fire({
-            title: 'Error!',
-            text: 'Internal server error. Please try again later.',
-            icon: 'error', confirmButtonText: 'Try Again'
-        });
-    } else {
-        Swal.fire({
-            title: "Error!",
-            text: message,
-            icon: "error",
-            customClass: { popup: 'custom-swal2' },
-            confirmButtonText: 'OK',
-            confirmButtonColor: "#B88E2F",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                localStorage.removeItem('Access-Token');
-                localStorage.removeItem('Access-Token-Expiry');
-                document.cookie = 'Refresh-Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                window.location.href = '/Furniro/frontend/index.html';
-            }
-        })
-    }
-};
 
 loginSuccessfully.addEventListener("click", async () => {
 
@@ -111,8 +83,8 @@ loginSuccessfully.addEventListener("click", async () => {
             if (userData.success) {
                 localStorage.removeItem('Access-Token');
                 localStorage.removeItem('Access-Token-Expiry');
-                document.cookie = 'Refresh-Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                window.location.href = '../index.html';
+                deleteCookie("Refresh-Token")
+                deleteCookie('Refresh-Token-Expiry');
                 handleUserAuthentication()
                 Swal.fire({
                     title: "Logged Out Successfully",
@@ -121,14 +93,110 @@ loginSuccessfully.addEventListener("click", async () => {
                     customClass: { popup: 'custom-swal2' },
                     confirmButtonText: 'ok',
                     confirmButtonColor: "#B88E2F",
-                });
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        location.href = '../index.html';
+                    }
+                })
 
             } else {
-                handleErrors(userData.status);
+                handleError(userData, errorMessagesLogout)
             }
         }
     });
 })
+
+const fetchRefreshToken = async () => {
+    const refreshToken = getCookieValue('Refresh-Token');
+    const refreshTokenExpiry = getCookieValue('Refresh-Token-Expiry');
+    const hasAccessTokenExpired = new Date().getTime() > refreshTokenExpiry
+
+    if (hasAccessTokenExpired && !refreshToken) {
+        redirectToLogin();
+    }
+
+    const tokenRefreshData = {
+        "refreshToken": refreshToken
+    }
+
+    try {
+        let response = await fetch('https://furniro-6x7f.onrender.com/auth/refresh', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(tokenRefreshData),
+        });
+
+        if (response.ok) {
+            const RefreshTokenData = await response.json();
+            return { AccessToken: RefreshTokenData.data.newAccessToken, RefreshToken: RefreshTokenData.data.newRefreshToken };
+        } else {
+            redirectToLogin();
+        }
+    } catch (error) {
+        redirectToLogin();
+    }
+}
+
+const hasAccessTokenExpired = async () => {
+    const expiryTime = getFromLocalStorage("Access-Token-Expiry")
+    const newDate = new Date().getTime()
+    const hasExpired = newDate >= parseInt(expiryTime, 10)
+
+    if (hasExpired) {
+        try {
+            const newToken = await fetchRefreshToken();
+            console.log(newToken);
+            if (newToken) {
+                return newToken;
+            } else {
+                redirectToLogin();
+            }
+        } catch (error) {
+            redirectToLogin();
+        }
+    } else {
+        redirectToLogin()
+    }
+}
+
+const redirectToLogin = () => {
+    localStorage.removeItem('Access-Token');
+    localStorage.removeItem('Access-Token-Expiry');
+    deleteCookie("Refresh-Token")
+    deleteCookie("Refresh-Token-Expiry")
+    Swal.fire({
+        title: "Logged Out for Security Reasons",
+        text: "You have been logged out due to security concerns. Please log in again to continue. Your security is our top priority.",
+        icon: "warning",
+        customClass: { popup: 'custom-swal2' },
+        showCancelButton: true,
+        confirmButtonText: 'Login Again',
+        cancelButtonText: 'Go to Home Page',
+        confirmButtonColor: "#B88E2F",
+        cancelButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.href = '../Pages/auth.html';
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            location.href = '../index.html';
+        }
+    });
+}
+
+const executeTokenCheck = async () => {
+    const token = await hasAccessTokenExpired();
+
+    if (token) {
+        setSecureCookie("Refresh-Token", token.RefreshToken, 7);
+        storeAccessTokenWithExpiry(token.AccessToken, 14);
+    } else {
+        redirectToLogin();
+    }
+
+    setTimeout(executeTokenCheck, 14 * 60 * 1000);
+}
 
 window.addEventListener("load", () => {
     handleUserAuthentication()

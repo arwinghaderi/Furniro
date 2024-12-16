@@ -83,7 +83,8 @@ loginSuccessfully.addEventListener("click", async () => {
             if (userData.success) {
                 localStorage.removeItem('Access-Token');
                 localStorage.removeItem('Access-Token-Expiry');
-                document.cookie = 'Refresh-Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                deleteCookie("Refresh-Token")
+                deleteCookie('Refresh-Token-Expiry');
                 handleUserAuthentication()
                 Swal.fire({
                     title: "Logged Out Successfully",

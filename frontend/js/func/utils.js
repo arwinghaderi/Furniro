@@ -247,7 +247,7 @@ const getCookieValue = (name) => {
 };
 
 const deleteCookie = (name) => {
-    document.cookie = name + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Strict;';
+    document.cookie = name + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
 }
 
 const handleError = (error, errorMessages) => {
@@ -276,7 +276,7 @@ const handleError = (error, errorMessages) => {
         localStorage.removeItem('Access-Token');
         localStorage.removeItem('Access-Token-Expiry');
         deleteCookie("Refresh-Token")
-        deleteCookie("Refresh-Token-Expiry")
+        deleteCookie('Refresh-Token-Expiry');
     });
 };
 

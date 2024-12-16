@@ -5,7 +5,7 @@ body {
 }
 
 .forgot-wrapper {
-    max-width: 39rem;
+    width: 36rem;
     background: #fff;
     padding: 4rem;
     border-radius: 1rem;
@@ -112,8 +112,16 @@ input[type='number']::-webkit-inner-spin-button {
 .resend {
     color: black;
     font-family: "Poppins-Regular";
+    display: none;
 }
 
 .input-box:focus-within #input-password-icon {
     color: var(--Primary-color);
+}
+
+.Confirm-email-button:disabled,
+.btn-submite:disabled{
+    background-color: #c0c0c0;
+    color: #ffffff;
+    cursor: not-allowed;
 }

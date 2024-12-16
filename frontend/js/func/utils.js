@@ -267,9 +267,9 @@ const handleError = (error, errorMessages) => {
         cancelButtonColor: "#d33",
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = '/Furniro/frontend/Pages/auth.html';
+            window.location.href = '../../Pages/auth.html';
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.href = '/Furniro/frontend/index.html';
+            window.location.href = '../../index.html';
         }
         localStorage.removeItem('Access-Token');
         localStorage.removeItem('Access-Token-Expiry');

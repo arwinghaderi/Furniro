@@ -87,7 +87,7 @@ const handleErrors = (response) => {
                 localStorage.removeItem('Access-Token');
                 localStorage.removeItem('Access-Token-Expiry');
                 document.cookie = 'Refresh-Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                window.location.href = '/Furniro/frontend/index.html';
+                window.location.href = '../index.html';
             }
         })
     }
@@ -122,7 +122,7 @@ loginSuccessfully.addEventListener("click", async () => {
                     confirmButtonColor: "#B88E2F",
                 }).then(async (result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '/Furniro/frontend/index.html';
+                        window.location.href = '../index.html';
                     }
                 })
 
@@ -207,9 +207,9 @@ const redirectToLogin = () => {
         cancelButtonColor: "#d33",
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = '/Furniro/frontend/Pages/auth.html';
+            window.location.href = '../Pages/auth.html';
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.href = '/Furniro/frontend/index.html';
+            window.location.href = '../index.html';
         }
     });
 }

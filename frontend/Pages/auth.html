@@ -75,6 +75,11 @@
                         </div>
                         <div action="" class="form-signUp">
                             <div class="input-box">
+                                <input type="email" class="input signUp-fullName " placeholder="Full Name">
+                            </div>
+                            <span class="fullName-validation-valid fullName-signUp-Valid  ">Valid full Name</span>
+                            <span class="fullName-validation-invalid fullName-signUp-InValid ">Invalid full Name</span>
+                            <div class="input-box">
                                 <input type="email" class="input signUp-Email " placeholder="Email Address">
                             </div>
                             <span class="Email-validation-Valid Email-signUp-Valid  ">Valid Email Address</span>
@@ -86,10 +91,10 @@
                                     <i class="fas fa-eye" id="input-password-icon"></i>
                                 </div>
                             </div>
-                            <div class="progress-container">
-                                <div class="progress-bar" id="passwordProgressBar">0%</div>
-                            </div>
                             <div class="password-checker-container">
+                                <div class="progress-container">
+                                    <div class="progress-bar" id="passwordProgressBar">0%</div>
+                                </div>
                                 <ul class="criteria">
                                     <li class="criteria-item length"><span class="icon">🔒</span> At least 8 characters
                                         (e.g., password123!)</li>

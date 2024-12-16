@@ -16,19 +16,13 @@ export const validation = (value, regex, input) => {
     }
 }
 
-export const registerErrorMessages = {
-    400: 'Bad Request. Please check your input and try again.',
-    409: 'Email already exists. Please use a different email or login.',
-    500: 'Server error. Please try again later.',
-    default: { message: "An unexpected error occurred. Please try again later." }
-
-};
 const errorMessagesyUserInformation = {
     401: { message: "You have been logged out. Invalid or missing token. Please log in again." },
     403: { message: "Your session has expired. Please log in again." },
     404: { message: "The requested user could not be found. Please check your information and try again." },
     default: { message: "An unexpected error occurred. Please try again later." }
 };
+
 export const errorMessagesLogout = {
     400: 'Request failed: refreshToken is missing. Redirecting to login.',
     403: 'Unauthorized access. Redirecting to login.',

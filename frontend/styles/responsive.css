@@ -741,6 +741,10 @@
     .product-description-box {
         margin-top: 2rem;
     }
+
+    .password-checker-container--active {
+        height: 27rem;
+    }
 }
 
 @media screen and (max-width:392px) {

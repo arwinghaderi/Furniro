@@ -218,7 +218,8 @@ body {
 }
 
 .password-checker-container--active {
-    height: 26.5rem;
+    height: 20rem;
+    padding: 1rem;
     visibility: visible;
     margin-bottom: 0;
     overflow-y: auto;

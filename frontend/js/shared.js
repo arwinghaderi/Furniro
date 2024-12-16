@@ -36,7 +36,7 @@ const fetchLogoutUser = async () => {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
-            'authorization': `Bearer ${4565}`
+            'authorization': `Bearer ${token}`
         },
         body: JSON.stringify(tokenRefreshData)
     })

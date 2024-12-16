@@ -1,6 +1,6 @@
 
-import { showSwal, saveToLocalStorage, storeAccessTokenWithExpiry, setSecureCookie } from "../func/utils.js"
-import { getDefaultErrorMessage, loginErrorMessages, registerErrorMessages, validation, } from "./utils.js"
+import { showSwal, storeAccessTokenWithExpiry, setSecureCookie } from "../func/utils.js"
+import { registerErrorMessages, validation, } from "./utils.js"
 
 const btnsAuth = document.querySelectorAll(".btn-Auth")
 const formSignIn = document.querySelector(".form-signIn")
@@ -217,7 +217,7 @@ const fetchAndSendLoginData = async () => {
         })
 
         const loginData = await response.json();
-        
+
         if (!response.ok) {
             const message = loginData.error.message;
             throw new Error(message);
@@ -225,7 +225,7 @@ const fetchAndSendLoginData = async () => {
         const fullName = loginData.data.user.fullname
 
         setSecureCookie("Refresh-Token", loginData.data.refreshToken, 7)
-        storeAccessTokenWithExpiry(loginData.data.accessToken,14)
+        storeAccessTokenWithExpiry(loginData.data.accessToken, 14)
         showSwal(`Your login was successful. Welcome ${fullName} .`, "success", "Go to HomePage", "../index.html")
     } catch (error) {
         showSwal(`${error.message}`, "error", ' Correction of information', "../../Pages/auth.html")
@@ -263,7 +263,7 @@ const fetchAndSendRegisterData = async () => {
         })
 
         if (!response.ok) {
-            const message = registerErrorMessages[response.status] || getDefaultErrorMessage()
+            const message = registerErrorMessages[response.status] || registerErrorMessages.default
             throw new Error(message)
         }
 

@@ -16,22 +16,19 @@ export const validation = (value, regex, input) => {
     }
 }
 
-export const loginErrorMessages = {
-    401: 'Invalid email or password. Please check your credentials and try again.',
-    403: 'Access denied. Please contact support if you believe this is an error.',
-    404: 'Email not found. Please sign up.',
-    500: 'Server error. Please try again later.',
-    502: 'Bad gateway. Please try again later.',
-    503: 'Service unavailable. Please try again later.',
-    504: 'Gateway timeout. Please try again later.'
-};
-
 export const registerErrorMessages = {
     400: 'Bad Request. Please check your input and try again.',
     409: 'Email already exists. Please use a different email or login.',
-    500: 'Server error. Please try again later.'
-};
+    500: 'Server error. Please try again later.',
+    default: { message: "An unexpected error occurred. Please try again later." }
 
+};
+const errorMessagesyUserInformation = {
+    401: { message: "You have been logged out. Invalid or missing token. Please log in again." },
+    403: { message: "Your session has expired. Please log in again." },
+    404: { message: "The requested user could not be found. Please check your information and try again." },
+    default: { message: "An unexpected error occurred. Please try again later." }
+};
 export const errorMessagesLogout = {
     400: 'Request failed: refreshToken is missing. Redirecting to login.',
     403: 'Unauthorized access. Redirecting to login.',
@@ -39,8 +36,6 @@ export const errorMessagesLogout = {
     500: 'Internal server error. Please try again later.',
     default: 'An unexpected error occurred. Redirecting to login.'
 };
-
-export const getDefaultErrorMessage = () => 'An error occurred. Please try again later.';
 
 export const checkingLoginStatus = () => {
     const userInfos = localStorage.getItem("Access-Token");
@@ -68,9 +63,8 @@ export const getingUaerInformation = async () => {
 
         const data = await response.json();
         return data;
-        
+
     } catch (error) {
-        handleError(error, errorMessagesLogout);
+        handleError(error, errorMessagesyUserInformation);
     }
 };
-

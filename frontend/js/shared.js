@@ -1,5 +1,5 @@
-import { getingUaerInformation, checkingLoginStatus, errorMessagesLogout } from "./auth/utils.js"
-import { getToken, getCookieValue, setSecureCookie, storeAccessTokenWithExpiry, getFromLocalStorage, deleteCookie } from "./func/utils.js"
+import { getingUaerInformation, checkingLoginStatus, errorMessagesLogout, } from "./auth/utils.js"
+import { getToken, getCookieValue, setSecureCookie, storeAccessTokenWithExpiry, getFromLocalStorage, deleteCookie, handleError } from "./func/utils.js"
 
 const $ = document
 const hamburger = $.querySelector(".hamburger")
@@ -25,18 +25,18 @@ const navbarDontRegisterText = $.querySelector(".navbar-dont-Register-text")
 
 const fetchLogoutUser = async () => {
     const token = getToken()
-    if (!token) {
+    const refreshToken = getCookieValue("Refresh-Token")
+    if (!token && !refreshToken) {
         return false
     }
 
-    const refreshToken = getCookieValue("Refresh-Token")
     const tokenRefreshData = { "refreshToken": refreshToken };
 
     const response = await fetch("https://furniro-6x7f.onrender.com/auth/log-out", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
-            'authorization': `Bearer ${token}`
+            'authorization': `Bearer ${4565}`
         },
         body: JSON.stringify(tokenRefreshData)
     })
@@ -64,34 +64,6 @@ const handleUserAuthentication = async () => {
 
     navbarSuccessfullyRegisterLoading.style.display = "none";
 }
-
-const handleErrors = (response) => {
-    const message = errorMessagesLogout[response.status] || errorMessagesLogout.default;
-
-    if (response.status === 500) {
-        Swal.fire({
-            title: 'Error!',
-            text: 'Internal server error. Please try again later.',
-            icon: 'error', confirmButtonText: 'Try Again'
-        });
-    } else {
-        Swal.fire({
-            title: "Error!",
-            text: message,
-            icon: "error",
-            customClass: { popup: 'custom-swal2' },
-            confirmButtonText: 'OK',
-            confirmButtonColor: "#B88E2F",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                localStorage.removeItem('Access-Token');
-                localStorage.removeItem('Access-Token-Expiry');
-                document.cookie = 'Refresh-Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                window.location.href = '../index.html';
-            }
-        })
-    }
-};
 
 loginSuccessfully.addEventListener("click", async () => {
 
@@ -127,7 +99,7 @@ loginSuccessfully.addEventListener("click", async () => {
                 })
 
             } else {
-                handleErrors(userData.status);
+                handleError(userData, errorMessagesLogout)
             }
         }
     });

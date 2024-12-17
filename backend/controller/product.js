@@ -1,8 +1,78 @@
+const { isValidObjectId } = require("mongoose");
 const productModel = require("./../model/product");
+const categoryModel = require("./../model/category");
+const { errorResponse, successResponse } = require("../helper/responses");
+const validator = require("../middleware/validator");
+const { createProductValidator } = require("./../validator/product");
 
 exports.createProduct = async (req, res, next) => {
   try {
-    //
+    let {
+      name,
+      description,
+      categoryId,
+      price,
+      discountPercent,
+      quantity,
+      size,
+      attributes,
+    } = req.body;
+
+    attributes = JSON.parse(attributes);
+    size = JSON.parse(size);
+
+    let priceAfterDiscount = undefined;
+    let label = ["New"];
+    let images = [];
+
+    validator(createProductValidator);
+
+    const category = await categoryModel.findById(categoryId);
+    if (!isValidObjectId(categoryId) || !category) {
+      return errorResponse(res, 404, {
+        message: "Category Not Found Or CategoryId is not valid",
+      });
+    }
+
+    if (discountPercent > 0) {
+      priceAfterDiscount = price - (price * discountPercent) / 100;
+      label.push("Discount");
+    }
+
+    if (req.files) {
+      for (let i = 0; i < req.files?.length; i++) {
+        const file = req.files[i];
+        const filename = file?.filename;
+
+        images.push({
+          filename,
+          path: `/images/products/${filename}`,
+        });
+      }
+    } else {
+      return errorResponse(res, 400, {
+        message: "Plz Upload images befor Add product",
+      });
+    }
+
+    const newProduct = await productModel.create({
+      name,
+      description,
+      categoryId,
+      price,
+      discountPercent,
+      priceAfterDiscount,
+      quantity,
+      size,
+      images,
+      label,
+      attributes,
+    });
+
+    return successResponse(res, 200, {
+      message: "Product Created Successfully",
+      newProduct,
+    });
   } catch (err) {
     next(err);
   }

@@ -10,14 +10,13 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    category: {
+    categoryId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
       required: true,
     },
     slug: {
       type: String,
-      required: true,
     },
 
     price: {
@@ -26,6 +25,7 @@ const productSchema = mongoose.Schema(
     },
     discountPercent: {
       type: Number,
+      default: 0,
       required: false,
     },
     priceAfterDiscount: {
@@ -49,15 +49,15 @@ const productSchema = mongoose.Schema(
       required: false,
     },
     size: {
-      type: String,
+      type: [String],
       enum: ["L", "XL", "XS"],
-      required: false,
+      required: true,
     },
+
     rating: {
       type: Number,
       min: 1,
       max: 5,
-      required: true,
     },
     attributes: {
       type: Map, //   Map -> Key - Value Pair
@@ -72,12 +72,12 @@ productSchema.pre("save", function (next) {
   const uniqe = Math.random().toString(36).substring(2, 6);
 
   if (!this.slug) {
-    this.slug = `${this.name.toLowerCase().replace(/ /g, "-")}-${uniqe}`;
+    this.slug = `${this.name.toLowerCase().replace(/ /g, "-")}${uniqe}`;
   }
 
   const randomRate = [3, 4, 5];
   const randomIndex = Math.floor(Math.random() * randomRate.length);
-  const score = numbers[randomIndex];
+  const score = randomRate[randomIndex];
   this.rating = score;
 
   next();

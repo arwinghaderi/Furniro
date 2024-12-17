@@ -4,8 +4,6 @@ const { auth } = require("../middleware/auth");
 const { isAdmin } = require("../middleware/isAdmin");
 const { createProduct } = require("../controller/product");
 const { multerStorage } = require("../middleware/uploader");
-const validator = require("../middleware/validator");
-const { createProductValidator } = require("./../validator/product");
 
 const upload = multerStorage("public/images/products");
 

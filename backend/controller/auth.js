@@ -130,10 +130,11 @@ exports.getResetPasswordCode = async (req, res, next) => {
     if (!user) {
       return errorResponse(res, 404, { message: "Email not Valid!!" });
     }
+    await resetPasswordModel.findOneAndDelete({ user: user._id });
 
     const resetCode = Math.floor(Math.random() * 99999);
 
-    const resetTokenExpireTime = Date.now() + 1000 * 60 * 3;
+    const resetTokenExpireTime = Date.now() + 1000 * 60 * 2;
 
     const resetPassword = new resetPasswordModel({
       user: user._id,

@@ -229,7 +229,7 @@ const fetchAndSendLoginData = async () => {
         const loginData = await response.json();
 
         if (!response.ok) {
-            const message = loginData.error.message;
+            const message = loginData.error.message || "An unexpected error occurred.";
             throw new Error(message);
         }
         const fullName = loginData.data.user.fullname
@@ -278,7 +278,7 @@ const fetchAndSendRegisterData = async () => {
 
         const registerData = await response.json()
         if (!response.ok) {
-            const message = registerData.error.message;
+            const message = registerData.error.message || "An unexpected error occurred.";
             throw new Error(message);
         }
 

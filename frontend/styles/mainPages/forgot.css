@@ -120,7 +120,7 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .Confirm-email-button:disabled,
-.btn-submite:disabled{
+.btn-submite:disabled {
     background-color: #c0c0c0;
     color: #ffffff;
     cursor: not-allowed;

@@ -132,7 +132,7 @@ exports.getResetPasswordCode = async (req, res, next) => {
     }
     await resetPasswordModel.findOneAndDelete({ user: user._id });
 
-    const resetCode = Math.floor(Math.random() * 99999);
+    let resetCode = Math.floor(Math.random() * 99999) + 10000;
 
     const resetTokenExpireTime = Date.now() + 1000 * 60 * 2;
 

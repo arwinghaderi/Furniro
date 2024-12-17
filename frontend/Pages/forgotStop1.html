@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="../vendor/FontAwesome5/all.min.css">
     <link rel="stylesheet" href="../styles/mainPages/forgot.css">
     <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../vendor/sweetalert2/sweetalert2.min.css">
+
     <title>Forgot password</title>
 </head>
 
@@ -27,14 +29,16 @@
                         <input class="input input-email" type="email" placeholder="Email address">
                     </div>
                     <div class="btn-box email-btn-box">
-                        <button class="forgot-button Confirm-email-button">send</button>
-                        <a class="resend" id="timer" href="#">Resend Email</a>
+                        <div>
+                            <button class="forgot-button Confirm-email-button">Send</button>
+                        </div>
+                        <a class="resend" id="timer" href="#"></a>
                     </div>
                     <div class="input-box">
-                        <input class="input" type="number" placeholder="code">
+                        <input class="input input-code" type="number" placeholder="code">
                     </div>
                     <div class="btn-box email-btn-submit">
-                        <button class="forgot-button btn-submite" disabled>Verify</button>
+                        <button class="forgot-button btn-submite" disabled>⛔Forbidden...</button>
                     </div>
                 </div>
 
@@ -43,6 +47,7 @@
     </div>
 
 </body>
-<script src="../js//forgot.js"></script>
+<script src="../js/forgot.js" type="module"></script>
+<script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
 </html>

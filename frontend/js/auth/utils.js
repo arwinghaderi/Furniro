@@ -17,18 +17,18 @@ export const validation = (value, regex, input) => {
 }
 
 const errorMessagesyUserInformation = {
-    401: { message: "You have been logged out. Invalid or missing token. Please log in again." },
-    403: { message: "Your session has expired. Please log in again." },
-    404: { message: "The requested user could not be found. Please check your information and try again." },
-    default: { message: "An unexpected error occurred. Please try again later." }
-};
+    401: "You have been logged out. Invalid or missing token. Please log in again.",
+    403: "Your session has expired. Please log in again.",
+    404: "The requested user could not be found. Please check your information and try again.",
+    default: "An unexpected error occurred."
+}
 
 export const errorMessagesLogout = {
     400: 'Request failed: refreshToken is missing. Redirecting to login.',
     403: 'Unauthorized access. Redirecting to login.',
     404: 'User not found. Redirecting to login.',
     500: 'Internal server error. Please try again later.',
-    default: 'An unexpected error occurred. Redirecting to login.'
+    default: 'An unexpected error occurred.'
 };
 
 export const checkingLoginStatus = () => {

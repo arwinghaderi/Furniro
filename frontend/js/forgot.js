@@ -102,13 +102,15 @@ inputCode.addEventListener("input", (event) => {
 })
 
 const fetchVerifyCode = async () => {
-    inputCodeValue = inputCode.value
+    inputCodeValue = +inputCode.value
     inputEmailValue = inputEmail.value
+    verifyCod.innerHTML = "Loading..."
 
     const userInformation = {
         email: inputEmailValue,
         code: inputCodeValue
     }
+    console.log(userInformation);
 
     try {
         const response = await fetch("https://furniro-6x7f.onrender.com/auth/verifyCode", {
@@ -119,7 +121,7 @@ const fetchVerifyCode = async () => {
             body: JSON.stringify(userInformation)
         })
         const data = await response.json()
-
+        console.log(data);
         if (!response.ok) {
             let message = data.error.message || "An unexpected error occurred."
             throw new Error(message)

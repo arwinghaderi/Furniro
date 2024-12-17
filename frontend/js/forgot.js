@@ -1,4 +1,5 @@
 import { showSwal } from "./func/utils.js";
+import { saveToLocalStorage } from "./func/utils.js";
 
 const confirmEmailBtn = document.querySelector(".Confirm-email-button")
 const verifyCod = document.querySelector(".btn-submite")
@@ -108,7 +109,6 @@ const fetchVerifyCode = async () => {
         email: inputEmailValue,
         code: inputCodeValue
     }
-    console.log(userInformation);
 
     try {
         const response = await fetch("https://furniro-6x7f.onrender.com/auth/verifyCode", {
@@ -118,12 +118,15 @@ const fetchVerifyCode = async () => {
             },
             body: JSON.stringify(userInformation)
         })
-        const data = await response.json()
-        console.log(data);
+        const VerifyCodeData = await response.json()
+        console.log(VerifyCodeData);
         if (!response.ok) {
-            let message = data.error.message || "An unexpected error occurred."
+            let message = VerifyCodeData.error.message || "An unexpected error occurred."
             throw new Error(message)
         }
+
+        saveToLocalStorage("user-Token", VerifyCodeData.data.userToken)
+        showSwal(`You can now set your new password.`, "success", "Set New Password", "../Pages/forgotStop2.html")
 
     } catch (error) {
         showSwal(`${error.message}`, "error", ' Correction of information', "../Pages/forgotStop1.html")
@@ -132,3 +135,15 @@ const fetchVerifyCode = async () => {
 verifyCod.addEventListener("click", () => {
     fetchVerifyCode()
 })
+
+
+
+// data
+// :
+// { message: 'Verified Code Successfully', userToken: '18b75d5045c5138c3abe641707e2c9732b02de952b70e615' }
+// status
+// :
+// 200
+// success
+// :
+// true

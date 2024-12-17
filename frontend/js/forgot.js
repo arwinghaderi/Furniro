@@ -50,9 +50,7 @@ const fetchGetCode = async (inputEmailValue) => {
             throw new Error(message);
         }
         confirmEmailBtn.disabled = true;
-        // verifyCod.disabled = false
         confirmEmailBtn.innerHTML = "⛔Forbidden";
-        // verifyCod.innerHTML = "Verify"
         timerElement.style.display = 'inline';
         startTimer(30);
     } catch (error) {
@@ -102,7 +100,7 @@ inputCode.addEventListener("input", (event) => {
 })
 
 const fetchVerifyCode = async () => {
-    inputCodeValue = +inputCode.value
+    inputCodeValue = inputCode.value
     inputEmailValue = inputEmail.value
     verifyCod.innerHTML = "Loading..."
 
@@ -131,9 +129,6 @@ const fetchVerifyCode = async () => {
         showSwal(`${error.message}`, "error", ' Correction of information', "../Pages/forgotStop1.html")
     }
 }
-
-
-
 verifyCod.addEventListener("click", () => {
     fetchVerifyCode()
 })

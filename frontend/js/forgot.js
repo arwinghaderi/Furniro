@@ -5,7 +5,7 @@ const verifyCod = document.querySelector(".btn-submite")
 const inputEmail = document.querySelector(".input-email")
 const inputCode = document.querySelector(".input-code")
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const codeRegex = /^\d{5}$/
+const codeRegex = /^\d{5,6}$/
 const timerElement = document.getElementById('timer');
 let inputEmailValue, inputCodeValue
 let isCodeSent = false

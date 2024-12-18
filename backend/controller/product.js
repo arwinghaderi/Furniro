@@ -85,7 +85,7 @@ exports.removeProduct = async (req, res, next) => {
     const { productId } = req.params;
 
     if (!isValidObjectId(productId)) {
-      return errorResponse(res, 401, {
+      return errorResponse(res, 400, {
         message: "productId is not valid",
       });
     }

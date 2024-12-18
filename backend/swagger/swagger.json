@@ -842,6 +842,162 @@
           }
         }
       }
+    },
+
+    "/products": {
+      "post": {
+        "tags": ["Admin Dashboard 📈"],
+        "summary": "create new product",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "The ID of the category (MongoDB ObjectId).",
+                    "example": "64b2fc0c3c2c4e8f12a45678"
+                  },
+                  "price": {
+                    "type": "Number",
+                    "example": 22000000
+                  },
+                  "quantity": {
+                    "type": "Number",
+                    "example": 30
+                  },
+                  "size": {
+                    "type": "array",
+                    "enum": ["L", "XL", "XS"]
+                  },
+                  "discountPercent": {
+                    "type": "Number",
+                    "example": 5,
+                    "Default": 0
+                  },
+
+                  "attributes": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "description": "A key-value pair for attributes, value can be any type."
+                    },
+                    "description": "A map of attributes with key-value pairs.",
+                    "example": {
+                      "color": "red",
+                      "weight": "5.5"
+                    }
+                  },
+
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product created successfully"
+          },
+          "400": {
+            "description": "Validation error or images not provided"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden (Only admins)"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      }
+    },
+    "/product/{productId}": {
+      "delete": {
+        "summary": "Delete a product by ID",
+        "tags": ["Admin Dashboard 📈"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the product to delete",
+            "example": "64b2fc0c3c2c4e8f12a45678"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product and images removed successfully"
+          },
+          "400": {
+            "description": "ProductId is not valid"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden (Only admins)"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/product/{slug}": {
+      "get": {
+        "summary": "Get a product by slug",
+        "tags": ["Products 📦"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the product",
+            "example": "chair-45325"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product retrieved successfully"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
     }
   }
 }

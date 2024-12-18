@@ -4,6 +4,8 @@ const categoryModel = require("./../model/category");
 const { errorResponse, successResponse } = require("../helper/responses");
 const validator = require("../middleware/validator");
 const { createProductValidator } = require("./../validator/product");
+const path = require("path");
+const fs = require("fs");
 
 exports.createProduct = async (req, res, next) => {
   try {
@@ -72,6 +74,45 @@ exports.createProduct = async (req, res, next) => {
     return successResponse(res, 200, {
       message: "Product Created Successfully",
       newProduct,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.removeProduct = async (req, res, next) => {
+  try {
+    const { productId } = req.params;
+
+    if (!isValidObjectId(productId)) {
+      return errorResponse(res, 401, {
+        message: "productId is not valid",
+      });
+    }
+
+    const product = await productModel.findOneAndDelete({ _id: productId });
+
+    if (!product) {
+      return errorResponse(res, 404, {
+        message: "Product Not Found",
+      });
+    }
+
+    product.images?.forEach((image) => {
+      let imagePath = path.join(__dirname, `../public/${image.path}`);
+      if (fs.existsSync(imagePath)) {
+        fs.unlink(imagePath, (err) => {
+          if (err) {
+            return errorResponse(res, 400, {
+              message: `Err in Remove Product images ->${err}`,
+            });
+          }
+        });
+      }
+    });
+
+    return successResponse(res, 200, {
+      message: "Product and ProductImages Removed Successfully",
     });
   } catch (err) {
     next(err);

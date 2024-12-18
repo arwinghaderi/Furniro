@@ -69,10 +69,10 @@ const productSchema = mongoose.Schema(
 );
 
 productSchema.pre("save", function (next) {
-  const uniqe = Math.random().toString(36).substring(2, 6);
+  const uniqe = Math.floor(Math.random() * 99999) + 1111;
 
   if (!this.slug) {
-    this.slug = `${this.name.toLowerCase().replace(/ /g, "-")}${uniqe}`;
+    this.slug = `${this.name.toLowerCase().replace(/ /g, "-")}-${uniqe}`;
   }
 
   const randomRate = [3, 4, 5];

@@ -118,3 +118,18 @@ exports.removeProduct = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getProduct = async (req, res, next) => {
+  try {
+    const { slug } = req.params;
+
+    const product = await productModel.findOne({ slug });
+    if (!product) {
+      return errorResponse(res, 404, { message: "Product Not Found" });
+    }
+
+    return successResponse(res, 200, { product });
+  } catch (err) {
+    next(err);
+  }
+};

@@ -53,7 +53,7 @@ const fetchGetCode = async (inputEmailValue) => {
         confirmEmailBtn.disabled = true;
         confirmEmailBtn.innerHTML = "⛔Forbidden";
         timerElement.style.display = 'inline';
-        startTimer(30);
+        startTimer(60);
     } catch (error) {
         showSwal(`${error.message}`, "error", ' Correction of information', "../Pages/forgotStop1.html")
     } finally {
@@ -85,7 +85,6 @@ const startTimer = (duration) => {
 };
 
 inputCode.addEventListener("input", (event) => {
-    console.log(isCodeSent);
     if (isCodeSent) {
         inputCodeValue = event.target.value
         const isEmailValid = validateCode(inputCodeValue)
@@ -119,7 +118,7 @@ const fetchVerifyCode = async () => {
             body: JSON.stringify(userInformation)
         })
         const VerifyCodeData = await response.json()
-        console.log(VerifyCodeData);
+
         if (!response.ok) {
             let message = VerifyCodeData.error.message || "An unexpected error occurred."
             throw new Error(message)
@@ -132,18 +131,7 @@ const fetchVerifyCode = async () => {
         showSwal(`${error.message}`, "error", ' Correction of information', "../Pages/forgotStop1.html")
     }
 }
+
 verifyCod.addEventListener("click", () => {
     fetchVerifyCode()
 })
-
-
-
-// data
-// :
-// { message: 'Verified Code Successfully', userToken: '18b75d5045c5138c3abe641707e2c9732b02de952b70e615' }
-// status
-// :
-// 200
-// success
-// :
-// true

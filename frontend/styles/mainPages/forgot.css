@@ -125,3 +125,21 @@ input[type='number']::-webkit-inner-spin-button {
     color: #ffffff;
     cursor: not-allowed;
 }
+
+.Email-validation-Valid,
+.password-validation-Valid,
+.fullName-validation-valid {
+    color: green;
+    display: none;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.Email-validation-invalid,
+.password-validation-invalid,
+.fullName-validation-invalid {
+    color: red;
+    display: none;
+    justify-content: flex-start;
+    width: 100%;
+}

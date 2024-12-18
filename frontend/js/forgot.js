@@ -1,11 +1,12 @@
 import { showSwal } from "./func/utils.js";
+import { saveToLocalStorage } from "./func/utils.js";
 
 const confirmEmailBtn = document.querySelector(".Confirm-email-button")
 const verifyCod = document.querySelector(".btn-submite")
 const inputEmail = document.querySelector(".input-email")
 const inputCode = document.querySelector(".input-code")
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const codeRegex = /^\d{5}$/
+const codeRegex = /^\d{5,6}$/
 const timerElement = document.getElementById('timer');
 let inputEmailValue, inputCodeValue
 let isCodeSent = false
@@ -50,11 +51,9 @@ const fetchGetCode = async (inputEmailValue) => {
             throw new Error(message);
         }
         confirmEmailBtn.disabled = true;
-        // verifyCod.disabled = false
         confirmEmailBtn.innerHTML = "⛔Forbidden";
-        // verifyCod.innerHTML = "Verify"
         timerElement.style.display = 'inline';
-        startTimer(30);
+        startTimer(60);
     } catch (error) {
         showSwal(`${error.message}`, "error", ' Correction of information', "../Pages/forgotStop1.html")
     } finally {
@@ -86,7 +85,6 @@ const startTimer = (duration) => {
 };
 
 inputCode.addEventListener("input", (event) => {
-    console.log(isCodeSent);
     if (isCodeSent) {
         inputCodeValue = event.target.value
         const isEmailValid = validateCode(inputCodeValue)
@@ -104,6 +102,7 @@ inputCode.addEventListener("input", (event) => {
 const fetchVerifyCode = async () => {
     inputCodeValue = inputCode.value
     inputEmailValue = inputEmail.value
+    verifyCod.innerHTML = "Loading..."
 
     const userInformation = {
         email: inputEmailValue,
@@ -118,19 +117,20 @@ const fetchVerifyCode = async () => {
             },
             body: JSON.stringify(userInformation)
         })
-        const data = await response.json()
+        const VerifyCodeData = await response.json()
 
         if (!response.ok) {
-            let message = data.error.message || "An unexpected error occurred."
+            let message = VerifyCodeData.error.message || "An unexpected error occurred."
             throw new Error(message)
         }
+
+        saveToLocalStorage("user-Token", VerifyCodeData.data.userToken)
+        showSwal(`You can now set your new password.`, "success", "Set New Password", "../Pages/forgotStop2.html")
 
     } catch (error) {
         showSwal(`${error.message}`, "error", ' Correction of information', "../Pages/forgotStop1.html")
     }
 }
-
-
 
 verifyCod.addEventListener("click", () => {
     fetchVerifyCode()

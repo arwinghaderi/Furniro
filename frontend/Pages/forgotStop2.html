@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../styles/font.css">
     <link rel="stylesheet" href="../vendor/FontAwesome5/all.min.css">
     <link rel="stylesheet" href="../styles/mainPages/forgot.css">
+    <link rel="stylesheet" href="../vendor/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="../styles/responsive.css">
     <title>Forgot password</title>
 </head>
@@ -30,6 +31,8 @@
                             <i class="fas fa-eye" id="input-password-icon"></i>
                         </div>
                     </div>
+                    <span class="password-validation-Valid">Valid password Address</span>
+                    <span class="password-validation-invalid">Invalid password Address</span>
                     <div class="input-box">
                         <input type="password" class="input signUp-confirm" id="password"
                             placeholder="Confirm password">
@@ -37,8 +40,11 @@
                             <i class="fas fa-eye" id="input-password-icon"></i>
                         </div>
                     </div>
+                    <span class="password-validation-Valid password-confrim-Valid">Valid password Address</span>
+                    <span class="password-validation-invalid password-confrim-invalid ">Invalid password Address </span>
+
                     <div class="btn-box email-btn-submit">
-                        <button class="forgot-button btn-submite">save</button>
+                        <button class="forgot-button btn-submite" disabled>⛔Forbidden...</button>
                     </div>
                 </div>
 
@@ -50,5 +56,7 @@
 </body>
 <script src="../vendor/FontAwesome5/all.min.js"></script>
 <script src="../js/funcAuth.js"></script>
+<script src="../js/forgotStop2.js" type="module"></script>
+<script src="../vendor/sweetalert2/sweetalert2.all.min.js" ></script>
 
 </html>

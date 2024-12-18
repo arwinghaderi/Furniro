@@ -9,6 +9,7 @@ const categoryRouter = require("./routes/category");
 const newsletterRouter = require("./routes/newsletter");
 const concatRouter = require("./routes/contact");
 const productRouter = require("./routes/product");
+const cartRouter = require("./routes/cart");
 const apiDocRouter = require("./routes/swagger");
 const { errorResponse } = require("./helper/responses");
 const { errorHandler } = require("./middleware/errorHandler");
@@ -28,6 +29,7 @@ app.use("/category", categoryRouter);
 app.use("/newsletter", newsletterRouter);
 app.use("/concat", concatRouter);
 app.use("/product", productRouter);
+app.use("/cart", cartRouter);
 app.use("/apis", apiDocRouter);
 app.use("*", (req, res) => {
   return errorResponse(res, 404, {

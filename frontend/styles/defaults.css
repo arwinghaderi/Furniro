@@ -123,3 +123,7 @@ a {
     border: none !important;
     box-shadow: none !important;
 }
+
+.home-section-container-description__befor{
+    color: var(--dark-color);
+}

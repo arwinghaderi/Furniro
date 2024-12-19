@@ -13,6 +13,7 @@ const displayPaths = () => {
         setTimeout(() => {
             let contentPath = referrer.includes(currentPath) ? "Same path" : extractedPart;
             previousPathElement.textContent = contentPath ? contentPath : "home"
+            previousPathElement.setAttribute("href", referrer);
         }, 1000)
     } else {
         previousPathElement.textContent = "Direct Entry";

@@ -25,23 +25,6 @@ const swapContent = (dataSetcontent) => {
 
 const productSelectionByUser = products.find(product => { return product.id === +urlParamsId })
 
-// const addingPagePathDom = () => {
-//     const routeProduct = document.querySelector(".route-product")
-//     const previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];
-
-
-//     previousPathElement.innerHTML = "Loading..."
-//     let extractedPart
-
-
-//     extractedPart = referrer.split('/').pop().split('.')[0];
-//     extractedPart = extractedPart === "index" ? "home" : extractedPart
-
-//     setTimeout(() => {
-//         routeProduct.insertAdjacentHTML("afterbegin", `<div class="container"><div class= "route-product__waraper"><p class="route-product__path-name">${previousPaths[1]}</p><i class="fa-solid fa-angle-right fa-xs"></i><p class="route-product__path-name">${previousPaths[0]}</p><i class="fa-solid fa-angle-right fa-xs"></i><div class="route-product__line-col line"></div><p class="route-product__product-name"> ${productSelectionByUser.productName}</p></></div >`)
-//     }, 1000);
-// }
-
 const addingPagePathDom = () => {
     const routeProduct = document.querySelector(".route-product");
     const previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];
@@ -53,7 +36,7 @@ const addingPagePathDom = () => {
     })
 
     setTimeout(() => {
-        routeProduct.innerHTML = ` <div class="container"> <div class="route-product__wrapper"> <span class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</span> <i class="fa-solid fa-angle-right fa-xs"></i> <span class="route-product__path-name">${extractedPart[0] || "home"}</span> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productSelectionByUser.productName}</span> </div> </div> `
+        routeProduct.innerHTML = ` <div class="container"> <div class="route-product__wrapper"> <a href="${previousPaths[1] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <a href="${previousPaths[0] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[0] || "home"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productSelectionByUser.productName}</span> </div> </div> `
     }, 1000)
 };
 
@@ -92,7 +75,6 @@ const addingDetailesProduct = () => {
         addingAllProductPhotos()
         addingPagePathDom()
         addingProductSpecifications()
-
 
         wrapperDetailesProducts.insertAdjacentHTML('afterbegin',
             `${productSelectionByUser.discount ? `<h3 class="detailes-produc-Specifications__title"> ${productSelectionByUser.productIntroduction}</h3>

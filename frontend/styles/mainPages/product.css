@@ -189,10 +189,10 @@ cart-shop singel-product
     padding: 5rem 0 5rem 10rem;
 }
 
-.route-product__waraper {
+.route-product__wrapper{
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 5rem;
     font-family: var(--primary-font);
 }
 

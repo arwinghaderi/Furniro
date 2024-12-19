@@ -6,7 +6,6 @@ exports.addToCart = async (req, res, next) => {
   try {
     const user = req.user;
     const { productId, quantity, color, size } = req.body;
-    console.log(productId, quantity, color, size);
 
     const product = await productModel.findById(productId);
     if (!product) {
@@ -97,7 +96,22 @@ exports.addToCart = async (req, res, next) => {
 
 exports.showUserCart = async (req, res, next) => {
   try {
-    //
+    const user = req.user;
+
+    const userCart = await cartModel.findOne({ user: user._id });
+    if (!userCart) {
+      return errorResponse(res, 404, {
+        message: "No products were found in your shopping cart",
+      });
+    }
+
+    await userCart.populate({
+      path: "items.product",
+      select:
+        "-categoryId -description -label -rating -size -attributes -createdAt -updatedAt -__v",
+    });
+
+    return successResponse(res, 200, { cart: userCart });
   } catch (err) {
     next(err);
   }

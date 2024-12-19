@@ -149,3 +149,53 @@ exports.removeItemFromProduct = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateProductQuantity = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const { itemId } = req.params;
+    const { quantity } = req.body;
+
+    if (!isValidObjectId(itemId)) {
+      return errorResponse(res, 404, { message: "Product Item Id Not Valid" });
+    }
+
+    const userCart = await cartModel.findOne({ user: user._id });
+    if (userCart.items.length === 0) {
+      return errorResponse(res, 400, { message: "Your Cart is Empty" });
+    }
+
+    const item = userCart.items.find((item) => {
+      return item._id.toString() === itemId;
+    });
+
+    if (!item) {
+      return errorResponse(res, 404, {
+        message: "Product not Found",
+      });
+    }
+
+    if (quantity <= 5) {
+      item.quantity = quantity;
+    } else {
+      return errorResponse(res, 400, {
+        message:
+          "You cannot add more than 5 of each product to the cart You have ",
+      });
+    }
+
+    await userCart.save();
+    userCart.populate({
+      path: "items.product",
+      select:
+        "-categoryId -description -label -rating -size -attributes -createdAt -updatedAt -__v",
+    });
+
+    return successResponse(res, 200, {
+      message: "Your shopping cart has been updated",
+      cart: userCart,
+    });
+  } catch (err) {
+    next(err);
+  }
+};

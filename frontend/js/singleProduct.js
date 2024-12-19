@@ -53,7 +53,7 @@ const addingPagePathDom = () => {
     })
 
     setTimeout(() => {
-        routeProduct.innerHTML = ` <div class="container"> <div class="route-product__wrapper"> <span class="route-product__path-name">${extractedPart[1] || "N/A"}</span> <i class="fa-solid fa-angle-right fa-xs"></i> <span class="route-product__path-name">${extractedPart[0] || "Direct Entry"}</span> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productSelectionByUser.productName}</span> </div> </div> `
+        routeProduct.innerHTML = ` <div class="container"> <div class="route-product__wrapper"> <span class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</span> <i class="fa-solid fa-angle-right fa-xs"></i> <span class="route-product__path-name">${extractedPart[0] || "Direct Entry"}</span> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productSelectionByUser.productName}</span> </div> </div> `
     }, 1000)
 };
 

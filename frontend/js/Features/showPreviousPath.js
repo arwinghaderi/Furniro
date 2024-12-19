@@ -10,7 +10,10 @@ const displayPaths = () => {
         extractedPart = referrer.split('/').pop().split('.')[0];
         extractedPart = extractedPart === "index" ? "home" : extractedPart;
 
-        previousPathElement.textContent = referrer.includes(currentPath) ? "Same path" : extractedPart;
+        setTimeout(() => {
+            let contentPath = referrer.includes(currentPath) ? "Same path" : extractedPart;
+            previousPathElement.textContent = contentPath ? contentPath : "home"
+        }, 1000)
     } else {
         previousPathElement.textContent = "Direct Entry";
     }
@@ -19,5 +22,3 @@ const displayPaths = () => {
 document.addEventListener("DOMContentLoaded", () => {
     displayPaths();
 });
-
-

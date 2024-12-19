@@ -59,6 +59,7 @@
     color: #ffff;
     font-family: "Poppins-Bold";
 }
+
 /* 
 ============== 
     RANGE
@@ -77,6 +78,10 @@
     font-size: 2.4rem;
     font-family: "Poppins-SemiBold";
     margin-top: 2rem;
+}
+
+.product-section {
+    margin-top: 10rem;
 }
 
 /* 

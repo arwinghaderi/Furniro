@@ -1,3 +1,4 @@
+const { isValidObjectId } = require("mongoose");
 const { successResponse, errorResponse } = require("../helper/responses");
 const cartModel = require("./../model/cart");
 const productModel = require("./../model/product");
@@ -112,6 +113,38 @@ exports.showUserCart = async (req, res, next) => {
     });
 
     return successResponse(res, 200, { cart: userCart });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.removeItemFromProduct = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const { itemId } = req.params;
+    if (!isValidObjectId(itemId)) {
+      return errorResponse(res, 404, { message: "Product Item Id Not Valid" });
+    }
+
+    const userCart = await cartModel.findOne({ user: user._id });
+    if (userCart.items.length === 0) {
+      return errorResponse(res, 400, { message: "Your Cart is Empty" });
+    }
+
+    const item = userCart.items.find((item) => {
+      return item._id.toString() === itemId;
+    });
+
+    if (!item) {
+      return errorResponse(res, 404, {
+        message: "Product not Found in your Cart Items",
+      });
+    }
+
+    userCart.items.pull(item);
+    await userCart.save();
+
+    return successResponse(res, 200, { message: "Product Removed From Cart" });
   } catch (err) {
     next(err);
   }

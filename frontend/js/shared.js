@@ -22,6 +22,30 @@ const loginSuccessfully = $.querySelector(".login-successfully")
 const navbarSuccessfullyRegisterText = $.querySelector(".navbar-successfully-Register-text")
 const navbarSuccessfullyRegisterLoading = $.querySelector(".navbar-successfully-Register-Loading")
 const navbarDontRegisterText = $.querySelector(".navbar-dont-Register-text")
+const previousPathElement = $.querySelector(".home-section-container-description__befor")
+
+
+const displayPaths = () => {
+    const referrer = document.referrer;
+    const currentPath = window.location.pathname;
+    previousPathElement.innerHTML = "Loading..."
+    let extractedPart
+
+    if (referrer) {
+        extractedPart = referrer.split('/').pop().split('.')[0];
+        extractedPart = extractedPart === "index" ? "home" : extractedPart
+
+        setTimeout(() => {
+            previousPathElement.textContent = referrer.includes(currentPath) ? "Same path" : extractedPart;
+        }, 1000);
+    } else {
+        previousPathElement.textContent = "Direct Entry";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    displayPaths();
+});
 
 const fetchLogoutUser = async () => {
     const token = getToken()

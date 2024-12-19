@@ -6,6 +6,7 @@ exports.addToCart = async (req, res, next) => {
   try {
     const user = req.user;
     const { productId, quantity, color, size } = req.body;
+    console.log(productId, quantity, color, size);
 
     const product = await productModel.findById(productId);
     if (!product) {
@@ -16,7 +17,9 @@ exports.addToCart = async (req, res, next) => {
     if (existCart) {
       const productIndexInItems = existCart.items.findIndex((item) => {
         return (
-          item.product.toString() === productId && item.color === req.body.color
+          item.product.toString() === productId &&
+          item.color === req.body.color &&
+          item.size === req.body.size
         );
       });
 
@@ -29,7 +32,7 @@ exports.addToCart = async (req, res, next) => {
             existCart.items[productIndexInItems].quantity += quantity;
           } else {
             return errorResponse(res, 400, {
-              message: "You cannot add more than 5 of each product to the cart",
+              message: `You cannot add more than 5 of each product to the cart You have ${item.quantity} of this product in your cart`,
             });
           }
         } else {

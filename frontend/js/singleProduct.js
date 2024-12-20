@@ -367,4 +367,5 @@ const removeProductByUserByUser = (productId) => {
     calculationTotalCart(productsCart)
     addingProductTemplateToCart(productsCart)
 }
+
 window.removeProductByUserByUser = removeProductByUserByUser;

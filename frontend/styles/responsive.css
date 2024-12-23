@@ -107,6 +107,10 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .service-container {
+        gap: 4rem;
+    }
 }
 
 @media screen and (max-width:1200px) {
@@ -270,8 +274,9 @@
         display: none;
     }
 
-
-
+    .service {
+        width: 33rem;
+    }
 
 }
 
@@ -492,6 +497,10 @@
     .navbar-dont-Register-text {
         display: none;
     }
+
+    .service {
+        width: 32rem;
+    }
 }
 
 @media screen and (max-width:768px) {
@@ -606,6 +615,17 @@
         width: 100%;
     }
 
+    .route-product__wrapper {
+        justify-content: center;
+    }
+
+    .service {
+        width: 34rem;
+    }
+
+    .service-container {
+        justify-content: center;
+    }
     * {
         cursor: none;
     }
@@ -744,6 +764,10 @@
 
     .password-checker-container--active {
         height: 27rem;
+    }
+
+    .route-product__wrapper {
+        gap: 2rem;
     }
 }
 

@@ -17,7 +17,7 @@
 .home__content-box {
     max-width: 58.3rem;
     max-height: 44.3rem;
-    background-color: rgb(255, 244, 229, 100%);
+    background-color: #fff4e5;
     padding: 3rem;
     border-radius: 1rem;
     box-shadow: 0rem 0.4rem 0.4rem rgb(0, 0, 0, 25%);
@@ -59,6 +59,7 @@
     color: #ffff;
     font-family: "Poppins-Bold";
 }
+
 /* 
 ============== 
     RANGE
@@ -77,6 +78,10 @@
     font-size: 2.4rem;
     font-family: "Poppins-SemiBold";
     margin-top: 2rem;
+}
+
+.product-section {
+    margin-top: 10rem;
 }
 
 /* 

@@ -9,6 +9,16 @@ exports.addToCartValidator = yup.object({
       isValidObjectId(value)
     ),
 
+  color: yup
+    .string()
+    .required("Color is required")
+    .matches(/^#([0-9A-F]{3}|[0-9A-F]{6})$/i, "Invalid HEX color format"),
+
+  size: yup
+    .string()
+    .required("Size is required")
+    .oneOf(["S", "M", "L", "XL", "XXL", "XS"], "Invalid size"),
+
   quantity: yup
     .number()
     .required("Quantity is required")

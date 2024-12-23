@@ -13,12 +13,15 @@
 
 .product-box {
     background-color: #F4F5F7;
+    border-radius: 2.5rem;
+    box-shadow: 0px 4px 4px 2px rgb(184, 142, 47,0.5);
     position: relative;
 }
 
 .product__img {
     width: 100%;
     height: 100%;
+    border-radius: 2.5rem;
 }
 
 .product-overlay {
@@ -35,6 +38,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border-radius: 2.5rem;
 }
 
 .img-box-overlay:hover .product-overlay {

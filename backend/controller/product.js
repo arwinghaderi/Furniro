@@ -170,7 +170,38 @@ exports.addToFavorites = async (req, res, next) => {
 
 exports.removeFromFavorites = async (req, res, next) => {
   try {
-    //codes
+    const { productId } = req.params;
+    const user = req.user;
+
+    if (!isValidObjectId(productId)) {
+      return errorResponse(res, 400, {
+        message: "Poroduct Id not Valid format!!",
+      });
+    }
+
+    const userFavorites = await favoriteModel.findOne({ user: user._id });
+    if (!userFavorites) {
+      return errorResponse(res, 404, {
+        message: "There is no product in your Favorite list!!",
+      });
+    }
+
+    const product = userFavorites.items.findIndex((item) => {
+      return item.toString() === productId.toString();
+    });
+
+    if (product === -1) {
+      return errorResponse(res, 404, {
+        message: "This Product is not in your Favorite list !!",
+      });
+    }
+
+    userFavorites.items.splice(product, 1);
+    await userFavorites.save();
+
+    return successResponse(res, 200, {
+      message: "Product Removed From Your Favorites",
+    });
   } catch (err) {
     next(err);
   }

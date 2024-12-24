@@ -143,7 +143,7 @@ exports.getAllFavorites = async (req, res, next) => {
       .populate({
         path: "items",
         select:
-          "name title price discountPercent priceAfterDiscount images slug rating label",
+          "name title price discountPercent description priceAfterDiscount images slug rating label",
       })
       .populate({
         path: "user",

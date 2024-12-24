@@ -19,9 +19,9 @@ const router = express.Router();
 router.route("/").post(auth, isAdmin, upload.array("images", 4), createProduct);
 
 router.route("/:productId").delete(auth, isAdmin, removeProduct);
-// router.route("/:slug").get(getProduct);
 
 router.route("/favorites").get(auth, getAllFavorites);
+router.route("/:slug").get(getProduct);
 router
   .route("/favorites/:productId")
   .post(auth, addToFavorites)

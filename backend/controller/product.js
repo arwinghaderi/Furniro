@@ -133,3 +133,27 @@ exports.getProduct = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getAllFavorites = async (req, res, next) => {
+  try {
+    //codes
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.addToFavorites = async (req, res, next) => {
+  try {
+    //codes
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.removeFromFavorites = async (req, res, next) => {
+  try {
+    //codes
+  } catch (err) {
+    next(err);
+  }
+};

@@ -68,7 +68,8 @@
 .range-img {
     width: 100%;
     object-fit: contain;
-
+    border-radius: 2.5rem;
+    box-shadow: 0 4px 8px 1px rgba(184, 142, 47, 1);
 }
 
 .range-description {

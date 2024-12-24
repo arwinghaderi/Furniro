@@ -1,0 +1,80 @@
+@import url("../defaults.css");
+@import url("../Features/footer.css");
+@import url("../Features/homeSection.css");
+@import url("../Features/navBar.css");
+
+.paymentOptionsHeader {
+    background-color: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.paymentOptionsTitle {
+    color: #333;
+    font-size: 36px;
+    font-family: "Poppins-Bold";
+}
+
+.paymentOptions {
+    background-color: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+}
+
+.paymentOptionsSubtitle {
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: "Poppins-Bold";
+}
+
+.paymentOptionsDescription {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.6;
+    font-family: "Poppins-Regular";
+}
+
+.paymentOptionsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.paymentOptionsListItem {
+    background-color: #fff4e5;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-left: 5px solid var(--Primary-color);
+    border-radius: 5px;
+}
+
+.paymentOptionsListItem strong {
+    color: #333;
+    font-size: 18px;
+    font-family: "Poppins-Regular";
+}
+
+.paymentOptionsFaqTitle {
+    color: #333;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.paymentOptionsFaqQuestion,
+.paymentOptionsFaqAnswer {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.paymentOptionsFaqAnswer strong {
+    color: #000;
+    font-family: "Poppins-Regular";
+}

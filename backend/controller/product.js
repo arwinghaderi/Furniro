@@ -137,7 +137,27 @@ exports.getProduct = async (req, res, next) => {
 
 exports.getAllFavorites = async (req, res, next) => {
   try {
-    //codes
+    const user = req.user;
+    const userFavorites = await favoriteModel
+      .findOne({ user: user._id })
+      .populate({
+        path: "items",
+        select:
+          "name title price discountPercent priceAfterDiscount images slug rating label",
+      })
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .select("-createdAt -updatedAt -__v");
+
+    if (!userFavorites) {
+      return errorResponse(res, 404, {
+        message: "There is no product in your Favorite list!!",
+      });
+    }
+
+    return successResponse(res, 200, { favorites: userFavorites });
   } catch (err) {
     next(err);
   }

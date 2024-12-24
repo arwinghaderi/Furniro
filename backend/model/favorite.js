@@ -6,9 +6,10 @@ const schema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    product: [
+    items: [
       {
-        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
       },
     ],
   },

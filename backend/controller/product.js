@@ -1,6 +1,7 @@
 const { isValidObjectId } = require("mongoose");
 const productModel = require("./../model/product");
 const categoryModel = require("./../model/category");
+const favoriteModel = require("./../model/favorite");
 const { errorResponse, successResponse } = require("../helper/responses");
 const validator = require("../middleware/validator");
 const { createProductValidator } = require("./../validator/product");
@@ -144,7 +145,24 @@ exports.getAllFavorites = async (req, res, next) => {
 
 exports.addToFavorites = async (req, res, next) => {
   try {
-    //codes
+    const { productId } = req.params;
+    const user = req.user;
+
+    const product = await productModel.findById(productId);
+
+    if (!isValidObjectId(productId) || !product) {
+      return errorResponse(res, 404, { message: "Poroduct Not Found !!" });
+    }
+
+    await favoriteModel.findOneAndUpdate(
+      { user: user._id },
+      { $addToSet: { items: productId } },
+      { upsert: true }
+    );
+
+    return successResponse(res, 201, {
+      message: "Product Add to Favorite List",
+    });
   } catch (err) {
     next(err);
   }

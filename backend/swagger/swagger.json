@@ -749,6 +749,410 @@
       }
     },
 
+    "/cart/": {
+      "post": {
+        "summary": "Add a product to the user's cart",
+        "description": "Add a specific product with its details to the shopping cart.",
+        "tags": ["Cart 🛒"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "string",
+                    "example": "6762e5867e70b51e0523f197",
+                    "description": "The ID of the product to add."
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "example": 2,
+                    "description": "The quantity of the product to add."
+                  },
+                  "color": {
+                    "type": "string",
+                    "example": "#FF5733",
+                    "description": "HEX code for the color of the product (e.g., #FF5733)"
+                  },
+                  "size": {
+                    "type": "string",
+                    "example": "XL",
+                    "description": "Size of the product (allowed values: S, M, L, XL, XXL, XS)"
+                  }
+                },
+                "required": ["productId", "quantity", "color", "size"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product successfully added to the cart.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "cart": {
+                      "$ref": "#/components/schemas/Cart"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request or exceeded quantity limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized !! - token Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized, Token expired or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized !! Token Expired"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Or Product not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Show user's cart",
+        "description": "Retrieve all products in the user's shopping cart.",
+        "tags": ["Cart 🛒"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the cart.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cart": {
+                      "$ref": "#/components/schemas/Cart"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized !! - token Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token expired or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized !! Token Expired"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No products found in the cart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/cart/{itemId}": {
+      "delete": {
+        "tags": ["Cart 🛒"],
+        "summary": "Remove an item from the shopping cart",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "64df123abc45678def901234"
+            },
+            "description": "The ID of the item to be removed from the cart"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item successfully removed from the cart",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Product Removed From Cart"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized !! - token Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized, Token expired or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized !! Token Expired"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Item not found or invalid ID",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Product Item Id Not Valid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Cart is empty",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Your Cart is Empty"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Cart 🛒"],
+        "summary": "Update the quantity of an item in the shopping cart",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "64df123abc45678def901234"
+            },
+            "description": "The ID of the item to update"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "quantity": {
+                    "type": "integer",
+                    "example": 3,
+                    "description": "The new quantity of the item (maximum: 5)"
+                  }
+                },
+                "required": ["quantity"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Quantity successfully updated",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Your shopping cart has been updated",
+                  "cart": {
+                    "user": "64df123abc45678def901234",
+                    "items": [
+                      {
+                        "product": "64df123abc45678def901234",
+                        "quantity": 3,
+                        "color": "#FF5733",
+                        "size": "M"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized !! - token Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized, Token expired or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized !! Token Expired"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Item not found or invalid ID",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Product Item Id Not Valid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid quantity or cart is empty",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Your Cart is Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
     "/concat/": {
       "post": {
         "summary": "Create a new contact message",

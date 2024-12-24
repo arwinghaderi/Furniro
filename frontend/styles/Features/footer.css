@@ -45,6 +45,10 @@
 
 }
 
+.item-helps__link--active{
+    color: var(--Primary-color);
+}
+
 .item-links__link--active {
     color: var(--Primary-color);
 }
@@ -99,3 +103,4 @@ hr {
 .copt-right-text {
     font-family: var(--primary-font);
 }
+

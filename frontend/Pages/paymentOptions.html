@@ -4,30 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/font.css">
     <link rel="icon" href="../images/icon.logo.png">
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/grid.css">
-    <link rel="stylesheet" href="../styles/font.css">
     <link rel="stylesheet" href="../vendor/FontAwesome5/all.min.css">
-    <link rel="stylesheet" href="../styles/mainPages/search.css">
-    <link rel="stylesheet" href="../styles/responsive.css">
-    <link rel="stylesheet" href="../vendor/sweetalert2/sweetalert2.min.css">
-
-    <title>Search</title>
+    <link rel="stylesheet" href="../styles/mainPages/paymentOptions.css">
+    <title>Payment Options</title>
 </head>
 
 <body>
     <div class="container">
         <nav class="nav-bar">
-
             <a href="../index.html">
                 <img class=" nav-bar__logo-img" src="../images/logoNavbar.jpg" alt="Logo">
             </a>
             <ul class="list-menu">
-                <li class="list-menu__item"><a class="list-menu-item__link " href="../index.html">Home</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="../Pages/shop.html">Shop</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="./about.html">About</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="./contact.html">Contact</a></li>
+                <li class="list-menu__item"><a class="list-menu-item__link" href="../index.html">Home</a></li>
+                <li class="list-menu__item"><a class="list-menu-item__link" href="../Pages/shop.html">Shop</a></li>
+                <li class="list-menu__item"><a class="list-menu-item__link" href="./about.html">About</a></li>
+                <li class="list-menu__item"><a class="list-menu-item__link" href="./contact.html">Contact</a></li>
             </ul>
 
             <div class="icon-container-option">
@@ -53,7 +49,7 @@
                     </a>
                 </div>
                 <a class="icon-container__link" href="./search.html">
-                    <i class="fas fa-search menu-icon menu-icon--active "></i>
+                    <i class="fas fa-search menu-icon"></i>
                 </a>
                 <a class="icon-container__link" href="./favorite.html">
                     <i class="fa-regular fa-heart menu-icon"></i>
@@ -74,74 +70,81 @@
                         <a class="list-menu-item__link " href="../Pages/shop.html">Shop</a>
                     </li>
                     <li class="list-menu__item-mobail">
-                        <a class="list-menu-item__link " href="./about.html">About</a>
+                        <a class="list-menu-item__link list-menu-item__link--active" href="./about.html">About</a>
                     </li>
                     <li class="list-menu__item-mobail">
-                        <a class="list-menu-item__link " href="./contact.html">Contact</a>
+                        <a class="list-menu-item__link" href="./contact.html">Contact</a>
                     </li>
                 </ul>
+
             </div>
             <div class="hamburger">
                 <div class="hamburger__line"></div>
             </div>
         </nav>
     </div>
-
     <!-- **shopHome -->
     <header class="home-section">
         <img src="../images/icon.logo.png" alt="logo">
-        <h1 class="home-section__title">search</h1>
+        <h1 class="home-section__title">Payment</h1>
         <div class="home-section-container-description">
             <a class="home-section-container-description__befor"></a>
             <svg class="home-section-container-description__svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
                 <path d="M0 12L5 7L0 2L1 0L8 7L1 14L0 12Z" fill="black" />
             </svg>
-            <p class="home-section-container-description__now">search</p>
+            <p class="home-section-container-description__now">Payment Options</p>
         </div>
     </header>
-
-    <section class="search-section">
-        <div class="input-box">
-            <input placeholder="search..." type="text" class="input-search">
-            <i class="fas fa-search icon-search"></i>
-        </div>
-    </section>
     <div class="container">
-        <div class="title-box">
-            <h2 class="title">Searched products</h2>
+        <div class="paymentOptionsHeader">
+            <h1 class="paymentOptionsTitle">Payment Options Guide</h1>
         </div>
-        <div class="search-not-found">
-            <div class="alert alert-danger">
-                <i class="fa-solid fa-not-equal  icon-not-equal"></i>
-                <p class="search-not-found__title">هیچ محصولی برای این جستوجو وجود ندارد</p>
-                <i class="fa-solid fa-not-equal  icon-not-equal"></i>
-            </div>
+        <div class="paymentOptions">
+            <h2 class="paymentOptionsSubtitle">Payment Options</h2>
+            <p class="paymentOptionsDescription">We offer a variety of payment options to suit your needs:</p>
+            <ul class="paymentOptionsList">
+                <li class="paymentOptionsListItem"><strong>Credit Card:</strong> Pay with your Visa, MasterCard, or
+                    American
+                    Express. Simply enter your card details at checkout.</li>
+                <li class="paymentOptionsListItem"><strong>PayPal:</strong> Use your PayPal account for a secure and
+                    fast
+                    payment experience. Select PayPal at checkout and follow the instructions.</li>
+                <li class="paymentOptionsListItem"><strong>Cash on Delivery:</strong> Pay with cash when your order is
+                    delivered. Available in select areas only.</li>
+            </ul>
+            <h3 class="paymentOptionsFaqTitle">Frequently Asked Questions</h3>
+            <p class="paymentOptionsFaqQuestion"><strong>Q:</strong> How can I get a refund?</p>
+            <p class="paymentOptionsFaqAnswer"><strong>A:</strong> Refunds can be processed through the original payment
+                method. Please contact our support team for assistance.</p>
+            <p class="paymentOptionsFaqQuestion"><strong>Q:</strong> Is my payment information secure?</p>
+            <p class="paymentOptionsFaqAnswer"><strong>A:</strong> Yes, we use advanced encryption technology to protect
+                your payment information.</p>
         </div>
-
     </div>
-
     <!-- footer -->
     <footer class=" footer">
         <hr>
         <div class="container">
             <div class="footer-items">
                 <div class="items-introduction">
-                    <h5 class="item-introduction__name"><a class="footer-logo-name" href="../index.html">Funiro.</a></h5>
+                    <h5 class="item-introduction__name"><a class="footer-logo-name" href="../index.html">Funiro.</a>
+                    </h5>
                     <p class="item-introduction__address">400 University Drive Suite 200 Coral <br>
                         Gables <br>
                         ,FL 33134 USA</p>
                 </div>
                 <div class="container-links-helps">
                     <ul class="items-links">
-                        <p class="items-links__title">Links</p>
-                        <li class="item-links__item"><a class="item-links__link " href="../index.html">Home</a></li>
+                        <span class="items-links__title">Links</span>
+                        <li class="item-links__item"><a class="item-links__link" href="../index.html">Home</a></li>
                         <li class="item-links__item"><a class="item-links__link" href="./shop.html">Shop</a></li>
                         <li class="item-links__item"><a class="item-links__link" href="./about.html">About</a></li>
                         <li class="item-links__item"><a class="item-links__link" href="./contact.html">Contact</a></li>
                     </ul>
                     <ul class="items-helps">
-                        <p class="items-helps__title">Help</p>
-                        <li class="item-helps__item"><a class="item-helps__link" href="./paymentOptions.html">Payment Options</a></li>
+                        <span class="items-helps__title">Help</span>
+                        <li class="item-helps__item"><a class="item-helps__link item-helps__link--active"
+                                href="./paymentOptions.html">Payment Options</a></li>
                         <li class="item-helps__item"><a class="item-helps__link" href="#">Returns</a></li>
                         <li class="item-helps__item"><a class="item-helps__link" href="#">Privacy Policies</a></li>
                     </ul>
@@ -171,11 +174,9 @@
     </footer>
 
 
+    <script src="../vendor/FontAwesome5/all.min.js"></script>
+    <script src="../js/shared.js" type="module"></script>
+    <script src="../js/Features/showPreviousPath.js" type="module"></script>
 </body>
-<script src="../vendor/FontAwesome5/all.min.js"></script>
-<script src="../js/shared.js" type="module"></script>
-<script src="../js/Features/showPreviousPath.js" type="module"></script>
-<script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
-
 
 </html>

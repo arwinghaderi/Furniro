@@ -16,19 +16,26 @@ exports.createProduct = async (req, res, next) => {
       categoryId,
       price,
       discountPercent,
+      colors,
       quantity,
       size,
       attributes,
     } = req.body;
 
     attributes = JSON.parse(attributes);
+    colors = JSON.parse(colors);
     size = JSON.parse(size);
+    let hexColorCode = [];
 
     let priceAfterDiscount = undefined;
     let label = ["New"];
     let images = [];
 
     validator(createProductValidator);
+
+    colors.forEach((color) => {
+      hexColorCode.push(color.hexColorCode);
+    });
 
     const category = await categoryModel.findById(categoryId);
     if (!isValidObjectId(categoryId) || !category) {
@@ -45,11 +52,13 @@ exports.createProduct = async (req, res, next) => {
     if (req.files) {
       for (let i = 0; i < req.files?.length; i++) {
         const file = req.files[i];
-        const filename = file?.filename;
+        const path = file?.filename;
+
+        let color = hexColorCode[i];
 
         images.push({
-          filename,
-          path: `/images/products/${filename}`,
+          hexColorCode: color,
+          path: `/images/products/${path}`,
         });
       }
     } else {
@@ -66,6 +75,7 @@ exports.createProduct = async (req, res, next) => {
       discountPercent,
       priceAfterDiscount,
       quantity,
+      colors,
       size,
       images,
       label,

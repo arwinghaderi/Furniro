@@ -36,9 +36,17 @@ const productSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+
+    colors: [
+      {
+        name: { type: String, required: true, trim: true },
+        hexColorCode: { type: String, required: true, trim: true },
+      },
+    ],
+
     images: [
       {
-        filename: { type: String, required: true, trim: true },
+        hexColorCode: { type: String, required: true, trim: true },
         path: { type: String, required: true, trim: true },
       },
     ],

@@ -1248,7 +1248,7 @@
       }
     },
 
-    "/products": {
+    "/products/": {
       "post": {
         "tags": ["Admin Dashboard 📈"],
         "summary": "create new product",
@@ -1293,6 +1293,24 @@
                     "Default": 0
                   },
 
+                  "colors": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "Red"
+                        },
+                        "hexColorCode": {
+                          "type": "string",
+                          "example": "#FF0000"
+                        }
+                      },
+                      "required": ["name", "hexColorCode"]
+                    }
+                  },
+
                   "attributes": {
                     "type": "object",
                     "additionalProperties": {
@@ -1301,7 +1319,7 @@
                     },
                     "description": "A map of attributes with key-value pairs.",
                     "example": {
-                      "color": "red",
+                      "Filling Material": "foam",
                       "weight": "5.5"
                     }
                   },
@@ -1320,7 +1338,58 @@
         },
         "responses": {
           "200": {
-            "description": "Product created successfully"
+            "description": "Product created successfully",
+            "content": {
+              "multipart/form-data": {
+                "example": {
+                  "message": "Product Created Successfully",
+                  "newProduct": {
+                    "name": "chair blue",
+                    "description": "best chair",
+                    "categoryId": "675988fecccbs76836e8b6e1",
+                    "price": 12500000,
+                    "discountPercent": 5,
+                    "priceAfterDiscount": 11875000,
+                    "quantity": 50,
+                    "colors": [
+                      {
+                        "name": "green",
+                        "hexColorCode": "#43a047",
+                        "_id": "676c22eb7ef6f6160f166f9b"
+                      },
+                      {
+                        "name": "blue",
+                        "hexColorCode": "#1e88e5",
+                        "_id": "676c22eb7ef6f6160f166f9c"
+                      }
+                    ],
+                    "images": [
+                      {
+                        "hexColorCode": "#43a047",
+                        "path": "/images/products/1735407033453.jpeg",
+                        "_id": "676c22eb7ef645160f166f9d"
+                      },
+                      {
+                        "hexColorCode": "#1e88e5",
+                        "path": "/images/products/1735328408802.jpeg",
+                        "_id": "676c22eb7ef6f4560f166f9e"
+                      }
+                    ],
+                    "label": ["New", "Discount"],
+                    "size": ["XL"],
+                    "attributes": {
+                      "Filling Material": "foam"
+                    },
+                    "_id": "676c22eb7ef6f6160f116f9a",
+                    "createdAt": "2024-12-25T15:21:15.236Z",
+                    "updatedAt": "2024-12-25T15:21:15.236Z",
+                    "slug": "chair-blue-54840",
+                    "rating": 3,
+                    "__v": 0
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Validation error or images not provided"

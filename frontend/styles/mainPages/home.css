@@ -85,6 +85,13 @@
     margin-top: 10rem;
 }
 
+.btn-link-our-Products {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
 /* 
 ===================
 slaisder-section
@@ -300,8 +307,6 @@ slaisder-section
 
 .designs {
     margin-top: 8rem;
-
-
 }
 
 .design-header {
@@ -358,11 +363,8 @@ slaisder-section
     gap: 1rem;
 }
 
-
-
-
 .designs__items__img {
     width: 100%;
-
     object-fit: cover;
+    box-shadow: 0 4px 8px rgba(184, 142, 47, 1);
 }

@@ -212,6 +212,21 @@ const showSwal = async (title, icon, confirmButtonText, url) => {
     })
 }
 
+const showSwalAndReload = (message, type) => {
+    Swal.fire({
+        title: message,
+        icon: type,
+        timer: 7000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+
+    }).then(() => {
+        location.reload();
+    });
+    Swal.getPopup().addEventListener('mouseover', () => { Swal.stopTimer(); })
+    Swal.getPopup().addEventListener('mouseout', () => { Swal.resumeTimer(); })
+};
+
 const getToken = () => {
     const userToken = JSON.parse(localStorage.getItem("Access-Token"));
     return userToken ? userToken : null
@@ -272,9 +287,9 @@ const handleError = (error, errorMessages) => {
         cancelButtonColor: "#d33",
     }).then((result) => {
         if (result.isConfirmed) {
-        location.href = '../../Pages/auth.html';
+            location.href = '../../Pages/auth.html';
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-        location.href = '../../index.html';
+            location.href = '../../index.html';
         }
         localStorage.removeItem('Access-Token');
         localStorage.removeItem('Access-Token-Expiry');
@@ -284,20 +299,13 @@ const handleError = (error, errorMessages) => {
 };
 
 export {
-    saveToLocalStorage,
-    getFromLocalStorage,
-    searchInProducts,
+    saveToLocalStorage, getFromLocalStorage, searchInProducts,
     ProductsWithPaginationCalculations,
     getCurrentPageAndShowCountProducts,
-    calculateProductsShowMoreButton,
-    getUrlParam,
-    productDiscountCalculation,
-    getCountProductsCart,
-    selectionPaginationPageByUser,
-    showSwal,
-    getToken,
-    storeAccessTokenWithExpiry,
-    setSecureCookie,
-    getCookieValue,
-    deleteCookie, handleError
+    calculateProductsShowMoreButton, getUrlParam,
+    productDiscountCalculation, getCountProductsCart,
+    selectionPaginationPageByUser, showSwal,
+    getToken, storeAccessTokenWithExpiry,
+    setSecureCookie, getCookieValue,
+    deleteCookie, handleError, showSwalAndReload
 }

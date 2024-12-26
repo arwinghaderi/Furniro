@@ -1,6 +1,7 @@
 const { isValidObjectId } = require("mongoose");
 const productModel = require("./../model/product");
 const categoryModel = require("./../model/category");
+const favoriteModel = require("./../model/favorite");
 const { errorResponse, successResponse } = require("../helper/responses");
 const validator = require("../middleware/validator");
 const { createProductValidator } = require("./../validator/product");
@@ -15,19 +16,26 @@ exports.createProduct = async (req, res, next) => {
       categoryId,
       price,
       discountPercent,
+      colors,
       quantity,
       size,
       attributes,
     } = req.body;
 
     attributes = JSON.parse(attributes);
+    colors = JSON.parse(colors);
     size = JSON.parse(size);
+    let hexColorCode = [];
 
     let priceAfterDiscount = undefined;
     let label = ["New"];
     let images = [];
 
     validator(createProductValidator);
+
+    colors.forEach((color) => {
+      hexColorCode.push(color.hexColorCode);
+    });
 
     const category = await categoryModel.findById(categoryId);
     if (!isValidObjectId(categoryId) || !category) {
@@ -44,11 +52,13 @@ exports.createProduct = async (req, res, next) => {
     if (req.files) {
       for (let i = 0; i < req.files?.length; i++) {
         const file = req.files[i];
-        const filename = file?.filename;
+        const path = file?.filename;
+
+        let color = hexColorCode[i];
 
         images.push({
-          filename,
-          path: `/images/products/${filename}`,
+          hexColorCode: color,
+          path: `/images/products/${path}`,
         });
       }
     } else {
@@ -65,6 +75,7 @@ exports.createProduct = async (req, res, next) => {
       discountPercent,
       priceAfterDiscount,
       quantity,
+      colors,
       size,
       images,
       label,
@@ -129,6 +140,98 @@ exports.getProduct = async (req, res, next) => {
     }
 
     return successResponse(res, 200, { product });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getAllFavorites = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const userFavorites = await favoriteModel
+      .findOne({ user: user._id })
+      .populate({
+        path: "items",
+        select:
+          "name title price discountPercent description priceAfterDiscount images slug rating label",
+      })
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .select("-createdAt -updatedAt -__v");
+
+    if (!userFavorites) {
+      return errorResponse(res, 404, {
+        message: "There is no product in your Favorite list!!",
+      });
+    }
+
+    return successResponse(res, 200, { favorites: userFavorites });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.addToFavorites = async (req, res, next) => {
+  try {
+    const { productId } = req.params;
+    const user = req.user;
+
+    const product = await productModel.findById(productId);
+
+    if (!isValidObjectId(productId) || !product) {
+      return errorResponse(res, 404, { message: "Poroduct Not Found !!" });
+    }
+
+    await favoriteModel.findOneAndUpdate(
+      { user: user._id },
+      { $addToSet: { items: productId } },
+      { upsert: true }
+    );
+
+    return successResponse(res, 201, {
+      message: "Product Add to Favorite List",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.removeFromFavorites = async (req, res, next) => {
+  try {
+    const { productId } = req.params;
+    const user = req.user;
+
+    if (!isValidObjectId(productId)) {
+      return errorResponse(res, 400, {
+        message: "Poroduct Id not Valid format!!",
+      });
+    }
+
+    const userFavorites = await favoriteModel.findOne({ user: user._id });
+    if (!userFavorites) {
+      return errorResponse(res, 404, {
+        message: "There is no product in your Favorite list!!",
+      });
+    }
+
+    const product = userFavorites.items.findIndex((item) => {
+      return item.toString() === productId.toString();
+    });
+
+    if (product === -1) {
+      return errorResponse(res, 404, {
+        message: "This Product is not in your Favorite list !!",
+      });
+    }
+
+    userFavorites.items.splice(product, 1);
+    await userFavorites.save();
+
+    return successResponse(res, 200, {
+      message: "Product Removed From Your Favorites",
+    });
   } catch (err) {
     next(err);
   }

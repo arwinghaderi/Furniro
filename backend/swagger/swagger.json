@@ -1248,7 +1248,7 @@
       }
     },
 
-    "/products": {
+    "/product/": {
       "post": {
         "tags": ["Admin Dashboard 📈"],
         "summary": "create new product",
@@ -1293,6 +1293,24 @@
                     "Default": 0
                   },
 
+                  "colors": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "Red"
+                        },
+                        "hexColorCode": {
+                          "type": "string",
+                          "example": "#FF0000"
+                        }
+                      },
+                      "required": ["name", "hexColorCode"]
+                    }
+                  },
+
                   "attributes": {
                     "type": "object",
                     "additionalProperties": {
@@ -1301,7 +1319,7 @@
                     },
                     "description": "A map of attributes with key-value pairs.",
                     "example": {
-                      "color": "red",
+                      "Filling Material": "foam",
                       "weight": "5.5"
                     }
                   },
@@ -1320,7 +1338,58 @@
         },
         "responses": {
           "200": {
-            "description": "Product created successfully"
+            "description": "Product created successfully",
+            "content": {
+              "multipart/form-data": {
+                "example": {
+                  "message": "Product Created Successfully",
+                  "newProduct": {
+                    "name": "chair blue",
+                    "description": "best chair",
+                    "categoryId": "675988fecccbs76836e8b6e1",
+                    "price": 12500000,
+                    "discountPercent": 5,
+                    "priceAfterDiscount": 11875000,
+                    "quantity": 50,
+                    "colors": [
+                      {
+                        "name": "green",
+                        "hexColorCode": "#43a047",
+                        "_id": "676c22eb7ef6f6160f166f9b"
+                      },
+                      {
+                        "name": "blue",
+                        "hexColorCode": "#1e88e5",
+                        "_id": "676c22eb7ef6f6160f166f9c"
+                      }
+                    ],
+                    "images": [
+                      {
+                        "hexColorCode": "#43a047",
+                        "path": "/images/products/1735407033453.jpeg",
+                        "_id": "676c22eb7ef645160f166f9d"
+                      },
+                      {
+                        "hexColorCode": "#1e88e5",
+                        "path": "/images/products/1735328408802.jpeg",
+                        "_id": "676c22eb7ef6f4560f166f9e"
+                      }
+                    ],
+                    "label": ["New", "Discount"],
+                    "size": ["XL"],
+                    "attributes": {
+                      "Filling Material": "foam"
+                    },
+                    "_id": "676c22eb7ef6f6160f116f9a",
+                    "createdAt": "2024-12-25T15:21:15.236Z",
+                    "updatedAt": "2024-12-25T15:21:15.236Z",
+                    "slug": "chair-blue-54840",
+                    "rating": 3,
+                    "__v": 0
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Validation error or images not provided"
@@ -1377,6 +1446,7 @@
         }
       }
     },
+
     "/product/{slug}": {
       "get": {
         "summary": "Get a product by slug",
@@ -1399,6 +1469,308 @@
           },
           "404": {
             "description": "Product not found"
+          }
+        }
+      }
+    },
+
+    "/product/favorites/": {
+      "get": {
+        "tags": ["Products 📦"],
+        "summary": "Get all favorite products for the authenticated user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the user's favorite products",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": {
+                    "favorites": {
+                      "_id": "64b1f7e9f9cde34e14f2d124",
+                      "items": [
+                        {
+                          "_id": "64b1f7e9f9cde34e14f2d125",
+                          "name": "Product 1",
+                          "price": 100,
+                          "discountPercent": 10,
+                          "priceAfterDiscount": 90,
+                          "description": "A brief description of the product",
+                          "images": ["image1.jpg", "image2.jpg"],
+                          "slug": "awesome-product",
+                          "rating": 4.5,
+                          "label": "New"
+                        }
+                      ],
+                      "user": {
+                        "_id": "64b1f7e9f9cde34e14f2d126",
+                        "email": "user@example.com",
+                        "fullname": "mehran"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "Unauthorized !! - token Not Found Or not Valid Format"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "Unauthorized !! -  Token Expired"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No favorite products found for the user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "There is no product in your Favorite list!!"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "Internal Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/product/favorites/{productId}": {
+      "post": {
+        "tags": ["Products 📦"],
+        "summary": "Add a product to the user's favorite list",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the product to be added to the favorite list",
+            "schema": {
+              "type": "string",
+              "example": "64b1f7e9f9cde34e14f2d124"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully added the product to the favorite list",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Product Add to Favorite List"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "Unauthorized !! - token Not Found Or not Valid Format"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "Unauthorized !! -  Token Expired"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": false,
+                  "error": {
+                    "message": "Product Not Found !!"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "Internal Server Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Products 📦"],
+        "summary": "Remove a product from the user's favorite list",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the product to be removed from the favorite list",
+            "schema": {
+              "type": "string",
+              "example": "64b1f7e9f9cde34e14f2d124"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed the product from the favorite list",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Product Removed From Your Favorites"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "Unauthorized !! - token Not Found Or not Valid Format"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "Unauthorized !! -  Token Expired"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid product ID format",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "Product Id not Valid format!!"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "favoritesNotFound": {
+                    "summary": "Favorites list not found",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "message": "There is no product in your Favorite list!!"
+                      }
+                    }
+                  },
+                  "productNotFound": {
+                    "summary": "Product not in favorites",
+                    "value": {
+                      "success": false,
+                      "error": {
+                        "message": "This Product is not in your Favorite list !!"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": {
+                    "message": "Internal Server Error"
+                  }
+                }
+              }
+            }
           }
         }
       }

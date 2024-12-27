@@ -54,7 +54,7 @@ exports.createProduct = async (req, res, next) => {
         const file = req.files[i];
         const path = file?.filename;
 
-        let color = hexColorCode[i];
+        let color = hexColorCode[i] || "null";
 
         images.push({
           hexColorCode: color,

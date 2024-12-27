@@ -26,7 +26,8 @@
                 <img class="nav-bar__logo-img" src="./images/logoNavbar.jpg" alt="Logo">
             </a>
             <ul class="list-menu">
-                <li class="list-menu__item"><a class="list-menu-item__link list-menu-item__link--active  " href="./index.html">Home</a></li>
+                <li class="list-menu__item"><a class="list-menu-item__link list-menu-item__link--active  "
+                        href="./index.html">Home</a></li>
                 <li class="list-menu__item"><a class="list-menu-item__link " href="./Pages/shop.html">Shop</a>
                 </li>
                 <li class="list-menu__item"><a class="list-menu-item__link " href="./Pages/about.html">About</a></li>
@@ -101,7 +102,7 @@
             </div>
         </nav>
     </div>
-    <!--** home -->
+    <!--** home-section -->
     <header class="home-section home-section-home">
         <div class="home__content-box">
             <p class="home__heading">New Arrival</p>
@@ -113,7 +114,7 @@
             </div>
         </div>
     </header>
-
+    <!--** range -->
     <div class="container">
         <div class="title-box">
             <h2 class="title">Browse The Range</h2>
@@ -149,23 +150,16 @@
                 </div>
             </div>
             <div class="box-btn-show-more">
-                <button class="show-more">Show More</button>
-                <svg class="show-more__loder" cl viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="100"
-                    height="100" style="shape-rendering: auto; display: none; background: rgb(255, 255, 255);">
-                    <g>
-                        <path stroke="none" fill="#b88e2f" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
-                            <animateTransform values="0 50 51;360 50 51" keyTimes="0;1" repeatCount="indefinite"
-                                dur="1s" type="rotate" attributeName="transform"></animateTransform>
-                        </path>
-                        <g></g>
-                    </g>
-                </svg>
-
+                <button class="show-more">
+                    <a class="btn-link-our-Products" href="./Pages/shop.html">
+                        All Products
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </button>
             </div>
         </section>
     </div>
     <!-- **slaidr -->
-
     <section class="slaisder-section">
         <div class="slaider-contant">
             <h4 class="slaider-contant__title">50+ Beautiful rooms inspiration</h4>
@@ -282,14 +276,14 @@
         </div>
 
     </section>
-
     <!-- **footer -->
     <footer class="footer">
         <hr>
         <div class="container">
             <div class="footer-items">
                 <div class="items-introduction">
-                    <h5 class="item-introduction__name"><a class="footer-logo-name" href="../index.html">Funiro.</a></h5>
+                    <h5 class="item-introduction__name"><a class="footer-logo-name" href="../index.html">Funiro.</a>
+                    </h5>
                     <p class="item-introduction__address">400 University Drive Suite 200 Coral <br>
                         Gables <br>
                         ,FL 33134 USA</p>
@@ -297,7 +291,8 @@
                 <div class="container-links-helps">
                     <ul class="items-links">
                         <p class="items-links__title">Links</p>
-                        <li class="item-links__item"><a class="item-links__link item-links__link--active " href="./index.html">Home</a></li>
+                        <li class="item-links__item"><a class="item-links__link item-links__link--active "
+                                href="./index.html">Home</a></li>
                         <li class="item-links__item"><a class="item-links__link" href="./Pages/shop.html">Shop</a></li>
                         <li class="item-links__item"><a class="item-links__link" href="./Pages/about.html">About</a>
                         </li>
@@ -306,7 +301,8 @@
                     </ul>
                     <ul class="items-helps">
                         <p class="items-helps__title">Help</p>
-                        <li class="item-helps__item"><a class="item-helps__link" href="#">Payment Options</a></li>
+                        <li class="item-helps__item"><a class="item-helps__link"
+                                href="./Pages/paymentOptions.html">Payment Options</a></li>
                         <li class="item-helps__item"><a class="item-helps__link" href="#">Returns</a></li>
                         <li class="item-helps__item"><a class="item-helps__link" href="#">Privacy Policies</a></li>
                     </ul>
@@ -315,11 +311,12 @@
                     <p class="items-Newsletter__title">Newsletter</p>
                     <form class="form-newsLetter">
                         <div class="items-Newsletter__box-input">
-                            <input class="items-Newsletter__input-email" type="email" name="" id=""
+                            <input class="items-Newsletter__input-email" type="email"
                                 placeholder="Enter Your Email Address">
                         </div>
                         <div class="items-Newsletter__box-button">
                             <button class="items-Newsletter__subscribe">SUBSCRIBE</button>
+                            <div class="loader"></div>
                         </div>
                     </form>
                 </div>
@@ -334,20 +331,14 @@
         </div>
 
     </footer>
-
-
-
-
-
-    <script src="./vendor/FontAwesome5/all.min.js"></script>
-    <script src="./vendor/swiperSlider/swiper.js"></script>
-    <script src="./vendor/aos.js/aos.js"></script>
-    <script src="./js/aos.js"></script>
-    <script src="./js/slaider.js"></script>
-    <script src="./js/shared.js" type="module"></script>
-    <script src="./js/home.js" type="module"></script>
-    <script src="./vendor/sweetalert2/sweetalert2.all.min.js"></script>
-
 </body>
+<script src="./vendor/FontAwesome5/all.min.js"></script>
+<script src="./vendor/swiperSlider/swiper.js"></script>
+<script src="./vendor/aos.js/aos.js"></script>
+<script src="./js/aos.js"></script>
+<script src="./js/slaider.js"></script>
+<script src="./js/shared.js" type="module"></script>
+<script src="./js/home.js" type="module"></script>
+<script src="./vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
 </html>

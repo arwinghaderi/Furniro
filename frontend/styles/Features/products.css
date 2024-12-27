@@ -174,8 +174,5 @@
     color: var(--Primary-color);
     font-family: "Poppins-Bold";
     cursor: pointer;
-}
-
-.show-more__loder {
-    display: none;
+    box-shadow: 0 4px 8px rgba(184, 142, 47, 1);
 }

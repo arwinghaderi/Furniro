@@ -1,6 +1,7 @@
 html {
     font-size: 62.5%;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -29,6 +30,7 @@ body {
 
 a {
     text-decoration: none;
+    color: var(--dark-color);
 }
 
 .icon {
@@ -124,6 +126,11 @@ a {
     box-shadow: none !important;
 }
 
+.swal2-progress-steps .swal2-progress-steps-step-line,
+.swal2-timer-progress-bar {
+    background-color: #B88E2F !important;
+}
+
 .home-section-container-description__befor {
     color: var(--dark-color);
 }
@@ -173,4 +180,68 @@ a:hover {
     fill: #ff0000;
     stroke: #ff0000;
     animation: heartbeat 1s ease-in-out;
+}
+
+.loader {
+    font-weight: bold;
+    font-family: "Poppins-Bold";
+    display: none;
+    font-size: 1.8rem;
+    color: var(--Primary-color);
+}
+
+.loader:before,
+.loader:after {
+    content: "Loading...";
+    grid-area: 1/1;
+    -webkit-mask-size: 1.5ch 100%, 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: l36-1 1s infinite;
+}
+
+.loader:before {
+    -webkit-mask-image:
+        linear-gradient(#000 0 0),
+        linear-gradient(#000 0 0);
+}
+
+.loader:after {
+    -webkit-mask-image: linear-gradient(#000 0 0);
+    animation:
+        l36-1 4s infinite,
+        l36-2 .4s infinite cubic-bezier(0.5, 200, 0.5, -200);
+}
+
+@keyframes l36-1 {
+    0% {
+        -webkit-mask-position: 0 0, 0 0
+    }
+
+    20% {
+        -webkit-mask-position: .5ch 0, 0 0
+    }
+
+    40% {
+        -webkit-mask-position: 100% 0, 0 0
+    }
+
+    60% {
+        -webkit-mask-position: 4.5ch 0, 0 0
+    }
+
+    80% {
+        -webkit-mask-position: 6.5ch 0, 0 0
+    }
+
+    100% {
+        -webkit-mask-position: 2.5ch 0, 0 0
+    }
+}
+
+@keyframes l36-2 {
+    100% {
+        transform: translateY(0.2px)
+    }
 }

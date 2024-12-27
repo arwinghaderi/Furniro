@@ -36,7 +36,7 @@ const calculationNumberOfPaginationPages = (productsInformation) => {
 
 const addingPaginationTemplate = (productsInformation, counter) => {
     const paginationBox = $.createElement("div")
-    paginationBox.className = "shop-products__pagination-box-btn"
+    paginationBox.className = "shop-products__pagination-box-btn box-shadow"
 
     const paginationButton = $.createElement("button")
     paginationButton.className = "shop-product-button"
@@ -51,7 +51,7 @@ const addingPaginationTemplate = (productsInformation, counter) => {
         paginationBox.classList.add("shop-products__pagination-box--active")
         paginationButton.classList.add("shop-product-button--active")
     } else {
-        paginationBox.className = "shop-products__pagination-box-btn"
+        paginationBox.className = "shop-products__pagination-box-btn box-shadow"
         paginationButton.className = "shop-product-button"
     }
     paginationBox.append(paginationButton)
@@ -77,9 +77,9 @@ const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) 
 }
 
 const addingPrevNextButtonTemplate = (productsInformation, numberOfPagesOfCourses) => {
-    productsInformation.paginationTool.prevContainer.insertAdjacentHTML("afterbegin", `<div class="shop-products__prev-btn-box"><button class="shop-products__button-prev-text">Prev</button></div >`)
+    productsInformation.paginationTool.prevContainer.insertAdjacentHTML("afterbegin", `<div class="shop-products__prev-btn-box box-shadow"><button class="shop-products__button-prev-text">Prev</button></div >`)
 
-    productsInformation.paginationTool.nextContainer.insertAdjacentHTML("beforeend", `<div class="shop-products__next-btn-box"> <button class="shop-products__button-next-text">Next</button></div > `)
+    productsInformation.paginationTool.nextContainer.insertAdjacentHTML("beforeend", `<div class="shop-products__next-btn-box box-shadow"> <button class="shop-products__button-next-text">Next</button></div > `)
 
     let nextBtn = $.querySelector(".shop-products__next-btn-box")
     let pervBtn = $.querySelector(".shop-products__prev-btn-box")

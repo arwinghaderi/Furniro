@@ -1,6 +1,7 @@
 .services {
     width: 100%;
     background-color: #FAF3EA;
+    box-shadow: 5px 5px 15px rgba(184, 142, 47, 0.7);
     margin-top: 10rem;
     padding: 5rem 0;
 }

@@ -9,6 +9,7 @@ const schema = mongoose.Schema(
     href: {
       type: String,
       required: true,
+      lowercase: true,
     },
   },
   { timestamps: true }

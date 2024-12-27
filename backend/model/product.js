@@ -17,6 +17,7 @@ const productSchema = mongoose.Schema(
     },
     slug: {
       type: String,
+      lowercase: true,
     },
 
     price: {

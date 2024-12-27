@@ -274,6 +274,12 @@ btnSubmitNewsletter.addEventListener("click", (event) => {
     fetchNewsletter()
 })
 
+const footerBackBtn = document.querySelector(".Returns-btn-help")
+footerBackBtn.addEventListener("click", (event) => {
+    event.preventDefault()
+    window.history.back();
+})
+
 window.addEventListener("load", () => {
     handleUserAuthentication()
 })

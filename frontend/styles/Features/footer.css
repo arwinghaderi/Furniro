@@ -104,3 +104,11 @@ hr {
     font-family: var(--primary-font);
     text-shadow: 2px 2px 4px rgba(184, 142, 47, 0.7);
 }
+
+.Returns-btn-help {
+    cursor: pointer;
+}
+
+.Returns-btn-help:hover {
+    color: var(--Primary-color);
+}

@@ -591,6 +591,7 @@
         object-fit: fill;
         filter: blur(0);
         position: relative;
+        box-shadow: none;
     }
 
     .box-contant-img-slaider {
@@ -626,6 +627,7 @@
     .service-container {
         justify-content: center;
     }
+
     * {
         cursor: none;
     }

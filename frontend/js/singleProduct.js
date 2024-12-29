@@ -28,7 +28,7 @@ const productSelectionByUser = products.find(product => { return product.id === 
 const addingPagePathDom = () => {
     const routeProduct = document.querySelector(".route-product");
     const previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];
-    routeProduct.innerHTML = `Loading...`
+    routeProduct.innerHTML = `<div class="loader"></div>`
 
     let extractedPart = previousPaths.map(path => {
         let part = path.split('/').pop().split('.')[0];
@@ -37,7 +37,7 @@ const addingPagePathDom = () => {
 
     setTimeout(() => {
         routeProduct.innerHTML = ` <div class="container "> <div class="route-product__wrapper "> <a href="${previousPaths[1] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <a href="${previousPaths[0] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[0] || "home"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productSelectionByUser.productName}</span> </div> </div> `
-    }, 1000)
+    }, 2000)
 };
 
 const addingAllProductPhotos = () => {

@@ -158,13 +158,10 @@
                     <textarea class="form-contact-us__Message form-contact-us__input"
                         placeholder="Hi! i’d like to ask about" id="Message"></textarea>
                 </div>
-
-
                 <div class="btn-box">
-                    <button class="btn-submite">Submit</button>
+                    <button class="submit-btn" disabled>🚫 Forbidden </button>
+                    <div class="loader"></div>
                 </div>
-
-
             </form>
 
         </div>
@@ -270,15 +267,17 @@
                         <p class="items-helps__title">Help</p>
                         <li class="item-helps__item"><a class="item-helps__link" href="./paymentOptions.html">Payment
                                 Options</a></li>
-                        <li class="item-helps__item"><span class="item-helps__link Returns-btn-help ">Returns</span></li>
-                        <li class="item-helps__item"><a class="item-helps__link" href="./privacy-policy.html">Privacy Policies</a></li>
+                        <li class="item-helps__item"><span class="item-helps__link Returns-btn-help ">Returns</span>
+                        </li>
+                        <li class="item-helps__item"><a class="item-helps__link" href="./privacy-policy.html">Privacy
+                                Policies</a></li>
                     </ul>
                 </div>
                 <div class="items-Newsletter">
                     <p class="items-Newsletter__title">Newsletter</p>
                     <form class="form-newsLetter">
                         <div class="items-Newsletter__box-input">
-                            <input class="items-Newsletter__input-email" type="email" name="" id=""
+                            <input class="items-Newsletter__input-email" type="email"
                                 placeholder="Enter Your Email Address">
                         </div>
                         <div class="items-Newsletter__box-button">
@@ -304,6 +303,6 @@
 <script src="../js/shared.js" type="module"></script>
 <script src="../js/Features/showPreviousPath.js" type="module"></script>
 <script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
-
+<script src="../js/contact.js" type="module"></script>
 
 </html>

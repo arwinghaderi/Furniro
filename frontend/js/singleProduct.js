@@ -28,7 +28,7 @@ const productSelectionByUser = products.find(product => { return product.id === 
 const addingPagePathDom = () => {
     const routeProduct = document.querySelector(".route-product");
     const previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];
-    routeProduct.innerHTML = `<div class="loader"></div>`
+    routeProduct.innerHTML = `<div class="loader" style="display: inline-grid; color: #000000;" ></div>`
 
     let extractedPart = previousPaths.map(path => {
         let part = path.split('/').pop().split('.')[0];

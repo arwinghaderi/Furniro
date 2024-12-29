@@ -12,15 +12,18 @@ const displayPaths = () => {
     if (referrer) {
         extractedPart = referrer.split('/').pop().split('.')[0];
         extractedPart = extractedPart === "index" ? "home" : extractedPart;
-
         setTimeout(() => {
-            let contentPath = referrer.includes(currentPath) ? "Same path" : extractedPart;
             loader.style.display = "none"
-            previousPathElement.textContent = contentPath ? contentPath : "home"
+            let contentPath = referrer.includes(currentPath) ? "Same path" : extractedPart;
+            console.log(contentPath);
+            previousPathElement.innerHTML = contentPath ? contentPath : "home"
             previousPathElement.setAttribute("href", referrer);
         }, 2500)
     } else {
-        previousPathElement.textContent = "Direct Entry";
+        setTimeout(() => {
+            loader.style.display = "none"
+            previousPathElement.innerHTML = "Direct Entry";
+        }, 2000)
     }
 };
 

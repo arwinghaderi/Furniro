@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
     const loader = document.getElementById("loader-content");
-    const content = document.querySelector(".content-loading");
+    const content = document.querySelector(".main-Content-App");
 
     setTimeout(() => {
         loader.style.display = "none";

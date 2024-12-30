@@ -16,87 +16,98 @@
     <title>Comparison</title>
 </head>
 
-<body>
-    <div class="container">
-        <nav class="nav-bar">
+<body class="loading">
+    <div id="loader-content" class="loader-container">
+        <div class="loading-text"> <span>L</span> <span>O</span> <span>A</span> <span>D</span> <span>I</span>
+            <span>N</span>
+            <span>G</span>
+        </div>
+        <div class="loading-line"></div>
+    </div>
+    <div class="content">
 
-            <a href="../index.html"">
+        <div class="container">
+            <nav class="nav-bar">
+
+                <a href="../index.html"">
                     <img class=" nav-bar__logo-img" src="../images/logoNavbar.jpg" alt="Logo">
-            </a>
-            <ul class="list-menu">
-                <li class="list-menu__item"><a class="list-menu-item__link " href="../index.html">Home</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="../Pages/shop.html">Shop</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="./about.html">About</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="./contact.html">Contact</a></li>
-            </ul>
-
-            <div class="icon-container-option">
-                <div>
-                    <a class=" icon-container__link icon-container__link--login dont-login " href="./auth.html">
-                        <span class="navbar-dont-Register-text"></span>
-                        <i class="fas fa-sign-in-alt " id="icon-login"></i>
-                    </a>
-                    <svg class="show-more__loder navbar-successfully-Register-Loading" cl viewBox="0 0 100 100"
-                        preserveAspectRatio="xMidYMid" width="100" height="100"
-                        style="shape-rendering: auto; display: none; background: #fff">
-                        <g>
-                            <path stroke="none" fill="#000000" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
-                                <animateTransform values="0 50 51;360 50 51" keyTimes="0;1" repeatCount="indefinite"
-                                    dur="1s" type="rotate" attributeName="transform"></animateTransform>
-                            </path>
-                            <g></g>
-                        </g>
-                    </svg>
-                    <a class=" icon-container__link icon-container__link--login login-successfully">
-                        <span class="navbar-successfully-Register-text"></span>
-                        <i class="fas fa-power-off" id="user-icon"></i>
-                    </a>
-                </div>
-                <a class="icon-container__link" href="./search.html">
-                    <i class="fas fa-search menu-icon"></i>
                 </a>
-                <a class="icon-container__link" href="./favorite.html">
-                    <i class="fa-regular fa-heart menu-icon"></i>
-                </a>
-                <a class="icon-container__link" href="./cart.html">
-                    <i class="fa-solid fa-cart-shopping menu-icon"></i>
-                    <span class="nav-bar__count-Product " value="0">0</span>
-                </a>
-            </div>
-
-            <!-- ** mobail -->
-            <div class="contener-menu-mobail">
-                <ul class="list-menu-mobail">
-                    <li class="list-menu__item-mobail ">
-                        <a class="list-menu-item__link menu-link" href="../index.html">Home</a>
-                    </li>
-                    <li class="list-menu__item-mobail">
-                        <a class="list-menu-item__link " href="../Pages/shop.html">Shop</a>
-                    </li>
-                    <li class="list-menu__item-mobail">
-                        <a class="list-menu-item__link " href="./about.html">About</a>
-                    </li>
-                    <li class="list-menu__item-mobail">
-                        <a class="list-menu-item__link " href="./contact.html">Contact</a>
-                    </li>
+                <ul class="list-menu">
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="../index.html">Home</a></li>
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="../Pages/shop.html">Shop</a></li>
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="./about.html">About</a></li>
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="./contact.html">Contact</a></li>
                 </ul>
 
-
-            </div>
-            <div class="hamburger">
-                <div class="hamburger__line"></div>
-            </div>
-        </nav>
-    </div>
-    <div class="container">
-        <div class="wrapper-title">
-            <img class="wrapper-title-img" src="../images/barrier.gif" alt="gif">
-            <div>
-                <h1 class="wrapper-title__box-text"> ما در حال توسعه👨‍💻 این صفحه هستیم از صبر و شکیبایی شما❤ ممنونیم
-                    <div class="wrapper-link">
-                        <a class="back-link" href="#">بازگشت به صحفه قبلی </a>
+                <div class="icon-container-option">
+                    <div>
+                        <a class=" icon-container__link icon-container__link--login dont-login " href="./auth.html">
+                            <span class="navbar-dont-Register-text"></span>
+                            <i class="fas fa-sign-in-alt " id="icon-login"></i>
+                        </a>
+                        <svg class="show-more__loder navbar-successfully-Register-Loading" cl viewBox="0 0 100 100"
+                            preserveAspectRatio="xMidYMid" width="100" height="100"
+                            style="shape-rendering: auto; display: none; background: #fff">
+                            <g>
+                                <path stroke="none" fill="#000000" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
+                                    <animateTransform values="0 50 51;360 50 51" keyTimes="0;1" repeatCount="indefinite"
+                                        dur="1s" type="rotate" attributeName="transform"></animateTransform>
+                                </path>
+                                <g></g>
+                            </g>
+                        </svg>
+                        <a class=" icon-container__link icon-container__link--login login-successfully">
+                            <span class="navbar-successfully-Register-text"></span>
+                            <i class="fas fa-power-off" id="user-icon"></i>
+                        </a>
                     </div>
-                </h1>
+                    <a class="icon-container__link" href="./search.html">
+                        <i class="fas fa-search menu-icon"></i>
+                    </a>
+                    <a class="icon-container__link" href="./favorite.html">
+                        <i class="fa-regular fa-heart menu-icon"></i>
+                    </a>
+                    <a class="icon-container__link" href="./cart.html">
+                        <i class="fa-solid fa-cart-shopping menu-icon"></i>
+                        <span class="nav-bar__count-Product " value="0">0</span>
+                    </a>
+                </div>
+
+                <!-- ** mobail -->
+                <div class="contener-menu-mobail">
+                    <ul class="list-menu-mobail">
+                        <li class="list-menu__item-mobail ">
+                            <a class="list-menu-item__link menu-link" href="../index.html">Home</a>
+                        </li>
+                        <li class="list-menu__item-mobail">
+                            <a class="list-menu-item__link " href="../Pages/shop.html">Shop</a>
+                        </li>
+                        <li class="list-menu__item-mobail">
+                            <a class="list-menu-item__link " href="./about.html">About</a>
+                        </li>
+                        <li class="list-menu__item-mobail">
+                            <a class="list-menu-item__link " href="./contact.html">Contact</a>
+                        </li>
+                    </ul>
+
+
+                </div>
+                <div class="hamburger">
+                    <div class="hamburger__line"></div>
+                </div>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="wrapper-title">
+                <img class="wrapper-title-img" src="../images/barrier.gif" alt="gif">
+                <div>
+                    <h1 class="wrapper-title__box-text"> ما در حال توسعه👨‍💻 این صفحه هستیم از صبر و شکیبایی شما❤
+                        ممنونیم
+                        <div class="wrapper-link">
+                            <a class="back-link" href="#">بازگشت به صحفه قبلی </a>
+                        </div>
+                    </h1>
+                </div>
             </div>
         </div>
     </div>
@@ -104,6 +115,7 @@
     <script src="../js/underDevelopment.js"></script>
     <script src="../vendor/FontAwesome5/all.min.js"></script>
     <script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="../js/Features/loader.js"></script>
     <script src="../js/shared.js" type="module"></script>
 </body>
 

@@ -2,6 +2,7 @@
 @import url("../Features/homeSection.css");
 @import url("../Features/navBar.css");
 @import url("../Features/footer.css");
+@import url(../Features/loader.css);
 
 .section-title {
     color: #333;
@@ -44,6 +45,6 @@
     margin-top: 1rem;
 }
 
-.payment-Options-Sub-title{
+.payment-Options-Sub-title {
     font-size: 3rem;
 }

@@ -1,4 +1,5 @@
 @import url(../defaults.css);
+@import url(../Features/loader.css);
 
 body {
     background-color: #FAF3EA;

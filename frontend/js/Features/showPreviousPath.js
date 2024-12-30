@@ -18,12 +18,12 @@ const displayPaths = () => {
             console.log(contentPath);
             previousPathElement.innerHTML = contentPath ? contentPath : "home"
             previousPathElement.setAttribute("href", referrer);
-        }, 2500)
+        }, 6000)
     } else {
         setTimeout(() => {
             loader.style.display = "none"
             previousPathElement.innerHTML = "Direct Entry";
-        }, 2000)
+        }, 6000)
     }
 };
 

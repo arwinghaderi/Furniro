@@ -21,11 +21,12 @@ html {
     font-family: var(--primary-font);
 }
 
-body {
+body.app {
     font-size: 1.6rem;
     line-height: 1.6;
     font-family: "Poppins-Medium";
     color: var(--text-color);
+    overflow: auto;
 }
 
 a {

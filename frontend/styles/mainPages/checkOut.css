@@ -2,6 +2,7 @@
 @import url(../Features/homeSection.css);
 @import url(../Features/service.css);
 @import url(../Features/footer.css);
+@import url(../Features/loader.css);
 @import url(../defaults.css);
 
 .billing-details {
@@ -9,6 +10,7 @@
     display: flex;
     margin-top: 10rem;
 }
+
 .title-billing-details {
     font-size: 3.6rem;
     font-family: "Poppins-SemiBold";

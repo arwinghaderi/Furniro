@@ -18,7 +18,7 @@ body.loading {
     animation: dropInBody 0.5s ease forwards;
 }
 
-body.loading .content {
+body.loading .content-loading {
     display: none;
 }
 
@@ -128,7 +128,7 @@ body.loading .content {
     }
 }
 
-body.loaded .content {
+body.loaded .content-loading {
     display: block;
     height: 100vh;
     animation: dropInContent 1.5s ease forwards;

@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         loader.style.display = "none";
         content.style.display = "block";
-        document.body.classList.remove('loading');
+        document.body.classList.remove('content-loading');
         document.body.classList.add('app');
     }, 4000)
 })

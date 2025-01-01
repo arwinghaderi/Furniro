@@ -171,8 +171,12 @@
     border: 0.1rem solid var(--Primary-color);
     width: 24.8rem;
     height: 4.8rem;
-    color: var(--Primary-color);
+    color: var(--dark-color);
     font-family: "Poppins-Bold";
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(184, 142, 47, 1);
+}
+
+.show-more:hover {
+    color: var(--Primary-color);
 }

@@ -17,6 +17,17 @@
     align-items: center;
 }
 
+.product-warapper-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.warapper-Product-guide {
+    width: 100%;
+}
+
 .Product-guide {
     width: 22.3rem;
 }
@@ -30,7 +41,7 @@
     margin-top: 3.4rem;
 }
 
-.Product-Img-Box {
+.Product-Img-Box--com {
     width: 28rem;
     height: 17.7rem;
     background-color: #F9F1E7;
@@ -40,9 +51,14 @@
     justify-content: center;
 }
 
-.product-img {
+.product-img--com {
     width: 24rem;
     height: 14.2rem;
+}
+
+.warapper-product-start {
+    display: flex;
+    gap: 0.5rem;
 }
 
 .product-details {
@@ -231,6 +247,8 @@
     border-bottom: none;
     width: 225px;
     vertical-align: bottom;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 .verticalTable tr:first-child td {

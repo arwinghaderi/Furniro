@@ -1,6 +1,7 @@
 @import url(../Features/navBar.css);
 @import url(../Features/homeSection.css);
 @import url(../Features/service.css);
+@import url(../Features/loader.css);
 @import url(../Features/footer.css);
 @import url(../defaults.css);
 
@@ -73,9 +74,6 @@
     height: 12rem;
 }
 
-
-.form-contact-us__label {}
-
 .form-contact-us__input {
     outline: none;
     border: none;
@@ -91,7 +89,14 @@
     padding: 3rem;
 }
 
+.submit-btn,
 .btn-box {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: var(--white-color);
+    font-family: "Poppins-Regular";
+    cursor: pointer;
     width: 23.7rem;
     height: 5.5rem;
     background-color: var(--Primary-color);
@@ -102,11 +107,15 @@
     cursor: pointer;
 }
 
-.btn-submite {
-    outline: none;
-    border: none;
-    background-color: transparent;
+.submit-btn:disabled,
+.btn-box {
+    background-color: #c0c0c0;
+    color: #ffffff;
+    cursor: not-allowed;
+    font-size: 1.8rem;
+}
+
+.loader {
     color: var(--white-color);
-    font-family: "Poppins-Regular";
-    cursor: pointer;
+    font-size: 1.8rem;
 }

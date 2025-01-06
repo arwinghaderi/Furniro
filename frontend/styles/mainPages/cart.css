@@ -3,6 +3,7 @@
 @import url(../Features/products.css);
 @import url(../Features/homeSection.css);
 @import url(../Features/service.css);
+@import url(../Features/loader.css);
 @import url(../defaults.css);
 
 /*
@@ -18,6 +19,7 @@ cart-shop
 .cart-shop-section__shop-title-keeper {
     width: 100%;
     background-color: #F9F1E7;
+    box-shadow: 0px 0px 30px rgba(184, 142, 47, 0.7);
     padding: 2rem;
     display: flex;
     align-items: center;
@@ -110,6 +112,7 @@ cart-shop
 .cart-shop-section__box-total {
     width: 39.3rem;
     background-color: #F9F1E7;
+    box-shadow: 0px 0px 30px rgba(184, 142, 47, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;

@@ -28,7 +28,7 @@ const productSelectionByUser = products.find(product => { return product.id === 
 const addingPagePathDom = () => {
     const routeProduct = document.querySelector(".route-product");
     const previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];
-    routeProduct.innerHTML = `Loading...`
+    routeProduct.innerHTML = `<div class="loader" style="display: inline-grid; color: #000000;" ></div>`
 
     let extractedPart = previousPaths.map(path => {
         let part = path.split('/').pop().split('.')[0];
@@ -36,8 +36,8 @@ const addingPagePathDom = () => {
     })
 
     setTimeout(() => {
-        routeProduct.innerHTML = ` <div class="container"> <div class="route-product__wrapper"> <a href="${previousPaths[1] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <a href="${previousPaths[0] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[0] || "home"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productSelectionByUser.productName}</span> </div> </div> `
-    }, 1000)
+        routeProduct.innerHTML = ` <div class="container "> <div class="route-product__wrapper "> <a href="${previousPaths[1] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <a href="${previousPaths[0] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[0] || "home"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productSelectionByUser.productName}</span> </div> </div> `
+    }, 6000)
 };
 
 const addingAllProductPhotos = () => {
@@ -46,7 +46,7 @@ const addingAllProductPhotos = () => {
 
     wrapperMainImage.insertAdjacentHTML("afterbegin", `<img class="detailes-product-img-main___img" src="${productSelectionByUser.imgSecoundMain}" alt="main-product">`)
 
-    wrapperSecoundImg.insertAdjacentHTML("afterbegin", ` <div class="detailes-product-img-secound__box  detailes-product-img-secound__box--active "><img class="detailes-product-img-secound__img" src =" ${productSelectionByUser.imgSecoundMain}" alt = "main-product" ></div ><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${productSelectionByUser.imgSecound1}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${productSelectionByUser.imgSecound2} " alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${productSelectionByUser.imgSecound3}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${productSelectionByUser.imgSecound4} " alt="detailes-product"></div>`)
+    wrapperSecoundImg.insertAdjacentHTML("afterbegin", ` <div class="detailes-product-img-secound__box   detailes-product-img-secound__box--active "><img class="detailes-product-img-secound__img" src =" ${productSelectionByUser.imgSecoundMain}" alt = "main-product" ></div ><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${productSelectionByUser.imgSecound1}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${productSelectionByUser.imgSecound2} " alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${productSelectionByUser.imgSecound3}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${productSelectionByUser.imgSecound4} " alt="detailes-product"></div>`)
 
     const boxImagesSubProduct = document.querySelectorAll(".detailes-product-img-secound__box")
     const imgProductMain = document.querySelector(".detailes-product-img-main___img")
@@ -77,12 +77,12 @@ const addingDetailesProduct = () => {
         addingProductSpecifications()
 
         wrapperDetailesProducts.insertAdjacentHTML('afterbegin',
-            `${productSelectionByUser.discount ? `<h3 class="detailes-produc-Specifications__title"> ${productSelectionByUser.productIntroduction}</h3>
-                <h5 class= "detailes-produc-Specifications__price-discount" > Rp ${productSelectionByUser.price.toLocaleString("en")}</h5>
-                <h5 class="detailes-produc-Specifications__price">Rp  ${total.toLocaleString("en")} </h5>`
+            `${productSelectionByUser.discount ? `<h3 class="detailes-produc-Specifications__title section-title"> ${productSelectionByUser.productIntroduction}</h3>
+                <h5 class= "detailes-produc-Specifications__price-discount section-title" > Rp ${productSelectionByUser.price.toLocaleString("en")}</h5>
+                <h5 class="detailes-produc-Specifications__price section-title">Rp  ${total.toLocaleString("en")} </h5>`
                 :
-                `<h3 class="detailes-produc-Specifications__title">${productSelectionByUser.productIntroduction}</h3>
-                <h5 class= "detailes-produc-Specifications__price"> Rp ${productSelectionByUser.price.toLocaleString("en")}</h5>`}
+                `<h3 class="detailes-produc-Specifications__title section-title">${productSelectionByUser.productIntroduction}</h3>
+                <h5 class= "detailes-produc-Specifications__price section-title"> Rp ${productSelectionByUser.price.toLocaleString("en")}</h5>`}
 
         <div class="detailes-produc-Specifications__customer-review-box">
             <div class="detailes-produc-Specifications__score">
@@ -335,7 +335,7 @@ const addingProductTemplateToCart = (productsCart) => {
         total = productDiscountCalculation(+product.price, +product.discountPercent)
 
         keeperCartProduct.insertAdjacentHTML("afterbegin",
-            `<div class="products-keeper"><div class="products-keeper__box-img"><img class="products-keeper__img" src="${product.imgSecoundMain}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title">${product.productName} </h6><div class="box-calculation"><span class="box-calculation__number">${product.count}</span>   <span class="box-calculation__multiplication">X</span><span class="box-calculation__price">Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span></div></div><button onclick=" removeProductByUserByUser(${product.id})" class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
+            `<div class="products-keeper"><div class="products-keeper__box-img"><img class="products-keeper__img" src="${product.imgSecoundMain}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title section-title">${product.productName} </h6><div class="box-calculation"><span class="box-calculation__number">${product.count}</span>   <span class="box-calculation__multiplication">X</span><span class="box-calculation__price">Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span></div></div><button onclick=" removeProductByUserByUser(${product.id})" class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
     })
     calculationTotalCart(productsCart)
 }

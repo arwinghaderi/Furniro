@@ -2,11 +2,11 @@
 @import url("../Features/homeSection.css");
 @import url("../Features/navBar.css");
 @import url("../Features/footer.css");
+@import url(../Features/loader.css);
 
 .paymentOptionsHeader {
     background-color: var(--white-color);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 20px auto;
     text-align: center;
@@ -22,7 +22,6 @@
 .paymentOptions {
     background-color: var(--white-color);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 20px auto;
 }
@@ -30,7 +29,6 @@
 .paymentOptionsSubtitle {
     color: #333;
     font-size: 24px;
-    text-align: center;
     margin-bottom: 20px;
     font-family: "Poppins-Bold";
 }

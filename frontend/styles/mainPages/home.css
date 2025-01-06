@@ -1,5 +1,6 @@
 @import url(../Features/navBar.css);
 @import url(../Features/footer.css);
+@import url(../Features/loader.css);
 @import url(../Features/products.css);
 @import url(../defaults.css);
 
@@ -20,8 +21,7 @@
     background-color: #fff4e5;
     padding: 3rem;
     border-radius: 1rem;
-    box-shadow: 0rem 0.4rem 0.4rem rgb(0, 0, 0, 25%);
-
+    box-shadow: 0px 0px 20px 1px rgba(184, 142, 47, 0.7);
 }
 
 .home__heading {
@@ -52,12 +52,15 @@
     justify-content: center;
     margin-top: 4rem;
     box-shadow: 0rem 0.4rem 0.4rem rgb(0, 0, 0, 25%);
-
 }
 
 .btn-link {
     color: #ffff;
     font-family: "Poppins-Bold";
+}
+
+.btn-link:hover {
+    color: rgb(234, 234, 234)
 }
 
 /* 
@@ -159,19 +162,22 @@ slaisder-section
     position: relative;
     filter: blur(0.3rem);
     transition: all 0.5s ease-in;
+    border-radius: 1.5rem;
 }
 
 .swiper-slide-active .slaider-img {
     width: 100%;
-    height: 52.6rem;
+    height: 51rem;
     object-fit: fill;
     filter: blur(0);
     position: relative;
+    box-shadow: 5px 5px 15px rgba(184, 142, 47, 0.7);
 }
 
 .swiper-slide-active .box-contant-img-slaider {
     opacity: 1;
     transition: all ease-in-out 0.8s;
+    border-radius: 1.5rem;
 }
 
 .box-contant-img-slaider {
@@ -198,6 +204,7 @@ slaisder-section
 .box-contant-img-slaider__title {
     font-size: 2.8rem;
     font-family: "Poppins-SemiBold";
+    text-shadow: 2px 2px 4px rgba(184, 142, 47, 0.7);
 }
 
 .slaider-content-img-arrow {

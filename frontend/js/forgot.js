@@ -10,16 +10,22 @@ const codeRegex = /^\d{5,6}$/
 const timerElement = document.getElementById('timer');
 let inputEmailValue, inputCodeValue
 let isCodeSent = false
-confirmEmailBtn.addEventListener("click", (event) => {
-    event.preventDefault()
-    inputEmailValue = inputEmail.value
-    const isEmailValid = validateEmail(inputEmailValue)
 
+
+inputEmail.addEventListener("input", (event) => {
+    const isEmailValid = validateEmail(event.target.value)
     if (isEmailValid) {
-        fetchGetCode(inputEmailValue)
+        confirmEmailBtn.disabled = false
+        confirmEmailBtn.innerHTML = "Send"
         return false
     }
-    showSwal("Email not valid...", "error", ' Correction of information', "../Pages/forgotStop1.html")
+    confirmEmailBtn.innerHTML = "🚫Forbidden"
+    confirmEmailBtn.disabled = true
+})
+
+confirmEmailBtn.addEventListener("click", (event) => {
+    event.preventDefault()
+    fetchGetCode(inputEmailValue)
 })
 
 const validateEmail = (email) => {

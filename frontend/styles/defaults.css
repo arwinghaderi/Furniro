@@ -21,16 +21,25 @@ html {
     font-family: var(--primary-font);
 }
 
-body {
+body.app {
     font-size: 1.6rem;
     line-height: 1.6;
     font-family: "Poppins-Medium";
     color: var(--text-color);
+    overflow: auto;
 }
 
 a {
     text-decoration: none;
     color: var(--dark-color);
+}
+
+.section-title {
+    text-shadow: 2px 2px 4px rgba(184, 142, 47, 0.7);
+}
+
+.box-shadow {
+    box-shadow: 5px 5px 15px rgba(184, 142, 47, 0.7);
 }
 
 .icon {
@@ -188,6 +197,7 @@ a:hover {
     display: none;
     font-size: 1.8rem;
     color: var(--Primary-color);
+    text-shadow: 2px 2px 4px rgba(184, 142, 47, 0.7);
 }
 
 .loader:before,
@@ -212,6 +222,27 @@ a:hover {
     animation:
         l36-1 4s infinite,
         l36-2 .4s infinite cubic-bezier(0.5, 200, 0.5, -200);
+}
+
+::-webkit-scrollbar {
+    width: 1rem;
+    height: 1rem;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--Primary-color);
+    border-radius: 1rem;
+    border: 0.1rem solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border: 0.2rem solid #ddd;
 }
 
 @keyframes l36-1 {

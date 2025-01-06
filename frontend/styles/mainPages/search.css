@@ -2,6 +2,7 @@
 @import url(../defaults.css);
 @import url(../Features/homeSection.css);
 @import url(../Features/footer.css);
+@import url(../Features/loader.css);
 
 .search-section {
     background-color: #F9F1E7;

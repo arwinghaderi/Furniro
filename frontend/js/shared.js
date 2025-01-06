@@ -1,5 +1,5 @@
 import { getingUaerInformation, checkingLoginStatus, errorMessagesLogout, } from "./auth/utils.js"
-import { getToken, getCookieValue, setSecureCookie, storeAccessTokenWithExpiry, getFromLocalStorage, deleteCookie, handleError, showSwal, showSwalAndReload } from "./func/utils.js"
+import { getToken, getCookieValue, setSecureCookie, storeAccessTokenWithExpiry, getFromLocalStorage, deleteCookie, handleError, showSwal, } from "./func/utils.js"
 
 const $ = document
 const hamburger = $.querySelector(".hamburger")
@@ -227,12 +227,12 @@ const btnSubmitNewsletter = document.querySelector(".items-Newsletter__subscribe
 
 const fetchNewsletter = async () => {
     const emailInoptNewsletter = document.querySelector(".items-Newsletter__input-email")
-    const loader = document.querySelector(".loader")
+    const loader = document.querySelector(".loader-Newsletter")
     const emailInoptNewsletterValue = emailInoptNewsletter.value
     const isValidaEmail = validateEmail(emailInoptNewsletterValue)
 
     if (!isValidaEmail) {
-        showSwalAndReload("Enter your email correctly.", "error",)
+        showSwal("Enter your email correctly.", "error", "Correction of information", "#")
         emailInoptNewsletter.value = ""
         return
     }
@@ -261,7 +261,7 @@ const fetchNewsletter = async () => {
 
         showSwal(newsletterEmailData.data.message, "success", "ok", "#")
     } catch (error) {
-        showSwalAndReload(error.message, "error", "Correction of information",)
+        showSwal(error.message, "error", "Correction of information", "#")
     } finally {
         emailInoptNewsletter.value = ""
         loader.style.display = "none"
@@ -272,6 +272,12 @@ const fetchNewsletter = async () => {
 btnSubmitNewsletter.addEventListener("click", (event) => {
     event.preventDefault()
     fetchNewsletter()
+})
+
+const footerBackBtn = document.querySelector(".Returns-btn-help")
+footerBackBtn.addEventListener("click", (event) => {
+    event.preventDefault()
+    window.history.back();
 })
 
 window.addEventListener("load", () => {

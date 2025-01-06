@@ -95,6 +95,8 @@ inputs.forEach(input => {
     input.element.addEventListener('input', (event) => {
         const value = event.target.value.trim();
         validation(value, input.regex, input.validationEntries);
+        checkFormValidityLogin()
+        checkFormValidityRegister()
     });
 });
 
@@ -195,22 +197,37 @@ const validateConfrimPassword = (password, confirmPassword) => {
     return password === confirmPassword
 }
 
+const checkFormValidityLogin = () => {
+    const { isEmailValid, isPasswordValid } = getingUserLoginInformation(loginEmailInput, loginPasswordInput)
+    console.log(isEmailValid, isPasswordValid);
+    if (isEmailValid && isPasswordValid) {
+        btnSignIn.disabled = false
+        btnSignIn.innerHTML = "sign in"
+    } else {
+        btnSignIn.disabled = true
+        btnSignIn.innerHTML = "🚫Forbidden"
+    }
+}
+
+const checkFormValidityRegister = () => {
+    const { isEmailValid, isPasswordValid, isConfirmPassword } = getingUserRegistrationInformation(signUpEmail, signUpPassword, signUpConfirmPassword)
+
+    if (isEmailValid && isPasswordValid && isConfirmPassword) {
+        btnRegister.disabled = false
+        btnRegister.innerHTML = "Sign up"
+    } else {
+        btnRegister.disabled = true
+        btnRegister.innerHTML = " 🚫Forbidden"
+    }
+}
+
 btnSignIn.addEventListener("click", async (event) => {
     event.preventDefault()
-
-
-    const { isEmailValid, isPasswordValid } = getingUserLoginInformation(loginEmailInput, loginPasswordInput)
-
-    if (isEmailValid && isPasswordValid) {
-        fetchAndSendLoginData()
-    } else {
-        showSwal("Your information is not correct.", "error", ' Correction of information', "../../Pages/auth.html")
-    }
+    fetchAndSendLoginData()
 })
 
 const fetchAndSendLoginData = async () => {
-    const showMoreLoder = document.querySelector(".show-more__loder")
-    showMoreLoder.style.display = 'flex';
+    btnSignIn.innerHTML = `<div class="loader lodaer-sign-in"></div>`
 
     const userInformation = {
         email: loginEmailInput.value.trim(),
@@ -240,24 +257,18 @@ const fetchAndSendLoginData = async () => {
     } catch (error) {
         showSwal(`${error.message}`, "error", ' Correction of information', "../../Pages/auth.html")
     } finally {
-        showMoreLoder.style.display = 'none';
+        btnSignIn.disabled = true
+        btnSignIn.innerHTML = '🚫Forbidden';
     }
 };
 
 btnRegister.addEventListener("click", async (event) => {
     event.preventDefault()
-    const { isEmailValid, isPasswordValid, isConfirmPassword } = getingUserRegistrationInformation(signUpEmail, signUpPassword, signUpConfirmPassword)
-
-    if (isEmailValid && isPasswordValid && isConfirmPassword) {
-        fetchAndSendRegisterData()
-    } else {
-        showSwal("Your email or password or password confirmation is invalid.", "error", "Correction of information", "../../Pages/auth.html")
-    }
+    fetchAndSendRegisterData()
 })
 
 const fetchAndSendRegisterData = async () => {
-    const showMoreLoder = document.querySelector(".loder-sign-up")
-    showMoreLoder.style.display = 'flex';
+    btnRegister.innerHTML = `<div class="loader lodaer-sign-up"></div>`
 
     let userSignUpInformation = {
         fullname: signUpFullName.value,
@@ -291,6 +302,11 @@ const fetchAndSendRegisterData = async () => {
     } catch (error) {
         showSwal(`${error.message}`, "error", "Correction of information", "../../Pages/auth.html")
     } finally {
-        showMoreLoder.style.display = 'none';
+        btnRegister.innerHTML = " 🚫Forbidden"
+        btnRegister.disabled = true
     }
 }
+
+window.addEventListener("load", () => {
+    checkFormValidityLogin()
+})

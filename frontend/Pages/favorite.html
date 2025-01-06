@@ -16,295 +16,313 @@
     <title>Favorite</title>
 </head>
 
-<body>
-    <!-- ** nav-bar-->
-    <div class="container">
-        <nav class="nav-bar">
+<body class="content-loading">
+    <div id="loader-content" class="loader-container">
+        <div class="loading-text"> <span>L</span> <span>O</span> <span>A</span> <span>D</span> <span>I</span>
+            <span>N</span>
+            <span>G</span>
+        </div>
+        <div class="loading-line"></div>
+    </div>
+    <div class="main-Content-App">
 
-            <a href="../index.html"">
+        <!-- ** nav-bar-->
+        <div class="container">
+            <nav class="nav-bar">
+
+                <a href="../index.html"">
                     <img class=" nav-bar__logo-img" src="../images/logoNavbar.jpg" alt="Logo">
-            </a>
-            <ul class="list-menu">
-                <li class="list-menu__item"><a class="list-menu-item__link " href="../index.html">Home</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="../Pages/shop.html">Shop</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="./about.html">About</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="./contact.html">Contact</a></li>
-            </ul>
-
-            <div class="icon-container-option">
-                <div>
-                    <a class=" icon-container__link icon-container__link--login dont-login " href="./auth.html">
-                        <span class="navbar-dont-Register-text"></span>
-                        <i class="fas fa-sign-in-alt " id="icon-login"></i>
-                    </a>
-                    <svg class="show-more__loder navbar-successfully-Register-Loading" cl viewBox="0 0 100 100"
-                        preserveAspectRatio="xMidYMid" width="100" height="100"
-                        style="shape-rendering: auto; display: none; background: #fff">
-                        <g>
-                            <path stroke="none" fill="#000000" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
-                                <animateTransform values="0 50 51;360 50 51" keyTimes="0;1" repeatCount="indefinite"
-                                    dur="1s" type="rotate" attributeName="transform"></animateTransform>
-                            </path>
-                            <g></g>
-                        </g>
-                    </svg>
-                    <a class=" icon-container__link icon-container__link--login login-successfully">
-                        <span class="navbar-successfully-Register-text"></span>
-                        <i class="fas fa-power-off" id="user-icon"></i>
-                    </a>
-                </div>
-                <a class="icon-container__link" href="./search.html">
-                    <i class="fas fa-search menu-icon"></i>
                 </a>
-                <a class="icon-container__link" href="./favorite.html">
-                    <i class="fa-regular fa-heart menu-icon menu-icon--active"></i>
-                </a>
-                <a class="icon-container__link" href="./cart.html">
-                    <i class="fa-solid fa-cart-shopping menu-icon"></i>
-                    <span class="nav-bar__count-Product " value="0">0</span>
-                </a>
-            </div>
-
-            <!-- ** mobail -->
-            <div class="contener-menu-mobail">
-                <ul class="list-menu-mobail">
-                    <li class="list-menu__item-mobail ">
-                        <a class="list-menu-item__link menu-link" href="../index.html">Home</a>
-                    </li>
-                    <li class="list-menu__item-mobail">
-                        <a class="list-menu-item__link " href="../Pages/shop.html">Shop</a>
-                    </li>
-                    <li class="list-menu__item-mobail">
-                        <a class="list-menu-item__link " href="./about.html">About</a>
-                    </li>
-                    <li class="list-menu__item-mobail">
-                        <a class="list-menu-item__link " href="./contact.html">Contact</a>
-                    </li>
+                <ul class="list-menu">
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="../index.html">Home</a></li>
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="../Pages/shop.html">Shop</a></li>
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="./about.html">About</a></li>
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="./contact.html">Contact</a></li>
                 </ul>
 
+                <div class="icon-container-option">
+                    <div>
+                        <a class=" icon-container__link icon-container__link--login dont-login " href="./auth.html">
+                            <span class="navbar-dont-Register-text"></span>
+                            <i class="fas fa-sign-in-alt " id="icon-login"></i>
+                        </a>
+                        <svg class="show-more__loder navbar-successfully-Register-Loading" cl viewBox="0 0 100 100"
+                            preserveAspectRatio="xMidYMid" width="100" height="100"
+                            style="shape-rendering: auto; display: none; background: #fff">
+                            <g>
+                                <path stroke="none" fill="#000000" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
+                                    <animateTransform values="0 50 51;360 50 51" keyTimes="0;1" repeatCount="indefinite"
+                                        dur="1s" type="rotate" attributeName="transform"></animateTransform>
+                                </path>
+                                <g></g>
+                            </g>
+                        </svg>
+                        <a class=" icon-container__link icon-container__link--login login-successfully">
+                            <span class="navbar-successfully-Register-text"></span>
+                            <i class="fas fa-power-off" id="user-icon"></i>
+                        </a>
+                    </div>
+                    <a class="icon-container__link" href="./search.html">
+                        <i class="fas fa-search menu-icon"></i>
+                    </a>
+                    <a class="icon-container__link" href="./favorite.html">
+                        <i class="fa-regular fa-heart menu-icon menu-icon--active"></i>
+                    </a>
+                    <a class="icon-container__link" href="./cart.html">
+                        <i class="fa-solid fa-cart-shopping menu-icon"></i>
+                        <span class="nav-bar__count-Product " value="0">0</span>
+                    </a>
+                </div>
 
-            </div>
-            <div class="hamburger">
-                <div class="hamburger__line"></div>
-            </div>
-        </nav>
-    </div>
-    <!--**home-section  -->
-    <header class="home-section">
-        <img src="../images/icon.logo.png" alt="logo">
-        <h1 class="home-section__title">favorite</h1>
-        <div class="home-section-container-description">
-            <a class="home-section-container-description__befor"></a>
-            <svg class="home-section-container-description__svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
-                <path d="M0 12L5 7L0 2L1 0L8 7L1 14L0 12Z" fill="black" />
-            </svg>
-            <p class="home-section-container-description__now">favorite</p>
+                <!-- ** mobail -->
+                <div class="contener-menu-mobail">
+                    <ul class="list-menu-mobail">
+                        <li class="list-menu__item-mobail ">
+                            <a class="list-menu-item__link menu-link" href="../index.html">Home</a>
+                        </li>
+                        <li class="list-menu__item-mobail">
+                            <a class="list-menu-item__link " href="../Pages/shop.html">Shop</a>
+                        </li>
+                        <li class="list-menu__item-mobail">
+                            <a class="list-menu-item__link " href="./about.html">About</a>
+                        </li>
+                        <li class="list-menu__item-mobail">
+                            <a class="list-menu-item__link " href="./contact.html">Contact</a>
+                        </li>
+                    </ul>
+
+
+                </div>
+                <div class="hamburger">
+                    <div class="hamburger__line"></div>
+                </div>
+            </nav>
         </div>
-    </header>
-    <!-- **releted Products -->
-    <div class="container">
-        <section class="product-section">
-            <h2 class="product__title">favorite products </h2>
-            <div iv class="product__box">
-                <div class="row row-container">
-                    <div class="product___box">
-                        <div class="row row-container">
-                            <div
-                                class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show ">
-                                <div class="product-box" id="discount">
-                                    <div class="img-box-overlay"><img class="product__img product__img-col"
-                                            src="../images/chair -2.webp" alt="product img">
-                                        <div class="product-overlay">
-                                            <div class="box-add-btn-cart"><a href="#"
-                                                    class="box-add-btn-cart__text">Details
-                                                    Product</a></div>
-                                            <div class="product-overlay__options">
-                                                <div class="option-overlay">
-                                                    <i class="fas fa-share-alt fa-flip-vertical  icon"></i>
-                                                    <span class="option-overlay__text">Share</span>
-                                                </div>
-                                                <div class="option-overlay">
-                                                    <i class="fas fa-exchange-alt  icon"></i>
-                                                    <span class="option-overlay__text">Compare</span>
-                                                </div>
-                                                <div class="option-overlay"><i class="fa-regular fa-heart icon"></i>
-                                                    <span class="option-overlay__text">Like</span>
+        <!--**home-section  -->
+        <header class="home-section">
+            <img src="../images/icon.logo.png" alt="logo">
+            <h1 class="home-section__title section-title">favorite</h1>
+            <div class="home-section-container-description">
+                <a class="home-section-container-description__befor"></a>
+                <div class="loader loader-Paths"></div>
+                <svg class="home-section-container-description__svg" width="8" height="14" viewBox="0 0 8 14"
+                    fill="none">
+                    <path d="M0 12L5 7L0 2L1 0L8 7L1 14L0 12Z" fill="black" />
+                </svg>
+                <p class="home-section-container-description__now">favorite</p>
+            </div>
+        </header>
+        <!-- **releted Products -->
+        <div class="container">
+            <section class="product-section">
+                <h2 class="product__title section-title">favorite products </h2>
+                <div iv class="product__box">
+                    <div class="row row-container">
+                        <div class="product___box">
+                            <div class="row row-container">
+                                <div
+                                    class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show ">
+                                    <div class="product-box" id="discount">
+                                        <div class="img-box-overlay"><img class="product__img product__img-col"
+                                                src="../images/chair -2.webp" alt="product img">
+                                            <div class="product-overlay">
+                                                <div class="box-add-btn-cart"><a href="#"
+                                                        class="box-add-btn-cart__text">Details
+                                                        Product</a></div>
+                                                <div class="product-overlay__options">
+                                                    <div class="option-overlay">
+                                                        <i class="fas fa-share-alt fa-flip-vertical  icon"></i>
+                                                        <span class="option-overlay__text">Share</span>
+                                                    </div>
+                                                    <div class="option-overlay">
+                                                        <i class="fas fa-exchange-alt  icon"></i>
+                                                        <span class="option-overlay__text">Compare</span>
+                                                    </div>
+                                                    <div class="option-overlay"><i class="fa-regular fa-heart icon"></i>
+                                                        <span class="option-overlay__text">Like</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-Introductions">
-                                        <h3 class="product-name"> Leviosa </h3>
-                                        <p class="product-Introduction"> Stylish cafe chair </p>
-                                        <div class="product-price-box">
-                                            <span class="product-price"> Rp 2.500.000
+                                        <div class="product-Introductions">
+                                            <h3 class="product-name"> Leviosa </h3>
+                                            <p class="product-Introduction"> Stylish cafe chair </p>
+                                            <div class="product-price-box">
+                                                <span class="product-price"> Rp 2.500.000
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div
-                                class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show ">
-                                <div class="product-box" id="discount">
-                                    <div class="img-box-overlay"><img class="product__img product__img-col"
-                                            src="../images/chair -2.webp" alt="product img">
-                                        <div class="product-overlay">
-                                            <div class="box-add-btn-cart"><a href="#"
-                                                    class="box-add-btn-cart__text">Details
-                                                    Product</a></div>
-                                            <div class="product-overlay__options">
-                                                <div class="option-overlay">
-                                                    <i class="fas fa-share-alt fa-flip-vertical  icon"></i>
-                                                    <span class="option-overlay__text">Share</span>
-                                                </div>
-                                                <div class="option-overlay">
-                                                    <i class="fas fa-exchange-alt  icon"></i>
-                                                    <span class="option-overlay__text">Compare</span>
-                                                </div>
-                                                <div class="option-overlay"><i class="fa-regular fa-heart icon"></i>
-                                                    <span class="option-overlay__text">Like</span>
+                                <div
+                                    class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show ">
+                                    <div class="product-box" id="discount">
+                                        <div class="img-box-overlay"><img class="product__img product__img-col"
+                                                src="../images/chair -2.webp" alt="product img">
+                                            <div class="product-overlay">
+                                                <div class="box-add-btn-cart"><a href="#"
+                                                        class="box-add-btn-cart__text">Details
+                                                        Product</a></div>
+                                                <div class="product-overlay__options">
+                                                    <div class="option-overlay">
+                                                        <i class="fas fa-share-alt fa-flip-vertical  icon"></i>
+                                                        <span class="option-overlay__text">Share</span>
+                                                    </div>
+                                                    <div class="option-overlay">
+                                                        <i class="fas fa-exchange-alt  icon"></i>
+                                                        <span class="option-overlay__text">Compare</span>
+                                                    </div>
+                                                    <div class="option-overlay"><i class="fa-regular fa-heart icon"></i>
+                                                        <span class="option-overlay__text">Like</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-Introductions">
-                                        <h3 class="product-name"> Leviosa </h3>
-                                        <p class="product-Introduction"> Stylish cafe chair </p>
-                                        <div class="product-price-box">
-                                            <span class="product-price"> Rp 2.500.000
+                                        <div class="product-Introductions">
+                                            <h3 class="product-name"> Leviosa </h3>
+                                            <p class="product-Introduction"> Stylish cafe chair </p>
+                                            <div class="product-price-box">
+                                                <span class="product-price"> Rp 2.500.000
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div
-                                class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show ">
-                                <div class="product-box" id="discount">
-                                    <div class="img-box-overlay"><img class="product__img product__img-col"
-                                            src="../images/chair -2.webp" alt="product img">
-                                        <div class="product-overlay">
-                                            <div class="box-add-btn-cart"><a href="#"
-                                                    class="box-add-btn-cart__text">Details
-                                                    Product</a></div>
-                                            <div class="product-overlay__options">
-                                                <div class="option-overlay">
-                                                    <i class="fas fa-share-alt fa-flip-vertical  icon"></i>
-                                                    <span class="option-overlay__text">Share</span>
-                                                </div>
-                                                <div class="option-overlay">
-                                                    <i class="fas fa-exchange-alt  icon"></i>
-                                                    <span class="option-overlay__text">Compare</span>
-                                                </div>
-                                                <div class="option-overlay"><i class="fa-regular fa-heart icon"></i>
-                                                    <span class="option-overlay__text">Like</span>
+                                <div
+                                    class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show ">
+                                    <div class="product-box" id="discount">
+                                        <div class="img-box-overlay"><img class="product__img product__img-col"
+                                                src="../images/chair -2.webp" alt="product img">
+                                            <div class="product-overlay">
+                                                <div class="box-add-btn-cart"><a href="#"
+                                                        class="box-add-btn-cart__text">Details
+                                                        Product</a></div>
+                                                <div class="product-overlay__options">
+                                                    <div class="option-overlay">
+                                                        <i class="fas fa-share-alt fa-flip-vertical  icon"></i>
+                                                        <span class="option-overlay__text">Share</span>
+                                                    </div>
+                                                    <div class="option-overlay">
+                                                        <i class="fas fa-exchange-alt  icon"></i>
+                                                        <span class="option-overlay__text">Compare</span>
+                                                    </div>
+                                                    <div class="option-overlay"><i class="fa-regular fa-heart icon"></i>
+                                                        <span class="option-overlay__text">Like</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-Introductions">
-                                        <h3 class="product-name"> Leviosa </h3>
-                                        <p class="product-Introduction"> Stylish cafe chair </p>
-                                        <div class="product-price-box">
-                                            <span class="product-price"> Rp 2.500.000
+                                        <div class="product-Introductions">
+                                            <h3 class="product-name"> Leviosa </h3>
+                                            <p class="product-Introduction"> Stylish cafe chair </p>
+                                            <div class="product-price-box">
+                                                <span class="product-price"> Rp 2.500.000
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div
-                                class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show ">
-                                <div class="product-box" id="discount">
-                                    <div class="img-box-overlay"><img class="product__img product__img-col"
-                                            src="../images/chair -2.webp" alt="product img">
-                                        <div class="product-overlay">
-                                            <div class="box-add-btn-cart"><a href="#"
-                                                    class="box-add-btn-cart__text">Details
-                                                    Product</a></div>
-                                            <div class="product-overlay__options">
-                                                <div class="option-overlay">
-                                                    <i class="fas fa-share-alt fa-flip-vertical  icon"></i>
-                                                    <span class="option-overlay__text">Share</span>
-                                                </div>
-                                                <div class="option-overlay">
-                                                    <i class="fas fa-exchange-alt  icon"></i>
-                                                    <span class="option-overlay__text">Compare</span>
-                                                </div>
-                                                <div class="option-overlay"><i class="fa-regular fa-heart icon"></i>
-                                                    <span class="option-overlay__text">Like</span>
+                                <div
+                                    class="col col-lg-3 product-main-box product-main-box__shop product-main-box__shop--show ">
+                                    <div class="product-box" id="discount">
+                                        <div class="img-box-overlay"><img class="product__img product__img-col"
+                                                src="../images/chair -2.webp" alt="product img">
+                                            <div class="product-overlay">
+                                                <div class="box-add-btn-cart"><a href="#"
+                                                        class="box-add-btn-cart__text">Details
+                                                        Product</a></div>
+                                                <div class="product-overlay__options">
+                                                    <div class="option-overlay">
+                                                        <i class="fas fa-share-alt fa-flip-vertical  icon"></i>
+                                                        <span class="option-overlay__text">Share</span>
+                                                    </div>
+                                                    <div class="option-overlay">
+                                                        <i class="fas fa-exchange-alt  icon"></i>
+                                                        <span class="option-overlay__text">Compare</span>
+                                                    </div>
+                                                    <div class="option-overlay"><i class="fa-regular fa-heart icon"></i>
+                                                        <span class="option-overlay__text">Like</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-Introductions">
-                                        <h3 class="product-name"> Leviosa </h3>
-                                        <p class="product-Introduction"> Stylish cafe chair </p>
-                                        <div class="product-price-box">
-                                            <span class="product-price"> Rp 2.500.000
+                                        <div class="product-Introductions">
+                                            <h3 class="product-name"> Leviosa </h3>
+                                            <p class="product-Introduction"> Stylish cafe chair </p>
+                                            <div class="product-price-box">
+                                                <span class="product-price"> Rp 2.500.000
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- **footer -->
+        <footer class=" footer">
+            <hr>
+            <div class="container">
+                <div class="footer-items">
+                    <div class="items-introduction">
+                        <h5 class="item-introduction__name"><a class="footer-logo-name" href="../index.html">Funiro.</a>
+                        </h5>
+                        <p class="item-introduction__address">400 University Drive Suite 200 Coral <br>
+                            Gables <br>
+                            ,FL 33134 USA</p>
+                    </div>
+                    <div class="container-links-helps">
+                        <ul class="items-links">
+                            <p class="items-links__title">Links</p>
+                            <li class="item-links__item"><a class="item-links__link" href="../index.html">Home</a></li>
+                            <li class="item-links__item"><a class="item-links__link" href="./shop.html">Shop</a></li>
+                            <li class="item-links__item"><a class="item-links__link" href="./about.html">About</a></li>
+                            <li class="item-links__item"><a class="item-links__link" href="./contact.html">Contact</a>
+                            </li>
+                        </ul>
+                        <ul class="items-helps">
+                            <p class="items-helps__title">Help</p>
+                            <li class="item-helps__item"><a class="item-helps__link"
+                                    href="./paymentOptions.html">Payment
+                                    Options</a></li>
+                            <li class="item-helps__item"><span class="item-helps__link Returns-btn-help ">Returns</span>
+                            </li>
+                            <li class="item-helps__item"><a class="item-helps__link"
+                                    href="./privacy-policy.html">Privacy
+                                    Policies</a></li>
+                        </ul>
+                    </div>
+                    <div class="items-Newsletter">
+                        <p class="items-Newsletter__title">Newsletter</p>
+                        <form class="form-newsLetter">
+                            <div class="items-Newsletter__box-input">
+                                <input class="items-Newsletter__input-email" type="email" name="" id=""
+                                    placeholder="Enter Your Email Address">
+                            </div>
+                            <div class="items-Newsletter__box-button">
+                                <button class="items-Newsletter__subscribe">SUBSCRIBE</button>
+                                <div class="loader loader-Newsletter"></div>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
+
+
+                <hr>
+                <div class="box-copt-right">
+                    <p class="copt-right-text">2023 furino. All rights reverved</p>
+                </div>
             </div>
-        </section>
+
+        </footer>
     </div>
-    <!-- **footer -->
-    <footer class=" footer">
-        <hr>
-        <div class="container">
-            <div class="footer-items">
-                <div class="items-introduction">
-                    <h5 class="item-introduction__name"><a class="footer-logo-name" href="../index.html">Funiro.</a>
-                    </h5>
-                    <p class="item-introduction__address">400 University Drive Suite 200 Coral <br>
-                        Gables <br>
-                        ,FL 33134 USA</p>
-                </div>
-                <div class="container-links-helps">
-                    <ul class="items-links">
-                        <p class="items-links__title">Links</p>
-                        <li class="item-links__item"><a class="item-links__link" href="../index.html">Home</a></li>
-                        <li class="item-links__item"><a class="item-links__link" href="./shop.html">Shop</a></li>
-                        <li class="item-links__item"><a class="item-links__link" href="./about.html">About</a></li>
-                        <li class="item-links__item"><a class="item-links__link" href="./contact.html">Contact</a></li>
-                    </ul>
-                    <ul class="items-helps">
-                        <p class="items-helps__title">Help</p>
-                        <li class="item-helps__item"><a class="item-helps__link" href="./paymentOptions.html">Payment
-                                Options</a></li>
-                        <li class="item-helps__item"><a class="item-helps__link" href="#">Returns</a></li>
-                        <li class="item-helps__item"><a class="item-helps__link" href="#">Privacy Policies</a></li>
-                    </ul>
-                </div>
-                <div class="items-Newsletter">
-                    <p class="items-Newsletter__title">Newsletter</p>
-                    <form class="form-newsLetter">
-                        <div class="items-Newsletter__box-input">
-                            <input class="items-Newsletter__input-email" type="email" name="" id=""
-                                placeholder="Enter Your Email Address">
-                        </div>
-                        <div class="items-Newsletter__box-button">
-                            <button class="items-Newsletter__subscribe">SUBSCRIBE</button>
-                            <div class="loader"></div>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-
-
-            <hr>
-            <div class="box-copt-right">
-                <p class="copt-right-text">2023 furino. All rights reverved</p>
-            </div>
-        </div>
-
-    </footer>
 </body>
 <script src="../js/underDevelopment.js"></script>
 <script src="../vendor/FontAwesome5/all.min.js"></script>
 <script src="../js/shared.js" type="module"></script>
 <script src="../js/Features/showPreviousPath.js"></script>
+<script src="../js/Features/loader.js"></script>
 <script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
 </html>

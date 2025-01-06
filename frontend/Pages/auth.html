@@ -15,125 +15,112 @@
     <title>Access</title>
 </head>
 
-<body>
-    <div class="container">
-        <div class="auth-container">
-            <div class="auth-wrapper">
-                <div class="form-title">
-                    <h3 class="auth-title signIn-title">Form sign in </h3>
-                    <h3 class="auth-title signup-title">Sign up Form</h3>
-                </div>
-                <div class="form-container">
-                    <div class="form-slide-controls">
-                        <div data-auth="signIn" class="btn-signIn btn-Auth btn-signIn--active">
-                            SignIn
-                        </div>
-                        <div data-auth="signUp" class="btn-signUp btn-Auth">
-                            SignUp
-                        </div>
+<body class="content-loading">
+    <div id="loader-content" class="loader-container">
+        <div class="loading-text"> <span>L</span> <span>O</span> <span>A</span> <span>D</span> <span>I</span>
+            <span>N</span>
+            <span>G</span>
+        </div>
+        <div class="loading-line"></div>
+    </div>
+    <div class="main-Content-App">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-wrapper ">
+                    <div class="form-title">
+                        <h3 class="auth-title signIn-title section-title">Form sign in </h3>
+                        <h3 class="auth-title signup-title section-title">Sign up Form</h3>
                     </div>
-                    <div class="form-wrapper">
-                        <div action="#" class="form-signIn">
-                            <div class="input-box">
-                                <input type="email" class="input signIn-Email" placeholder="Email Address">
+                    <div class="form-container">
+                        <div class="form-slide-controls">
+                            <div data-auth="signIn" class="btn-signIn btn-Auth btn-signIn--active">
+                                SignIn
                             </div>
-                            <span class="Email-validation-Valid  Email-signin-Valid ">Valid Email Address</span>
-                            <span class="Email-validation-invalid    Email-signin-invalid  ">Invalid Email
-                                Address</span>
-
-                            <div class="input-box">
-                                <input type="password" class="input signIn-password" id="password"
-                                    placeholder="Password">
-                                <div class="togglePassword-box">
-                                    <i class="fas fa-eye" id="input-password-icon"></i>
-                                </div>
+                            <div data-auth="signUp" class="btn-signUp btn-Auth">
+                                SignUp
                             </div>
-                            <span class="password-validation-Valid">Valid password Address</span>
-                            <span class="password-validation-invalid">Invalid password Address</span>
-                            <div>
-                                <a class="forgot-password" href="../Pages/forgotStop1.html">Forgot password?</a>
-                            </div>
-
-                            <div class="btn-box btn-signIn-box">
-                                <button class="btn-signIn-register btn">
-                                    <svg class="show-more__loder" cl viewBox="0 0 100 100"
-                                        preserveAspectRatio="xMidYMid" width="100" height="100"
-                                        style="shape-rendering: auto; display: none; background: #B88E2F">
-                                        <g>
-                                            <path stroke="none" fill="#ffff"
-                                                d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
-                                                <animateTransform values="0 50 51;360 50 51" keyTimes="0;1"
-                                                    repeatCount="indefinite" dur="1s" type="rotate"
-                                                    attributeName="transform"></animateTransform>
-                                            </path>
-                                            <g></g>
-                                        </g>
-                                    </svg>
-                                    signIn</button>
-                            </div>
-                            <div class="signup-link">Not a member? <a href="#" class="signup-now">Signup now</a></div>
                         </div>
-                        <div action="" class="form-signUp">
-                            <div class="input-box">
-                                <input type="email" class="input signUp-fullName " placeholder="Full Name">
-                            </div>
-                            <span class="fullName-validation-valid fullName-signUp-Valid  ">Valid full Name</span>
-                            <span class="fullName-validation-invalid fullName-signUp-InValid ">Invalid full Name</span>
-                            <div class="input-box">
-                                <input type="email" class="input signUp-Email " placeholder="Email Address">
-                            </div>
-                            <span class="Email-validation-Valid Email-signUp-Valid  ">Valid Email Address</span>
-                            <span class="Email-validation-invalid Email-signUp-InValid ">Invalid Email Address</span>
-                            <div class="input-box">
-                                <input type="password" class="input signUp-password" id="password"
-                                    placeholder=" Password">
-                                <div class="togglePassword-box">
-                                    <i class="fas fa-eye" id="input-password-icon"></i>
+                        <div class="form-wrapper">
+                            <div action="#" class="form-signIn">
+                                <div class="input-box">
+                                    <input type="email" class="input signIn-Email" placeholder="Email Address">
                                 </div>
-                            </div>
-                            <div class="password-checker-container">
-                                <div class="progress-container">
-                                    <div class="progress-bar" id="passwordProgressBar">0%</div>
+                                <span class="Email-validation-Valid  Email-signin-Valid ">Valid Email Address</span>
+                                <span class="Email-validation-invalid    Email-signin-invalid  ">Invalid Email
+                                    Address</span>
+
+                                <div class="input-box">
+                                    <input type="password" class="input signIn-password" id="password"
+                                        placeholder="Password">
+                                    <div class="togglePassword-box">
+                                        <i class="fas fa-eye" id="input-password-icon"></i>
+                                    </div>
                                 </div>
-                                <ul class="criteria">
-                                    <li class="criteria-item length"><span class="icon">🔒</span> At least 8 characters
-                                        (e.g., password123!)</li>
-                                    <li class="criteria-item uppercase"><span class="icon">🔒</span> At least one
-                                        uppercase letter (e.g., Password)</li>
-                                    <li class="criteria-item lowercase"><span class="icon">🔒</span> At least one
-                                        lowercase letter (e.g., password)</li>
-                                    <li class="criteria-item number"><span class="icon">🔒</span> At least one number
-                                        (e.g., password1)</li>
-                                    <li class="criteria-item special"><span class="icon">🔒</span> At least one special
-                                        character (e.g., password@)</li>
-                                </ul>
-                            </div>
-                            <div class="input-box">
-                                <input type="password" class="input signUp-confirm" id="password"
-                                    placeholder="Confirm password">
-                                <div class="togglePassword-box">
-                                    <i class="fas fa-eye" id="input-password-icon"></i>
+                                <span class="password-validation-Valid">Valid password Address</span>
+                                <span class="password-validation-invalid">Invalid password Address</span>
+                                <div>
+                                    <a class="forgot-password section-title" href="../Pages/forgotStop1.html">Forgot
+                                        password?</a>
                                 </div>
+                                <button disabled class="btn-signIn-register btn">
+                                    🚫Forbidden
+                                </button>
+                                <div class="signup-link">Not a member? <a href="#"
+                                        class="signup-now section-title">Signup now</a></div>
                             </div>
-                            <span class="password-validation-Valid password-confrim-Valid">Valid password Address</span>
-                            <span class="password-validation-invalid password-confrim-invalid ">Invalid password
-                                Address</span>
-                            <div class="btn-box btn-signUp-box">
-                                <button class="btn-Register btn">
-                                    <svg class="show-more__loder loder-sign-up" cl viewBox="0 0 100 100"
-                                        preserveAspectRatio="xMidYMid" width="100" height="100"
-                                        style="shape-rendering: auto; display: none; background: #B88E2F">
-                                        <g>
-                                            <path stroke="none" fill="#ffff"
-                                                d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
-                                                <animateTransform values="0 50 51;360 50 51" keyTimes="0;1"
-                                                    repeatCount="indefinite" dur="1s" type="rotate"
-                                                    attributeName="transform"></animateTransform>
-                                            </path>
-                                            <g></g>
-                                        </g>
-                                    </svg>
-                                    signUp
+                            <div action="" class="form-signUp">
+                                <div class="input-box">
+                                    <input type="email" class="input signUp-fullName " placeholder="Full Name">
+                                </div>
+                                <span class="fullName-validation-valid fullName-signUp-Valid  ">Valid full Name</span>
+                                <span class="fullName-validation-invalid fullName-signUp-InValid ">Invalid full
+                                    Name</span>
+                                <div class="input-box">
+                                    <input type="email" class="input signUp-Email " placeholder="Email Address">
+                                </div>
+                                <span class="Email-validation-Valid Email-signUp-Valid  ">Valid Email Address</span>
+                                <span class="Email-validation-invalid Email-signUp-InValid ">Invalid Email
+                                    Address</span>
+                                <div class="input-box">
+                                    <input type="password" class="input signUp-password" id="password"
+                                        placeholder=" Password">
+                                    <div class="togglePassword-box">
+                                        <i class="fas fa-eye" id="input-password-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="password-checker-container">
+                                    <div class="progress-container">
+                                        <div class="progress-bar" id="passwordProgressBar">0%</div>
+                                    </div>
+                                    <ul class="criteria">
+                                        <li class="criteria-item length"><span class="icon">🔒</span> At least 8
+                                            characters
+                                            (e.g., password123!)</li>
+                                        <li class="criteria-item uppercase"><span class="icon">🔒</span> At least one
+                                            uppercase letter (e.g., Password)</li>
+                                        <li class="criteria-item lowercase"><span class="icon">🔒</span> At least one
+                                            lowercase letter (e.g., password)</li>
+                                        <li class="criteria-item number"><span class="icon">🔒</span> At least one
+                                            number
+                                            (e.g., password1)</li>
+                                        <li class="criteria-item special"><span class="icon">🔒</span> At least one
+                                            special
+                                            character (e.g., password@)</li>
+                                    </ul>
+                                </div>
+                                <div class="input-box">
+                                    <input type="password" class="input signUp-confirm" id="password"
+                                        placeholder="Confirm password">
+                                    <div class="togglePassword-box">
+                                        <i class="fas fa-eye" id="input-password-icon"></i>
+                                    </div>
+                                </div>
+                                <span class="password-validation-Valid password-confrim-Valid">Valid password
+                                    Address</span>
+                                <span class="password-validation-invalid password-confrim-invalid ">Invalid password
+                                    Address</span>
+                                <button disabled class="btn-Register btn">
+                                    🚫Forbidden
                                 </button>
                             </div>
                         </div>
@@ -148,6 +135,7 @@
 <script src="../vendor/FontAwesome5/all.min.js"></script>
 <script src="../js/auth/auth.js" type="module"></script>
 <script src="../js/funcAuth.js"></script>
+<script src="../js/Features/loader.js"></script>
 <script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
 

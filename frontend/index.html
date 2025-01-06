@@ -18,319 +18,337 @@
 
 </head>
 
-<body>
-    <!--**navbar  -->
-    <div class="container">
-        <nav class="nav-bar">
-            <a href="./index.html">
-                <img class="nav-bar__logo-img" src="./images/logoNavbar.jpg" alt="Logo">
-            </a>
-            <ul class="list-menu">
-                <li class="list-menu__item"><a class="list-menu-item__link list-menu-item__link--active  "
-                        href="./index.html">Home</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="./Pages/shop.html">Shop</a>
-                </li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="./Pages/about.html">About</a></li>
-                <li class="list-menu__item"><a class="list-menu-item__link " href="./Pages/contact.html">Contact</a>
-                </li>
-            </ul>
+<body class="content-loading">
+    <div id="loader-content" class="loader-container">
+        <div class="loading-text"> <span>L</span> <span>O</span> <span>A</span> <span>D</span> <span>I</span>
+            <span>N</span>
+            <span>G</span>
+        </div>
+        <div class="loading-line"></div>
+    </div>
 
-            <div class="icon-container-option">
-                <div>
-                    <svg class="show-more__loder navbar-successfully-Register-Loading" cl viewBox="0 0 100 100"
-                        preserveAspectRatio="xMidYMid" width="100" height="100"
-                        style="shape-rendering: auto; display: none; background: #fff">
-                        <g>
-                            <path stroke="none" fill="#000000" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
-                                <animateTransform values="0 50 51;360 50 51" keyTimes="0;1" repeatCount="indefinite"
-                                    dur="1s" type="rotate" attributeName="transform"></animateTransform>
-                            </path>
-                            <g></g>
-                        </g>
-                    </svg>
-                    <a class=" icon-container__link icon-container__link--login dont-login " href="./Pages/auth.html">
-                        <span class="navbar-dont-Register-text"></span>
-                        <i class="fas fa-sign-in-alt " id="icon-login"></i>
-                    </a>
-                    <svg class="show-more__loder navbar-successfully-Register-Loading" cl viewBox="0 0 100 100"
-                        preserveAspectRatio="xMidYMid" width="100" height="100"
-                        style="shape-rendering: auto; display: none; background: #fff">
-                        <g>
-                            <path stroke="none" fill="#000000" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
-                                <animateTransform values="0 50 51;360 50 51" keyTimes="0;1" repeatCount="indefinite"
-                                    dur="1s" type="rotate" attributeName="transform"></animateTransform>
-                            </path>
-                            <g></g>
-                        </g>
-                    </svg>
-                    <a class=" icon-container__link icon-container__link--login login-successfully">
-                        <span class="navbar-successfully-Register-text"></span>
-                        <i class="fas fa-power-off" id="user-icon"></i>
-                    </a>
-                </div>
-                <a class="icon-container__link" href="./Pages/search.html">
-                    <i class="fas fa-search menu-icon"></i>
+    <div class="main-Content-App">
+        <!--**navbar  -->
+        <div class="container">
+            <nav class="nav-bar">
+                <a href="./index.html">
+                    <img class="nav-bar__logo-img" src="./images/logoNavbar.jpg" alt="Logo">
                 </a>
-                <a class="icon-container__link" href="./Pages/favorite.html">
-                    <i class="fa-regular fa-heart menu-icon "></i>
-                </a>
-                <a class="icon-container__link" href="./Pages/cart.html">
-                    <i class="fa-solid fa-cart-shopping menu-icon"></i>
-                    <span class="nav-bar__count-Product " value="0">0</span>
-                </a>
-            </div>
-
-            <!-- ** mobail -->
-            <div class="contener-menu-mobail">
-                <ul class="list-menu-mobail">
-                    <li class="list-menu__item-mobail"><a class="list-menu-item__link--active"
-                            href="./index.html">Home</a>
+                <ul class="list-menu">
+                    <li class="list-menu__item"><a class="list-menu-item__link list-menu-item__link--active  "
+                            href="./index.html">Home</a></li>
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="./Pages/shop.html">Shop</a>
                     </li>
-                    <li class="list-menu__item-mobail"><a class="list-menu-item__link" href="./Pages/shop.html">Shop</a>
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="./Pages/about.html">About</a>
                     </li>
-                    <li class="list-menu__item-mobail"><a class="list-menu-item__link"
-                            href="./Pages/about.html">About</a>
-                    </li>
-                    <li class="list-menu__item-mobail"><a class="list-menu-item__link"
-                            href="./Pages/contact.html">Contact</a>
+                    <li class="list-menu__item"><a class="list-menu-item__link " href="./Pages/contact.html">Contact</a>
                     </li>
                 </ul>
-            </div>
 
-            <div class="hamburger">
-                <div class="hamburger__line"></div>
-            </div>
-        </nav>
-    </div>
-    <!--** home-section -->
-    <header class="home-section home-section-home">
-        <div class="home__content-box">
-            <p class="home__heading">New Arrival</p>
-            <h1 class="home__title">Discover Our New Collection</h1>
-            <p class="home__caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
-                ullamcorper mattis.</p>
-            <div class="home__btn-box">
-                <a class="btn-link" href="./Pages/shop.html">BUY Now</a>
-            </div>
-        </div>
-    </header>
-    <!--** range -->
-    <div class="container">
-        <div class="title-box">
-            <h2 class="title">Browse The Range</h2>
-            <p class="secondary-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <section class="range-container">
-
-            <div class="row">
-                <div class="col  col-xxl-4 " data-aos="fade-up" data-aos-delay="300">
-                    <img class="range-img" src="images/Dining.jpg" alt="dining">
-                    <p class="range-description">Dining</p>
-
-                </div>
-                <div class="col  col-xxl-4 " data-aos="fade-up" data-aos-delay="300">
-                    <img class="range-img" src="images/Image-living room.jpg" alt="living">
-                    <p class="range-description">Living</p>
-                </div>
-                <div class="col col-xxl-4 " data-aos="fade-up" data-aos-delay="300">
-                    <img class="range-img" src="images/Bedroom.jpg" alt="bedroom">
-                    <p class="range-description">Bedroom</p>
-                </div>
-            </div>
-        </section>
-
-    </div>
-    <!-- **Our Products -->
-    <div class="container">
-        <section class="product-section">
-            <h2 class="product__title">Our Products</h2>
-            <div iv class="product__box">
-                <div class="row row-container">
-
-                </div>
-            </div>
-            <div class="box-btn-show-more">
-                <button class="show-more">
-                    <a class="btn-link-our-Products" href="./Pages/shop.html">
-                        All Products
-                        <i class="fas fa-arrow-right"></i>
+                <div class="icon-container-option">
+                    <div>
+                        <svg class="show-more__loder navbar-successfully-Register-Loading" cl viewBox="0 0 100 100"
+                            preserveAspectRatio="xMidYMid" width="100" height="100"
+                            style="shape-rendering: auto; display: none; background: #fff">
+                            <g>
+                                <path stroke="none" fill="#000000" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
+                                    <animateTransform values="0 50 51;360 50 51" keyTimes="0;1" repeatCount="indefinite"
+                                        dur="1s" type="rotate" attributeName="transform"></animateTransform>
+                                </path>
+                                <g></g>
+                            </g>
+                        </svg>
+                        <a class=" icon-container__link icon-container__link--login dont-login "
+                            href="./Pages/auth.html">
+                            <span class="navbar-dont-Register-text"></span>
+                            <i class="fas fa-sign-in-alt " id="icon-login"></i>
+                        </a>
+                        <svg class="show-more__loder navbar-successfully-Register-Loading" cl viewBox="0 0 100 100"
+                            preserveAspectRatio="xMidYMid" width="100" height="100"
+                            style="shape-rendering: auto; display: none; background: #fff">
+                            <g>
+                                <path stroke="none" fill="#000000" d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
+                                    <animateTransform values="0 50 51;360 50 51" keyTimes="0;1" repeatCount="indefinite"
+                                        dur="1s" type="rotate" attributeName="transform"></animateTransform>
+                                </path>
+                                <g></g>
+                            </g>
+                        </svg>
+                        <a class=" icon-container__link icon-container__link--login login-successfully">
+                            <span class="navbar-successfully-Register-text"></span>
+                            <i class="fas fa-power-off" id="user-icon"></i>
+                        </a>
+                    </div>
+                    <a class="icon-container__link" href="./Pages/search.html">
+                        <i class="fas fa-search menu-icon"></i>
                     </a>
-                </button>
-            </div>
-        </section>
-    </div>
-    <!-- **slaidr -->
-    <section class="slaisder-section">
-        <div class="slaider-contant">
-            <h4 class="slaider-contant__title">50+ Beautiful rooms inspiration</h4>
-            <p class="slaider-contant__caption">Our designer already made a lot of beautiful prototipe of rooms that
-                inspire you</p>
-            <div class="slaider-btn-box">
-                <a href="./Pages/shop.html">
-                    <button class="slaider-contant__btn">Explore More</button>
-                </a>
-            </div>
+                    <a class="icon-container__link" href="./Pages/favorite.html">
+                        <i class="fa-regular fa-heart menu-icon "></i>
+                    </a>
+                    <a class="icon-container__link" href="./Pages/cart.html">
+                        <i class="fa-solid fa-cart-shopping menu-icon"></i>
+                        <span class="nav-bar__count-Product " value="0">0</span>
+                    </a>
+                </div>
+
+                <!-- ** mobail -->
+                <div class="contener-menu-mobail">
+                    <ul class="list-menu-mobail">
+                        <li class="list-menu__item-mobail"><a class="list-menu-item__link--active"
+                                href="./index.html">Home</a>
+                        </li>
+                        <li class="list-menu__item-mobail"><a class="list-menu-item__link"
+                                href="./Pages/shop.html">Shop</a>
+                        </li>
+                        <li class="list-menu__item-mobail"><a class="list-menu-item__link"
+                                href="./Pages/about.html">About</a>
+                        </li>
+                        <li class="list-menu__item-mobail"><a class="list-menu-item__link"
+                                href="./Pages/contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="hamburger">
+                    <div class="hamburger__line"></div>
+                </div>
+            </nav>
         </div>
-        <div class="swiper mySwiper ">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="box-contant-img-slaider">
-                        <p class="box-contant-img-slaider__introduction">01___Second bedroom</p>
-                        <h5 class="box-contant-img-slaider__title">pleasant</h5>
-                    </div>
-
-                    <img id="active" class="slaider-img" src="images/Rectangle 24.jpg">
-                </div>
-                <div class="swiper-slide">
-                    <div class="box-contant-img-slaider">
-                        <p class="box-contant-img-slaider__introduction">02___bed Room</p>
-                        <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
-                    </div>
-
-                    <img class="slaider-img " src="images/Rectangle 25.jpg" alt="imgSlaider">
-                </div>
-                <div class="swiper-slide">
-                    <div class="box-contant-img-slaider">
-                        <p class="box-contant-img-slaider__introduction">03___work room</p>
-                        <h5 class="box-contant-img-slaider__title">cute</h5>
-                    </div>
-                    <img class="slaider-img " src="images/Rectangle 26.jpg" alt="imgSlaider">
-                </div>
-                <div class="swiper-slide">
-                    <div class="box-contant-img-slaider">
-                        <p class="box-contant-img-slaider__introduction">04___bed Room</p>
-                        <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
-                    </div>
-                    <img class="slaider-img " src="images/Rectangle 25.jpg" alt="imgSlaider">
+        <!--** home-section -->
+        <header class="home-section home-section-home">
+            <div class="home__content-box box-shadow">
+                <p class="home__heading section-title">New Arrival</p>
+                <h1 class="home__title">Discover Our New Collection</h1>
+                <p class="home__caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus
+                    nec
+                    ullamcorper mattis.</p>
+                <div class="home__btn-box">
+                    <a class="btn-link" href="./Pages/shop.html">BUY Now</a>
                 </div>
             </div>
-
-            <div class="autoplay-progress">
-                <svg viewBox="0 0 48 48">
-                    <circle cx="24" cy="24" r="20"></circle>
-                </svg>
-                <span></span>
-            </div>
-            <div class="swiper-button-next slaider-content-img-arrow"></div>
-            <div class="swiper-button-prev slaider-content-img-arrow"></div>
-            <div class="swiper-pagination custom-input-radio"></div>
-        </div>
-    </section>
-    <!-- ** designs-->
-    <section class="designs">
-        <div class="design-header">
-            <p class="design-header__caption">Share your setup with</p>
-            <h3 class="design-header__title">#FuniroFurniture</h3>
-        </div>
-        <div class="designs-items">
-            <div class="designs-items-row1">
-                <div class="designs-items--1-2">
-                    <div class="designs-items__item">
-                        <img class="designs__items__img" src="images/Rectangle 36.jpg" alt="imgDesigns-1">
-                    </div>
-                    <div class="designs-items__item">
-                        <img class="designs__items__img" src="images/Rectangle 38.jpg" alt="imgDesigns-2">
-                    </div>
-                </div>
-                <div class="designs-items--6-7">
-                    <div class="designs-items__item">
-                        <img class="designs__items__img" src="images/Rectangle 37.jpg" alt="imgDesigns-6">
-                    </div>
-                    <div class="designs-items__item-top">
-                        <img class="designs__items__img" src="images/Rectangle 39.jpg" alt="imgDesigns-7">
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="designs-items-row2">
-                <div class="designs-items--3">
-                    <div class="designs-items__item">
-                        <img class="designs__items__img" src="images/Rectangle 40.jpg" alt="imgDesigns-3">
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="designs-items-row3">
-                <div class="designs-items--4-5">
-                    <div class="designs-items__item ">
-                        <img class="designs__items__img" src="images/Rectangle 43.jpg" alt="imgDesigns-4">
-                    </div>
-                    <div class="designs-items__item">
-                        <img class="designs__items__img" src="images/Rectangle 45.jpg" alt="imgDesigns-5">
-                    </div>
-                </div>
-
-                <div class="designs-items--8-9">
-                    <div class="designs-items__item">
-                        <img class="designs__items__img" src="images/Rectangle 41.jpg" alt="imgDesigns-8">
-                    </div>
-                    <div class="designs-items__item-top">
-                        <img class="designs__items__img" src="images/Rectangle 44.jpg" alt="imgDesigns-9">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </section>
-    <!-- **footer -->
-    <footer class="footer">
-        <hr>
+        </header>
+        <!--** range -->
         <div class="container">
-            <div class="footer-items">
-                <div class="items-introduction">
-                    <h5 class="item-introduction__name"><a class="footer-logo-name" href="../index.html">Funiro.</a>
-                    </h5>
-                    <p class="item-introduction__address">400 University Drive Suite 200 Coral <br>
-                        Gables <br>
-                        ,FL 33134 USA</p>
-                </div>
-                <div class="container-links-helps">
-                    <ul class="items-links">
-                        <p class="items-links__title">Links</p>
-                        <li class="item-links__item"><a class="item-links__link item-links__link--active "
-                                href="./index.html">Home</a></li>
-                        <li class="item-links__item"><a class="item-links__link" href="./Pages/shop.html">Shop</a></li>
-                        <li class="item-links__item"><a class="item-links__link" href="./Pages/about.html">About</a>
-                        </li>
-                        <li class="item-links__item"><a class="item-links__link" href="./Pages/contact.html">Contact</a>
-                        </li>
-                    </ul>
-                    <ul class="items-helps">
-                        <p class="items-helps__title">Help</p>
-                        <li class="item-helps__item"><a class="item-helps__link"
-                                href="./Pages/paymentOptions.html">Payment Options</a></li>
-                        <li class="item-helps__item"><a class="item-helps__link" href="#">Returns</a></li>
-                        <li class="item-helps__item"><a class="item-helps__link" href="#">Privacy Policies</a></li>
-                    </ul>
-                </div>
-                <div class="items-Newsletter">
-                    <p class="items-Newsletter__title">Newsletter</p>
-                    <form class="form-newsLetter">
-                        <div class="items-Newsletter__box-input">
-                            <input class="items-Newsletter__input-email" type="email"
-                                placeholder="Enter Your Email Address">
-                        </div>
-                        <div class="items-Newsletter__box-button">
-                            <button class="items-Newsletter__subscribe">SUBSCRIBE</button>
-                            <div class="loader"></div>
-                        </div>
-                    </form>
-                </div>
-
+            <div class="title-box">
+                <h2 class="title section-title">Browse The Range</h2>
+                <p class="secondary-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
+            <section class="range-container">
 
+                <div class="row">
+                    <div class="col  col-xxl-4 " data-aos="fade-up" data-aos-delay="300">
+                        <img class="range-img" src="images/Dining.jpg" alt="dining">
+                        <p class="range-description">Dining</p>
 
-            <hr>
-            <div class="box-copt-right">
-                <p class="copt-right-text">2023 furino. All rights reverved</p>
-            </div>
+                    </div>
+                    <div class="col  col-xxl-4 " data-aos="fade-up" data-aos-delay="300">
+                        <img class="range-img" src="images/Image-living room.jpg" alt="living">
+                        <p class="range-description">Living</p>
+                    </div>
+                    <div class="col col-xxl-4 " data-aos="fade-up" data-aos-delay="300">
+                        <img class="range-img" src="images/Bedroom.jpg" alt="bedroom">
+                        <p class="range-description">Bedroom</p>
+                    </div>
+                </div>
+            </section>
+
         </div>
+        <!-- **Our Products -->
+        <div class="container">
+            <section class="product-section">
+                <h2 class="product__title section-title">Our Products</h2>
+                <div iv class="product__box">
+                    <div class="row row-container">
 
-    </footer>
+                    </div>
+                </div>
+                <div class="box-btn-show-more">
+                    <a class="btn-link-our-Products" href="./Pages/shop.html">
+                        <button class="show-more">
+                            All Products
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </a>
+                </div>
+            </section>
+        </div>
+        <!-- **slaidr -->
+        <!-- <section class="slaisder-section">
+            <div class="slaider-contant">
+                <h4 class="slaider-contant__title section-title">50+ Beautiful rooms inspiration</h4>
+                <p class="slaider-contant__caption">Our designer already made a lot of beautiful prototipe of rooms that
+                    inspire you</p>
+                <div class="slaider-btn-box">
+                    <a href="./Pages/shop.html">
+                        <button class="slaider-contant__btn">Explore More</button>
+                    </a>
+                </div>
+            </div>
+            <div class="swiper mySwiper ">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="box-contant-img-slaider">
+                            <p class="box-contant-img-slaider__introduction">01___Second bedroom</p>
+                            <h5 class="box-contant-img-slaider__title">pleasant</h5>
+                        </div>
+
+                        <img id="active" class="slaider-img" src="images/Rectangle 24.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="box-contant-img-slaider">
+                            <p class="box-contant-img-slaider__introduction">02___bed Room</p>
+                            <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
+                        </div>
+
+                        <img class="slaider-img " src="images/Rectangle 25.jpg" alt="imgSlaider">
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="box-contant-img-slaider">
+                            <p class="box-contant-img-slaider__introduction">03___work room</p>
+                            <h5 class="box-contant-img-slaider__title">cute</h5>
+                        </div>
+                        <img class="slaider-img " src="images/Rectangle 26.jpg" alt="imgSlaider">
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="box-contant-img-slaider">
+                            <p class="box-contant-img-slaider__introduction">04___bed Room</p>
+                            <h5 class="box-contant-img-slaider__title">Inner Peace</h5>
+                        </div>
+                        <img class="slaider-img " src="images/Rectangle 25.jpg" alt="imgSlaider">
+                    </div>
+                </div>
+
+                <div class="autoplay-progress">
+                    <svg viewBox="0 0 48 48">
+                        <circle cx="24" cy="24" r="20"></circle>
+                    </svg>
+                    <span></span>
+                </div>
+                <div class="swiper-button-next slaider-content-img-arrow"></div>
+                <div class="swiper-button-prev slaider-content-img-arrow"></div>
+                <div class="swiper-pagination custom-input-radio"></div>
+            </div>
+        </section> -->
+        <!-- ** designs-->
+        <section class="designs">
+            <div class="design-header">
+                <p class="design-header__caption">Share your setup with</p>
+                <h3 class="design-header__title section-title">#FuniroFurniture</h3>
+            </div>
+            <div class="designs-items">
+                <div class="designs-items-row1">
+                    <div class="designs-items--1-2">
+                        <div class="designs-items__item">
+                            <img class="designs__items__img" src="images/Rectangle 36.jpg" alt="imgDesigns-1">
+                        </div>
+                        <div class="designs-items__item">
+                            <img class="designs__items__img" src="images/Rectangle 38.jpg" alt="imgDesigns-2">
+                        </div>
+                    </div>
+                    <div class="designs-items--6-7">
+                        <div class="designs-items__item">
+                            <img class="designs__items__img" src="images/Rectangle 37.jpg" alt="imgDesigns-6">
+                        </div>
+                        <div class="designs-items__item-top">
+                            <img class="designs__items__img" src="images/Rectangle 39.jpg" alt="imgDesigns-7">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="designs-items-row2">
+                    <div class="designs-items--3">
+                        <div class="designs-items__item">
+                            <img class="designs__items__img" src="images/Rectangle 40.jpg" alt="imgDesigns-3">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="designs-items-row3">
+                    <div class="designs-items--4-5">
+                        <div class="designs-items__item ">
+                            <img class="designs__items__img" src="images/Rectangle 43.jpg" alt="imgDesigns-4">
+                        </div>
+                        <div class="designs-items__item">
+                            <img class="designs__items__img" src="images/Rectangle 45.jpg" alt="imgDesigns-5">
+                        </div>
+                    </div>
+
+                    <div class="designs-items--8-9">
+                        <div class="designs-items__item">
+                            <img class="designs__items__img" src="images/Rectangle 41.jpg" alt="imgDesigns-8">
+                        </div>
+                        <div class="designs-items__item-top">
+                            <img class="designs__items__img" src="images/Rectangle 44.jpg" alt="imgDesigns-9">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+        <!-- **footer -->
+        <footer class="footer">
+            <hr>
+            <div class="container">
+                <div class="footer-items">
+                    <div class="items-introduction">
+                        <h5 class="item-introduction__name"><a class="footer-logo-name" href="../index.html">Funiro.</a>
+                        </h5>
+                        <p class="item-introduction__address">400 University Drive Suite 200 Coral <br>
+                            Gables <br>
+                            ,FL 33134 USA</p>
+                    </div>
+                    <div class="container-links-helps">
+                        <ul class="items-links">
+                            <p class="items-links__title">Links</p>
+                            <li class="item-links__item"><a class="item-links__link item-links__link--active "
+                                    href="./index.html">Home</a></li>
+                            <li class="item-links__item"><a class="item-links__link" href="./Pages/shop.html">Shop</a>
+                            </li>
+                            <li class="item-links__item"><a class="item-links__link" href="./Pages/about.html">About</a>
+                            </li>
+                            <li class="item-links__item"><a class="item-links__link"
+                                    href="./Pages/contact.html">Contact</a>
+                            </li>
+                        </ul>
+                        <ul class="items-helps">
+                            <p class="items-helps__title">Help</p>
+                            <li class="item-helps__item"><a class="item-helps__link"
+                                    href="./Pages/paymentOptions.html">Payment Options</a></li>
+                            <li class="item-helps__item"><span class="item-helps__link Returns-btn-help ">Returns</span>
+                            </li>
+                            <li class="item-helps__item"><a class="item-helps__link"
+                                    href="./Pages/privacy-policy.html">Privacy Policies</a></li>
+                        </ul>
+                    </div>
+                    <div class="items-Newsletter">
+                        <p class="items-Newsletter__title">Newsletter</p>
+                        <form class="form-newsLetter">
+                            <div class="items-Newsletter__box-input">
+                                <input class="items-Newsletter__input-email" type="email"
+                                    placeholder="Enter Your Email Address">
+                            </div>
+                            <div class="items-Newsletter__box-button">
+                                <button class="items-Newsletter__subscribe">SUBSCRIBE</button>
+                                <div class="loader loader-Newsletter"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+
+                <hr>
+                <div class="box-copt-right">
+                    <p class="copt-right-text">2023 furino. All rights reverved</p>
+                </div>
+            </div>
+
+        </footer>
+    </div>
 </body>
 <script src="./vendor/FontAwesome5/all.min.js"></script>
 <script src="./vendor/swiperSlider/swiper.js"></script>
@@ -338,6 +356,7 @@
 <script src="./js/aos.js"></script>
 <script src="./js/slaider.js"></script>
 <script src="./js/shared.js" type="module"></script>
+<script src="./js/Features/loader.js"></script>
 <script src="./js/home.js" type="module"></script>
 <script src="./vendor/sweetalert2/sweetalert2.all.min.js"></script>
 

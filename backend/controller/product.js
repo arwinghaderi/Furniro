@@ -310,3 +310,43 @@ exports.removeFromFavorites = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.searchItem = async (req, res, next) => {
+  try {
+    let { title, page = 1, limit = 8 } = req.query;
+
+    const filters = {
+      quantity: { $gt: 0 },
+    };
+
+    if (!title) {
+      return errorResponse(res, 400, {
+        message: "Please enter a title to search",
+      });
+    }
+    filters.title = { $regex: title, $options: "i" };
+
+    const products = await productModel
+      .find(filters)
+      .skip((page - 1) * limit)
+      .limit(+limit)
+      .select(
+        "-__v -description -size -attributes -createdAt -updatedAt -colors"
+      );
+
+    if (products.length === 0) {
+      return errorResponse(res, 404, {
+        message: "No product found",
+      });
+    }
+
+    const totalProduct = await productModel.countDocuments(filters);
+
+    return successResponse(res, 200, {
+      products,
+      pagination: createPagination(page, limit, totalProduct, "SearchProduct"),
+    });
+  } catch (err) {
+    next(err);
+  }
+};

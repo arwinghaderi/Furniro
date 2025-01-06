@@ -10,7 +10,7 @@ const {
   addToFavorites,
   removeFromFavorites,
   getAllProducts,
-  test,
+  searchItem,
 } = require("../controller/product");
 const { multerStorage } = require("../middleware/uploader");
 
@@ -31,4 +31,6 @@ router
   .route("/favorites/:productId")
   .post(auth, addToFavorites)
   .delete(auth, removeFromFavorites);
+
+router.route("/search").post(searchItem);
 module.exports = router;

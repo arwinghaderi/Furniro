@@ -9,6 +9,8 @@ const {
   getAllFavorites,
   addToFavorites,
   removeFromFavorites,
+  getAllProducts,
+  test,
 } = require("../controller/product");
 const { multerStorage } = require("../middleware/uploader");
 
@@ -16,7 +18,10 @@ const upload = multerStorage("public/images/products");
 
 const router = express.Router();
 
-router.route("/").post(auth, isAdmin, upload.array("images", 4), createProduct);
+router
+  .route("/")
+  .get(getAllProducts)
+  .post(auth, isAdmin, upload.array("images", 4), createProduct);
 
 router.route("/:productId").delete(auth, isAdmin, removeProduct);
 

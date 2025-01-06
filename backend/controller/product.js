@@ -1,4 +1,4 @@
-const { isValidObjectId } = require("mongoose");
+const { isValidObjectId, default: mongoose } = require("mongoose");
 const productModel = require("./../model/product");
 const categoryModel = require("./../model/category");
 const favoriteModel = require("./../model/favorite");
@@ -7,11 +7,84 @@ const validator = require("../middleware/validator");
 const { createProductValidator } = require("./../validator/product");
 const path = require("path");
 const fs = require("fs");
+const { createPagination } = require("../utils/paganition");
+
+exports.getAllProducts = async (req, res, next) => {
+  try {
+    let { title, category, page = 1, limit = 8 } = req.query;
+
+    const filters = {
+      quantity: { $gt: 0 },
+    };
+
+    if (title) {
+      filters.title = { $regex: title, $options: "i" };
+    }
+
+    if (isValidObjectId(category)) {
+      filters.categoryId =
+        mongoose.Types.ObjectId.createFromHexString(category);
+    }
+
+    const products = await productModel.aggregate([
+      {
+        $match: filters,
+      },
+      {
+        $lookup: {
+          from: "comments",
+          localField: "_id",
+          foreignField: "product",
+          as: "comments",
+        },
+      },
+      {
+        $addFields: {
+          averageRating: {
+            $cond: {
+              if: { $gt: [{ $size: "$comments" }, 0] },
+              then: { $avg: `$comments.rating` },
+              else: 0,
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          comments: 0,
+          size: 0,
+          colors: 0,
+          description: 0,
+          attributes: 0,
+          createdAt: 0,
+          updatedAt: 0,
+          __v: 0,
+        },
+      },
+      {
+        $skip: (page - 1) * limit,
+      },
+      {
+        $limit: +limit,
+      },
+    ]);
+
+    const totalProducts = await productModel.countDocuments(filters);
+
+    return successResponse(res, 200, {
+      products,
+      pagination: createPagination(+page, +limit, totalProducts, "Products"),
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.createProduct = async (req, res, next) => {
   try {
     let {
       name,
+      title,
       description,
       categoryId,
       price,
@@ -69,6 +142,7 @@ exports.createProduct = async (req, res, next) => {
 
     const newProduct = await productModel.create({
       name,
+      title,
       description,
       categoryId,
       price,

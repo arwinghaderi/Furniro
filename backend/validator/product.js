@@ -6,7 +6,13 @@ exports.createProductValidator = yup.object().shape({
     .string()
     .required("Product name is required")
     .min(3, "Product name must be at least 3 characters long")
-    .max(100, "Product name cannot exceed 100 characters"),
+    .max(30, "Product name cannot exceed 100 characters"),
+
+  title: yup
+    .string()
+    .required("Product name is required")
+    .min(10, "Product name must be at least 3 characters long")
+    .max(50, "Product name cannot exceed 100 characters"),
 
   description: yup
     .string()

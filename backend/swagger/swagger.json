@@ -1404,8 +1404,82 @@
             "description": "Category not found"
           }
         }
+      },
+      "get": {
+        "summary": "Get all products",
+        "tags": ["Products 📦"],
+        "description": "Fetch a list of products with optional filters",
+        "operationId": "getAllProducts",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Filter products by title",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter products by category",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "required": false,
+            "type": "integer",
+            "default": 1
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of products per page",
+            "required": false,
+            "type": "integer",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved products",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": { "type": "string" },
+                      "title": { "type": "string" },
+                      "averageRating": { "type": "number" },
+                      "quantity": { "type": "integer" },
+                      "categoryId": { "type": "string" }
+                    }
+                  }
+                },
+                "pagination": {
+                  "type": "object",
+                  "properties": {
+                    "currentPage": { "type": "integer" },
+                    "totalPages": { "type": "integer" },
+                    "totalCount": { "type": "integer" },
+                    "perPage": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
       }
     },
+
     "/product/{productId}": {
       "delete": {
         "summary": "Delete a product by ID",

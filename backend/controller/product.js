@@ -231,8 +231,37 @@ exports.getProduct = async (req, res, next) => {
   try {
     const { slug } = req.params;
 
-    const product = await productModel.findOne({ slug });
-    if (!product) {
+    let product = await productModel.aggregate([
+      {
+        $match: { slug },
+      },
+      {
+        $lookup: {
+          from: "comments",
+          localField: "_id",
+          foreignField: "product",
+          as: "comments",
+        },
+      },
+      {
+        $addFields: {
+          averageRating: {
+            $cond: {
+              if: { $gt: [{ $size: "$comments" }, 0] },
+              then: { $avg: `$comments.rating` },
+              else: 0,
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          comments: 0,
+        },
+      },
+    ]);
+
+    if (product.length === 0) {
       return errorResponse(res, 404, { message: "Product Not Found" });
     }
 

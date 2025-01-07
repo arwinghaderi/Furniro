@@ -7,6 +7,7 @@ const validator = require("../middleware/validator");
 const { createProductValidator } = require("./../validator/product");
 const path = require("path");
 const fs = require("fs");
+const moment = require("moment");
 const { createPagination } = require("../utils/paganition");
 
 exports.getAllProducts = async (req, res, next) => {
@@ -26,7 +27,7 @@ exports.getAllProducts = async (req, res, next) => {
         mongoose.Types.ObjectId.createFromHexString(category);
     }
 
-    const products = await productModel.aggregate([
+    let products = await productModel.aggregate([
       {
         $match: filters,
       },
@@ -56,7 +57,7 @@ exports.getAllProducts = async (req, res, next) => {
           colors: 0,
           description: 0,
           attributes: 0,
-          createdAt: 0,
+          // createdAt: 1,
           updatedAt: 0,
           __v: 0,
         },
@@ -69,6 +70,16 @@ exports.getAllProducts = async (req, res, next) => {
       },
     ]);
 
+    const fourWeeksAgo = moment().subtract(4, "weeks");
+
+    products = products.map((product) => {
+      const createdAt = moment(product.createdAt);
+      const isNew = createdAt.isAfter(fourWeeksAgo);
+      return {
+        ...product,
+        isNewProduct: isNew,
+      };
+    });
     const totalProducts = await productModel.countDocuments(filters);
 
     return successResponse(res, 200, {
@@ -101,7 +112,6 @@ exports.createProduct = async (req, res, next) => {
     let hexColorCode = [];
 
     let priceAfterDiscount = undefined;
-    let label = ["New"];
     let images = [];
 
     validator(createProductValidator);
@@ -119,7 +129,6 @@ exports.createProduct = async (req, res, next) => {
 
     if (discountPercent > 0) {
       priceAfterDiscount = price - (price * discountPercent) / 100;
-      label.push("Discount");
     }
 
     if (req.files) {
@@ -152,7 +161,6 @@ exports.createProduct = async (req, res, next) => {
       colors,
       size,
       images,
-      label,
       attributes,
     });
 

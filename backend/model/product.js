@@ -56,11 +56,6 @@ const productSchema = mongoose.Schema(
       },
     ],
 
-    label: {
-      type: [String],
-      enum: ["Discount", "New"],
-      required: false,
-    },
     size: {
       type: [String],
       enum: ["L", "XL", "XS"],

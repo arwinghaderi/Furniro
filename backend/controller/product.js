@@ -13,6 +13,7 @@ const { createPagination } = require("../utils/paganition");
 exports.getAllProducts = async (req, res, next) => {
   try {
     let { title, category, page = 1, limit = 8 } = req.query;
+    const user = req.user;
 
     const filters = {
       quantity: { $gt: 0 },
@@ -72,12 +73,26 @@ exports.getAllProducts = async (req, res, next) => {
 
     const fourWeeksAgo = moment().subtract(4, "weeks");
 
+    let FavoriteProductIds = [];
+    if (user) {
+      const favoriteProduct = await favoriteModel.findOne({ user: user._id });
+      FavoriteProductIds = favoriteProduct?.items?.map((favProduct) =>
+        favProduct.toString()
+      );
+    }
+
     products = products.map((product) => {
       const createdAt = moment(product.createdAt);
       const isNew = createdAt.isAfter(fourWeeksAgo);
+
+      const isFavorite = user
+        ? FavoriteProductIds?.includes(product._id.toString())
+        : false;
+
       return {
         ...product,
         isNewProduct: isNew,
+        isFavorite,
       };
     });
     const totalProducts = await productModel.countDocuments(filters);

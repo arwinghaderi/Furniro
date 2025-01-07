@@ -1848,6 +1848,123 @@
           }
         }
       }
+    },
+
+    "/product/search": {
+      "post": {
+        "summary": "Product Search",
+        "tags": ["Products 📦"],
+        "description": "Search Product with title",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Filter products by title",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "required": false,
+            "type": "integer",
+            "default": 1
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of products per page",
+            "required": false,
+            "type": "integer",
+            "default": 8
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved products",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": { "type": "string" },
+                      "title": { "type": "string" },
+                      "averageRating": { "type": "number" },
+                      "quantity": { "type": "integer" },
+                      "categoryId": { "type": "string" }
+                    }
+                  }
+                },
+                "pagination": {
+                  "type": "object",
+                  "properties": {
+                    "currentPage": { "type": "integer" },
+                    "totalPages": { "type": "integer" },
+                    "totalCount": { "type": "integer" },
+                    "perPage": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request: The 'title' parameter is required for the search query.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Bad Request"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The 'title' parameter is required for the search query."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found: No product matches the provided search criteria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "No product found with the given title."
+                    }
+                  }
+                }
+              }
+            }
+          },
+
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
     }
   }
 }

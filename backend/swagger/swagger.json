@@ -1421,27 +1421,10 @@
           {
             "name": "category",
             "in": "query",
-            "description": "Filter products by category",
+            "description": "Filter products by category objectID",
             "required": false,
-            "type": "string"
-          },
-          {
-            "name": "discount",
-            "in": "query",
-            "description": "(true/false)",
-            "schema": {
-              "type": "string",
-              "enum": ["true", "false"]
-            }
-          },
-          {
-            "name": "isNew",
-            "in": "query",
-            "description": "(true/false)",
-            "schema": {
-              "type": "string",
-              "enum": ["true", "false"]
-            }
+            "type": "string",
+            "example": "675988fecccbf76836e8b6e1"
           },
           {
             "name": "page",

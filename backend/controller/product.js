@@ -12,7 +12,7 @@ const { createPagination } = require("../utils/paganition");
 
 exports.getAllProducts = async (req, res, next) => {
   try {
-    let { title, category, page = 1, limit = 8, discount, isNew } = req.query;
+    let { title, category, page = 1, limit = 8 } = req.query;
     const user = req.user;
     const fourWeeksAgo = moment().subtract(4, "weeks").toDate();
 
@@ -20,17 +20,22 @@ exports.getAllProducts = async (req, res, next) => {
 
     if (title) filters.title = { $regex: title, $options: "i" };
 
-    if (isValidObjectId(category)) {
-      filters.categoryId =
-        mongoose.Types.ObjectId.createFromHexString(category);
+    if (category && isValidObjectId(category)) {
+      const categoryDoc = await categoryModel.findById(category);
+      if (categoryDoc) {
+        const { href } = categoryDoc;
+
+        if (href.toLowerCase() === "all") {
+        } else if (href.toLowerCase() === "new") {
+          filters.createdAt = { $gte: fourWeeksAgo };
+        } else if (href.toLowerCase() === "discount") {
+          filters.discountPercent = { $gt: 0 };
+        } else {
+          filters.categoryId =
+            mongoose.Types.ObjectId.createFromHexString(category);
+        }
+      }
     }
-
-    if (discount === "true") filters.discountPercent = { $gt: 0 };
-
-    if (isNew === "true") {
-      filters.createdAt = { $gte: fourWeeksAgo };
-    }
-
     const userFavorites = user
       ? await favoriteModel
           .findOne({ user: user._id })

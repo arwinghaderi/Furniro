@@ -1426,6 +1426,24 @@
             "type": "string"
           },
           {
+            "name": "discount",
+            "in": "query",
+            "description": "(true/false)",
+            "schema": {
+              "type": "string",
+              "enum": ["true", "false"]
+            }
+          },
+          {
+            "name": "isNew",
+            "in": "query",
+            "description": "(true/false)",
+            "schema": {
+              "type": "string",
+              "enum": ["true", "false"]
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "description": "Page number for pagination",
@@ -1445,29 +1463,32 @@
         "responses": {
           "200": {
             "description": "Successfully retrieved products",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "products": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "_id": { "type": "string" },
-                      "title": { "type": "string" },
-                      "averageRating": { "type": "number" },
-                      "quantity": { "type": "integer" },
-                      "categoryId": { "type": "string" }
-                    }
-                  }
-                },
-                "pagination": {
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "currentPage": { "type": "integer" },
-                    "totalPages": { "type": "integer" },
-                    "totalCount": { "type": "integer" },
-                    "perPage": { "type": "integer" }
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": { "type": "string" },
+                          "title": { "type": "string" },
+                          "averageRating": { "type": "number" },
+                          "isNewProduct": { "type": "boolean" },
+                          "isFavorite": { "type": "boolean" }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "page": { "type": "integer" },
+                        "limit": { "type": "integer" },
+                        "totalItems": { "type": "integer" }
+                      }
+                    }
                   }
                 }
               }

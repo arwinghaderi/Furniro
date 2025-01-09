@@ -12,26 +12,33 @@ const { createPagination } = require("../utils/paganition");
 
 exports.getAllProducts = async (req, res, next) => {
   try {
-    let { title, category, page = 1, limit = 8 } = req.query;
+    let { title, category, page = 1, limit = 8, discount, isNew } = req.query;
     const user = req.user;
+    const fourWeeksAgo = moment().subtract(4, "weeks").toDate();
 
-    const filters = {
-      quantity: { $gt: 0 },
-    };
+    const filters = { quantity: { $gt: 0 } };
 
-    if (title) {
-      filters.title = { $regex: title, $options: "i" };
-    }
+    if (title) filters.title = { $regex: title, $options: "i" };
 
     if (isValidObjectId(category)) {
       filters.categoryId =
         mongoose.Types.ObjectId.createFromHexString(category);
     }
 
+    if (discount === "true") filters.discountPercent = { $gt: 0 };
+
+    if (isNew === "true") {
+      filters.createdAt = { $gte: fourWeeksAgo };
+    }
+
+    const userFavorites = user
+      ? await favoriteModel
+          .findOne({ user: user._id })
+          .then((fav) => fav?.items.map((item) => item.toString()) || [])
+      : [];
+
     let products = await productModel.aggregate([
-      {
-        $match: filters,
-      },
+      { $match: filters },
       {
         $lookup: {
           from: "comments",
@@ -45,10 +52,12 @@ exports.getAllProducts = async (req, res, next) => {
           averageRating: {
             $cond: {
               if: { $gt: [{ $size: "$comments" }, 0] },
-              then: { $avg: `$comments.rating` },
+              then: { $avg: "$comments.rating" },
               else: 0,
             },
           },
+          isNewProduct: { $gte: ["$createdAt", fourWeeksAgo] },
+          isFavorite: { $in: [{ $toString: "$_id" }, userFavorites] },
         },
       },
       {
@@ -58,43 +67,14 @@ exports.getAllProducts = async (req, res, next) => {
           colors: 0,
           description: 0,
           attributes: 0,
-          // createdAt: 1,
           updatedAt: 0,
           __v: 0,
         },
       },
-      {
-        $skip: (page - 1) * limit,
-      },
-      {
-        $limit: +limit,
-      },
+      { $skip: (page - 1) * limit },
+      { $limit: +limit },
     ]);
 
-    const fourWeeksAgo = moment().subtract(4, "weeks");
-
-    let FavoriteProductIds = [];
-    if (user) {
-      const favoriteProduct = await favoriteModel.findOne({ user: user._id });
-      FavoriteProductIds = favoriteProduct?.items?.map((favProduct) =>
-        favProduct.toString()
-      );
-    }
-
-    products = products.map((product) => {
-      const createdAt = moment(product.createdAt);
-      const isNew = createdAt.isAfter(fourWeeksAgo);
-
-      const isFavorite = user
-        ? FavoriteProductIds?.includes(product._id.toString())
-        : false;
-
-      return {
-        ...product,
-        isNewProduct: isNew,
-        isFavorite,
-      };
-    });
     const totalProducts = await productModel.countDocuments(filters);
 
     return successResponse(res, 200, {

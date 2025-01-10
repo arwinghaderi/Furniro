@@ -30,6 +30,7 @@ exports.getAllCategories = async (req, res, next) => {
   try {
     const categories = await categoryModel
       .find({})
+      .sort({ createdAt: 1 })
       .select("-createdAt -updatedAt -__v");
     if (!categories) {
       return errorResponse(res, 404, { message: "Category Not Found!!" });

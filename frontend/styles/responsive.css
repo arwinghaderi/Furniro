@@ -710,6 +710,17 @@
     .product-img--com {
         width: 12rem;
     }
+
+    .product-selection--shop-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+    }
+
+    .select-container--shop-page {
+        width: 90%;
+    }
 }
 
 @media screen and (max-width:576px) {
@@ -857,6 +868,12 @@
     .vertical-line {
         display: none;
     }
+
+    .Discount-product {
+        right: 32rem;
+    }
+
+
 }
 
 @media screen and (max-width:392px) {
@@ -896,5 +913,9 @@
 
     .sub-Title {
         font-size: 1.3rem;
+    }
+
+    .Discount-product {
+        right: 23rem;
     }
 }

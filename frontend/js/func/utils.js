@@ -232,9 +232,18 @@ const handleError = (error, errorMessages) => {
     });
 };
 
+const saveFilterState = (categoryId, currentPage, limit, searchValue) => {
+    localStorage.setItem('filterState', JSON.stringify({ categoryId, currentPage, limit, searchValue }));
+};
+
+const getFilterState = () => {
+    return JSON.parse(localStorage.getItem('filterState') || '{}');
+};
+
+
 export {
     saveToLocalStorage, getFromLocalStorage, searchInProducts,
-    // ProductsWithPaginationCalculations,
+    saveFilterState, getFilterState,
     getCurrentPageAndShowCountProducts,
     calculateProductsShowMoreButton, getUrlParam,
     productDiscountCalculation, getCountProductsCart,

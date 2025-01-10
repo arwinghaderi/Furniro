@@ -5,8 +5,7 @@ import { addingProductsTemplate, productsSorting } from "../js/func/shared.js"
 import {
     saveToLocalStorage,
     getFromLocalStorage,
-    searchInProducts,
-    getCountProductsCart, selectionPaginationPageByUser, showSwal, getUrlParam
+    selectionPaginationPageByUser, showSwal, saveFilterState, getFilterState,
 } from "./func/utils.js"
 
 let $ = document
@@ -28,8 +27,6 @@ const resultShowProducts = document.querySelector(".shop-filter__result-text")
 const nextContainer = $.querySelector(".shop-products__Next")
 const prevContainer = $.querySelector(".shop-products__prev")
 const customSelected = document.querySelector(".custom-selected")
-
-
 
 let productsStructure = 'row'
 
@@ -101,9 +98,9 @@ const addingPaginationTemplate = (currentPage, paginationTool, totalPage, limit 
 
 
 const addParamToUrl = async (param, value, limit, userSearchValue) => {
-    console.log(limit);
     let url = new URL(location.href);
     let searchParams = url.searchParams;
+
 
     searchParams.set(param, value);
     const activeOption = document.querySelector(".option--active");
@@ -114,8 +111,9 @@ const addParamToUrl = async (param, value, limit, userSearchValue) => {
     }
 
     url.search = searchParams.toString();
-    history.pushState(null, '', url);
-    console.log(value, limit, categoryId, userSearchValue);
+
+    saveFilterState(categoryId, value, limit, userSearchValue);
+
     const dataProducts = await fetchProducts(value, limit, categoryId, userSearchValue);
 
     console.log(dataProducts.data.pagination.limit);
@@ -172,42 +170,6 @@ const handlerPrevButtonByUser = (currentPage, nextPrevTemaplte, limit, userSearc
     })
 }
 
-// saveToLocalStorage("currentPage", dataProducts.data.pagination.page)
-// saveToLocalStorage("totalPage", dataProducts.data.pagination.totalPage)
-// saveToLocalStorage("showCountProducts", dataProducts.data.pagination.limit)
-// saveToLocalStorage("products", dataProducts.data.products)
-
-
-// **سلکت باکس
-// const optionSelect = $.querySelector(".box-filter__select")
-
-// optionSelect.addEventListener('change', async event => {
-//     // currentPage = 1;
-//     // saveToLocalStorage("currentPage", currentPage);
-
-//     const optionActive = event.target.value;
-//     // saveToLocalStorage("optionActiveSelectBox", optionActive);
-//     // addingActiveOptionInSelectBoxByUser();
-
-//     // numberProductsShown = 8;
-//     // saveToLocalStorage("showCountProducts", numberProductsShown);
-//     // ChangeInputPlaceholderToUserChange();
-
-//     let currentPage = 1
-//     let numberProductsShown = 4
-//     console.log(optionActive);
-//     // فراخوانی داده‌ها از API با استفاده از پارامتر category
-//     const productsFilter = await fetchProducts(currentPage, numberProductsShown, optionActive);
-//     // saveToLocalStorage("FilteredProducts", productsFilter.data.products);
-
-
-//     console.log(productsFilter.data.products);
-//     addingProductsTemplate(productsFilter.data.products, productsStructure, productsWrapper);
-
-//     // به‌روزرسانی قالب صفحه‌بندی
-//     addingPaginationTemplate(productsFilter.data.pagination.page, paginationTool, productsFilter.data.pagination.totalPage);
-//     addingPrevNextButtonTemplate(currentPage, productsFilter.data.pagination.totalPage);
-// });
 const customOptions = document.querySelector(".custom-options");
 
 const fetchCategory = async () => {
@@ -246,30 +208,25 @@ const addClickEventToOptions = () => {
                 activeOption.classList.remove("option--active");
             }
 
+            let currentPage = getFromLocalStorage("currentPage") || 1
             option.classList.add("option--active");
             customOptions.classList.remove('custom-options--active');
             arrow.classList.remove("arrow-down--open");
 
             const categoryId = option.getAttribute('data-id');
 
-
             const limit = getFromLocalStorage("showCountProducts") || 4
 
-            const productsFilter = await fetchProducts(1, limit, categoryId);
+            saveFilterState(categoryId, currentPage, limit, "");
 
-            let currentPage = 1
+            const productsFilter = await fetchProducts(1, limit, categoryId, "");
+
             addingProductsTemplate(productsFilter.data.products, productsStructure, productsWrapper);
             addingPaginationTemplate(productsFilter.data.pagination.page, paginationTool, productsFilter.data.pagination.totalPage, productsFilter.data.pagination.limit);
             addingPrevNextButtonTemplate(currentPage, productsFilter.data.pagination.totalPage, productsFilter.data.pagination.limit);
         });
     });
 }
-
-// const ChangeInputPlaceholderToUserChange = () => {
-//     numberProductsShown = getFromLocalStorage("showCountProducts")
-//     numberShowProduct.value = numberProductsShown
-//     numberShowProduct.setAttribute("placeholder", numberProductsShown)
-// }
 
 numberShowProduct.addEventListener("input", async (event) => {
     let numberProductsShown = parseInt(event.target.value);
@@ -285,7 +242,7 @@ numberShowProduct.addEventListener("input", async (event) => {
 
     if (event.target) {
         let currentPage = 1;
-        // saveToLocalStorage("currentPage", currentPage);
+
         saveToLocalStorage("showCountProducts", event.target.value);
         const activeOption = document.querySelector(".option--active");
 
@@ -295,6 +252,7 @@ numberShowProduct.addEventListener("input", async (event) => {
 
         const productsFilter = await fetchProducts(currentPage, numberProductsShown, newCategoryId, userSearchValue);
 
+        saveFilterState(newCategoryId, currentPage, numberProductsShown, userSearchValue);
 
         // saveToLocalStorage("FilteredProducts", productsFilter.data.products);
 
@@ -310,45 +268,6 @@ numberShowProduct.addEventListener("input", async (event) => {
 
 });
 
-
-
-const addingActiveOptionInSelectBoxByUser = () => {
-    let data = getFromLocalStorage("optionActiveSelectBox")
-    if (data) {
-        customSelected.value = data
-    }
-    else {
-        customSelected.value = "All"
-    }
-}
-
-// const addingProductsFilteredbyUser = () => {
-//     filterProducts = getFromLocalStorage('FilteredProducts')
-//     currentPage = getFromLocalStorage('currentPage')
-//     numberProductsShown = getFromLocalStorage("showCountProducts")
-
-//     getCurrentPageAndShowCountProducts(currentPage, numberProductsShown)
-
-//     if (filterProducts) {
-//         filteredProductPagination = ProductsWithPaginationCalculations(filterProducts, paginationTool)
-
-//         // showProductsCount(filterProducts)
-//         // addingActiveOptionInSelectBoxByUser()
-//         addingProductsTemplate(filteredProductPagination, productsStructure, productsWrapper)
-//     }
-//     else {
-//         const products = getFromLocalStorage('products')
-//         console.log(products);
-//         console.log(products);
-
-//         // saveToLocalStorage("FilteredProducts", products)
-
-//         // showProductsCount(products)
-//         productsBasedPagination = ProductsWithPaginationCalculations(products, paginationTool)
-//         addingProductsTemplate(productsBasedPagination, productsStructure, productsWrapper)
-//     }
-// }
-
 const structhreIcons = document.querySelectorAll(".shop-filter__svg-icon")
 structhreIcons.forEach((icon) => {
     icon.addEventListener("click", () => {
@@ -362,7 +281,6 @@ structhreIcons.forEach((icon) => {
 })
 
 const addingTemplatesBasedOnProductStructure = (target) => {
-    // filterProducts = getFromLocalStorage('FilteredProducts')
     saveToLocalStorage("structure", target)
 
     if (target === "row") {
@@ -400,16 +318,15 @@ searchInput.addEventListener("input", async (event) => {
 
     let userSearchValue = event.target.value
     const limit = $.querySelector(".shop-filter__input--number").value || 4
+    let currentPage = 1;
 
     if (userSearchValue) {
-        let currentPage = 1;
-        // saveToLocalStorage("currentPage", currentPage);
 
         if (userSearchValue === "") {
 
             const productsSearchUser = await fetchProducts(currentPage, limit, "", userSearchValue);
             addingProductsTemplate(productsSearchUser.data.products, productsStructure, productsWrapper);
-
+            saveFilterState("", currentPage, limit, userSearchValue);
             addingPaginationTemplate(productsSearchUser.data.pagination.page, paginationTool, productsSearchUser.data.pagination.totalPage, limit);
 
             addingPrevNextButtonTemplate(currentPage, productsSearchUser.data.pagination.totalPage, productsSearchUser.data.pagination.limit);
@@ -418,9 +335,9 @@ searchInput.addEventListener("input", async (event) => {
 
             saveToLocalStorage("userSearchValue", userSearchValue);
             const productsSearchUser = await fetchProducts(currentPage, limit, "", userSearchValue);
-            // saveToLocalStorage("FilteredProducts", productsFilter.data.products);
 
-            // const filteredProductPagination = ProductsWithPaginationCalculations(productsFilter.data.products, paginationTool);
+            saveFilterState("", currentPage, limit, userSearchValue);
+
             addingProductsTemplate(productsSearchUser.data.products, productsStructure, productsWrapper);
 
             addingPaginationTemplate(productsSearchUser.data.pagination.page, paginationTool, productsSearchUser.data.pagination.totalPage, limit, userSearchValue);
@@ -432,27 +349,44 @@ searchInput.addEventListener("input", async (event) => {
 
 })
 
+document.addEventListener('DOMContentLoaded', async () => {
+    const savedState = getFilterState();
 
-window.addEventListener('load', function () {
-    if (getFromLocalStorage('currentPage') && getFromLocalStorage('showCountProducts')) {
-        currentPage = getFromLocalStorage('currentPage')
-        ChangeInputPlaceholderToUserChange()
-        addingProductsFilteredbyUser()
-    } else {
-        fetchProducts().then(product => {
-            let products = product.data.products
-            addingProductsTemplate(products, productsStructure, productsWrapper)
-            addingPaginationTemplate(product.data.pagination.page, paginationTool, product.data.pagination.totalPage)
+    console.log(Boolean(savedState));
+    let { categoryId, currentPage, limit, searchValue } = savedState;
 
-            let currentPage = 1
-            addingPrevNextButtonTemplate(currentPage, product.data.pagination.totalPage, product.data.pagination.limit);
-
-        })
+    console.log(Boolean(categoryId));
+    if (!categoryId || !currentPage > 1) {
+        categoryId = getDefaultCategoryId(); // در صورتی که فیلتر پیش‌فرضی نداری، این مقدار رو تنظیم کن
     }
-})
+
+    const productsFilter = await fetchProducts(currentPage || 1, limit || 4, categoryId, searchValue);
+
+    // تنظیم فیلترهای انتخاب‌شده
+    const activeOption = document.querySelector(`.option[data-id="${categoryId}"]`) || document.querySelector(".option");
+    if (activeOption) {
+        activeOption.classList.add('option--active');
+        customSelected.innerHTML = activeOption.innerHTML;
+    }
+
+    addingProductsTemplate(productsFilter.data.products, productsStructure, productsWrapper);
+    addingPaginationTemplate(productsFilter.data.pagination.page, paginationTool, productsFilter.data.pagination.totalPage, limit, searchValue);
+    addingPrevNextButtonTemplate(productsFilter.data.pagination.page, productsFilter.data.pagination.totalPage, limit, searchValue);
 
 
+});
 
+const getDefaultCategoryId = () => {
+    fetchProducts().then(product => {
+        let products = product.data.products
+        addingProductsTemplate(products, productsStructure, productsWrapper)
+        addingPaginationTemplate(product.data.pagination.page, paginationTool, product.data.pagination.totalPage)
+
+        let currentPage = 1
+        addingPrevNextButtonTemplate(currentPage, product.data.pagination.totalPage, product.data.pagination.limit);
+
+    })
+}
 
 window.addParamToUrl = addParamToUrl
 window.selectionPaginationPageByUser = selectionPaginationPageByUser;

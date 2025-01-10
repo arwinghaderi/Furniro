@@ -13,12 +13,14 @@ const addingProductsTemplate = (products, productsStructure = "row", productsWra
             });
         } else {
             productsWrapper.innerHTML = `
-                <div class="empty-products box-shadow ">
-                    <h2>No Products Available</h2>
-                    <p>We're sorry, but there are no products available in this category at the moment.</p>
-                    <p>Please check back later or explore our other categories.</p>
-                    <img src="../images/images.png" alt="No products available" />
-                </div>
+        <div class="container">
+            <div class="empty-products box-shadow ">
+                <h2>No Products Available</h2>
+                <p>We're sorry, but there are no products available in this category at the moment.</p>
+                <p>Please check back later or explore our other categories.</p>
+                <img src="../images/images.png" alt="No products available" />
+            </div>
+        </div>
             `;
             return;
         }
@@ -29,12 +31,14 @@ const addingProductsTemplate = (products, productsStructure = "row", productsWra
             });
         } else {
             productsWrapper.innerHTML = `
-                <div class="empty-products box-shadow ">
-                    <h2>No Products Available</h2>
-                    <p>We're sorry, but there are no products available in this category at the moment.</p>
-                    <p>Please check back later or explore our other categories.</p>
-                    <img src="../images/images.png" alt="No products available" />
-                </div>
+            <div class="container">
+              <div class="empty-products box-shadow ">
+                <h2>No Products Available</h2>
+                <p>We're sorry, but there are no products available in this category at the moment.</p>
+                <p>Please check back later or explore our other categories.</p>
+                <img src="../images/images.png" alt="No products available" />
+               </div>
+            </div>
             `;
             return;
         }

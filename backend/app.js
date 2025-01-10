@@ -4,6 +4,7 @@ const { setHeaders } = require("./middleware/setHeaders");
 const cookieParser = require("cookie-parser");
 
 // Routers
+const homeRouter = require("./routes/home.js");
 const authRouter = require("./routes/auth");
 const categoryRouter = require("./routes/category");
 const newsletterRouter = require("./routes/newsletter");
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.use("/images", express.static(path.resolve(__dirname, "public/images")));
 
+app.use("/", homeRouter);
 app.use("/auth", authRouter);
 app.use("/category", categoryRouter);
 app.use("/newsletter", newsletterRouter);

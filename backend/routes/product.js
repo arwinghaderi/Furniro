@@ -9,14 +9,20 @@ const {
   getAllFavorites,
   addToFavorites,
   removeFromFavorites,
+  getAllProducts,
+  searchItem,
 } = require("../controller/product");
 const { multerStorage } = require("../middleware/uploader");
+const { optionalAuth } = require("../middleware/optionalAuth");
 
 const upload = multerStorage("public/images/products");
 
 const router = express.Router();
 
-router.route("/").post(auth, isAdmin, upload.array("images", 4), createProduct);
+router
+  .route("/")
+  .get(optionalAuth, getAllProducts)
+  .post(auth, isAdmin, upload.array("images", 4), createProduct);
 
 router.route("/:productId").delete(auth, isAdmin, removeProduct);
 
@@ -26,4 +32,6 @@ router
   .route("/favorites/:productId")
   .post(auth, addToFavorites)
   .delete(auth, removeFromFavorites);
+
+router.route("/search").post(searchItem);
 module.exports = router;

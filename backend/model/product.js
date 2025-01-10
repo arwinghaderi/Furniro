@@ -6,6 +6,10 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    title: {
+      type: String,
+      required: true,
+    },
     description: {
       type: String,
       required: true,
@@ -52,22 +56,12 @@ const productSchema = mongoose.Schema(
       },
     ],
 
-    label: {
-      type: [String],
-      enum: ["Discount", "New"],
-      required: false,
-    },
     size: {
       type: [String],
       enum: ["L", "XL", "XS"],
       required: true,
     },
 
-    rating: {
-      type: Number,
-      min: 1,
-      max: 5,
-    },
     attributes: {
       type: Map, //   Map -> Key - Value Pair
       of: mongoose.Types.Mixed,
@@ -83,11 +77,6 @@ productSchema.pre("save", function (next) {
   if (!this.slug) {
     this.slug = `${this.name.toLowerCase().replace(/ /g, "-")}-${uniqe}`;
   }
-
-  const randomRate = [3, 4, 5];
-  const randomIndex = Math.floor(Math.random() * randomRate.length);
-  const score = randomRate[randomIndex];
-  this.rating = score;
 
   next();
 });

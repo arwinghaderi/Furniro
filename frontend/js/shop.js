@@ -204,7 +204,6 @@ const handlerPrevButtonByUser = (currentPage, nextPrevTemaplte, limit, userSearc
 
 const fetchCategory = async () => {
     customOptions.innerHTML = `<div class="option" >Loading...</div>`
-    console.log("s");
     try {
         const response = await fetch("https://furniro-6x7f.onrender.com/category/")
         const categoryData = await response.json()
@@ -367,12 +366,12 @@ const initializeFilters = async () => {
 
     let { categoryId, currentPage, limit, searchValue } = savedState;
 
-    if (!categoryId || currentPage <= 1) {
+    if (!categoryId || !currentPage > 1) {
         categoryId = getAllProducts();
     }
 
     const productsFilter = await fetchProducts(currentPage || 1, limit || 4, categoryId, searchValue);
-    fetchCategory();
+    fetchCategory()
     setActiveOptionUsingObserver();
     addingProductsTemplate(productsFilter.data.products, productsStructure, productsWrapper);
     addingPaginationTemplate(

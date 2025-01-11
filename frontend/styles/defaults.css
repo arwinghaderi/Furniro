@@ -88,6 +88,34 @@ a {
     justify-content: center;
 }
 
+.empty-products {
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    background-color: #f9f9f9;
+    margin: 2rem 0;
+}
+
+.empty-products h2 {
+    font-size: 2rem;
+    color: var(--Primary-color);
+    margin-bottom: 1rem;
+}
+
+.empty-products p {
+    font-size: 1.6rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.empty-products img {
+    width: 35rem;
+    height: auto;
+    mix-blend-mode: multiply;
+    margin-top: 1rem;
+}
+
 .title-box {
     display: flex;
     align-items: center;

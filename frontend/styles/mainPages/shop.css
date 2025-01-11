@@ -3,6 +3,7 @@
 @import url(../Features/products.css);
 @import url(../Features/homeSection.css);
 @import url(../Features/service.css);
+@import url(../Features/selectBox.css);
 @import url(../Features/loader.css);
 @import url(../defaults.css);
 
@@ -16,7 +17,7 @@
     background-color: #F9F1E7;
     padding: 3rem 0 3rem 0;
     height: 15rem;
-    transition: all 0.8s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 .shop-filter--active {
@@ -125,51 +126,42 @@
     align-items: center;
     justify-content: center;
     margin-top: 2rem;
-
-}
-
-.box-filter__select-custom {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.box-filter__select {
-    padding: 0;
-    width: 0;
-    border: none;
-    outline: none;
-    transition: all 0.8s ease-in-out;
-
 }
 
 .box-filter__select--active {
-    width: 32rem;
-    padding: 2rem;
-    position: absolute;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 30rem;
+    height: 5rem;
+    opacity: 1;
+    visibility: visible;
     background-color: #f9f1e7;
     box-shadow: 0.5rem 0.5rem 1rem gray;
-    border-radius: 1rem;
-    font-size: 1.8rem;
-    font-family: var(--primary-font);
-    line-height: 1.6;
-    cursor: pointer;
-    z-index: 100;
-
+    color: var(--Primary-color);
+    border-radius: 0.6rem;
+    padding: 0 1.5rem;
+    margin-right: 2rem;
+    transition: opacity 1s ease-in;
 }
 
+.custom-selected,
+.arrow-down {
+    color: var(--Primary-color);
+}
+
+.custom-options {
+    background-color: #f9f1e7;
+    box-shadow: 0.5rem 0.5rem 1rem gray;
+    top: 4.8rem;
+}
 
 /* 
 ====================
   #SHOP--products
 ====================
 */
-
-
-
-
-
 .shop-products__pagination {
     display: flex;
     align-items: center;
@@ -274,10 +266,47 @@
     font-size: 2.8rem;
 }
 
-.product__img-col {
+/* .product__img-col {
     height: 100%;
-}
+} */
 
 .footer-Shop {
     margin-bottom: 2rem;
+}
+
+.loader-products {
+    width: 4.5rem;
+    aspect-ratio: .75;
+    --c: no-repeat linear-gradient(var(--Primary-color) 0 0);
+    background:
+        var(--c) 0% 50%,
+        var(--c) 50% 50%,
+        var(--c) 100% 50%;
+    animation: l7 1s infinite linear alternate;
+}
+
+@keyframes l7 {
+    0% {
+        background-size: 20% 50%, 20% 50%, 20% 50%
+    }
+
+    20% {
+        background-size: 20% 20%, 20% 50%, 20% 50%
+    }
+
+    40% {
+        background-size: 20% 100%, 20% 20%, 20% 50%
+    }
+
+    60% {
+        background-size: 20% 50%, 20% 100%, 20% 20%
+    }
+
+    80% {
+        background-size: 20% 50%, 20% 50%, 20% 100%
+    }
+
+    100% {
+        background-size: 20% 50%, 20% 50%, 20% 50%
+    }
 }

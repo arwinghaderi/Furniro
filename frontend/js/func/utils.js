@@ -2,61 +2,36 @@ import { addingProductsTemplate } from "../func/shared.js"
 let filteredProductPagination
 const $ = document
 
-const paginationCalculations = (products, numberProductsShown, currentPage, paginationTool) => {
-    paginationTool.wrapperPagination.innerHTML = ""
-    paginationTool.nextContainer.innerHTML = ""
-    paginationTool.prevContainer.innerHTML = ""
+// const addingPaginationTemplate = (productsInformation, counter) => {
 
-    let indexEnd, indexStart
-    let copyProducts = [...products]
 
-    indexEnd = numberProductsShown * currentPage
-    indexStart = indexEnd - numberProductsShown
 
-    paginationTool.resultShowProducts.innerHTML = `Showing  ${indexStart}  --   ${indexEnd > products.length ? products.length : indexEnd}   of  ${products.length}  results`
+// const paginationBox = $.createElement("div")
+// paginationBox.className = "shop-products__pagination-box-btn box-shadow"
 
-    let paginationProducts = copyProducts.slice(indexStart, indexEnd)
+// const paginationButton = $.createElement("button")
+// paginationButton.className = "shop-product-button"
 
-    let productsInformation = {
-        products, numberProductsShown, currentPage, paginationTool,
-    }
-    calculationNumberOfPaginationPages(productsInformation)
-    return paginationProducts
-}
+// paginationButton.innerHTML = counter
 
-const calculationNumberOfPaginationPages = (productsInformation) => {
 
-    let numberOfPagesOfCourses = Math.ceil(productsInformation.products.length / productsInformation.numberProductsShown)
-    addingPrevNextButtonTemplate(productsInformation, numberOfPagesOfCourses)
+// if (counter === Number(productsInformation.currentPage)) {
+//     paginationBox.classList.add("shop-products__pagination-box--active")
+//     paginationButton.classList.add("shop-product-button--active")
+// } else {
+//     paginationBox.className = "shop-products__pagination-box-btn box-shadow"
+//     paginationButton.className = "shop-product-button"
+// }
+// paginationButton.setAttribute('onclick', `addParamToUrl('page', ${counter})`);
+// paginationBox.append(paginationButton)
 
-    for (let counter = 1; counter < numberOfPagesOfCourses + 1; counter++) {
-        addingPaginationTemplate(productsInformation, counter)
-    }
-}
 
-const addingPaginationTemplate = (productsInformation, counter) => {
-    const paginationBox = $.createElement("div")
-    paginationBox.className = "shop-products__pagination-box-btn box-shadow"
 
-    const paginationButton = $.createElement("button")
-    paginationButton.className = "shop-product-button"
-
-    paginationButton.innerHTML = counter
-
-    const paginationTemaplte = {
-        paginationButton, paginationBox, counter
-    }
-
-    if (counter === Number(productsInformation.currentPage)) {
-        paginationBox.classList.add("shop-products__pagination-box--active")
-        paginationButton.classList.add("shop-product-button--active")
-    } else {
-        paginationBox.className = "shop-products__pagination-box-btn box-shadow"
-        paginationButton.className = "shop-product-button"
-    }
-    paginationBox.append(paginationButton)
-    selectionPaginationPageByUser(productsInformation, paginationTemaplte)
-}
+// const paginationTemaplte = {
+//     paginationButton, paginationBox, counter
+// }
+// selectionPaginationPageByUser(productsInformation, paginationTemaplte)
+// }
 
 const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) => {
     const fragment = document.createDocumentFragment();
@@ -76,52 +51,11 @@ const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) 
     productsInformation.paginationTool.wrapperPagination.append(fragment)
 }
 
-const addingPrevNextButtonTemplate = (productsInformation, numberOfPagesOfCourses) => {
-    productsInformation.paginationTool.prevContainer.insertAdjacentHTML("afterbegin", `<div class="shop-products__prev-btn-box box-shadow"><button class="shop-products__button-prev-text">Prev</button></div >`)
 
-    productsInformation.paginationTool.nextContainer.insertAdjacentHTML("beforeend", `<div class="shop-products__next-btn-box box-shadow"> <button class="shop-products__button-next-text">Next</button></div > `)
 
-    let nextBtn = $.querySelector(".shop-products__next-btn-box")
-    let pervBtn = $.querySelector(".shop-products__prev-btn-box")
 
-    if (numberOfPagesOfCourses === 1) {
-        nextBtn.style.display = "none"
-        pervBtn.style.display = "none"
-    } else {
-        nextBtn.style.display = "flex"
-        pervBtn.style.display = "flex"
-    }
 
-    const nextPrevTemaplte = { nextBtn, pervBtn }
 
-    productsInformation.currentPage === 1 ? pervBtn.style.display = "none" : pervBtn.style.display = "flex"
-    productsInformation.currentPage === numberOfPagesOfCourses ? nextBtn.style.display = "none" : nextBtn.style.display = "flex"
-
-    handlerNextButtonByUser(productsInformation, nextPrevTemaplte)
-    handlerPrevButtonByUser(productsInformation, nextPrevTemaplte)
-}
-
-const handlerNextButtonByUser = (productsInformation, nextPrevTemaplte) => {
-    nextPrevTemaplte.nextBtn.addEventListener("click", () => {
-        productsInformation.currentPage++
-        saveToLocalStorage("currentPage", productsInformation.currentPage)
-
-        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.paginationTool)
-
-        addingProductsTemplate(filteredProductPagination, productsInformation.paginationTool.productsStructure, productsInformation.paginationTool.productsWrapper)
-    })
-}
-
-const handlerPrevButtonByUser = (productsInformation, nextPrevTemaplte) => {
-    nextPrevTemaplte.pervBtn.addEventListener("click", () => {
-        productsInformation.currentPage--
-        saveToLocalStorage("currentPage", productsInformation.currentPage)
-
-        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.paginationTool)
-
-        addingProductsTemplate(filteredProductPagination, productsInformation.paginationTool.productsStructure, productsInformation.paginationTool.productsWrapper)
-    })
-}
 
 const saveToLocalStorage = (key, value) => {
     return localStorage.setItem(key, JSON.stringify(value))
@@ -147,22 +81,23 @@ const getCurrentPageAndShowCountProducts = (currentPage, showCountProducts) => {
     showCountProducts ? showCountProducts : showCountProducts = 8
 }
 
-const ProductsWithPaginationCalculations = (products, paginationTool) => {
-    let filterProducts = getFromLocalStorage('FilteredProducts')
-    let currentPage = getFromLocalStorage("currentPage")
-    let showCountProducts = getFromLocalStorage("showCountProducts")
+// const ProductsWithPaginationCalculations = (paginationTool) => {
+//     let filterProducts = getFromLocalStorage('FilteredProducts')
+//     let currentPage = getFromLocalStorage("currentPage")
+//     let showCountProducts = getFromLocalStorage("showCountProducts")
+//     let totalPage = getFromLocalStorage("totalPage")
 
-    getCurrentPageAndShowCountProducts(currentPage, showCountProducts)
+//     getCurrentPageAndShowCountProducts(currentPage, showCountProducts)
 
-    if (filterProducts) {
-        let filteredProductsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, paginationTool)
-        return filteredProductsBasedPagination
+//     if (filterProducts) {
+//         let filteredProductsBasedPagination = paginationCalculations(currentPage, paginationTool, totalPage)
+//         return filteredProductsBasedPagination
 
-    } else {
-        let productsBasedPagination = paginationCalculations(products, showCountProducts, currentPage, paginationTool)
-        return productsBasedPagination
-    }
-}
+//     } else {
+//         let productsBasedPagination = paginationCalculations(currentPage, paginationTool, totalPage)
+//         return productsBasedPagination
+//     }
+// }
 
 const calculateProductsShowMoreButton = (products, curentItem, currentPage) => {
     let indexEnd = curentItem * currentPage
@@ -232,7 +167,6 @@ const getToken = () => {
     return userToken ? userToken : null
 };
 
-
 const storeAccessTokenWithExpiry = (accessToken, expiresInMinutes) => {
     const expiresInMilliseconds = expiresInMinutes * 60 * 1000;
     const expiryTime = Date.now() + expiresInMilliseconds;
@@ -250,7 +184,7 @@ const setSecureCookie = (name, value, days) => {
     const secure = "; Secure";
     const httpOnly = "; HttpOnly";
     const sameSite = "; SameSite=Strict";
-    document.cookie = `${name} = ${value} ${expires} ${secure}  ${sameSite}; path=/ `
+    document.cookie = `${name} = ${value} ${expires} ${secure}  ${sameSite}; path =/ `
     document.cookie = `Refresh-Token-Expiry=${expires}; path=/; ${secure} ${sameSite}`;
 }
 
@@ -298,14 +232,23 @@ const handleError = (error, errorMessages) => {
     });
 };
 
+const saveFilterState = (categoryId, currentPage, limit, searchValue) => {
+    localStorage.setItem('filterState', JSON.stringify({ categoryId, currentPage, limit, searchValue }));
+};
+
+const getFilterState = () => {
+    return JSON.parse(localStorage.getItem('filterState') || '{}');
+};
+
+
 export {
     saveToLocalStorage, getFromLocalStorage, searchInProducts,
-    ProductsWithPaginationCalculations,
+    saveFilterState, getFilterState,
     getCurrentPageAndShowCountProducts,
     calculateProductsShowMoreButton, getUrlParam,
     productDiscountCalculation, getCountProductsCart,
     selectionPaginationPageByUser, showSwal,
     getToken, storeAccessTokenWithExpiry,
     setSecureCookie, getCookieValue,
-    deleteCookie, handleError, showSwalAndReload
+    deleteCookie, handleError, showSwalAndReload,
 }

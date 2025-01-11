@@ -244,6 +244,26 @@ exports.getProduct = async (req, res, next) => {
       },
       {
         $lookup: {
+          from: "categories",
+          localField: "categoryId",
+          foreignField: "_id",
+          as: "categoryId",
+          pipeline: [
+            {
+              $project: {
+                _id: 1,
+                title: 1,
+                href: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        $unwind: "$categoryId",
+      },
+      {
+        $lookup: {
           from: "comments",
           localField: "_id",
           foreignField: "product",

@@ -1,8 +1,13 @@
+import { getFromLocalStorage } from "./utils.js";
+
 let discountTemplate, newTemplate, discountPrice, element, randomIndex,
     randomImage, fullImagePath
 const fragment = document.createDocumentFragment();
 
-const addingProductsTemplate = (products, productsStructure = "row", productsWrapper, pageRoute) => {
+const addingProductsTemplate = (products, productsStructure = "row", productsWrapper) => {
+
+    productsStructure = getFromLocalStorage("structure") || "row"
+    
     productsWrapper.innerHTML = '';
     let fragment = document.createDocumentFragment();
 

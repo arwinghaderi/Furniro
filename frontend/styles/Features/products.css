@@ -18,6 +18,10 @@
     position: relative;
 }
 
+.shop-product-button:hover {
+    color: var(--dark-color);
+}
+
 .product__img,
 .product__img--col {
     width: 100%;

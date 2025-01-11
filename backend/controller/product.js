@@ -7,14 +7,14 @@ const validator = require("../middleware/validator");
 const { createProductValidator } = require("./../validator/product");
 const path = require("path");
 const fs = require("fs");
-const moment = require("moment");
 const { createPagination } = require("../utils/paganition");
 
 exports.getAllProducts = async (req, res, next) => {
   try {
     let { title, category, page = 1, limit = 8 } = req.query;
     const user = req.user;
-    const fourWeeksAgo = moment().subtract(4, "weeks").toDate();
+    let fourWeeksAgo = new Date();
+    fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 28);
 
     const filters = { quantity: { $gt: 0 } };
 
@@ -36,6 +36,7 @@ exports.getAllProducts = async (req, res, next) => {
         }
       }
     }
+
     const userFavorites = user
       ? await favoriteModel
           .findOne({ user: user._id })
@@ -46,12 +47,33 @@ exports.getAllProducts = async (req, res, next) => {
       { $match: filters },
       {
         $lookup: {
+          from: "categories",
+          localField: "categoryId",
+          foreignField: "_id",
+          as: "categoryId",
+          pipeline: [
+            {
+              $project: {
+                _id: 1,
+                title: 1,
+                href: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        $unwind: "$categoryId",
+      },
+      {
+        $lookup: {
           from: "comments",
           localField: "_id",
           foreignField: "product",
           as: "comments",
         },
       },
+
       {
         $addFields: {
           averageRating: {
@@ -219,6 +241,26 @@ exports.getProduct = async (req, res, next) => {
     let product = await productModel.aggregate([
       {
         $match: { slug },
+      },
+      {
+        $lookup: {
+          from: "categories",
+          localField: "categoryId",
+          foreignField: "_id",
+          as: "categoryId",
+          pipeline: [
+            {
+              $project: {
+                _id: 1,
+                title: 1,
+                href: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        $unwind: "$categoryId",
       },
       {
         $lookup: {

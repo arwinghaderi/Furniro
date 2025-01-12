@@ -1,11 +1,30 @@
-import { products } from "../js/db/data.js"
-import { getUrlParam, saveToLocalStorage, getFromLocalStorage, productDiscountCalculation, getCountProductsCart } from "../js/func/utils.js"
+import { getUrlParam, saveToLocalStorage, getFromLocalStorage, showSwal } from "../js/func/utils.js"
+import { addingDetailesProduct, addingProductsTemplate } from "./func/shared.js"
+
 
 const $ = document
-const urlParamsId = getUrlParam("id")
+const urlParamsSlug = getUrlParam("slug")
 let total
 let productsCart = []
 let informationMenuItems = document.querySelectorAll(".product-infomation-menu__item")
+const fetchProductsDetails = async () => {
+    try {
+        const response = await fetch(`https://furniro-6x7f.onrender.com/product/${urlParamsSlug}`)
+
+        if (!response.ok) {
+            const message = "Product not found" || "An unexpected error occurred."
+            throw new Error(message)
+        }
+
+        const detailsProductData = await response.json()
+        console.log(detailsProductData);
+        return detailsProductData
+    } catch (error) {
+        showSwal(`${error.message}`, "error", "Back to Shop", "../Pages/shop.html")
+    }
+
+}
+
 
 informationMenuItems.forEach(infomationMenuItem => {
     infomationMenuItem.addEventListener("click", (event) => {
@@ -23,8 +42,6 @@ const swapContent = (dataSetcontent) => {
     content.classList.add('content--active')
 }
 
-const productSelectionByUser = products.find(product => { return product.id === +urlParamsId })
-
 const addingPagePathDom = () => {
     const routeProduct = document.querySelector(".route-product");
     const previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];
@@ -34,180 +51,240 @@ const addingPagePathDom = () => {
         let part = path.split('/').pop().split('.')[0];
         return part === "index" ? "home" : part;
     })
-
-    setTimeout(() => {
-        routeProduct.innerHTML = ` <div class="container "> <div class="route-product__wrapper "> <a href="${previousPaths[1] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <a href="${previousPaths[0] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[0] || "home"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productSelectionByUser.productName}</span> </div> </div> `
-    }, 6000)
+    console.log(extractedPart);
+    fetchProductsDetails().then((ProductsDetails) => {
+        setTimeout(() => {
+            routeProduct.innerHTML = ` <div class="container "> <div class="route-product__wrapper "> <a href="${previousPaths[1] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <a href="${previousPaths[0] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[0] || "home"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${ProductsDetails.data.product[0].name}</span> </div> </div> `
+        }, 3500)
+    })
 };
 
 const addingAllProductPhotos = () => {
-    const wrapperMainImage = document.querySelector(".detailes-product-img-main__box")
-    const wrapperSecoundImg = document.querySelector(".detailes-product-img-secound")
+    const wrapperMainImage = document.querySelector(".detailes-product-img-main__box");
+    const wrapperSecoundImg = document.querySelector(".detailes-product-img-secound");
 
-    wrapperMainImage.insertAdjacentHTML("afterbegin", `<img class="detailes-product-img-main___img" src="${productSelectionByUser.imgSecoundMain}" alt="main-product">`)
+    fetchProductsDetails().then((ProductsDetails) => {
+        let images = ProductsDetails.data.product[0].images;
 
-    wrapperSecoundImg.insertAdjacentHTML("afterbegin", ` <div class="detailes-product-img-secound__box   detailes-product-img-secound__box--active "><img class="detailes-product-img-secound__img" src =" ${productSelectionByUser.imgSecoundMain}" alt = "main-product" ></div ><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${productSelectionByUser.imgSecound1}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="${productSelectionByUser.imgSecound2} " alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${productSelectionByUser.imgSecound3}"alt="detailes-product"></div><div class="detailes-product-img-secound__box"><img class="detailes-product-img-secound__img" src="  ${productSelectionByUser.imgSecound4} " alt="detailes-product"></div>`)
+        wrapperMainImage.insertAdjacentHTML("afterbegin", `
+            <img class="detailes-product-img-main___img" src="https://furniro-6x7f.onrender.com${images[0].path}" alt="main-product">`);
 
-    const boxImagesSubProduct = document.querySelectorAll(".detailes-product-img-secound__box")
-    const imgProductMain = document.querySelector(".detailes-product-img-main___img")
+        images.forEach((img, index) => {
+            let imgPath = img.path ? `https://furniro-6x7f.onrender.com${img.path}` : '';
 
-    selectionSecondaryProductsByUser(boxImagesSubProduct, imgProductMain)
-}
+            wrapperSecoundImg.insertAdjacentHTML("beforeend", `
+            <div class="detailes-product-img-secound__box ${index === 0 ? 'detailes-product-img-secound__box--active' : ''}">
+                  <img class="detailes-product-img-secound__img" src="${imgPath}" alt="main-product" data-path="${img.path ? img.path : ''}" loading="lazy">
+            </div>`);
+        });
+        handleSecondaryImageClick(wrapperSecoundImg, wrapperMainImage)
+    });
+};
+
+const handleSecondaryImageClick = (wrapperSecoundImg, wrapperMainImage) => {
+    wrapperSecoundImg.addEventListener("click", (event) => {
+        const target = event.target.closest(".detailes-product-img-secound__img");
+
+        if (target) {
+            const newPath = target.getAttribute("data-path");
+            const mainImage = wrapperMainImage.querySelector(".detailes-product-img-main___img");
+
+            if (mainImage) {
+                mainImage.src = `https://furniro-6x7f.onrender.com${newPath}`;
+            }
+
+            const parentBox = target.closest('.detailes-product-img-secound__box');
+            document.querySelectorAll('.detailes-product-img-secound__box').forEach(box => {
+                box.classList.remove('detailes-product-img-secound__box--active');
+            });
+
+            if (parentBox) {
+                parentBox.classList.add('detailes-product-img-secound__box--active');
+            }
+        }
+    });
+};
+
+addingAllProductPhotos()
 
 const addingProductSpecifications = () => {
     const wrapperProductSpecifications = $.querySelector(".Supplementary-specifications__value-box");
+    fetchProductsDetails().then((ProductsDetails) => {
 
-    wrapperProductSpecifications.insertAdjacentHTML("afterbegin",
-        `<span class="Supplementary-specifications__value">SS00${productSelectionByUser.id} </span><span class="Supplementary-specifications__value">${productSelectionByUser.type}  </span ><span class="Supplementary-specifications__value">Sofa, Chair, Home, Shop</span>  
-            
-            <div class="Supplementary-specifications__box-icon">
-              <div class="box-Icon-social"><i class="fa-brands fa-facebook-f Icon-social"></i></div>
-              <div class="box-Icon-social box-Icon-social--linkdin"><i class="fa-brands fa-linkedin-in Icon-social"></i></div>
-              <div class="box-Icon-social"><i class="fa-brands fa-twitter Icon-social"></i></div>
-            </div >`)
+        wrapperProductSpecifications.insertAdjacentHTML("afterbegin",
+            `<span class="Supplementary-specifications__value">SS-${urlParamsSlug} </span><span class="Supplementary-specifications__value">${ProductsDetails.data.product[0].categoryId.title}  </span >
+                <div class="Supplementary-specifications__box-icon">
+                  <div class="box-Icon-social"><i class="fa-brands fa-facebook-f Icon-social"></i></div>
+                  <div class="box-Icon-social box-Icon-social--linkdin"><i class="fa-brands fa-linkedin-in Icon-social"></i></div>
+                  <div class="box-Icon-social"><i class="fa-brands fa-twitter Icon-social"></i></div>
+                </div >`)
+
+    })
 }
+addingProductSpecifications()
 
-const addingDetailesProduct = () => {
-    if (productSelectionByUser) {
-        const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
-        total = productDiscountCalculation(+productSelectionByUser.price, +productSelectionByUser.discountPercent)
+const addingRelatedProduct = () => {
+    fetchProductsDetails().then((productsDetails) => {
+        let reletedProducts = productsDetails.data.reletedProducts
+        let productsWrapper = document.querySelector(".row-container")
 
-        addingAllProductPhotos()
-        addingPagePathDom()
-        addingProductSpecifications()
+        addingProductsTemplate(reletedProducts, "row", productsWrapper)
+    })
 
-        wrapperDetailesProducts.insertAdjacentHTML('afterbegin',
-            `${productSelectionByUser.discount ? `<h3 class="detailes-produc-Specifications__title section-title"> ${productSelectionByUser.productIntroduction}</h3>
-                <h5 class= "detailes-produc-Specifications__price-discount section-title" > Rp ${productSelectionByUser.price.toLocaleString("en")}</h5>
-                <h5 class="detailes-produc-Specifications__price section-title">Rp  ${total.toLocaleString("en")} </h5>`
-                :
-                `<h3 class="detailes-produc-Specifications__title section-title">${productSelectionByUser.productIntroduction}</h3>
-                <h5 class= "detailes-produc-Specifications__price section-title"> Rp ${productSelectionByUser.price.toLocaleString("en")}</h5>`}
-
-        <div class="detailes-produc-Specifications__customer-review-box">
-            <div class="detailes-produc-Specifications__score">
-               <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
-               <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
-               <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
-               <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
-               <button class="btn-icon"><i class="fa-regular detailes-product-Specifications__star fa-star"></i></button>
-            </div>
-            <div class="detailes-produc-Specifications__line line"></div>
-            <p class="detailes-produc-Specifications__status">0 Customer Review</p>  
-        </div>   
-
-        <div class="detailes-product__description-box">
-          <p class="detailes-product__description">${productSelectionByUser.description}</p>
-        </div>
-
-        <div class="detailes-product__size-box">
-            <span class="detailes-product__size__name">Size</span>
-          <div class= "detailes-product__size-btn-container">
-            <div class="detailes-product__size-btn-box  detailes-product__size-btn-box--active"><butuon class="detailes-product__size-btn  detailes-product__size-btn--active">L</butuon></div>
-            <div class="detailes-product__size-btn-box"><butuon class="detailes-product__size-btn">XL</butuon></div>
-            <div class="detailes-product__size-btn-box"><butuon class="detailes-product__size-btn">XS</butuon></div>
-          </div> 
-        </div>
-
-     <div class="detailes-product__color-box">
-         <span class="detailes-product__Color__name">Color</span><div class="detailes-product__Color-btn-container"> <div data-color="${productSelectionByUser.color1}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color1} detailes-product__Color-btn-box--active"> </div> <div data-color="${productSelectionByUser.color2}"  class="detailes-product__Color-btn-box detailes-product__size-btn--${productSelectionByUser.color2}"> </div><div data-color="${productSelectionByUser.color3}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color3}"></div><div data-color="${productSelectionByUser.color4}"<div class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color4}"></div></div>   
-     </div> 
-
-     <div class="detailes-product-btn">
-         <div class="detailes-product-input__box-quantity">
-             <div class="detailes-product-input__quantity-Container-input">
-                 <span class="detailes-product-input__quantity__minus">-</span>
-                 <input class="detailes-product-input__quantity" type="number" min="1" max="10"  value="1" placeholder="1" >
-                 <span class="detailes-product-input__quantity__plus">+</span>
-             </div>
-         </div>
-         <div class="detailes-product-btn__box-cart"><button class="detailes-product-btn__cart detailes-product-btn__cart--add-to-cart">Add To Cart</button></div>
-         <div class="detailes-product-btn__box-Compare"><button  class="detailes-product-btn__Compare">+Compare</button></div>
-     </div>
-        `
-        )
-    }
-    const iconsStar = document.querySelectorAll(".btn-icon")
-    const scoreStatus = document.querySelector(".detailes-produc-Specifications__status")
-
-    const productsSizeButtons = document.querySelectorAll(".detailes-product__size-btn-box")
-
-    const ProductsColorButton = document.querySelectorAll(".detailes-product__Color-btn-box ")
-
-    const btnAddProductCount = document.querySelector(".detailes-product-input__quantity__plus")
-    const btnReduceNumberProduct = document.querySelector(".detailes-product-input__quantity__minus")
-    const productCountInput = document.querySelector(".detailes-product-input__quantity")
-    const imgProductMain = document.querySelector(".detailes-product-img-main___img")
-
-    const btnAddToCart = document.querySelector(".detailes-product-btn__box-cart")
-
-    productsScoreing(iconsStar, scoreStatus)
-    selctingProductsSizing(productsSizeButtons)
-    selctingProductsColor(ProductsColorButton, imgProductMain)
-    selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput)
-    addingProductToCart(btnAddToCart, productCountInput)
 }
+addingRelatedProduct()
+// const addingDetailesProduct = () => {
+//     if (productSelectionByUser) {
+//         const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
 
-let iconCountProducts = document.querySelector(".nav-bar__count-Product")
 
-const countIconCart = () => {
-    iconCountProducts.classList.add("nav-bar__count-Product--active")
-    iconCountProducts.innerHTML = productsCart.length
-    saveToLocalStorage("countProductToCart", productsCart.length)
-}
+const addingProductInformationTemplate = () => {
+    let informationContent = document.querySelector(".information-content")
+    let productImgSection = document.querySelector(".product-img-section")
 
-const addingProductToCart = (btnAddToCart, productCountInput) => {
-    btnAddToCart.addEventListener("click", () => {
-        logicAddingProductToCart(productSelectionByUser.id, productCountInput)
+    console.log(informationContent);
+    fetchProductsDetails().then((productDetails) => {
+        let images = productDetails.data.product[0].images;
+        let productInfomation = productDetails.data.product[0]
+
+        informationContent.insertAdjacentHTML("beforeend", ` 
+            <div class="content content--active  product-description-box" id="description">
+                        <p class="product-description">
+                        ${productInfomation.description}
+                       </p>
+                    </div>
+
+                    <div class="content product-description-box  additional-information" id="Information">
+                        <table class="additional-information__table">
+                            <thead class="additional-information__head">
+                                <tr class="column-head">
+                                    <th class="column-head__content">Feature</th>
+                                    <th class="column-head__content">value</th>
+                                </tr>
+                            </thead>
+                            <tbody class="additional-information__body">
+                                <tr class="column-body">
+                                    <td class="column-body__content">Base Material</td>
+                                    <td class="column-body__content">Engineered Wood </td>
+                                </tr>
+                                <tr class="column-body">
+                                    <td class="column-body__content">Brande</td>
+                                    <td class="column-body__content">${productInfomation.attributes.Brand}</td>
+                                </tr>
+                                <tr class="column-body">
+                                    <td class="column-body__content">Style</td>
+                                    <td class="column-body__content"> ${productInfomation.attributes.Style}</td>
+                                </tr>
+                        </table>
+                    </div>`)
+
+
+        productImgSection.insertAdjacentHTML("beforeend", `
+                     <div class="product-img-box box-shadow">
+                        <img class="product-img" src="https://furniro-6x7f.onrender.com${images[0].path}" alt="product-img">
+                    </div>
+                    <div class="product-img-box box-shadow">
+                        <img class="product-img" src="https://furniro-6x7f.onrender.com${images[1].path}" alt="product-img">
+                    </div>`)
+
     })
 }
 
-const logicAddingProductToCart = (urlParamsId, productCountInput) => {
-    let product = productsCart.find(cartproduct => { return cartproduct.id === urlParamsId })
+addingProductInformationTemplate()
+//         // addingAllProductPhotos()
+//         // addingPagePathDom()
+//         // addingProductSpecifications()
+//     }
+//     const iconsStar = document.querySelectorAll(".btn-icon")
+//     const scoreStatus = document.querySelector(".detailes-produc-Specifications__status")
 
-    if (product) {
-        product.count === productCountInput.value ? productCountInput.value++ : productCountInput.value
-        product.count = productCountInput.value
+//     const productsSizeButtons = document.querySelectorAll(".detailes-product__size-btn-box")
 
-        saveToLocalStorage("selectedCountProduct", product.count)
-        saveToLocalStorage("cartShopProducts", productsCart)
-        addingProductTemplateToCart(productsCart)
-        calculationTotalCart(productsCart)
-    }
-    else {
-        productsCart.push(productSelectionByUser)
-        !productCountInput.value ? productCountInput.value = 1 : productCountInput.value
-        productSelectionByUser.count = productCountInput.value
+//     const ProductsColorButton = document.querySelectorAll(".detailes-product__Color-btn-box ")
 
-        saveToLocalStorage("selectedCountProduct", productSelectionByUser.count)
-        saveToLocalStorage("cartShopProducts", productsCart)
-        addingProductTemplateToCart(productsCart)
-        countIconCart()
-        calculationTotalCart(productsCart)
-    }
-    if (window.innerWidth > 992) {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        })
-    }
+//     const btnAddProductCount = document.querySelector(".detailes-product-input__quantity__plus")
+//     const btnReduceNumberProduct = document.querySelector(".detailes-product-input__quantity__minus")
+//     const productCountInput = document.querySelector(".detailes-product-input__quantity")
+//     const imgProductMain = document.querySelector(".detailes-product-img-main___img")
+
+//     const btnAddToCart = document.querySelector(".detailes-product-btn__box-cart")
+
+//     productsScoreing(iconsStar, scoreStatus)
+//     selctingProductsSizing(productsSizeButtons)
+//     selctingProductsColor(ProductsColorButton, imgProductMain)
+//     // selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput)
+//     // addingProductToCart(btnAddToCart, productCountInput)
+// }
+
+const renderProductDetails = () => {
+    fetchProductsDetails().then((ProductDetails) => {
+        addingDetailesProduct(ProductDetails.data.product[0])
+        addingPagePathDom()
+
+    })
 }
+renderProductDetails()
 
-const getingproductsCartByUser = () => {
-    let getproductsCart = getFromLocalStorage("cartShopProducts")
+let iconCountProducts = document.querySelector(".nav-bar__count-Product")
 
-    if (getproductsCart) {
-        productsCart = getproductsCart
-    } else {
-        productsCart = []
-    }
-    addingProductTemplateToCart(productsCart)
-}
+// const countIconCart = () => {
+//     iconCountProducts.classList.add("nav-bar__count-Product--active")
+//     iconCountProducts.innerHTML = productsCart.length
+//     saveToLocalStorage("countProductToCart", productsCart.length)
+// }
+
+// const addingProductToCart = (btnAddToCart, productCountInput) => {
+//     btnAddToCart.addEventListener("click", () => {
+//         logicAddingProductToCart(productSelectionByUser.id, productCountInput)
+//     })
+// }
+
+// const logicAddingProductToCart = (urlParamsId, productCountInput) => {
+//     let product = productsCart.find(cartproduct => { return cartproduct.id === urlParamsId })
+
+//     if (product) {
+//         product.count === productCountInput.value ? productCountInput.value++ : productCountInput.value
+//         product.count = productCountInput.value
+
+//         saveToLocalStorage("selectedCountProduct", product.count)
+//         saveToLocalStorage("cartShopProducts", productsCart)
+//         addingProductTemplateToCart(productsCart)
+//         calculationTotalCart(productsCart)
+//     }
+//     else {
+//         productsCart.push(productSelectionByUser)
+//         productCountInput.value ? productCountInput.value = 1 : productCountInput.value
+//         productSelectionByUser.count = productCountInput.value
+
+//         saveToLocalStorage("selectedCountProduct", productSelectionByUser.count)
+//         saveToLocalStorage("cartShopProducts", productsCart)
+//         addingProductTemplateToCart(productsCart)
+//         countIconCart()
+//         calculationTotalCart(productsCart)
+//     }
+//     if (window.innerWidth > 992) {
+//         window.scrollTo({
+//             top: 0,
+//             behavior: "smooth"
+//         })
+//     }
+// }
+
+// const getingproductsCartByUser = () => {
+//     let getproductsCart = getFromLocalStorage("cartShopProducts")
+
+//     if (getproductsCart) {
+//         productsCart = getproductsCart
+//     } else {
+//         productsCart = []
+//     }
+//     addingProductTemplateToCart(productsCart)
+// }
 
 window.addEventListener("load", () => {
-    addingDetailesProduct()
-    getCountProductsCart()
-    getingproductsCartByUser()
+    // addingDetailesProduct()
+    // getCountProductsCart()
+    // getingproductsCartByUser()
 })
 
 const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
@@ -234,57 +311,30 @@ const productsScoreing = (iconsStar, scoreStatus) => {
     })
 }
 
-const selctingProductsSizing = (productsSizeButtons) => {
-    productsSizeButtons.forEach(button => {
-        button.addEventListener("click", () => {
 
-            document.querySelector(".detailes-product__size-btn-box--active").classList.remove("detailes-product__size-btn-box--active")
-            document.querySelector(".detailes-product__size-btn--active").classList.remove("detailes-product__size-btn--active")
 
-            button.classList.add("detailes-product__size-btn-box--active")
-            button.classList.add("detailes-product__size-btn--active")
-        })
-    })
-}
 
-const selctingProductsColor = (ProductsColorButton, imgProductMain) => {
-    ProductsColorButton.forEach(button => {
 
-        button.addEventListener("click", event => {
+// const selectingcountproductByUser = (btnAddProductCount, btnReduceNumberProduct, productCountInput) => {
+//     btnAddProductCount.addEventListener("click", () => {
+//         +productCountInput.value++
 
-            document.querySelector(".detailes-product__Color-btn-box--active").classList.remove("detailes-product__Color-btn-box--active")
-            button.classList.add("detailes-product__Color-btn-box--active")
-            document.querySelector(".detailes-product-img-secound__box--active").classList.remove
+//         if (+productCountInput.value === 11) {
+//             productCountInput.value = 10
+//             alert("اگر بیشتر از 10 محصول نیاز دارید  به شماره مورد نظر تماس بگیرید :09308064108")
+//         }
+//         saveToLocalStorage("selectedCountProduct", productCountInput.value)
+//     })
 
-            setMainImage(event.target.dataset.color, imgProductMain)
-        })
-    })
-}
+//     btnReduceNumberProduct.addEventListener("click", () => {
+//         +productCountInput.value--
 
-const setMainImage = (colorName, imgProductMain) => {
-    imgProductMain.setAttribute("src", "../images/product img " + colorName + " " + productSelectionByUser.type + ".webp")
-}
+//         +productCountInput.value ? productCountInput.value = 1 : +productCountInput.value
 
-const selectingcountproductByUser = (btnAddProductCount, btnReduceNumberProduct, productCountInput) => {
-    btnAddProductCount.addEventListener("click", () => {
-        +productCountInput.value++
-
-        if (+productCountInput.value === 11) {
-            productCountInput.value = 10
-            alert("اگر بیشتر از 10 محصول نیاز دارید  به شماره مورد نظر تماس بگیرید :09308064108")
-        }
-        saveToLocalStorage("selectedCountProduct", productCountInput.value)
-    })
-
-    btnReduceNumberProduct.addEventListener("click", () => {
-        +productCountInput.value--
-
-        !+productCountInput.value ? productCountInput.value = 1 : +productCountInput.value
-
-        saveToLocalStorage("selectedCountProduct", productCountInput.value)
-    })
-    getProductCountByUser(productCountInput)
-}
+//         saveToLocalStorage("selectedCountProduct", productCountInput.value)
+//     })
+//     getProductCountByUser(productCountInput)
+// }
 
 const getProductCountByUser = (productCountInput) => {
     let countProduct = getFromLocalStorage("selectedCountProduct")
@@ -367,5 +417,25 @@ const removeProductByUserByUser = (productId) => {
     calculationTotalCart(productsCart)
     addingProductTemplateToCart(productsCart)
 }
+
+
+
+
+
+
+//     <div class="detailes-product__size-box">
+//         <span class="detailes-product__size__name">Size</span>
+//       <div class= "detailes-product__size-btn-container">
+//         <div class="detailes-product__size-btn-box  detailes-product__size-btn-box--active"><butuon class="detailes-product__size-btn  detailes-product__size-btn--active">L</butuon></div>
+//         <div class="detailes-product__size-btn-box"><butuon class="detailes-product__size-btn">XL</butuon></div>
+//         <div class="detailes-product__size-btn-box"><butuon class="detailes-product__size-btn">XS</butuon></div>
+//       </div> 
+//     </div>
+
+//  <div class="detailes-product__color-box">
+//      <span class="detailes-product__Color__name">Color</span><div class="detailes-product__Color-btn-container"> <div data-color="${productSelectionByUser.color1}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color1} detailes-product__Color-btn-box--active"> </div> <div data-color="${productSelectionByUser.color2}"  class="detailes-product__Color-btn-box detailes-product__size-btn--${productSelectionByUser.color2}"> </div><div data-color="${productSelectionByUser.color3}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color3}"></div><div data-color="${productSelectionByUser.color4}"<div class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color4}"></div></div>   
+//  </div> 
+
+
 
 window.removeProductByUserByUser = removeProductByUserByUser;

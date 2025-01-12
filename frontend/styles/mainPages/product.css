@@ -237,11 +237,14 @@ cart-shop singel-product
 }
 
 .detailes-product-img-secound__box {
-    width: 7.6rem;
-    height: 8rem;
+    width: 9.5rem;
+    height: 9.5rem;
     border-radius: 1rem;
     background-color: #F9F1E7;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.8s ease-in-out;
 }
 
@@ -252,8 +255,9 @@ cart-shop singel-product
 }
 
 .detailes-product-img-secound__img {
-    width: 100%;
-    height: 100%;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 1rem;
     mix-blend-mode: multiply;
 }
 
@@ -309,7 +313,6 @@ cart-shop singel-product
 }
 
 .detailes-produc-Specifications__score {
-    cursor: pointer;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -421,74 +424,23 @@ cart-shop singel-product
 }
 
 .detailes-product__Color-btn-box {
-    width: 3rem;
-    height: 3rem;
-    background-color: #000000;
-    border-radius: 100%;
-    cursor: pointer;
-    transition: all 0.8s ease-in-out;
+    width: 3rem !important;
+    height: 3rem !important;
+    border-radius: 100% !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+    transition: all 0.8s ease-in-out !important;
 }
 
 .detailes-product__Color-btn-box--active {
-    transform: scale(1.4);
+    transform: scale(1.4) !important;
 }
 
-.detailes-product__size-btn--CHALET {
-    background-color: #d7b284;
-    display: flex;
-}
-
-.detailes-product__size-btn--transparent {
+.detailes-product__size-btn {
+    border: none;
+    outline: none;
     background-color: transparent;
-    display: none;
 }
-
-.detailes-product__size-btn--black {
-    background-color: rgb(0, 0, 0);
-    display: flex;
-}
-
-.detailes-product__size-btn--CARROT {
-    background-color: #d35110;
-    display: flex;
-}
-
-.detailes-product__size-btn--AFRICA {
-    background-color: #87491d;
-    display: flex;
-}
-
-.detailes-product__size-btn--gray {
-    background-color: gray;
-    display: flex;
-}
-
-.detailes-product__size-btn--brown {
-    background-color: #3f180aa9;
-    display: flex;
-}
-
-.detailes-product__size-btn--LINEN {
-    background-color: #db9c4d;
-    display: flex;
-}
-
-.detailes-product__size-btn--STEAM {
-    background-color: #f1f1f1;
-    display: flex;
-}
-
-.detailes-product__size-btn--gold {
-    background-color: gold;
-    display: flex;
-}
-
-.detailes-product__size-btn--pink {
-    background-color: pink;
-    display: flex;
-}
-
-.detailes-product__size-btn {}
 
 .detailes-product-btn {
     display: flex;
@@ -749,11 +701,18 @@ cart-shop singel-product
 }
 
 .product-img {
-    width: 100%;
-    height: 100%;
+    width: 40rem;
+    height: 40rem;
+    mix-blend-mode: multiply;
 }
 
 .releted-products {
     border-top: solid 0.1rem var(--gray-color);
     padding-top: 8rem;
+}
+
+.box-btn-show-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

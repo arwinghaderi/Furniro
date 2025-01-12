@@ -1,123 +1,13 @@
-import { addingProductsTemplate } from "../func/shared.js"
-let filteredProductPagination
-const $ = document
-
-// const addingPaginationTemplate = (productsInformation, counter) => {
-
-
-
-// const paginationBox = $.createElement("div")
-// paginationBox.className = "shop-products__pagination-box-btn box-shadow"
-
-// const paginationButton = $.createElement("button")
-// paginationButton.className = "shop-product-button"
-
-// paginationButton.innerHTML = counter
-
-
-// if (counter === Number(productsInformation.currentPage)) {
-//     paginationBox.classList.add("shop-products__pagination-box--active")
-//     paginationButton.classList.add("shop-product-button--active")
-// } else {
-//     paginationBox.className = "shop-products__pagination-box-btn box-shadow"
-//     paginationButton.className = "shop-product-button"
-// }
-// paginationButton.setAttribute('onclick', `addParamToUrl('page', ${counter})`);
-// paginationBox.append(paginationButton)
-
-
-
-// const paginationTemaplte = {
-//     paginationButton, paginationBox, counter
-// }
-// selectionPaginationPageByUser(productsInformation, paginationTemaplte)
-// }
-
-const selectionPaginationPageByUser = (productsInformation, paginationTemaplte) => {
-    const fragment = document.createDocumentFragment();
-
-    paginationTemaplte.paginationButton.addEventListener("click", () => {
-        productsInformation.currentPage = paginationTemaplte.counter
-        saveToLocalStorage("currentPage", productsInformation.currentPage)
-
-        filteredProductPagination = ProductsWithPaginationCalculations(productsInformation.products, productsInformation.paginationTool)
-
-        paginationTemaplte.paginationBox.classList.add("shop-products__pagination-box--active")
-        paginationTemaplte.paginationButton.classList.add("shop-product-button--active")
-
-        addingProductsTemplate(filteredProductPagination, productsInformation.paginationTool.productsStructure, productsInformation.paginationTool.productsWrapper)
-    })
-    fragment.append(paginationTemaplte.paginationBox)
-    productsInformation.paginationTool.wrapperPagination.append(fragment)
-}
-
-
-
-
-
-
-
 const saveToLocalStorage = (key, value) => {
     return localStorage.setItem(key, JSON.stringify(value))
 }
-
 const getFromLocalStorage = (key) => {
     return JSON.parse(localStorage.getItem(key))
-}
-
-const searchInProducts = (products, SearchValue, productsKey) => {
-    let SearchValueLoewr = SearchValue.toLowerCase().trim()
-    let searchProducts = products.filter((product) => product[productsKey].includes(SearchValueLoewr))
-
-    if (SearchValue) {
-        return searchProducts
-    } else {
-        return products
-    }
-}
-
-const getCurrentPageAndShowCountProducts = (currentPage, showCountProducts) => {
-    currentPage ? currentPage : currentPage = 1
-    showCountProducts ? showCountProducts : showCountProducts = 8
-}
-
-// const ProductsWithPaginationCalculations = (paginationTool) => {
-//     let filterProducts = getFromLocalStorage('FilteredProducts')
-//     let currentPage = getFromLocalStorage("currentPage")
-//     let showCountProducts = getFromLocalStorage("showCountProducts")
-//     let totalPage = getFromLocalStorage("totalPage")
-
-//     getCurrentPageAndShowCountProducts(currentPage, showCountProducts)
-
-//     if (filterProducts) {
-//         let filteredProductsBasedPagination = paginationCalculations(currentPage, paginationTool, totalPage)
-//         return filteredProductsBasedPagination
-
-//     } else {
-//         let productsBasedPagination = paginationCalculations(currentPage, paginationTool, totalPage)
-//         return productsBasedPagination
-//     }
-// }
-
-const calculateProductsShowMoreButton = (products, curentItem, currentPage) => {
-    let indexEnd = curentItem * currentPage
-    let indexStart = indexEnd - indexEnd
-
-    let productsShowMor = products.slice(indexStart, indexEnd);
-
-    return productsShowMor
 }
 
 const getUrlParam = (key) => {
     const urlParams = new URLSearchParams(location.search)
     return urlParams.get(key)
-}
-
-const productDiscountCalculation = (price, discountPercent) => {
-    let totalDiscount = (price * discountPercent) / 100
-    let total = price - totalDiscount
-
-    return total
 }
 
 const getCountProductsCart = () => {
@@ -240,15 +130,21 @@ const getFilterState = () => {
     return JSON.parse(localStorage.getItem('filterState') || '{}');
 };
 
+const saveStructureState = (id) => {
+    localStorage.setItem("productStructure", id);
+};
+
+const getSavedStructure = () => {
+    return localStorage.getItem("productStructure");
+};
 
 export {
-    saveToLocalStorage, getFromLocalStorage, searchInProducts,
+    saveToLocalStorage, getFromLocalStorage,
     saveFilterState, getFilterState,
-    getCurrentPageAndShowCountProducts,
-    calculateProductsShowMoreButton, getUrlParam,
-    productDiscountCalculation, getCountProductsCart,
-    selectionPaginationPageByUser, showSwal,
-    getToken, storeAccessTokenWithExpiry,
-    setSecureCookie, getCookieValue,
+    getUrlParam,
+    getCountProductsCart,
+    showSwal,
+    getToken, storeAccessTokenWithExpiry, getSavedStructure,
+    setSecureCookie, getCookieValue, saveStructureState,
     deleteCookie, handleError, showSwalAndReload,
 }

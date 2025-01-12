@@ -1,9 +1,12 @@
 const customSelected = document.querySelector(".custom-selected")
+const selectContainer = document.querySelector(".select-container")
 const customOptions = document.querySelector(".custom-options")
 const arrow = document.querySelector(".arrow-down");
 const optionsList = document.querySelectorAll('.option');
 
-customSelected.addEventListener("click", () => {
+selectContainer.addEventListener("click", () => {
+    customOptions.classList.remove('custom-options--hide');
+
     customOptions.classList.toggle("custom-options--active")
     arrow.classList.toggle("arrow-down--open")
 })

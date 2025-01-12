@@ -292,7 +292,19 @@ exports.getProduct = async (req, res, next) => {
       return errorResponse(res, 404, { message: "Product Not Found" });
     }
 
-    return successResponse(res, 200, { product });
+    const productId = product[0]._id.toString();
+    const categoryId = product[0].categoryId._id.toString();
+    const reletedProducts = await productModel
+      .find({
+        categoryId,
+        _id: { $ne: productId },
+      })
+      .select("-description -colors -size -createdAt -updatedAt -__v");
+
+    return successResponse(res, 200, {
+      product,
+      reletedProducts,
+    });
   } catch (err) {
     next(err);
   }

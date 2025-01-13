@@ -794,22 +794,7 @@
         },
         "responses": {
           "200": {
-            "description": "Product successfully added to the cart.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    },
-                    "cart": {
-                      "$ref": "#/components/schemas/Cart"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Product successfully added to the cart."
           },
           "400": {
             "description": "Invalid request or exceeded quantity limit.",

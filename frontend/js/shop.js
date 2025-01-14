@@ -72,7 +72,7 @@ const fetchProducts = async (page = 1, limit = 4, category = '', title = '') => 
     wrapperPagination.innerHTML = ""
     nextContainer.innerHTML = ""
     prevContainer.innerHTML = ""
-    productsWrapper.innerHTML = `<div class="loader-products section-title"></div>`
+    productsWrapper.innerHTML = `<div class="loader-bars loader-products  section-title"></div>`
 
     document.querySelector('.loader-products').scrollIntoView({ behavior: "smooth", block: "start" });
     paginationTool.resultShowProducts.innerHTML = ` <div class="section-title">Loading...</div>`

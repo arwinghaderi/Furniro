@@ -1,13 +1,10 @@
-import { getUrlParam, saveToLocalStorage, getFromLocalStorage, showSwal } from "../js/func/utils.js"
-import { addingProductsTemplate } from "./func/shared.js"
+import { getUrlParam, showSwal, getToken, showDeleteConfirmation } from "../js/func/utils.js"
+import { addingProductsTemplate, } from "./func/shared.js"
 import { checkingLoginStatus } from "./auth/utils.js"
-import { errorMessagesForCart, getToken } from "../js/func/utils.js"
-
+import { getCountProductsCart, fetchGetCartProducts } from "./Features/cartQuantityDisplay.js"
 
 const $ = document
 const urlParamsSlug = getUrlParam("slug")
-let total
-let productsCart = []
 let informationMenuItems = document.querySelectorAll(".product-infomation-menu__item")
 
 informationMenuItems.forEach(infomationMenuItem => {
@@ -55,12 +52,12 @@ const createSizeButtons = (sizes) => sizes.map((size, index) => `
     </div>`).join('');
 
 const createColorButtons = (colors) => colors.map((color, index) => `
-        <div style="background-color:${color.hexColorCode}; width: 3rem; height: 3rem; border-radius: 100%; cursor: pointer; transition: all 0.8s ease-in-out; ${index === 0 ? 'transform: scale(1.4);' : ''}" class="detailes-product__color-btn-box" data-color="${color.hexColorCode}"></div>`).join('');
+<div style="background-color:${color.hexColorCode}; width: 3rem; height: 3rem; border-radius: 100%; cursor: pointer; transition: all 0.8s ease-in-out; ${index === 0 ? 'transform: scale(1.4);' : ''}" class="detailes-product__color-btn-box" data-color="${color.hexColorCode}"></div>`).join('');
 
 const handleActiveClass = (elements, activeClass, targetClass) => {
-    elements.forEach(el => {
-        el.classList.remove(activeClass);
-        el.querySelector(targetClass).classList.remove(activeClass);
+    elements.forEach(element => {
+        element.classList.remove(activeClass);
+        element.querySelector(targetClass).classList.remove(activeClass);
     });
 };
 
@@ -179,12 +176,43 @@ const getProductDetails = (productId) => {
     };
 }
 
+const showAuthenticationRequiredAlert = () => {
+    Swal.fire({
+        title: "Authentication Required",
+        text: "You need to log in to add the product to the cart. Would you like to continue viewing details?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: 'View Details',
+        cancelButtonText: 'Log In',
+        confirmButtonColor: "#B88E2F",
+        cancelButtonColor: "#28a745",
+    }).then((result) => {
+        if (result.isConfirmed) {
+        } else {
+            window.location.href = "../Pages/auth.html";
+        }
+    });
+};
+
+const handleResponseError = (status) => {
+    switch (status) {
+        case 400:
+            return "Your selection is limited.";
+        case 401:
+        case 403:
+        case 404:
+            return null;
+        default:
+            return "An unexpected error occurred.";
+    }
+};
+
 const addProductToCart = (btnAddToCart, productId) => {
     const token = getToken();
 
     const handleClick = async () => {
         if (!checkingLoginStatus()) {
-            showSwal("Authentication Required", "warning", "Log In", "../Pages/auth.html");
+            showAuthenticationRequiredAlert()
             return;
         }
 
@@ -203,31 +231,25 @@ const addProductToCart = (btnAddToCart, productId) => {
             });
 
             if (!response.ok) {
-                let message = "An unexpected error occurred.";
-
-                if ([401, 403, 404].includes(response.status)) {
-                    message = errorMessagesForCart[response.status] || "An unexpected error occurred.";
-                    showSwal(message, "warning", "Log In", "../Pages/auth.html");
-                    throw new Error(message);
-                } else if (response.status === 400) {
-                    showSwal("Your selection is limited.", "warning", "OK", "#");
-                    throw new Error("Your selection is limited.");
-                } else {
-                    showSwal(message, "error", "Try Again", '#');
-                    throw new Error(message);
+                const message = handleResponseError(response.status);
+                if (message === null) {
+                    showAuthenticationRequiredAlert(); return;
                 }
+                throw new Error(message);
             }
 
-            const shoppingCartData = await response.json();
-            console.log(shoppingCartData);
             showProductAddedToCartAlert();
+            getCountProductsCart()
         } catch (error) {
-            if (error.message !== "Your selection is limited.") {
-                showSwal(error.message, 'error', 'Try Again', '#');
+            if (error.message === "Your selection is limited.") {
+                showSwal(error.message, "warning", "OK", "#");
             }
-            window.location.reload();
+            else {
+                showSwal(error.message, "error", "Try Again", '#')
+            }
         } finally {
-            btnAddToCart.innerHTML = "Add To Cart";
+            btnAddToCart.classList.add("detailes-product-btn__cart--add-to-cart")
+            btnAddToCart.innerHTML = `<button class="detailes-product-btn__cart detailes-product-btn__cart--add-to-cart">Add To Cart</button>`;
         }
     };
 
@@ -376,31 +398,6 @@ const addingProductInformationTemplate = (product) => {
                     </div>`)
 }
 
-//         // addingAllProductPhotos()
-//         // addingPagePathDom()
-//         // addingProductSpecifications()
-//     }
-//     const iconsStar = document.querySelectorAll(".btn-icon")
-//     const scoreStatus = document.querySelector(".detailes-produc-Specifications__status")
-
-//     const productsSizeButtons = document.querySelectorAll(".detailes-product__size-btn-box")
-
-//     const ProductsColorButton = document.querySelectorAll(".detailes-product__Color-btn-box ")
-
-const btnAddProductCount = document.querySelector(".detailes-product-input__quantity__plus")
-const btnReduceNumberProduct = document.querySelector(".detailes-product-input__quantity__minus")
-const productCountInput = document.querySelector(".detailes-product-input__quantity")
-//     const imgProductMain = document.querySelector(".detailes-product-img-main___img")
-
-//     const btnAddToCart = document.querySelector(".detailes-product-btn__box-cart")
-
-//     productsScoreing(iconsStar, scoreStatus)
-//     selctingProductsSizing(productsSizeButtons)
-//     selctingProductsColor(ProductsColorButton, imgProductMain)
-//     // selectingcountproductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput)
-//     // addingProductToCart(btnAddToCart, productCountInput)
-// }
-
 const renderProductDetails = async () => {
     try {
         const response = await fetchProductsDetails();
@@ -417,104 +414,6 @@ const renderProductDetails = async () => {
     }
 };
 renderProductDetails()
-let iconCountProducts = document.querySelector(".nav-bar__count-Product")
-
-// const countIconCart = () => {
-//     iconCountProducts.classList.add("nav-bar__count-Product--active")
-//     iconCountProducts.innerHTML = productsCart.length
-//     saveToLocalStorage("countProductToCart", productsCart.length)
-// }
-
-// const addingProductToCart = (btnAddToCart, productCountInput) => {
-//     btnAddToCart.addEventListener("click", () => {
-//         logicAddingProductToCart(productSelectionByUser.id, productCountInput)
-//     })
-// }
-
-// const logicAddingProductToCart = (urlParamsId, productCountInput) => {
-//     let product = productsCart.find(cartproduct => { return cartproduct.id === urlParamsId })
-
-//     if (product) {
-//         product.count === productCountInput.value ? productCountInput.value++ : productCountInput.value
-//         product.count = productCountInput.value
-
-//         saveToLocalStorage("selectedCountProduct", product.count)
-//         saveToLocalStorage("cartShopProducts", productsCart)
-//         addingProductTemplateToCart(productsCart)
-//         calculationTotalCart(productsCart)
-//     }
-//     else {
-//         productsCart.push(productSelectionByUser)
-//         productCountInput.value ? productCountInput.value = 1 : productCountInput.value
-//         productSelectionByUser.count = productCountInput.value
-
-//         saveToLocalStorage("selectedCountProduct", productSelectionByUser.count)
-//         saveToLocalStorage("cartShopProducts", productsCart)
-//         addingProductTemplateToCart(productsCart)
-//         countIconCart()
-//         calculationTotalCart(productsCart)
-//     }
-//     if (window.innerWidth > 992) {
-//         window.scrollTo({
-//             top: 0,
-//             behavior: "smooth"
-//         })
-//     }
-// }
-
-// const getingproductsCartByUser = () => {
-//     let getproductsCart = getFromLocalStorage("cartShopProducts")
-
-//     if (getproductsCart) {
-//         productsCart = getproductsCart
-//     } else {
-//         productsCart = []
-//     }
-//     addingProductTemplateToCart(productsCart)
-// }
-
-
-const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
-    iconsStar.forEach((icon, index) => {
-        if (userScoreingNumber >= index + 1) {
-            icon.firstChild.classList.add("fa-solid")
-            icon.firstChild.classList.remove("fa-regular")
-            scoreStatus.innerHTML = userScoreingNumber + "  of" + ' 5 Customer Review';
-        } else {
-            icon.firstChild.classList.add("fa-regular")
-            icon.firstChild.classList.remove("fa-solid")
-        }
-    })
-}
-
-const productsScoreing = (iconsStar, scoreStatus) => {
-    let userScoreingNumber
-    iconsStar.forEach((icon, index) => {
-        icon.addEventListener("click", () => {
-            userScoreingNumber = index + 1
-
-            userScoringLogic(iconsStar, userScoreingNumber, scoreStatus)
-        })
-    })
-}
-
-
-
-
-
-
-// const getProductCountByUser = (productCountInput) => {
-//     let countProduct = getFromLocalStorage("selectedCountProduct")
-
-//     if (countProduct) {
-//         productSelectionByUser.count = countProduct
-//         productCountInput.value = countProduct
-//     } else {
-//         productSelectionByUser.count = countProduct
-//         productCountInput.value = countProduct
-//     }
-//     addingProductTemplateToCart(productsCart)
-// }
 
 let iconCart = document.querySelector(".icon-container__link--cart")
 let cartShop = document.querySelector(".cart-Shop")
@@ -524,36 +423,131 @@ let iconExit = document.querySelector(".cart-Shop__icon-exit-head")
 iconCart.addEventListener("click", () => {
     cartShop.classList.add("cart-Shop--active")
     wrapperCaverScreen.classList.add("wrapper--active")
+    addingProductTemplateToCart()
+
 })
 
 iconExit.addEventListener("click", () => {
     cartShop.classList.remove("cart-Shop--active")
     wrapperCaverScreen.classList.remove("wrapper--active")
+    getCountProductsCart()
 })
 
-const addingProductTemplateToCart = (productsCart) => {
-    const keeperCartProduct = document.querySelector(".cart-Shop__products")
-    keeperCartProduct.innerHTML = ""
+const addingProductTemplateToCart = async () => {
+    const token = getToken();
+    if (!token) {
+        return false
+    }
 
-    productsCart.forEach(product => {
-        total = productDiscountCalculation(+product.price, +product.discountPercent)
+    let productImage, imageUrl
+    const keeperCartProduct = document.querySelector(".cart-Shop__products")
+    keeperCartProduct.classList.add("center")
+    keeperCartProduct.innerHTML = `<div class="loader-bars loader-cart-products  section-title"></div>`
+
+    const dataCartProduct = await fetchGetCartProducts()
+    const cartProducts = dataCartProduct.cart.items
+    console.log(cartProducts);
+    keeperCartProduct.innerHTML = ""
+    keeperCartProduct.classList.remove("center")
+
+    cartProducts.length ? cartProducts.forEach(item => {
+        productImage = item.product.images.find(image => image.hexColorCode === item.color);
+        imageUrl = productImage ? `https://furniro-6x7f.onrender.com${productImage.path}` : `https://furniro-6x7f.onrender.com${item.product.images[0].path}`
 
         keeperCartProduct.insertAdjacentHTML("afterbegin",
-            `<div class="products-keeper"><div class="products-keeper__box-img"><img class="products-keeper__img" src="${product.imgSecoundMain}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title section-title">${product.productName} </h6><div class="box-calculation"><span class="box-calculation__number">${product.count}</span>   <span class="box-calculation__multiplication">X</span><span class="box-calculation__price">Rs ${product.discount ? total.toLocaleString("en") : product.price.toLocaleString("en")} </span></div></div><button onclick=" removeProductByUserByUser(${product.id})" class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
-    })
-    calculationTotalCart(productsCart)
+            `<div class="products-keeper"><div class="products-keeper__box-img"><img loading="lazy" class="products-keeper__img" src="${imageUrl}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title section-title">${item.product.name.slice(0, 10)}...</h6><div class="box-calculation"><span class="box-calculation__number">${item.quantity}</span>
+              <span class="box-calculation__multiplication">x</span><span class="box-calculation__price">Rs ${item.product.discountPercent ? item.product.priceAfterDiscount.toLocaleString("en") : item.product.price.toLocaleString("en")} </span>
+              </div>
+              <div class="product-information-detailes">
+                <div class="detailes-product__size-btn-box detailes-product__size-btn-box--active ">
+                    <span class="detailes-product__size-btn detailes-product__size-btn--active">${item.size}</span>
+                  </div>
+                  <div class="box-shadow" style="background-color:${item.color}; width: 3rem; height: 3rem; border-radius: 100%;"></div>
+              </div>
+                  </div><button onclick="removeProductByUserByUser('${item._id}', '${token}')"class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
+    }) : keeperCartProduct.innerHTML = `  
+        <div class="empty-products">
+           <h2>Your Cart is Empty</h2>
+           <p>It looks like you haven't added any products to your cart yet.</p>
+           <p>Browse our products and add some amazing products to your cart.</p>
+           <img src="../images/images.png" alt="No products available" />
+         </div>
+    `
 }
 
-const removeProductByUserByUser = (productId) => {
-    productsCart = productsCart.filter(product => {
-        return product.id !== productId
-    })
-    productsCart.length ? productsCart.length : productsCart.length + 1
-    iconCountProducts.innerHTML = productsCart.length
+const deleteProductAndUpdateCart = async (productId, token) => {
 
-    saveToLocalStorage("countProductToCart", productsCart.length)
-    saveToLocalStorage("cartShopProducts", productsCart)
-    calculationTotalCart(productsCart)
-    addingProductTemplateToCart(productsCart)
+    try {
+        const response = await fetch(`https://furniro-6x7f.onrender.com/cart/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+                'accept': 'application/json'
+            },
+        });
+
+        if (!response.ok) {
+            showAuthenticationRequiredAlert();
+        }
+
+        const result = await response.json();
+
+        showSwal(result.data.message, "success", "OK", "#");
+    } catch (error) {
+        showSwal("You need to authenticate first.", "error", "Try Again", '#');
+    }
+
+    addingProductTemplateToCart();
+};
+
+const removeProductByUserByUser = async (productId, token) => {
+    console.log(productId, token);
+    console.log(productId, token);
+    if (!productId && !token) {
+        return false
+    }
+    showDeleteConfirmation(productId, token, deleteProductAndUpdateCart)
 }
-window.removeProductByUserByUser = removeProductByUserByUser;
+
+let previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];
+
+const updatePreviousPaths = () => {
+    const referrer = document.referrer;
+
+    if (referrer && referrer !== window.location.href) {
+        previousPaths.unshift(referrer);
+        if (previousPaths.length > 2) previousPaths.pop();
+        localStorage.setItem('previousPaths', JSON.stringify(previousPaths));
+    }
+
+    return previousPaths;
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    updatePreviousPaths();
+}); window.removeProductByUserByUser = removeProductByUserByUser;
+
+// const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
+//     iconsStar.forEach((icon, index) => {
+//         if (userScoreingNumber >= index + 1) {
+//             icon.firstChild.classList.add("fa-solid")
+//             icon.firstChild.classList.remove("fa-regular")
+//             scoreStatus.innerHTML = userScoreingNumber + "  of" + ' 5 Customer Review';
+//         } else {
+//             icon.firstChild.classList.add("fa-regular")
+//             icon.firstChild.classList.remove("fa-solid")
+//         }
+//     })
+// }
+
+// const productsScoreing = (iconsStar, scoreStatus) => {
+//     let userScoreingNumber
+//     iconsStar.forEach((icon, index) => {
+//         icon.addEventListener("click", () => {
+//             userScoreingNumber = index + 1
+
+//             userScoringLogic(iconsStar, userScoreingNumber, scoreStatus)
+//         })
+//     })
+// }

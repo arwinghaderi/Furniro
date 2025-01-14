@@ -1,7 +1,5 @@
-import { addingProductsTemplate } from "./func/shared.js"
 import {
     getFromLocalStorage,
-    getCountProductsCart
 } from "./func/utils.js"
 
 let productsWrapper = document.querySelector(".row-container")
@@ -12,7 +10,7 @@ let productsShowMore
 const addingProductsByUser = () => {
     productsShowMore = getFromLocalStorage("pageHomeProducts")
 
-    addingProductsTemplate(productsShowMore, productsStructure, productsWrapper)
+    // addingProductsTemplate(productsShowMore, productsStructure, productsWrapper)
 }
 
 window.addEventListener('load', () => {
@@ -21,5 +19,5 @@ window.addEventListener('load', () => {
     // } else {
     //     addingProductsByUser(products)
     // }
-    getCountProductsCart()
+    // getCountProductsCart()
 })

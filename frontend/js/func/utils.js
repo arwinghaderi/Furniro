@@ -10,19 +10,19 @@ const getUrlParam = (key) => {
     return urlParams.get(key)
 }
 
-const getCountProductsCart = () => {
-    let iconCountProducts = document.querySelector(".nav-bar__count-Product")
-    let countProducts = getFromLocalStorage("countProductToCart")
+// const getCountProductsCart = () => {
+//     let iconCountProducts = document.querySelector(".nav-bar__count-Product")
+//     let countProducts = getFromLocalStorage("countProductToCart")
 
-    if (countProducts) {
-        iconCountProducts.classList.add("nav-bar__count-Product--active")
-        iconCountProducts.innerHTML = countProducts
+//     if (countProducts) {
+//         iconCountProducts.classList.add("nav-bar__count-Product--active")
+//         iconCountProducts.innerHTML = countProducts
 
-    } else {
-        iconCountProducts.classList.add("nav-bar__count-Product--active")
-        iconCountProducts.innerHTML = 0
-    }
-}
+//     } else {
+//         iconCountProducts.classList.add("nav-bar__count-Product--active")
+//         iconCountProducts.innerHTML = 0
+//     }
+// }
 
 const showSwal = async (title, icon, confirmButtonText, url) => {
     await swal.fire({
@@ -145,11 +145,27 @@ const errorMessagesForCart = {
     404: "User or product not found.",
 };
 
+const showDeleteConfirmation = (productId, token, deleteFunction) => {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "Do you really want to remove this item from the cart?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, keep it',
+        confirmButtonColor: "#B88E2F",
+        cancelButtonColor: "#28a745",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteFunction(productId, token);
+        }
+    });
+};
+
 export {
     saveToLocalStorage, getFromLocalStorage,
     saveFilterState, getFilterState,
-    getUrlParam,
-    getCountProductsCart,
+    getUrlParam, showDeleteConfirmation,
     showSwal, errorMessagesForCart,
     getToken, storeAccessTokenWithExpiry, getSavedStructure,
     setSecureCookie, getCookieValue, saveStructureState,

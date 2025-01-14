@@ -277,7 +277,7 @@ const fetchAndSendLoginData = async () => {
 
         setSecureCookie("Refresh-Token", loginData.data.refreshToken, 7)
         storeAccessTokenWithExpiry(loginData.data.accessToken, 14)
-        showSwal(`Your login was successful. Welcome ${fullName} .`, "success", "Go to HomePage", "../index.html")
+        showSwal(`Your login was successful. Welcome ${fullName} .`, "success", "Go to HomePage", window.history.back ? window.history.back() : "../../index.html")
     } catch (error) {
         showSwal(`${error.message}`, "error", ' Correction of information', "#")
     } finally {
@@ -322,7 +322,7 @@ const fetchAndSendRegisterData = async () => {
         storeAccessTokenWithExpiry(registerData.data.accessToken, 14)
         const fullName = registerData.data.user.fullname
 
-        showSwal(`Your registration has been successfully completed. Welcome. ${fullName} .`, "success", "Go to HomePage", "../index.html")
+        showSwal(`Your registration has been successfully completed. Welcome. ${fullName} .`, "success", "Go to HomePage", window.history.back ? window.history.back() : "../../index.html")
 
     } catch (error) {
         showSwal(`${error.message}`, "error", "Correction of information", "#")

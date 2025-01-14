@@ -35,6 +35,7 @@ cart-shop singel-product
     width: 41.7rem;
     overflow-y: auto;
     z-index: 1000;
+    direction: ltr;
 }
 
 .cart-Shop__box-head {
@@ -93,10 +94,18 @@ cart-shop singel-product
 }
 
 .products-keeper-box-profile {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-family: var(--primary-font);
+}
+
+.product-information-detailes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
 }
 
 .box-calculation {
@@ -530,11 +539,13 @@ cart-shop singel-product
 }
 
 .wrapper--active {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 130rem;
+    height: 100%;
     background-color: rgba(0, 0, 0, 20%);
 }
-
 .Supplementary-specifications {
     display: flex;
     justify-content: end;

@@ -25,6 +25,7 @@ inputEmail.addEventListener("input", (event) => {
 
 confirmEmailBtn.addEventListener("click", (event) => {
     event.preventDefault()
+    inputEmailValue = inputEmail.value
     fetchGetCode(inputEmailValue)
 })
 
@@ -33,6 +34,11 @@ const validateEmail = (email) => {
 }
 const validateCode = (code) => {
     return codeRegex.test(code);
+}
+
+const clearInputsForgot = () => {
+    inputCode.value = ""
+    inputEmail.value = ""
 }
 
 const fetchGetCode = async (inputEmailValue) => {
@@ -61,8 +67,12 @@ const fetchGetCode = async (inputEmailValue) => {
         timerElement.style.display = 'inline';
         startTimer(60);
     } catch (error) {
-        showSwal(`${error.message}`, "error", ' Correction of information', "../Pages/forgotStop1.html")
+        showSwal(`${error.message}`, "error", ' Correction of information', "#")
+        clearInputsForgot()
     } finally {
+        confirmEmailBtn.disabled = true;
+        confirmEmailBtn.innerHTML = "⛔Forbidden";
+        timerElement.style.display = 'inline';
         if (!confirmEmailBtn.disabled) { confirmEmailBtn.innerHTML = "Send"; }
     }
 }
@@ -132,9 +142,9 @@ const fetchVerifyCode = async () => {
 
         saveToLocalStorage("user-Token", VerifyCodeData.data.userToken)
         showSwal(`You can now set your new password.`, "success", "Set New Password", "../Pages/forgotStop2.html")
-
     } catch (error) {
-        showSwal(`${error.message}`, "error", ' Correction of information', "../Pages/forgotStop1.html")
+        showSwal(`${error.message}`, "error", ' Correction of information', "#")
+        clearInputsForgot()
     }
 }
 

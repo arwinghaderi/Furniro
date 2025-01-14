@@ -1,5 +1,7 @@
 import { getUrlParam, saveToLocalStorage, getFromLocalStorage, showSwal } from "../js/func/utils.js"
-import { addingDetailesProduct, addingProductsTemplate } from "./func/shared.js"
+import { addingProductsTemplate } from "./func/shared.js"
+import { checkingLoginStatus } from "./auth/utils.js"
+import { errorMessagesForCart, getToken } from "../js/func/utils.js"
 
 
 const $ = document
@@ -7,24 +9,6 @@ const urlParamsSlug = getUrlParam("slug")
 let total
 let productsCart = []
 let informationMenuItems = document.querySelectorAll(".product-infomation-menu__item")
-const fetchProductsDetails = async () => {
-    try {
-        const response = await fetch(`https://furniro-6x7f.onrender.com/product/${urlParamsSlug}`)
-
-        if (!response.ok) {
-            const message = "Product not found" || "An unexpected error occurred."
-            throw new Error(message)
-        }
-
-        const detailsProductData = await response.json()
-        console.log(detailsProductData);
-        return detailsProductData
-    } catch (error) {
-        showSwal(`${error.message}`, "error", "Back to Shop", "../Pages/shop.html")
-    }
-
-}
-
 
 informationMenuItems.forEach(infomationMenuItem => {
     infomationMenuItem.addEventListener("click", (event) => {
@@ -42,7 +26,235 @@ const swapContent = (dataSetcontent) => {
     content.classList.add('content--active')
 }
 
-const addingPagePathDom = () => {
+const fetchProductsDetails = async () => {
+    try {
+        const response = await fetch(`https://furniro-6x7f.onrender.com/product/${urlParamsSlug}`)
+
+        if (!response.ok) {
+            const message = "Product not found" || "An unexpected error occurred."
+            throw new Error(message)
+        }
+
+        const detailsProductData = await response.json()
+        return detailsProductData
+    } catch (error) {
+        showSwal(`${error.message}`, "error", "Back to Shop", "../Pages/shop.html")
+    }
+
+}
+
+const createStarRating = (averageRating) => {
+    const filledStars = `<i class="fas fa-star detailes-product-Specifications__star" ></i>`.repeat(Math.ceil(averageRating));
+    const emptyStars = `<i class="far fa-star detailes-product-Specifications__star" ></i>`.repeat(5 - Math.ceil(averageRating));
+    return filledStars + emptyStars;
+};
+
+const createSizeButtons = (sizes) => sizes.map((size, index) => `
+    <div class="detailes-product__size-btn-box ${index === 0 ? 'detailes-product__size-btn-box--active' : ''}"> 
+        <button class="detailes-product__size-btn ${index === 0 ? 'detailes-product__size-btn--active' : ''}">${size}</button>
+    </div>`).join('');
+
+const createColorButtons = (colors) => colors.map((color, index) => `
+        <div style="background-color:${color.hexColorCode}; width: 3rem; height: 3rem; border-radius: 100%; cursor: pointer; transition: all 0.8s ease-in-out; ${index === 0 ? 'transform: scale(1.4);' : ''}" class="detailes-product__color-btn-box" data-color="${color.hexColorCode}"></div>`).join('');
+
+const handleActiveClass = (elements, activeClass, targetClass) => {
+    elements.forEach(el => {
+        el.classList.remove(activeClass);
+        el.querySelector(targetClass).classList.remove(activeClass);
+    });
+};
+
+const updateCartCount = (input, increment, maxCount = 5) => {
+    let currentCount = +input.value;
+    currentCount = increment ? currentCount + 1 : currentCount - 1;
+
+    if (currentCount > maxCount) {
+        showSwal(`If you want more than ten pieces, call this number 09308064108`, "warning", "ok", "#");
+        currentCount = maxCount;
+    } else if (currentCount < 1) {
+        currentCount = 1;
+    }
+
+    input.value = currentCount;
+};
+
+const selectingCountProductByUser = (btnAddProductCount, btnReduceNumberProduct, productCountInput) => {
+    btnAddProductCount.addEventListener("click", () => {
+        updateCartCount(productCountInput, true);
+    });
+
+    btnReduceNumberProduct.addEventListener("click", () => {
+        updateCartCount(productCountInput, false);
+    });
+};
+
+const addingDetailesProduct = (detailesProduct) => {
+    const wrapper = document.querySelector(".wrapper-Detailes-Products");
+    const starRating = createStarRating(detailesProduct.averageRating);
+    const sizeButtons = createSizeButtons(detailesProduct.size);
+    const colorButtons = createColorButtons(detailesProduct.colors);
+    const productId = detailesProduct._id
+
+    const discountHTML = detailesProduct.discountPercent
+        ? `<h3 class="detailes-produc-Specifications__title section-title">${detailesProduct.title.slice(0, 20)}..</h3>
+           <h5 class="detailes-produc-Specifications__price-discount section-title">Rp ${detailesProduct.price.toLocaleString("en")}</h5>
+           <h5 class="detailes-produc-Specifications__price section-title">Rp ${detailesProduct.priceAfterDiscount.toLocaleString("en")}</h5>`
+        : `<h3 class="detailes-produc-Specifications__title section-title">${detailesProduct.title.slice(0, 20)}...</h3>
+           <h5 class="detailes-produc-Specifications__price section-title">Rp ${detailesProduct.price.toLocaleString("en")}</h5>`;
+
+    wrapper.insertAdjacentHTML('afterbegin', `
+        ${discountHTML}
+        <div class="detailes-produc-Specifications__customer-review-box">
+            <div class="detailes-produc-Specifications__score">${starRating}</div>
+            <div class="detailes-produc-Specifications__line line"></div>
+            <p class="detailes-produc-Specifications__status">${detailesProduct.averageRating} Total product score</p>  
+        </div>
+        <div class="detailes-product__description-box">
+            <p class="detailes-product__description">${detailesProduct.description.slice(0, 400)}...</p>
+        </div>
+        <div class="detailes-product__size-box">
+            <span class="detailes-product__size__name">Size</span>
+            <div class="detailes-product__size-btn-container">${sizeButtons}</div> 
+        </div>
+        <div class="detailes-product__color-box">
+            <span class="detailes-product__Color__name">Color</span>
+            <div class="detailes-product__Color-btn-container">${colorButtons}</div>
+        </div>
+        <div class="detailes-product-btn">
+            <div class="detailes-product-input__box-quantity">
+                <div class="detailes-product-input__quantity-Container-input">
+                    <span class="detailes-product-input__quantity__minus">-</span>
+                    <input class="detailes-product-input__quantity" type="number" min="1" max="10" value="1" placeholder="1">
+                    <span class="detailes-product-input__quantity__plus">+</span>
+                </div>
+            </div>
+            <div class="detailes-product-btn__box-cart">
+                <button class="detailes-product-btn__cart detailes-product-btn__cart--add-to-cart">Add To Cart</button>
+            </div>
+            <div class="detailes-product-btn__box-Compare">
+                <button class="detailes-product-btn__Compare">+Compare</button>
+            </div>
+        </div>`);
+
+    document.querySelectorAll('.detailes-product__size-btn-box').forEach(button => {
+        button.addEventListener('click', () => {
+            handleActiveClass(document.querySelectorAll('.detailes-product__size-btn-box'), 'detailes-product__size-btn-box--active', '.detailes-product__size-btn');
+            button.classList.add('detailes-product__size-btn-box--active');
+            button.querySelector('.detailes-product__size-btn').classList.add('detailes-product__size-btn--active');
+        });
+    });
+
+    document.querySelectorAll('.detailes-product__color-btn-box').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.detailes-product__color-btn-box').forEach(btn => btn.style.transform = 'scale(1)');
+            button.style.transform = 'scale(1.4)';
+
+            const selectedColor = button.getAttribute('data-color');
+            const selectedImage = detailesProduct.images.find(img => img.hexColorCode === selectedColor);
+            if (selectedImage) {
+                document.querySelector('.detailes-product-img-main___img').src = `https://furniro-6x7f.onrender.com${selectedImage.path}`;
+            }
+        });
+    });
+
+    const btnAddProductCount = document.querySelector(".detailes-product-input__quantity__plus");
+    const btnReduceNumberProduct = document.querySelector(".detailes-product-input__quantity__minus");
+    const productCountInput = document.querySelector(".detailes-product-input__quantity");
+    const btnAddToCart = document.querySelector(".detailes-product-btn__box-cart")
+
+    selectingCountProductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput);
+    addProductToCart(btnAddToCart, productId)
+};
+
+const getProductDetails = (productId) => {
+    const quantity = +document.querySelector('.detailes-product-input__quantity').value;
+    const color = document.querySelector('.detailes-product__color-btn-box[style*="scale(1.4)"]').dataset.color;
+    const size = document.querySelector('.detailes-product__size-btn-box--active .detailes-product__size-btn').textContent;
+
+    return {
+        productId,
+        quantity,
+        color,
+        size
+    };
+}
+
+const addProductToCart = (btnAddToCart, productId) => {
+    const token = getToken();
+
+    const handleClick = async () => {
+        if (!checkingLoginStatus()) {
+            showSwal("Authentication Required", "warning", "Log In", "../Pages/auth.html");
+            return;
+        }
+
+        btnAddToCart.innerHTML = "Loading...";
+
+        const productData = getProductDetails(productId);
+
+        try {
+            const response = await fetch('https://furniro-6x7f.onrender.com/cart/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(productData)
+            });
+
+            if (!response.ok) {
+                let message = "An unexpected error occurred.";
+
+                if ([401, 403, 404].includes(response.status)) {
+                    message = errorMessagesForCart[response.status] || "An unexpected error occurred.";
+                    showSwal(message, "warning", "Log In", "../Pages/auth.html");
+                    throw new Error(message);
+                } else if (response.status === 400) {
+                    showSwal("Your selection is limited.", "warning", "OK", "#");
+                    throw new Error("Your selection is limited.");
+                } else {
+                    showSwal(message, "error", "Try Again", '#');
+                    throw new Error(message);
+                }
+            }
+
+            const shoppingCartData = await response.json();
+            console.log(shoppingCartData);
+            showProductAddedToCartAlert();
+        } catch (error) {
+            if (error.message !== "Your selection is limited.") {
+                showSwal(error.message, 'error', 'Try Again', '#');
+            }
+            window.location.reload();
+        } finally {
+            btnAddToCart.innerHTML = "Add To Cart";
+        }
+    };
+
+    btnAddToCart.addEventListener('click', handleClick);
+};
+
+const showProductAddedToCartAlert = () => {
+    Swal.fire({
+        title: "Product Added",
+        text: "Your product has been added to the cart.",
+        icon: "success",
+        customClass: {
+            popup: 'custom-swal2'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Go to Cart',
+        cancelButtonText: 'Continue Shopping',
+        confirmButtonColor: "#B88E2F",
+        cancelButtonColor: "#28a745",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            setTimeout(() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 500);
+        }
+    });
+};
+
+const addingPagePathDom = (productsDetails) => {
     const routeProduct = document.querySelector(".route-product");
     const previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];
     routeProduct.innerHTML = `<div class="loader" style="display: inline-grid; color: #000000;" ></div>`
@@ -51,34 +263,31 @@ const addingPagePathDom = () => {
         let part = path.split('/').pop().split('.')[0];
         return part === "index" ? "home" : part;
     })
-    console.log(extractedPart);
-    fetchProductsDetails().then((ProductsDetails) => {
-        setTimeout(() => {
-            routeProduct.innerHTML = ` <div class="container "> <div class="route-product__wrapper "> <a href="${previousPaths[1] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <a href="${previousPaths[0] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[0] || "home"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${ProductsDetails.data.product[0].name}</span> </div> </div> `
-        }, 3500)
-    })
+
+
+    setTimeout(() => {
+        routeProduct.innerHTML = ` <div class="container "> <div class="route-product__wrapper "> <a href="${previousPaths[1] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <a href="${previousPaths[0] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[0] || "home"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productsDetails.name}</span> </div> </div> `
+    }, 5000)
+
 };
 
-const addingAllProductPhotos = () => {
+const addingAllProductPhotos = (product) => {
     const wrapperMainImage = document.querySelector(".detailes-product-img-main__box");
     const wrapperSecoundImg = document.querySelector(".detailes-product-img-secound");
+    let images = product.images;
 
-    fetchProductsDetails().then((ProductsDetails) => {
-        let images = ProductsDetails.data.product[0].images;
-
-        wrapperMainImage.insertAdjacentHTML("afterbegin", `
+    wrapperMainImage.insertAdjacentHTML("afterbegin", `
             <img class="detailes-product-img-main___img" src="https://furniro-6x7f.onrender.com${images[0].path}" alt="main-product">`);
 
-        images.forEach((img, index) => {
-            let imgPath = img.path ? `https://furniro-6x7f.onrender.com${img.path}` : '';
+    images.forEach((img, index) => {
+        let imgPath = img.path ? `https://furniro-6x7f.onrender.com${img.path}` : '';
 
-            wrapperSecoundImg.insertAdjacentHTML("beforeend", `
+        wrapperSecoundImg.insertAdjacentHTML("beforeend", `
             <div class="detailes-product-img-secound__box ${index === 0 ? 'detailes-product-img-secound__box--active' : ''}">
                   <img class="detailes-product-img-secound__img" src="${imgPath}" alt="main-product" data-path="${img.path ? img.path : ''}" loading="lazy">
             </div>`);
-        });
-        handleSecondaryImageClick(wrapperSecoundImg, wrapperMainImage)
     });
+    handleSecondaryImageClick(wrapperSecoundImg, wrapperMainImage)
 };
 
 const handleSecondaryImageClick = (wrapperSecoundImg, wrapperMainImage) => {
@@ -105,49 +314,30 @@ const handleSecondaryImageClick = (wrapperSecoundImg, wrapperMainImage) => {
     });
 };
 
-addingAllProductPhotos()
-
-const addingProductSpecifications = () => {
+const addingProductSpecifications = (product) => {
     const wrapperProductSpecifications = $.querySelector(".Supplementary-specifications__value-box");
-    fetchProductsDetails().then((ProductsDetails) => {
 
-        wrapperProductSpecifications.insertAdjacentHTML("afterbegin",
-            `<span class="Supplementary-specifications__value">SS-${urlParamsSlug} </span><span class="Supplementary-specifications__value">${ProductsDetails.data.product[0].categoryId.title}  </span >
+    wrapperProductSpecifications.insertAdjacentHTML("afterbegin",
+        `<span class="Supplementary-specifications__value">SS-${urlParamsSlug} </span><span class="Supplementary-specifications__value">${product.categoryId.title}  </span >
                 <div class="Supplementary-specifications__box-icon">
                   <div class="box-Icon-social"><i class="fa-brands fa-facebook-f Icon-social"></i></div>
                   <div class="box-Icon-social box-Icon-social--linkdin"><i class="fa-brands fa-linkedin-in Icon-social"></i></div>
                   <div class="box-Icon-social"><i class="fa-brands fa-twitter Icon-social"></i></div>
                 </div >`)
-
-    })
 }
-addingProductSpecifications()
 
-const addingRelatedProduct = () => {
-    fetchProductsDetails().then((productsDetails) => {
-        let reletedProducts = productsDetails.data.reletedProducts
-        let productsWrapper = document.querySelector(".row-container")
-
-        addingProductsTemplate(reletedProducts, "row", productsWrapper)
-    })
-
+const addingRelatedProduct = (reletedProducts) => {
+    let productsWrapper = document.querySelector(".row-container")
+    addingProductsTemplate(reletedProducts, "row", productsWrapper)
 }
-addingRelatedProduct()
-// const addingDetailesProduct = () => {
-//     if (productSelectionByUser) {
-//         const wrapperDetailesProducts = $.querySelector(".wrapper-Detailes-Products")
 
-
-const addingProductInformationTemplate = () => {
+const addingProductInformationTemplate = (product) => {
     let informationContent = document.querySelector(".information-content")
     let productImgSection = document.querySelector(".product-img-section")
+    let images = product.images;
+    let productInfomation = product
 
-    console.log(informationContent);
-    fetchProductsDetails().then((productDetails) => {
-        let images = productDetails.data.product[0].images;
-        let productInfomation = productDetails.data.product[0]
-
-        informationContent.insertAdjacentHTML("beforeend", ` 
+    informationContent.insertAdjacentHTML("beforeend", ` 
             <div class="content content--active  product-description-box" id="description">
                         <p class="product-description">
                         ${productInfomation.description}
@@ -177,20 +367,15 @@ const addingProductInformationTemplate = () => {
                                 </tr>
                         </table>
                     </div>`)
-
-
-        productImgSection.insertAdjacentHTML("beforeend", `
+    productImgSection.insertAdjacentHTML("beforeend", `
                      <div class="product-img-box box-shadow">
                         <img class="product-img" src="https://furniro-6x7f.onrender.com${images[0].path}" alt="product-img">
                     </div>
                     <div class="product-img-box box-shadow">
                         <img class="product-img" src="https://furniro-6x7f.onrender.com${images[1].path}" alt="product-img">
                     </div>`)
-
-    })
 }
 
-addingProductInformationTemplate()
 //         // addingAllProductPhotos()
 //         // addingPagePathDom()
 //         // addingProductSpecifications()
@@ -202,9 +387,9 @@ addingProductInformationTemplate()
 
 //     const ProductsColorButton = document.querySelectorAll(".detailes-product__Color-btn-box ")
 
-//     const btnAddProductCount = document.querySelector(".detailes-product-input__quantity__plus")
-//     const btnReduceNumberProduct = document.querySelector(".detailes-product-input__quantity__minus")
-//     const productCountInput = document.querySelector(".detailes-product-input__quantity")
+const btnAddProductCount = document.querySelector(".detailes-product-input__quantity__plus")
+const btnReduceNumberProduct = document.querySelector(".detailes-product-input__quantity__minus")
+const productCountInput = document.querySelector(".detailes-product-input__quantity")
 //     const imgProductMain = document.querySelector(".detailes-product-img-main___img")
 
 //     const btnAddToCart = document.querySelector(".detailes-product-btn__box-cart")
@@ -216,15 +401,22 @@ addingProductInformationTemplate()
 //     // addingProductToCart(btnAddToCart, productCountInput)
 // }
 
-const renderProductDetails = () => {
-    fetchProductsDetails().then((ProductDetails) => {
-        addingDetailesProduct(ProductDetails.data.product[0])
-        addingPagePathDom()
-
-    })
-}
+const renderProductDetails = async () => {
+    try {
+        const response = await fetchProductsDetails();
+        const product = response.data.product[0];
+        let reletedProducts = response.data.reletedProducts
+        addingDetailesProduct(product);
+        addingPagePathDom(product);
+        addingAllProductPhotos(product);
+        addingProductSpecifications(product);
+        addingRelatedProduct(reletedProducts);
+        addingProductInformationTemplate(product);
+    } catch (error) {
+        showSwal(`Please try again.`, "error", "Back to Shop", "../Pages/shop.html")
+    }
+};
 renderProductDetails()
-
 let iconCountProducts = document.querySelector(".nav-bar__count-Product")
 
 // const countIconCart = () => {
@@ -281,11 +473,6 @@ let iconCountProducts = document.querySelector(".nav-bar__count-Product")
 //     addingProductTemplateToCart(productsCart)
 // }
 
-window.addEventListener("load", () => {
-    // addingDetailesProduct()
-    // getCountProductsCart()
-    // getingproductsCartByUser()
-})
 
 const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
     iconsStar.forEach((icon, index) => {
@@ -315,52 +502,19 @@ const productsScoreing = (iconsStar, scoreStatus) => {
 
 
 
-// const selectingcountproductByUser = (btnAddProductCount, btnReduceNumberProduct, productCountInput) => {
-//     btnAddProductCount.addEventListener("click", () => {
-//         +productCountInput.value++
 
-//         if (+productCountInput.value === 11) {
-//             productCountInput.value = 10
-//             alert("اگر بیشتر از 10 محصول نیاز دارید  به شماره مورد نظر تماس بگیرید :09308064108")
-//         }
-//         saveToLocalStorage("selectedCountProduct", productCountInput.value)
-//     })
+// const getProductCountByUser = (productCountInput) => {
+//     let countProduct = getFromLocalStorage("selectedCountProduct")
 
-//     btnReduceNumberProduct.addEventListener("click", () => {
-//         +productCountInput.value--
-
-//         +productCountInput.value ? productCountInput.value = 1 : +productCountInput.value
-
-//         saveToLocalStorage("selectedCountProduct", productCountInput.value)
-//     })
-//     getProductCountByUser(productCountInput)
+//     if (countProduct) {
+//         productSelectionByUser.count = countProduct
+//         productCountInput.value = countProduct
+//     } else {
+//         productSelectionByUser.count = countProduct
+//         productCountInput.value = countProduct
+//     }
+//     addingProductTemplateToCart(productsCart)
 // }
-
-const getProductCountByUser = (productCountInput) => {
-    let countProduct = getFromLocalStorage("selectedCountProduct")
-
-    if (countProduct) {
-        productSelectionByUser.count = countProduct
-        productCountInput.value = countProduct
-    } else {
-        productSelectionByUser.count = countProduct
-        productCountInput.value = countProduct
-    }
-    addingProductTemplateToCart(productsCart)
-}
-
-const selectionSecondaryProductsByUser = (boxImagesSubProduct, imgProductMain) => {
-    boxImagesSubProduct.forEach(boxImgProduct => {
-
-        boxImgProduct.addEventListener("click", () => {
-            document.querySelector(".detailes-product-img-secound__box--active").classList.remove("detailes-product-img-secound__box--active")
-            boxImgProduct.classList.add("detailes-product-img-secound__box--active")
-
-            const childOfImgBox = boxImgProduct.firstChild.getAttribute("src");
-            imgProductMain.setAttribute("src", childOfImgBox)
-        })
-    })
-}
 
 let iconCart = document.querySelector(".icon-container__link--cart")
 let cartShop = document.querySelector(".cart-Shop")
@@ -390,21 +544,6 @@ const addingProductTemplateToCart = (productsCart) => {
     calculationTotalCart(productsCart)
 }
 
-const calculationTotalCart = (productsCart) => {
-    const subTotalPrice = document.querySelector(".sub-total-box__price")
-    let priceTotal = 0
-    let priceProduct, countProduct
-    productsCart.forEach(product => {
-        total = productDiscountCalculation(+product.price, +product.discountPercent)
-
-        product.discount ? priceProduct = +total : priceProduct = +product.price
-        countProduct = +product.count
-
-        priceTotal += countProduct * priceProduct
-    })
-    subTotalPrice.innerHTML = "Rs. " + priceTotal.toLocaleString("en")
-}
-
 const removeProductByUserByUser = (productId) => {
     productsCart = productsCart.filter(product => {
         return product.id !== productId
@@ -417,25 +556,4 @@ const removeProductByUserByUser = (productId) => {
     calculationTotalCart(productsCart)
     addingProductTemplateToCart(productsCart)
 }
-
-
-
-
-
-
-//     <div class="detailes-product__size-box">
-//         <span class="detailes-product__size__name">Size</span>
-//       <div class= "detailes-product__size-btn-container">
-//         <div class="detailes-product__size-btn-box  detailes-product__size-btn-box--active"><butuon class="detailes-product__size-btn  detailes-product__size-btn--active">L</butuon></div>
-//         <div class="detailes-product__size-btn-box"><butuon class="detailes-product__size-btn">XL</butuon></div>
-//         <div class="detailes-product__size-btn-box"><butuon class="detailes-product__size-btn">XS</butuon></div>
-//       </div> 
-//     </div>
-
-//  <div class="detailes-product__color-box">
-//      <span class="detailes-product__Color__name">Color</span><div class="detailes-product__Color-btn-container"> <div data-color="${productSelectionByUser.color1}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color1} detailes-product__Color-btn-box--active"> </div> <div data-color="${productSelectionByUser.color2}"  class="detailes-product__Color-btn-box detailes-product__size-btn--${productSelectionByUser.color2}"> </div><div data-color="${productSelectionByUser.color3}" class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color3}"></div><div data-color="${productSelectionByUser.color4}"<div class="detailes-product__Color-btn-box  detailes-product__size-btn--${productSelectionByUser.color4}"></div></div>   
-//  </div> 
-
-
-
 window.removeProductByUserByUser = removeProductByUserByUser;

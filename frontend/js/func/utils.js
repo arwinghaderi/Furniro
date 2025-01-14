@@ -138,12 +138,19 @@ const getSavedStructure = () => {
     return localStorage.getItem("productStructure");
 };
 
+const errorMessagesForCart = {
+    400: "Invalid request or exceeded quantity limit.",
+    401: "Unauthorized. Token not found.",
+    403: "Unauthorized, token expired or invalid.",
+    404: "User or product not found.",
+};
+
 export {
     saveToLocalStorage, getFromLocalStorage,
     saveFilterState, getFilterState,
     getUrlParam,
     getCountProductsCart,
-    showSwal,
+    showSwal, errorMessagesForCart,
     getToken, storeAccessTokenWithExpiry, getSavedStructure,
     setSecureCookie, getCookieValue, saveStructureState,
     deleteCookie, handleError, showSwalAndReload,

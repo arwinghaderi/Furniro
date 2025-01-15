@@ -112,7 +112,12 @@ exports.showUserCart = async (req, res, next) => {
         "-categoryId -description -label -rating -size -attributes -createdAt -updatedAt -__v",
     });
 
-    return successResponse(res, 200, { cart: userCart });
+    const cartObject = userCart.toObject();
+    cartObject.total = userCart.totalPrice;
+
+    return successResponse(res, 200, {
+      cart: cartObject,
+    });
   } catch (err) {
     next(err);
   }

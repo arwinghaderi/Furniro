@@ -871,19 +871,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the cart.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "cart": {
-                      "$ref": "#/components/schemas/Cart"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Successfully retrieved the cart."
           },
           "401": {
             "description": "Unauthorized access",

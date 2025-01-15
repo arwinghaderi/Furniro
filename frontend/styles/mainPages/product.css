@@ -232,7 +232,10 @@ cart-shop singel-product
     align-items: center;
 }
 
-
+.no-stock {
+    font-size: 2.7rem;
+    color: red;
+}
 
 .detailes-product-container-img-secoun-img-main {
     display: flex;

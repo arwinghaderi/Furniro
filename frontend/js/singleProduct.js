@@ -85,29 +85,29 @@ const selectingCountProductByUser = (btnAddProductCount, btnReduceNumberProduct,
     });
 };
 
-const addingDetailesProduct = (detailesProduct) => {
+const addingproductsDetailes = (productsDetailes) => {
     const wrapper = document.querySelector(".wrapper-Detailes-Products");
-    const starRating = createStarRating(detailesProduct.averageRating);
-    const sizeButtons = createSizeButtons(detailesProduct.size);
-    const colorButtons = createColorButtons(detailesProduct.colors);
-    const productId = detailesProduct._id
+    const starRating = createStarRating(productsDetailes.averageRating);
+    const sizeButtons = createSizeButtons(productsDetailes.size);
+    const colorButtons = createColorButtons(productsDetailes.colors);
+    const productId = productsDetailes._id
 
-    const discountHTML = detailesProduct.discountPercent
-        ? `<h3 class="detailes-produc-Specifications__title section-title">${detailesProduct.title.slice(0, 20)}..</h3>
-           <h5 class="detailes-produc-Specifications__price-discount section-title">Rp ${detailesProduct.price.toLocaleString("en")}</h5>
-           <h5 class="detailes-produc-Specifications__price section-title">Rp ${detailesProduct.priceAfterDiscount.toLocaleString("en")}</h5>`
-        : `<h3 class="detailes-produc-Specifications__title section-title">${detailesProduct.title.slice(0, 20)}...</h3>
-           <h5 class="detailes-produc-Specifications__price section-title">Rp ${detailesProduct.price.toLocaleString("en")}</h5>`;
+    const discountHTML = productsDetailes.discountPercent
+        ? `<h3 class="detailes-produc-Specifications__title section-title">${productsDetailes.title.slice(0, 15)}..</h3>
+           <h5 class="detailes-produc-Specifications__price-discount section-title">Rp ${productsDetailes.price.toLocaleString("en")}</h5>
+           <h5 class="detailes-produc-Specifications__price section-title">Rp ${productsDetailes.priceAfterDiscount.toLocaleString("en")}</h5>`
+        : `<h3 class="detailes-produc-Specifications__title section-title">${productsDetailes.title.slice(0, 15)}...</h3>
+           <h5 class="detailes-produc-Specifications__price section-title">Rp ${productsDetailes.price.toLocaleString("en")}</h5>`;
 
     wrapper.insertAdjacentHTML('afterbegin', `
         ${discountHTML}
         <div class="detailes-produc-Specifications__customer-review-box">
             <div class="detailes-produc-Specifications__score">${starRating}</div>
             <div class="detailes-produc-Specifications__line line"></div>
-            <p class="detailes-produc-Specifications__status">${detailesProduct.averageRating} Total product score</p>  
+            <p class="detailes-produc-Specifications__status">${productsDetailes.averageRating} Total product score</p>  
         </div>
         <div class="detailes-product__description-box">
-            <p class="detailes-product__description">${detailesProduct.description.slice(0, 400)}...</p>
+            <p class="detailes-product__description">${productsDetailes.description.slice(0, 400)}...</p>
         </div>
         <div class="detailes-product__size-box">
             <span class="detailes-product__size__name">Size</span>
@@ -117,7 +117,9 @@ const addingDetailesProduct = (detailesProduct) => {
             <span class="detailes-product__Color__name">Color</span>
             <div class="detailes-product__Color-btn-container">${colorButtons}</div>
         </div>
-        <div class="detailes-product-btn">
+
+      ${productsDetailes.quantity ? `
+         <div class="detailes-product-btn">
             <div class="detailes-product-input__box-quantity">
                 <div class="detailes-product-input__quantity-Container-input">
                     <span class="detailes-product-input__quantity__minus">-</span>
@@ -131,7 +133,8 @@ const addingDetailesProduct = (detailesProduct) => {
             <div class="detailes-product-btn__box-Compare">
                 <button class="detailes-product-btn__Compare">+Compare</button>
             </div>
-        </div>`);
+        </div>`: `<div class="detailes-product-btn"><span class='no-stock section-title'>This product is not available.</span></div>`}  
+     `);
 
     document.querySelectorAll('.detailes-product__size-btn-box').forEach(button => {
         button.addEventListener('click', () => {
@@ -147,7 +150,7 @@ const addingDetailesProduct = (detailesProduct) => {
             button.style.transform = 'scale(1.4)';
 
             const selectedColor = button.getAttribute('data-color');
-            const selectedImage = detailesProduct.images.find(img => img.hexColorCode === selectedColor);
+            const selectedImage = productsDetailes.images.find(img => img.hexColorCode === selectedColor);
             if (selectedImage) {
                 document.querySelector('.detailes-product-img-main___img').src = `https://furniro-6x7f.onrender.com${selectedImage.path}`;
             }
@@ -159,8 +162,12 @@ const addingDetailesProduct = (detailesProduct) => {
     const productCountInput = document.querySelector(".detailes-product-input__quantity");
     const btnAddToCart = document.querySelector(".detailes-product-btn__box-cart")
 
-    selectingCountProductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput);
-    addProductToCart(btnAddToCart, productId)
+    if (btnAddProductCount && btnReduceNumberProduct && productCountInput) {
+        selectingCountProductByUser(btnAddProductCount, btnReduceNumberProduct, productCountInput);
+    }
+    if (btnAddToCart) {
+        addProductToCart(btnAddToCart, productId);
+    }
 };
 
 const getProductDetails = (productId) => {
@@ -271,7 +278,11 @@ const showProductAddedToCartAlert = () => {
         cancelButtonColor: "#28a745",
     }).then((result) => {
         if (result.isConfirmed) {
-            setTimeout(() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 500);
+            if (window.innerWidth >= 1024) {
+                setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 500);
+            }
         }
     });
 };
@@ -288,7 +299,7 @@ const addingPagePathDom = (productsDetails) => {
 
 
     setTimeout(() => {
-        routeProduct.innerHTML = ` <div class="container "> <div class="route-product__wrapper "> <a href="${previousPaths[1] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <a href="${previousPaths[0] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[0] || "home"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productsDetails.name}</span> </div> </div> `
+        routeProduct.innerHTML = ` <div class="container "> <div class="route-product__wrapper "> <a href="${previousPaths[1] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[1] || "Direct Entry"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <a href="${previousPaths[0] || "https://furniroo-store.vercel.app/index.html"}" class="route-product__path-name">${extractedPart[0] || "home"}</a> <i class="fa-solid fa-angle-right fa-xs"></i> <div class="route-product__line-col line"></div> <span class="route-product__product-name">${productsDetails.name.slice(0, 10)}</span> </div> </div> `
     }, 5000)
 
 };
@@ -403,7 +414,7 @@ const renderProductDetails = async () => {
         const response = await fetchProductsDetails();
         const product = response.data.product[0];
         let reletedProducts = response.data.reletedProducts
-        addingDetailesProduct(product);
+        addingproductsDetailes(product);
         addingPagePathDom(product);
         addingAllProductPhotos(product);
         addingProductSpecifications(product);

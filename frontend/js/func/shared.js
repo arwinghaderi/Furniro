@@ -5,7 +5,7 @@ let discountTemplate, newTemplate, discountPrice, element, randomIndex,
 const fragment = document.createDocumentFragment();
 
 const addingProductsTemplate = (products, productsStructure = "row", productsWrapper) => {
-
+    console.log(products);
     productsStructure = getFromLocalStorage("structure") || "row"
 
     productsWrapper.innerHTML = '';
@@ -127,7 +127,7 @@ const toggleLike = async (element, productId, isFavorite) => {
 
     try {
         const method = isFavorite ? "DELETE" : "POST";
-        const response = await fetch(`http://localhost:3001//product/favorites/${productId}`, {
+        const response = await fetch(`https://furniro-6x7f.onrender.com/product/favorites/${productId}`, {
             method: method,
             headers: {
                 'Content-Type': 'application/json',

@@ -67,7 +67,7 @@ const addingProductsTemplateRow = (product) => {
 
     element.innerHTML = `<div class="product-box"  id="discount"><div   
      class="img-box-overlay"><img class="product__img product__img-col" src="${fullImagePath}" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';"  alt="${product.name}" loading="lazy"><div class="product-overlay">
-     <div class="box-add-btn-cart"><a href="../../Pages/product.html?slug=${product.slug}" class="box-add-btn-cart__text">Details Product</a></div> 
+     <div class="box-add-btn-cart"><a href="/Furniro/frontend/Pages/product.html?slug=${product.slug}" class="box-add-btn-cart__text">Details Product</a></div> 
      <div class="product-overlay__options"> 
      <div class="option-overlay"> 
      <i class="fas fa-share-alt fa-flip-vertical  icon" ></i> 

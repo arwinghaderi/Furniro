@@ -266,47 +266,6 @@
     font-size: 2.8rem;
 }
 
-/* .product__img-col {
-    height: 100%;
-} */
-
 .footer-Shop {
     margin-bottom: 2rem;
-}
-
-.loader-products {
-    width: 4.5rem;
-    aspect-ratio: .75;
-    --c: no-repeat linear-gradient(var(--Primary-color) 0 0);
-    background:
-        var(--c) 0% 50%,
-        var(--c) 50% 50%,
-        var(--c) 100% 50%;
-    animation: l7 1s infinite linear alternate;
-}
-
-@keyframes l7 {
-    0% {
-        background-size: 20% 50%, 20% 50%, 20% 50%
-    }
-
-    20% {
-        background-size: 20% 20%, 20% 50%, 20% 50%
-    }
-
-    40% {
-        background-size: 20% 100%, 20% 20%, 20% 50%
-    }
-
-    60% {
-        background-size: 20% 50%, 20% 100%, 20% 20%
-    }
-
-    80% {
-        background-size: 20% 50%, 20% 50%, 20% 100%
-    }
-
-    100% {
-        background-size: 20% 50%, 20% 50%, 20% 50%
-    }
 }

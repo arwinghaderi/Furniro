@@ -127,7 +127,6 @@ body.content-loading .main-Content-App {
 @for $i from 1 through 7 {
     .loading-text span:nth-child(#{$i}) {
         animation-delay: $i * 0.15s;
-        /* اصلاح مدت زمان تاخیر */
     }
 }
 

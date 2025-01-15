@@ -1,11 +1,12 @@
 import { showSwal } from "./func/utils.js";
+import { getCountProductsCart } from "./Features/cartQuantityDisplay.js"
+
 
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#Email");
 const subjectInput = document.querySelector("#Subject");
 const messagInput = document.querySelector("#Message");
 const submitBtn = document.querySelector(".submit-btn");
-
 
 const fetchContactUs = async () => {
     const loader = document.querySelector(".lodaer-contact")
@@ -82,3 +83,5 @@ const checkFormValidity = () => {
 });
 
 checkFormValidity()
+
+window.addEventListener("DOMContentLoaded", () => getCountProductsCart())

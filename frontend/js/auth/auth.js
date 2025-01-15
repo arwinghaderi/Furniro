@@ -159,6 +159,30 @@ const updateProgress = (progressBar) => {
     }
 }
 
+const clearLoginInputs = (inputs) => {
+    inputs.forEach(input => {
+        if (input.element.classList.contains("signIn-Email") || input.element.classList.contains("signIn-password")) {
+            input.element.value = "";
+            input.validationEntries.valid.style.display = "none";
+            input.validationEntries.invalid.style.display = "none";
+        }
+    });
+};
+
+const clearSignUpInputs = (inputs) => {
+    inputs.forEach(input => {
+        const isSignUpInput = input.element.classList.contains("signUp-Email") ||
+            input.element.classList.contains("signUp-confirm") ||
+            input.element.classList.contains("signUp-fullName");
+
+        if (isSignUpInput) {
+            input.element.value = "";
+            input.validationEntries.valid.style.display = "none";
+            input.validationEntries.invalid.style.display = "none";
+        }
+    });
+};
+
 const getingUserLoginInformation = (loginEmailInput, loginPasswordInput) => {
     const userInformation = {
         email: loginEmailInput.value.trim(),
@@ -253,12 +277,13 @@ const fetchAndSendLoginData = async () => {
 
         setSecureCookie("Refresh-Token", loginData.data.refreshToken, 7)
         storeAccessTokenWithExpiry(loginData.data.accessToken, 14)
-        showSwal(`Your login was successful. Welcome ${fullName} .`, "success", "Go to HomePage", "../index.html")
+        showSwal(`Your login was successful. Welcome ${fullName} .`, "success", "Go to HomePage", window.history.back ? window.history.back() : "../../index.html")
     } catch (error) {
-        showSwal(`${error.message}`, "error", ' Correction of information', "../../Pages/auth.html")
+        showSwal(`${error.message}`, "error", ' Correction of information', "#")
     } finally {
         btnSignIn.disabled = true
         btnSignIn.innerHTML = '🚫Forbidden';
+        clearLoginInputs(inputs)
     }
 };
 
@@ -297,13 +322,14 @@ const fetchAndSendRegisterData = async () => {
         storeAccessTokenWithExpiry(registerData.data.accessToken, 14)
         const fullName = registerData.data.user.fullname
 
-        showSwal(`Your registration has been successfully completed. Welcome. ${fullName} .`, "success", "Go to HomePage", "../index.html")
+        showSwal(`Your registration has been successfully completed. Welcome. ${fullName} .`, "success", "Go to HomePage", window.history.back ? window.history.back() : "../../index.html")
 
     } catch (error) {
-        showSwal(`${error.message}`, "error", "Correction of information", "../../Pages/auth.html")
+        showSwal(`${error.message}`, "error", "Correction of information", "#")
     } finally {
-        btnRegister.innerHTML = " 🚫Forbidden"
+        btnRegister.innerHTML = "🚫Forbidden"
         btnRegister.disabled = true
+        clearSignUpInputs(inputs)
     }
 }
 

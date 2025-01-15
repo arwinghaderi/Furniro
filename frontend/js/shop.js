@@ -67,7 +67,13 @@ const updateActiveClass = categoryId => {
 };
 
 const fetchProducts = async (page = 1, limit = 4, category = '', title = '') => {
-    productsWrapper.innerHTML = `<div class="loader-products section-title"></div>`
+    productsWrapper.classList.add("row-container--center")
+    productsWrapper.classList.remove("row-container")
+    wrapperPagination.innerHTML = ""
+    nextContainer.innerHTML = ""
+    prevContainer.innerHTML = ""
+    productsWrapper.innerHTML = `<div class="loader-bars loader-products  section-title"></div>`
+
     document.querySelector('.loader-products').scrollIntoView({ behavior: "smooth", block: "start" });
     paginationTool.resultShowProducts.innerHTML = ` <div class="section-title">Loading...</div>`
 
@@ -75,6 +81,7 @@ const fetchProducts = async (page = 1, limit = 4, category = '', title = '') => 
         const url = new URL(`https://furniro-6x7f.onrender.com/product/`);
         url.searchParams.append('page', page);
         url.searchParams.append('limit', limit);
+
 
         if (category) {
             url.searchParams.append('category', category);
@@ -97,15 +104,13 @@ const fetchProducts = async (page = 1, limit = 4, category = '', title = '') => 
         const indexStart = (dataProducts.data.pagination.limit * dataProducts.data.pagination.page) - dataProducts.data.pagination.limit
 
         paginationTool.resultShowProducts.innerHTML = `Showing  ${indexStart}  --   ${indexEnd > products ? products : indexEnd}   of  ${products}  results`
-
+        productsWrapper.classList.remove("row-container--center")
+        productsWrapper.classList.add("row-container")
         return dataProducts
 
     } catch (error) {
         showSwal(`${error.message}`, "error", "Refresh the page.", "../Pages/shop.html")
-    } finally {
-
     }
-
 }
 
 const addingPaginationTemplate = (currentPage, paginationTool, totalPage, limit = 4, userSearchValue = "") => {

@@ -1,6 +1,5 @@
 const displayPaths = () => {
     const previousPathElement = document.querySelector(".home-section-container-description__befor");
-    console.log(previousPathElement);
     const loader = document.querySelector(".loader-Paths")
     const referrer = document.referrer;
     const currentPath = window.location.pathname;

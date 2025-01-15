@@ -34,6 +34,16 @@ a {
     color: var(--dark-color);
 }
 
+a:hover {
+    color: var(--Primary-color);
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .section-title {
     text-shadow: 2px 2px 4px rgba(184, 142, 47, 0.7);
 }
@@ -172,10 +182,6 @@ a {
     color: var(--dark-color);
 }
 
-a:hover {
-    color: var(--Primary-color);
-}
-
 @keyframes heartbeat {
 
     0%,
@@ -252,6 +258,43 @@ a:hover {
         l36-2 .4s infinite cubic-bezier(0.5, 200, 0.5, -200);
 }
 
+.loader-bars {
+    width: 4.5rem;
+    aspect-ratio: .75;
+    --c: no-repeat linear-gradient(var(--Primary-color) 0 0);
+    background:
+        var(--c) 0% 50%,
+        var(--c) 50% 50%,
+        var(--c) 100% 50%;
+    animation: l7 1s infinite linear alternate;
+}
+
+@keyframes l7 {
+    0% {
+        background-size: 20% 50%, 20% 50%, 20% 50%
+    }
+
+    20% {
+        background-size: 20% 20%, 20% 50%, 20% 50%
+    }
+
+    40% {
+        background-size: 20% 100%, 20% 20%, 20% 50%
+    }
+
+    60% {
+        background-size: 20% 50%, 20% 100%, 20% 20%
+    }
+
+    80% {
+        background-size: 20% 50%, 20% 50%, 20% 100%
+    }
+
+    100% {
+        background-size: 20% 50%, 20% 50%, 20% 50%
+    }
+}
+
 ::-webkit-scrollbar {
     width: 1rem;
     height: 1rem;
@@ -302,5 +345,19 @@ a:hover {
 @keyframes l36-2 {
     100% {
         transform: translateY(0.2px)
+    }
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }

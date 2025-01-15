@@ -82,6 +82,9 @@
 .option-overlay {
     display: flex;
     align-items: center;
+}
+
+.icon {
     cursor: pointer;
 }
 
@@ -170,6 +173,12 @@
 }
 
 .row-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.row-container--center {
     display: flex;
     align-items: center;
     justify-content: center;

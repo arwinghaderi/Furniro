@@ -5,8 +5,6 @@ const saveBtn = document.querySelector(".btn-submite")
 const inputPassword = document.querySelector(".signUp-password")
 const inputConfrimPassword = document.querySelector(".signUp-confirm")
 
-
-
 const inputs = [
 
     {
@@ -27,10 +25,6 @@ const inputs = [
     },
 
 ]
-
-// const validatePassword = (password) => {
-//     return passwordRegex.test(password);
-// }
 
 const validateConfrimPassword = (password, confirmPassword) => {
     return password === confirmPassword

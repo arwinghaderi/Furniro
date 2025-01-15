@@ -1,4 +1,4 @@
-import { getUrlParam, showSwal, getToken, showDeleteConfirmation } from "../js/func/utils.js"
+import { getUrlParam, showSwal, getToken, showDeleteConfirmation, showAuthenticationRequiredAlert } from "../js/func/utils.js"
 import { addingProductsTemplate, } from "./func/shared.js"
 import { checkingLoginStatus } from "./auth/utils.js"
 import { getCountProductsCart, fetchGetCartProducts } from "./Features/cartQuantityDisplay.js"
@@ -182,24 +182,6 @@ const getProductDetails = (productId) => {
         size
     };
 }
-
-const showAuthenticationRequiredAlert = () => {
-    Swal.fire({
-        title: "Authentication Required",
-        text: "You need to log in to add the product to the cart. Would you like to continue viewing details?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: 'View Details',
-        cancelButtonText: 'Log In',
-        confirmButtonColor: "#B88E2F",
-        cancelButtonColor: "#28a745",
-    }).then((result) => {
-        if (result.isConfirmed) {
-        } else {
-            window.location.href = "../Pages/auth.html";
-        }
-    });
-};
 
 const handleResponseError = (status) => {
     switch (status) {
@@ -452,16 +434,19 @@ const addingProductTemplateToCart = async () => {
 
     let productImage, imageUrl
     const keeperCartProduct = document.querySelector(".cart-Shop__products")
+    const subTotalBoxPrice = document.querySelector(".sub-total-box__price")
+    subTotalBoxPrice.innerHTML = "Loading..."
     keeperCartProduct.classList.add("center")
     keeperCartProduct.innerHTML = `<div class="loader-bars loader-cart-products  section-title"></div>`
 
     const dataCartProduct = await fetchGetCartProducts()
-    const cartProducts = dataCartProduct.cart.items
-    console.log(cartProducts);
+    const cartProductsItems = dataCartProduct.cart.items
+    const cartProductsTotal = dataCartProduct.cart.total
     keeperCartProduct.innerHTML = ""
+    subTotalBoxPrice.innerHTML = ""
     keeperCartProduct.classList.remove("center")
 
-    cartProducts.length ? cartProducts.forEach(item => {
+    cartProductsItems.length ? cartProductsItems.forEach(item => {
         productImage = item.product.images.find(image => image.hexColorCode === item.color);
         imageUrl = productImage ? `https://furniro-6x7f.onrender.com${productImage.path}` : `https://furniro-6x7f.onrender.com${item.product.images[0].path}`
 
@@ -475,7 +460,11 @@ const addingProductTemplateToCart = async () => {
                   </div>
                   <div class="box-shadow" style="background-color:${item.color}; width: 3rem; height: 3rem; border-radius: 100%;"></div>
               </div>
-                  </div><button onclick="removeProductByUserByUser('${item._id}', '${token}')"class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`)
+                  </div><button onclick="removeProductByUserByUser('${item._id}', '${token}')"class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`
+        )
+
+        subTotalBoxPrice.innerHTML = `Rs.${cartProductsTotal.allPrice.toLocaleString("en")}`
+
     }) : keeperCartProduct.innerHTML = `  
         <div class="empty-products">
            <h2>Your Cart is Empty</h2>
@@ -487,7 +476,6 @@ const addingProductTemplateToCart = async () => {
 }
 
 const deleteProductAndUpdateCart = async (productId, token) => {
-
     try {
         const response = await fetch(`https://furniro-6x7f.onrender.com/cart/${productId}`, {
             method: 'DELETE',
@@ -513,8 +501,6 @@ const deleteProductAndUpdateCart = async (productId, token) => {
 };
 
 const removeProductByUserByUser = async (productId, token) => {
-    console.log(productId, token);
-    console.log(productId, token);
     if (!productId && !token) {
         return false
     }
@@ -537,7 +523,8 @@ const updatePreviousPaths = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     updatePreviousPaths();
-}); window.removeProductByUserByUser = removeProductByUserByUser;
+});
+window.removeProductByUserByUser = removeProductByUserByUser;
 
 // const userScoringLogic = (iconsStar, userScoreingNumber, scoreStatus) => {
 //     iconsStar.forEach((icon, index) => {

@@ -39,8 +39,8 @@ exports.getAllProducts = async (req, res, next) => {
 
     const userFavorites = user
       ? await favoriteModel
-          .findOne({ user: user._id })
-          .then((fav) => fav?.items.map((item) => item.toString()) || [])
+        .findOne({ user: user._id })
+        .then((fav) => fav?.items.map((item) => item.toString()) || [])
       : [];
 
     let products = await productModel.aggregate([
@@ -103,7 +103,7 @@ exports.getAllProducts = async (req, res, next) => {
     ]);
 
     const totalProducts = await productModel.countDocuments(filters);
-
+    console.log(products);
     return successResponse(res, 200, {
       products,
       pagination: createPagination(+page, +limit, totalProducts, "Products"),

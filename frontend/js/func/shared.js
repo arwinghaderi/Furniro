@@ -1,4 +1,4 @@
-import { getFromLocalStorage } from "./utils.js";
+import { getFromLocalStorage, showAuthenticationRequiredAlert, getToken } from "./utils.js";
 
 let discountTemplate, newTemplate, discountPrice, element, randomIndex,
     randomImage, fullImagePath
@@ -53,6 +53,7 @@ const addingProductsTemplate = (products, productsStructure = "row", productsWra
 }
 
 const addingProductsTemplateRow = (product) => {
+    console.log(product);
     element = document.createElement("div")
     element.className = `col col-md-6 col-lg-4 col-xxl-3 product-main-box product-main-box__shop product-main-box__shop--show `
     element.setAttribute("data-aos", "zoom-in")
@@ -75,7 +76,7 @@ const addingProductsTemplateRow = (product) => {
      <i class="fas fa-exchange-alt  icon"></i>
      <span class="option-overlay__text">Compare</span></div> 
      <div class="option-overlay">
-     <svg id="like" Button" onclick="toggleLike(this)" class=" icon heart-icon " fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/> </svg>
+     <svg id="like" onclick="toggleLike(this, '${product._id}', ${product.isFavorite})" class="icon heart-icon ${product.isFavorite ? "heart-icon--active" : ""} " fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/> </svg>
      <span class="option-overlay__text">Like</span></div></div></div><div class="lable-product-box"> ${product.discountPercent ? discountTemplate : ""} ${product.isNewProduct ? newTemplate : ""}</div></div><div class="product-Introductions"><h3 class="product-name">  ${product.name.slice(0, 10)}...  </h3><p class="product-Introduction"> ${product.title}   </p><div class="product-price-box"> 
     <span class="product-price"> Rp  ${product.discountPercent ? product.priceAfterDiscount.toLocaleString("en") : product.price.toLocaleString("en")}   ${product.discountPercent ? discountPrice : ""}
     </div> </div></div>`
@@ -117,8 +118,32 @@ const addingProductsTemplateCol = (product) => {
     return fragment
 }
 
-const toggleLike = (element) => {
-    element.classList.toggle("heart-icon--active");
+const toggleLike = async (element, productId, isFavorite) => {
+    const token = getToken();
+    if (!token) {
+        showAuthenticationRequiredAlert();
+        return false;
+    }
+
+    try {
+        const method = isFavorite ? "DELETE" : "POST";
+        const response = await fetch(`http://localhost:3001//product/favorites/${productId}`, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`
+            }
+        });
+
+        if (response.ok) {
+            element.classList.toggle("heart-icon--active");
+        } else {
+            console.log("خطا در بروزرسانی لایک");
+        }
+
+    } catch (error) {
+        console.log("خطا در ارتباط با سرور", error);
+    }
 }
 
 window.toggleLike = toggleLike

@@ -162,11 +162,29 @@ const showDeleteConfirmation = (productId, token, deleteFunction) => {
     });
 };
 
+const showAuthenticationRequiredAlert = () => {
+    Swal.fire({
+        title: "Authentication Required",
+        text: "You need to log in to add the product to the cart. Would you like to continue viewing details?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: 'View Details',
+        cancelButtonText: 'Log In',
+        confirmButtonColor: "#B88E2F",
+        cancelButtonColor: "#28a745",
+    }).then((result) => {
+        if (result.isConfirmed) {
+        } else {
+            window.location.href = "../Pages/auth.html";
+        }
+    });
+};
+
 export {
     saveToLocalStorage, getFromLocalStorage,
     saveFilterState, getFilterState,
     getUrlParam, showDeleteConfirmation,
-    showSwal, errorMessagesForCart,
+    showSwal, errorMessagesForCart, showAuthenticationRequiredAlert,
     getToken, storeAccessTokenWithExpiry, getSavedStructure,
     setSecureCookie, getCookieValue, saveStructureState,
     deleteCookie, handleError, showSwalAndReload,

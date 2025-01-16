@@ -223,7 +223,6 @@ const validateConfrimPassword = (password, confirmPassword) => {
 
 const checkFormValidityLogin = () => {
     const { isEmailValid, isPasswordValid } = getingUserLoginInformation(loginEmailInput, loginPasswordInput)
-    console.log(isEmailValid, isPasswordValid);
     if (isEmailValid && isPasswordValid) {
         btnSignIn.disabled = false
         btnSignIn.innerHTML = "sign in"

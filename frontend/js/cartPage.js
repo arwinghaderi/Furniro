@@ -68,6 +68,8 @@ const addingCartProductsTemplate = async () => {
 const calculationTotalCart = async () => {
     const TotalPrice = document.querySelector(".cart-shop-section__total-price");
     const subTotalPrice = document.querySelector(".cart-shop-section__sub-total-price");
+    subTotalPrice.innerHTML = "Loading...";
+    TotalPrice.innerHTML = "Loading...";
 
     const dataCartProduct = await fetchGetCartProducts();
     const cartProductsTotal = dataCartProduct.cart.total;

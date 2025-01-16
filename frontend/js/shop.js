@@ -67,14 +67,14 @@ const updateActiveClass = categoryId => {
 };
 
 const fetchProducts = async (page = 1, limit = 4, category = '', title = '') => {
-    const token = getToken();
+    let token = getToken();
 
     productsWrapper.classList.add("row-container--center");
     productsWrapper.classList.remove("row-container");
     wrapperPagination.innerHTML = "";
     nextContainer.innerHTML = "";
     prevContainer.innerHTML = "";
-    productsWrapper.innerHTML = `<div class="loader-bars loader-products  section-title"></div>`;
+    productsWrapper.innerHTML = `<div class="loader-bars loader-products section-title"></div>`;
 
     document.querySelector('.loader-products').scrollIntoView({ behavior: "smooth", block: "start" });
     paginationTool.resultShowProducts.innerHTML = ` <div class="section-title">Loading...</div>`;
@@ -91,21 +91,23 @@ const fetchProducts = async (page = 1, limit = 4, category = '', title = '') => 
             url.searchParams.append('title', title);
         }
 
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+        if (token) {
+            headers['authorization'] = `Bearer ${token}`;
+        }
+
         const response = await fetch(url, {
             method: "GET",
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`
-            }
+            headers: headers
         });
-        console.log("API Response:", response);
 
         if (!response.ok) {
             let message = "An unexpected error occurred. Refresh the page.";
             throw new Error(message);
         }
         const dataProducts = await response.json();
-        console.log("Data Products:", dataProducts);
 
         paginationTool.resultShowProducts.innerHTML = "";
 
@@ -113,13 +115,12 @@ const fetchProducts = async (page = 1, limit = 4, category = '', title = '') => 
         const products = dataProducts.data.pagination.totalProducts;
         const indexStart = (dataProducts.data.pagination.limit * dataProducts.data.pagination.page) - dataProducts.data.pagination.limit;
 
-        paginationTool.resultShowProducts.innerHTML = `Showing  ${indexStart}  --   ${indexEnd > products ? products : indexEnd}   of  ${products}  results`;
+        paginationTool.resultShowProducts.innerHTML = `Showing ${indexStart} -- ${indexEnd > products ? products : indexEnd} of ${products} results`;
         productsWrapper.classList.remove("row-container--center");
         productsWrapper.classList.add("row-container");
 
-        console.log("Is Favorite:", dataProducts.data.products[0].isFavorite); // بررسی `isFavorite`
+        console.log("Is Favorite:", dataProducts.data.products[0]?.isFavorite);
 
-        // بررسی کنید که `isFavorite` به درستی در اینجا پردازش شود
         return dataProducts;
     } catch (error) {
         showSwal(`${error.message}`, "error", "Refresh the page.", "../Pages/shop.html");
@@ -388,7 +389,7 @@ const initializeFilters = async () => {
         categoryId = getAllProducts();
     }
 
-    const productsFilter = await fetchProducts(currentPage || 1, limit || 4, categoryId, searchValue);
+    let productsFilter = await fetchProducts(currentPage || 1, limit || 4, categoryId, searchValue);
     fetchCategory()
     setActiveOptionUsingObserver();
     addingProductsTemplate(productsFilter.data.products, productsStructure, productsWrapper);

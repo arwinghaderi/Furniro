@@ -460,7 +460,7 @@ const addingProductTemplateToCart = async () => {
                   </div>
                   <div class="box-shadow" style="background-color:${item.color}; width: 3rem; height: 3rem; border-radius: 100%;"></div>
               </div>
-                  </div><button onclick="removeProductByUserByUser('${item._id}', '${token}')"class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`
+                  </div><button onclick="removeProductByUserByUser(this,'${item._id}', '${token}')"class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`
         )
 
         subTotalBoxPrice.innerHTML = `Rs.${cartProductsTotal.allPrice.toLocaleString("en")}`
@@ -475,7 +475,9 @@ const addingProductTemplateToCart = async () => {
     `
 }
 
-const deleteProductAndUpdateCart = async (productId, token) => {
+const deleteProductAndUpdateCart = async (element, productId, token) => {
+
+    element.classList.add = "icon-delete--pending"
     try {
         const response = await fetch(`https://furniro-6x7f.onrender.com/cart/${productId}`, {
             method: 'DELETE',
@@ -495,16 +497,18 @@ const deleteProductAndUpdateCart = async (productId, token) => {
         showSwal(result.data.message, "success", "OK", "#");
     } catch (error) {
         showSwal("You need to authenticate first.", "error", "Try Again", '#');
+    } finally {
+        element.classList.remove = "icon-delete--pending"
     }
 
     addingProductTemplateToCart();
 };
 
-const removeProductByUserByUser = async (productId, token) => {
+const removeProductByUserByUser = async (element, productId, token) => {
     if (!productId && !token) {
         return false
     }
-    showDeleteConfirmation(productId, token, deleteProductAndUpdateCart)
+    showDeleteConfirmation(element, productId, token, deleteProductAndUpdateCart)
 }
 
 let previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];

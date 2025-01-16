@@ -732,3 +732,9 @@ cart-shop singel-product
     align-items: center;
     justify-content: center;
 }
+
+.icon-delete--pending {
+    color: hsl(0, 100%, 50%);
+    opacity: 0.6;
+    cursor: not-allowed !important;
+}

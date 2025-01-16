@@ -217,3 +217,9 @@
 .show-more:hover {
     color: var(--Primary-color);
 }
+
+.like--pending {
+    color: hsl(0, 100%, 50%);
+    opacity: 0.6;
+    cursor: not-allowed !important;
+}

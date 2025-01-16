@@ -39,8 +39,8 @@ exports.getAllProducts = async (req, res, next) => {
 
     const userFavorites = user
       ? await favoriteModel
-        .findOne({ user: user._id })
-        .then((fav) => fav?.items.map((item) => item.toString()) || [])
+          .findOne({ user: user._id })
+          .then((fav) => fav?.items.map((item) => item.toString()) || [])
       : [];
 
     let products = await productModel.aggregate([
@@ -83,7 +83,7 @@ exports.getAllProducts = async (req, res, next) => {
               else: 0,
             },
           },
-          isNewProduct: { $gte: ["$createdAt", fourWeeksAgo] },
+          isNewProduct: { $gte: ["$updatedAt", fourWeeksAgo] },
           isFavorite: { $in: [{ $toString: "$_id" }, userFavorites] },
         },
       },
@@ -94,7 +94,6 @@ exports.getAllProducts = async (req, res, next) => {
           colors: 0,
           description: 0,
           attributes: 0,
-          updatedAt: 0,
           __v: 0,
         },
       },
@@ -103,7 +102,7 @@ exports.getAllProducts = async (req, res, next) => {
     ]);
 
     const totalProducts = await productModel.countDocuments(filters);
-    console.log(products);
+
     return successResponse(res, 200, {
       products,
       pagination: createPagination(+page, +limit, totalProducts, "Products"),
@@ -355,8 +354,13 @@ exports.addToFavorites = async (req, res, next) => {
       { upsert: true }
     );
 
+    const userFavorites = await favoriteModel
+      .findOne({ user: user._id })
+      .then((fav) => fav?.items.map((item) => item.toString()) || []);
+
     return successResponse(res, 201, {
       message: "Product Add to Favorite List",
+      userFavorites,
     });
   } catch (err) {
     next(err);

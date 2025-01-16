@@ -55,14 +55,10 @@ exports.addSlider = async (req, res, next) => {
     const countFormat =
       sliderCount < 9 ? `0${sliderCount + 1}-` : `${sliderCount + 1}-`;
 
-    const slider = {
+    const slider = await sliderModel.create({
       imagePath: `/images/slider/${req.file.filename}`,
       title: countFormat + title,
       caption,
-    };
-
-    await sliderModel.create({
-      slider,
     });
 
     return successResponse(res, 201, { slider });
@@ -73,6 +69,12 @@ exports.addSlider = async (req, res, next) => {
 
 exports.sliderInfo = async (req, res, next) => {
   try {
+    const sliders = await sliderModel.find().lean().select("-__v");
+    if (!sliders) {
+      return errorResponse(res, 404, "Slider Not Found!");
+    }
+
+    return successResponse(res, 200, { sliders });
   } catch (err) {
     next(err);
   }

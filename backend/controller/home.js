@@ -1,6 +1,7 @@
 const { errorResponse, successResponse } = require("../helper/responses");
 const productModel = require("./../model/product");
 const favoriteModel = require("./../model/favorite");
+const sliderModel = require("./../model/slider");
 
 exports.homePage = async (req, res, next) => {
   try {
@@ -38,6 +39,40 @@ exports.homePage = async (req, res, next) => {
     return successResponse(res, 200, {
       products,
     });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.addSlider = async (req, res, next) => {
+  try {
+    const { caption, title } = req.body;
+
+    if (!req.file) {
+      return errorResponse(res, 400, "Pleaz Upload an Image for Slider");
+    }
+    let sliderCount = await sliderModel.countDocuments();
+    const countFormat =
+      sliderCount < 9 ? `0${sliderCount + 1}-` : `${sliderCount + 1}-`;
+
+    const slider = {
+      imagePath: `/images/slider/${req.file.filename}`,
+      title: countFormat + title,
+      caption,
+    };
+
+    await sliderModel.create({
+      slider,
+    });
+
+    return successResponse(res, 201, { slider });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.sliderInfo = async (req, res, next) => {
+  try {
   } catch (err) {
     next(err);
   }

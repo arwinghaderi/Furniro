@@ -93,6 +93,11 @@
     margin-left: 0.8rem;
 }
 
+.favorites-loading {
+    cursor: wait;
+    opacity: 0.6;
+}
+
 .lable-product-box {
     position: absolute;
     right: 0;

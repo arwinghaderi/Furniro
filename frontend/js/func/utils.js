@@ -10,20 +10,6 @@ const getUrlParam = (key) => {
     return urlParams.get(key)
 }
 
-// const getCountProductsCart = () => {
-//     let iconCountProducts = document.querySelector(".nav-bar__count-Product")
-//     let countProducts = getFromLocalStorage("countProductToCart")
-
-//     if (countProducts) {
-//         iconCountProducts.classList.add("nav-bar__count-Product--active")
-//         iconCountProducts.innerHTML = countProducts
-
-//     } else {
-//         iconCountProducts.classList.add("nav-bar__count-Product--active")
-//         iconCountProducts.innerHTML = 0
-//     }
-// }
-
 const showSwal = async (title, icon, confirmButtonText, url) => {
     await swal.fire({
         title: title,
@@ -145,7 +131,7 @@ const errorMessagesForCart = {
     404: "User or product not found.",
 };
 
-const showDeleteConfirmation = (productId, token, deleteFunction) => {
+const showDeleteConfirmation = (element, productId, token, deleteFunction) => {
     Swal.fire({
         title: "Are you sure?",
         text: "Do you really want to remove this item from the cart?",
@@ -157,7 +143,7 @@ const showDeleteConfirmation = (productId, token, deleteFunction) => {
         cancelButtonColor: "#28a745",
     }).then((result) => {
         if (result.isConfirmed) {
-            deleteFunction(productId, token);
+            deleteFunction(element, productId, token);
         }
     });
 };

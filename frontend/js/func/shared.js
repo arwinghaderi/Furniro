@@ -5,9 +5,8 @@ let discountTemplate, newTemplate, discountPrice, element, randomIndex,
 const fragment = document.createDocumentFragment();
 
 const addingProductsTemplate = (products, productsStructure = "row", productsWrapper) => {
-    console.log(products);
     productsStructure = getFromLocalStorage("structure") || "row"
-
+    console.log(products);
     productsWrapper.innerHTML = '';
     let fragment = document.createDocumentFragment();
 
@@ -53,7 +52,6 @@ const addingProductsTemplate = (products, productsStructure = "row", productsWra
 }
 
 const addingProductsTemplateRow = (product) => {
-    console.log(product);
     element = document.createElement("div")
     element.className = `col col-md-6 col-lg-4 col-xxl-3 product-main-box product-main-box__shop product-main-box__shop--show `
     element.setAttribute("data-aos", "zoom-in")
@@ -68,7 +66,7 @@ const addingProductsTemplateRow = (product) => {
 
     element.innerHTML = `<div class="product-box"  id="discount"><div   
      class="img-box-overlay"><img class="product__img product__img-col" src="${fullImagePath}" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';"  alt="${product.name}" loading="lazy"><div class="product-overlay">
-     <div class="box-add-btn-cart"><a href="../../Pages/product.html?slug=${product.slug}" class="box-add-btn-cart__text">Details Product</a></div> 
+     <div class="box-add-btn-cart"><a href="/Furniro/frontend/Pages/product.html?slug=${product.slug}" class="box-add-btn-cart__text">Details Product</a></div> 
      <div class="product-overlay__options"> 
      <div class="option-overlay"> 
      <i class="fas fa-share-alt fa-flip-vertical  icon" ></i> 
@@ -125,6 +123,8 @@ const toggleLike = async (element, productId, isFavorite) => {
         return false;
     }
 
+    element.classList.add("icon-delete--pending")
+
     try {
         const method = isFavorite ? "DELETE" : "POST";
         const response = await fetch(`https://furniro-6x7f.onrender.com/product/favorites/${productId}`, {
@@ -134,7 +134,7 @@ const toggleLike = async (element, productId, isFavorite) => {
                 'authorization': `Bearer ${token}`
             }
         });
-
+      
         if (response.ok) {
             element.classList.toggle("heart-icon--active");
         } else {
@@ -143,6 +143,8 @@ const toggleLike = async (element, productId, isFavorite) => {
 
     } catch (error) {
         console.log("خطا در ارتباط با سرور", error);
+    } finally {
+        element.classList.remove("icon-delete--pending")
     }
 }
 

@@ -244,9 +244,8 @@ cart-shop singel-product
 
 .detailes-product-img-secound {
     display: flex;
-    justify-content: space-around;
+    gap: 3rem;
     align-items: center;
-    gap: 2rem;
     flex-direction: column;
 }
 

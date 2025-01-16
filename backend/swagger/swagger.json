@@ -1126,6 +1126,93 @@
       }
     },
 
+    "/": {
+      "get": {
+        "summary": "Get homepage products",
+        "description": "Fetch 8 random products with optional user authentication.",
+        "tags": ["Home 🏡"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional Bearer token for user authentication"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of products"
+          },
+          "401": {
+            "description": "Unauthorized - Token missing or invalid"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/slider/": {
+      "post": {
+        "summary": "Add a new slider",
+        "description": "Add a new slider image with title and caption. Requires admin authentication.",
+        "tags": ["Admin Dashboard 📈"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "caption": { "type": "string" },
+                  "image": { "type": "string", "format": "binary" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Slider added successfully"
+          },
+          "401": {
+            "description": "Unauthorized !! - token Not Found or Invalid"
+          },
+          "403": {
+            "description": "Unauthorized, admin access required"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get slider information",
+        "description": "Fetch all sliders without the version field",
+        "tags": ["Home 🏡"],
+        "responses": {
+          "200": {
+            "description": "Sliders retrieved successfully"
+          },
+          "404": {
+            "description": "Slider not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+
     "/concat/": {
       "post": {
         "summary": "Create a new contact message",

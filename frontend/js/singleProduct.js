@@ -30,7 +30,7 @@ const fetchProductsDetails = async () => {
         const headers = {
             'Content-Type': 'application/json',
         };
-        
+
         if (token) {
             headers['authorization'] = `Bearer ${token}`;
         }
@@ -410,7 +410,8 @@ const renderProductDetails = async () => {
     try {
         const response = await fetchProductsDetails();
         const product = response.data.product[0];
-        const reletedProducts = response.data.reletedProducts
+        let reletedProducts = response.data.reletedProducts
+        reletedProducts ? reletedProducts : reletedProducts = []
         addingproductsDetailes(product);
         addingPagePathDom(product);
         addingAllProductPhotos(product);

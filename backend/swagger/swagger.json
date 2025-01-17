@@ -1621,6 +1621,24 @@
             "bearerAuth": []
           }
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "required": false,
+            "type": "integer",
+            "default": 1
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of products per page",
+            "required": false,
+            "type": "integer",
+            "default": 4
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successfully retrieved the user's favorite products",
@@ -1941,7 +1959,7 @@
             "description": "Number of products per page",
             "required": false,
             "type": "integer",
-            "default": 8
+            "default": 4
           }
         ],
         "responses": {

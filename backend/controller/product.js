@@ -340,7 +340,10 @@ exports.getProduct = async (req, res, next) => {
 exports.getAllFavorites = async (req, res, next) => {
   try {
     const user = req.user;
-    const { page = 1, limit = 4 } = req.query;
+    let { page = 1, limit = 4 } = req.query;
+    page = parseInt(page);
+    limit = parseInt(limit);
+
     let fourWeeksAgo = new Date();
     fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 28);
 
@@ -355,8 +358,6 @@ exports.getAllFavorites = async (req, res, next) => {
         path: "user",
         select: "-password",
       })
-      .skip((page - 1) * limit)
-      .limit(+limit)
       .select("-createdAt -updatedAt -__v");
 
     if (!userFavorites) {
@@ -365,16 +366,18 @@ exports.getAllFavorites = async (req, res, next) => {
       });
     }
 
-    const favoritesWithFlags = userFavorites.items.map((item) => ({
-      ...item._doc,
-      isFavorite: true,
-      isNewProduct: new Date(item.updatedAt) >= fourWeeksAgo,
-    }));
-
     const totalFavorites = userFavorites.items.length;
 
+    const paginatedItems = userFavorites.items
+      .slice((page - 1) * limit, page * limit)
+      .map((item) => ({
+        ...item._doc,
+        isFavorite: true,
+        isNewProduct: new Date(item.updatedAt) >= fourWeeksAgo,
+      }));
+
     return successResponse(res, 200, {
-      favorites: favoritesWithFlags,
+      favorites: paginatedItems,
       pagination: createPagination(+page, +limit, totalFavorites, "Favorites"),
     });
   } catch (err) {
@@ -455,6 +458,9 @@ exports.searchItem = async (req, res, next) => {
   try {
     let { title, page = 1, limit = 4 } = req.query;
     const user = req.user;
+    page = parseInt(page);
+    limit = parseInt(limit);
+
     let fourWeeksAgo = new Date();
     fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 28);
 
@@ -482,8 +488,7 @@ exports.searchItem = async (req, res, next) => {
       .limit(+limit)
       .select(
         "-__v -description -size -attributes -createdAt -updatedAt -colors"
-      )
-      .lean();
+      );
 
     if (products.length === 0) {
       return errorResponse(res, 404, {

@@ -340,17 +340,21 @@ exports.getProduct = async (req, res, next) => {
 exports.getAllFavorites = async (req, res, next) => {
   try {
     const user = req.user;
+    const { page = 1, limit = 4 } = req.query;
+
     const userFavorites = await favoriteModel
       .findOne({ user: user._id })
       .populate({
         path: "items",
         select:
-          "name title price discountPercent description priceAfterDiscount images slug rating label",
+          "name title price discountPercent priceAfterDiscount images slug",
       })
       .populate({
         path: "user",
         select: "-password",
       })
+      .skip((page - 1) * limit)
+      .limit(+limit)
       .select("-createdAt -updatedAt -__v");
 
     if (!userFavorites) {
@@ -359,7 +363,12 @@ exports.getAllFavorites = async (req, res, next) => {
       });
     }
 
-    return successResponse(res, 200, { favorites: userFavorites });
+    const totalFavorites = userFavorites.items.length;
+
+    return successResponse(res, 200, {
+      favorites: userFavorites,
+      pagination: createPagination(+page, +limit, totalFavorites, "Favorites"),
+    });
   } catch (err) {
     next(err);
   }
@@ -436,7 +445,7 @@ exports.removeFromFavorites = async (req, res, next) => {
 
 exports.searchItem = async (req, res, next) => {
   try {
-    let { title, page = 1, limit = 8 } = req.query;
+    let { title, page = 1, limit = 4 } = req.query;
 
     const filters = {
       quantity: { $gt: 0 },
@@ -467,7 +476,12 @@ exports.searchItem = async (req, res, next) => {
 
     return successResponse(res, 200, {
       products,
-      pagination: createPagination(page, limit, totalProduct, "SearchProduct"),
+      pagination: createPagination(
+        +page,
+        +limit,
+        totalProduct,
+        "SearchProduct"
+      ),
     });
   } catch (err) {
     next(err);

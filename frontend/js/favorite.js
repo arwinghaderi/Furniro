@@ -3,8 +3,11 @@ import { getToken } from "./func/utils.js"
 import { showAuthenticationRequiredAlert } from "./func/utils.js"
 
 const fetchGetFavoriteProduct = async () => {
-    const token = getToken()
+    const token = getToken();
 
+    if (!token) {
+        return { cart: { items: [] } };
+    }
     const headers = {
         'Content-Type': 'application/json',
     };
@@ -20,7 +23,7 @@ const fetchGetFavoriteProduct = async () => {
         })
 
         if (!response.ok) {
-            showAuthenticationRequiredAlert()
+            return { cart: { items: [] } };
         }
 
         const favoriteData = await response.json()
@@ -32,7 +35,7 @@ const fetchGetFavoriteProduct = async () => {
 
 window.addEventListener("load", async () => {
     const favoriteProductContainer = document.querySelector('.favorite-product-container');
-    
+
     if (favoriteProductContainer) {
         let productsFavorite = await fetchGetFavoriteProduct();
         let productsStructure = "row";

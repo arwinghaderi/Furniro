@@ -1,4 +1,5 @@
 import { getFromLocalStorage, showAuthenticationRequiredAlert, getToken } from "./utils.js";
+import { getCountProductsFavorite } from "../Features/cartQuantityDisplay.js";
 
 let discountTemplate, newTemplate, discountPrice, element, randomIndex,
     randomImage, fullImagePath
@@ -136,6 +137,7 @@ const toggleLike = async (element, productId, isFavorite) => {
 
         if (response.ok) {
             element.classList.toggle("heart-icon--active");
+            getCountProductsFavorite()
         } else {
             showAuthenticationRequiredAlert()
         }

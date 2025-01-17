@@ -63,4 +63,4 @@ window.addEventListener("DOMContentLoaded", () => {
 
 })
 
-export { getCountProductsCart, fetchGetCartProducts };
+export { getCountProductsCart, fetchGetCartProducts, getCountProductsFavorite };

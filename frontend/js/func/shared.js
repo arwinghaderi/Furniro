@@ -5,9 +5,7 @@ let discountTemplate, newTemplate, discountPrice, element, randomIndex,
 const fragment = document.createDocumentFragment();
 
 const addingProductsTemplate = (products, productsStructure = "row", productsWrapper) => {
-    console.log(products);
     productsStructure = getFromLocalStorage("structure") || "row"
-
     productsWrapper.innerHTML = '';
     let fragment = document.createDocumentFragment();
 
@@ -53,7 +51,6 @@ const addingProductsTemplate = (products, productsStructure = "row", productsWra
 }
 
 const addingProductsTemplateRow = (product) => {
-    console.log(product);
     element = document.createElement("div")
     element.className = `col col-md-6 col-lg-4 col-xxl-3 product-main-box product-main-box__shop product-main-box__shop--show `
     element.setAttribute("data-aos", "zoom-in")
@@ -125,6 +122,8 @@ const toggleLike = async (element, productId, isFavorite) => {
         return false;
     }
 
+    element.classList.add("like--pending")
+
     try {
         const method = isFavorite ? "DELETE" : "POST";
         const response = await fetch(`https://furniro-6x7f.onrender.com/product/favorites/${productId}`, {
@@ -138,11 +137,13 @@ const toggleLike = async (element, productId, isFavorite) => {
         if (response.ok) {
             element.classList.toggle("heart-icon--active");
         } else {
-            console.log("خطا در بروزرسانی لایک");
+            showAuthenticationRequiredAlert()
         }
 
     } catch (error) {
-        console.log("خطا در ارتباط با سرور", error);
+        showAuthenticationRequiredAlert()
+    } finally {
+        element.classList.remove("like--pending")
     }
 }
 

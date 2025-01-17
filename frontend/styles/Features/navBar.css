@@ -40,12 +40,13 @@
 }
 
 .nav-bar__count-Product,
-.nav-bar__count-Product_mobail {
+.nav-bar__count-Product-favorite .nav-bar__count-Product_mobail {
     opacity: 0;
     transition: all 2.5s ease-in-out;
 }
 
-.nav-bar__count-Product--active {
+.nav-bar__count-Product--active,
+.nav-bar__count-Product-favorite--active {
     position: absolute;
     top: 0.5rem;
     left: 1.5rem;

@@ -244,9 +244,8 @@ cart-shop singel-product
 
 .detailes-product-img-secound {
     display: flex;
-    justify-content: space-around;
+    gap: 3rem;
     align-items: center;
-    gap: 2rem;
     flex-direction: column;
 }
 
@@ -710,6 +709,7 @@ cart-shop singel-product
 
 .product-img-box {
     width: 100%;
+    height: 60rem;
     background-color: #FAF3EA;
     display: flex;
     align-items: center;
@@ -732,4 +732,10 @@ cart-shop singel-product
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.icon-delete--pending {
+    color: hsl(0, 100%, 50%);
+    opacity: 0.6;
+    cursor: not-allowed !important;
 }

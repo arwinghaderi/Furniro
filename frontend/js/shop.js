@@ -2,7 +2,7 @@ import { addingProductsTemplate } from "../js/func/shared.js"
 import {
     saveToLocalStorage,
     getFromLocalStorage, saveStructureState, getSavedStructure,
-    showSwal, saveFilterState, getFilterState,
+    showSwal, saveFilterState, getFilterState, getToken
 } from "./func/utils.js"
 
 let $ = document
@@ -67,21 +67,22 @@ const updateActiveClass = categoryId => {
 };
 
 const fetchProducts = async (page = 1, limit = 4, category = '', title = '') => {
-    productsWrapper.classList.add("row-container--center")
-    productsWrapper.classList.remove("row-container")
-    wrapperPagination.innerHTML = ""
-    nextContainer.innerHTML = ""
-    prevContainer.innerHTML = ""
-    productsWrapper.innerHTML = `<div class="loader-bars loader-products  section-title"></div>`
+    let token = getToken();
+
+    productsWrapper.classList.add("row-container--center");
+    productsWrapper.classList.remove("row-container");
+    wrapperPagination.innerHTML = "";
+    nextContainer.innerHTML = "";
+    prevContainer.innerHTML = "";
+    productsWrapper.innerHTML = `<div class="loader-bars loader-products section-title"></div>`;
 
     document.querySelector('.loader-products').scrollIntoView({ behavior: "smooth", block: "start" });
-    paginationTool.resultShowProducts.innerHTML = ` <div class="section-title">Loading...</div>`
+    paginationTool.resultShowProducts.innerHTML = ` <div class="section-title">Loading...</div>`;
 
     try {
         const url = new URL(`https://furniro-6x7f.onrender.com/product/`);
         url.searchParams.append('page', page);
         url.searchParams.append('limit', limit);
-
 
         if (category) {
             url.searchParams.append('category', category);
@@ -90,28 +91,41 @@ const fetchProducts = async (page = 1, limit = 4, category = '', title = '') => 
             url.searchParams.append('title', title);
         }
 
-        const response = await fetch(url);
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+        if (token) {
+            headers['authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers
+        });
 
         if (!response.ok) {
-            let message = "An unexpected error occurred. Refresh the page."
-            throw new Error(message)
+            let message = "An unexpected error occurred. Refresh the page.";
+            throw new Error(message);
         }
         const dataProducts = await response.json();
-        paginationTool.resultShowProducts.innerHTML = ""
 
-        const indexEnd = dataProducts.data.pagination.limit * dataProducts.data.pagination.page
-        const products = dataProducts.data.pagination.totalProducts
-        const indexStart = (dataProducts.data.pagination.limit * dataProducts.data.pagination.page) - dataProducts.data.pagination.limit
+        paginationTool.resultShowProducts.innerHTML = "";
 
-        paginationTool.resultShowProducts.innerHTML = `Showing  ${indexStart}  --   ${indexEnd > products ? products : indexEnd}   of  ${products}  results`
-        productsWrapper.classList.remove("row-container--center")
-        productsWrapper.classList.add("row-container")
-        return dataProducts
+        const indexEnd = dataProducts.data.pagination.limit * dataProducts.data.pagination.page;
+        const products = dataProducts.data.pagination.totalProducts;
+        const indexStart = (dataProducts.data.pagination.limit * dataProducts.data.pagination.page) - dataProducts.data.pagination.limit;
 
+        paginationTool.resultShowProducts.innerHTML = `Showing ${indexStart} -- ${indexEnd > products ? products : indexEnd} of ${products} results`;
+        productsWrapper.classList.remove("row-container--center");
+        productsWrapper.classList.add("row-container");
+
+        console.log("Is Favorite:", dataProducts.data.products[0]?.isFavorite);
+
+        return dataProducts;
     } catch (error) {
-        showSwal(`${error.message}`, "error", "Refresh the page.", "../Pages/shop.html")
+        showSwal(`${error.message}`, "error", "Refresh the page.", "../Pages/shop.html");
     }
-}
+};
 
 const addingPaginationTemplate = (currentPage, paginationTool, totalPage, limit = 4, userSearchValue = "") => {
     paginationTool.wrapperPagination.innerHTML = ""
@@ -375,7 +389,7 @@ const initializeFilters = async () => {
         categoryId = getAllProducts();
     }
 
-    const productsFilter = await fetchProducts(currentPage || 1, limit || 4, categoryId, searchValue);
+    let productsFilter = await fetchProducts(currentPage || 1, limit || 4, categoryId, searchValue);
     fetchCategory()
     setActiveOptionUsingObserver();
     addingProductsTemplate(productsFilter.data.products, productsStructure, productsWrapper);

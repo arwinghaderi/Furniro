@@ -24,8 +24,21 @@ const swapContent = (dataSetcontent) => {
 }
 
 const fetchProductsDetails = async () => {
+    const token = getToken()
+
     try {
-        const response = await fetch(`https://furniro-6x7f.onrender.com/product/${urlParamsSlug}`)
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+        
+        if (token) {
+            headers['authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`https://furniro-6x7f.onrender.com/product/${urlParamsSlug}`, {
+            method: "GET",
+            headers: headers
+        })
 
         if (!response.ok) {
             const message = "Product not found" || "An unexpected error occurred."
@@ -347,41 +360,43 @@ const addingRelatedProduct = (reletedProducts) => {
 }
 
 const addingProductInformationTemplate = (product) => {
-    let informationContent = document.querySelector(".information-content")
-    let productImgSection = document.querySelector(".product-img-section")
+    let productImgSection = document.querySelector(".product-img-section");
     let images = product.images;
-    let productInfomation = product
+    let informationContent = document.querySelector(".information-content");
+    let productInfomation = product;
 
     informationContent.insertAdjacentHTML("beforeend", ` 
-            <div class="content content--active  product-description-box" id="description">
-                        <p class="product-description">
-                        ${productInfomation.description}
-                       </p>
-                    </div>
+    <div class="content content--active product-description-box" id="description">
+        <p class="product-description">
+            ${productInfomation.description}
+        </p>
+    </div>
 
-                    <div class="content product-description-box  additional-information" id="Information">
-                        <table class="additional-information__table">
-                            <thead class="additional-information__head">
-                                <tr class="column-head">
-                                    <th class="column-head__content">Feature</th>
-                                    <th class="column-head__content">value</th>
-                                </tr>
-                            </thead>
-                            <tbody class="additional-information__body">
-                                <tr class="column-body">
-                                    <td class="column-body__content">Base Material</td>
-                                    <td class="column-body__content">Engineered Wood </td>
-                                </tr>
-                                <tr class="column-body">
-                                    <td class="column-body__content">Brande</td>
-                                    <td class="column-body__content">${productInfomation.attributes.Brand}</td>
-                                </tr>
-                                <tr class="column-body">
-                                    <td class="column-body__content">Style</td>
-                                    <td class="column-body__content"> ${productInfomation.attributes.Style}</td>
-                                </tr>
-                        </table>
-                    </div>`)
+    <div class="content product-description-box additional-information" id="Information">
+        <table class="additional-information__table">
+            <thead class="additional-information__head">
+                <tr class="column-head">
+                    <th class="column-head__content">Feature</th>
+                    <th class="column-head__content">Value</th>
+                </tr>
+            </thead>
+            <tbody class="additional-information__body" id="productAttributesBody">
+            </tbody>
+        </table>
+    </div>`);
+
+    let productAttributesBody = document.querySelector("#productAttributesBody");
+
+    const extractedAttributes = Object.entries(productInfomation.attributes).slice(0, 3);
+
+    extractedAttributes.forEach(([key, value]) => {
+        productAttributesBody.insertAdjacentHTML("beforeend", `
+        <tr class="column-body">
+            <td class="column-body__content">${key}</td>
+            <td class="column-body__content">${value}</td>
+        </tr>`);
+    });
+
     productImgSection.insertAdjacentHTML("beforeend", `
                      <div class="product-img-box box-shadow">
                         <img class="product-img" src="https://furniro-6x7f.onrender.com${images[0].path}" alt="product-img">
@@ -395,7 +410,7 @@ const renderProductDetails = async () => {
     try {
         const response = await fetchProductsDetails();
         const product = response.data.product[0];
-        let reletedProducts = response.data.reletedProducts
+        const reletedProducts = response.data.reletedProducts
         addingproductsDetailes(product);
         addingPagePathDom(product);
         addingAllProductPhotos(product);
@@ -460,7 +475,7 @@ const addingProductTemplateToCart = async () => {
                   </div>
                   <div class="box-shadow" style="background-color:${item.color}; width: 3rem; height: 3rem; border-radius: 100%;"></div>
               </div>
-                  </div><button onclick="removeProductByUserByUser('${item._id}', '${token}')"class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`
+                  </div><button onclick="removeProductByUserByUser(this,'${item._id}', '${token}')"class="products-keeper-product-delete-btn"><div class="box-remove-product"> <i class="fas fa-times icon-close "></i></div></button></div>`
         )
 
         subTotalBoxPrice.innerHTML = `Rs.${cartProductsTotal.allPrice.toLocaleString("en")}`
@@ -475,7 +490,9 @@ const addingProductTemplateToCart = async () => {
     `
 }
 
-const deleteProductAndUpdateCart = async (productId, token) => {
+const deleteProductAndUpdateCart = async (element, productId, token) => {
+
+    element.classList.add = "icon-delete--pending"
     try {
         const response = await fetch(`https://furniro-6x7f.onrender.com/cart/${productId}`, {
             method: 'DELETE',
@@ -495,16 +512,18 @@ const deleteProductAndUpdateCart = async (productId, token) => {
         showSwal(result.data.message, "success", "OK", "#");
     } catch (error) {
         showSwal("You need to authenticate first.", "error", "Try Again", '#');
+    } finally {
+        element.classList.remove = "icon-delete--pending"
     }
 
     addingProductTemplateToCart();
 };
 
-const removeProductByUserByUser = async (productId, token) => {
+const removeProductByUserByUser = async (element, productId, token) => {
     if (!productId && !token) {
         return false
     }
-    showDeleteConfirmation(productId, token, deleteProductAndUpdateCart)
+    showDeleteConfirmation(element, productId, token, deleteProductAndUpdateCart)
 }
 
 let previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];

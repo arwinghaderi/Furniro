@@ -33,5 +33,5 @@ router
   .post(auth, addToFavorites)
   .delete(auth, removeFromFavorites);
 
-router.route("/search").post(searchItem);
+router.route("/search").post(optionalAuth, searchItem);
 module.exports = router;

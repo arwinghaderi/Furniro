@@ -341,13 +341,15 @@ exports.getAllFavorites = async (req, res, next) => {
   try {
     const user = req.user;
     const { page = 1, limit = 4 } = req.query;
+    let fourWeeksAgo = new Date();
+    fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 28);
 
     const userFavorites = await favoriteModel
       .findOne({ user: user._id })
       .populate({
         path: "items",
         select:
-          "name title price discountPercent priceAfterDiscount images slug",
+          "name title price discountPercent priceAfterDiscount images slug updatedAt",
       })
       .populate({
         path: "user",
@@ -363,10 +365,16 @@ exports.getAllFavorites = async (req, res, next) => {
       });
     }
 
+    const favoritesWithFlags = userFavorites.items.map((item) => ({
+      ...item._doc,
+      isFavorite: true,
+      isNewProduct: new Date(item.updatedAt) >= fourWeeksAgo,
+    }));
+
     const totalFavorites = userFavorites.items.length;
 
     return successResponse(res, 200, {
-      favorites: userFavorites,
+      favorites: favoritesWithFlags,
       pagination: createPagination(+page, +limit, totalFavorites, "Favorites"),
     });
   } catch (err) {
@@ -446,6 +454,9 @@ exports.removeFromFavorites = async (req, res, next) => {
 exports.searchItem = async (req, res, next) => {
   try {
     let { title, page = 1, limit = 4 } = req.query;
+    const user = req.user;
+    let fourWeeksAgo = new Date();
+    fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 28);
 
     const filters = {
       quantity: { $gt: 0 },
@@ -456,7 +467,14 @@ exports.searchItem = async (req, res, next) => {
         message: "Please enter a title to search",
       });
     }
+
     filters.title = { $regex: title, $options: "i" };
+
+    const userFavorites = user
+      ? await favoriteModel
+          .findOne({ user: user._id })
+          .then((fav) => fav?.items.map((item) => item.toString()) || [])
+      : [];
 
     const products = await productModel
       .find(filters)
@@ -464,7 +482,8 @@ exports.searchItem = async (req, res, next) => {
       .limit(+limit)
       .select(
         "-__v -description -size -attributes -createdAt -updatedAt -colors"
-      );
+      )
+      .lean();
 
     if (products.length === 0) {
       return errorResponse(res, 404, {
@@ -472,10 +491,16 @@ exports.searchItem = async (req, res, next) => {
       });
     }
 
+    const productsWithFlags = products.map((product) => ({
+      ...product,
+      isFavorite: userFavorites.includes(product._id.toString()),
+      isNewProduct: new Date(product.updatedAt) >= fourWeeksAgo,
+    }));
+
     const totalProduct = await productModel.countDocuments(filters);
 
     return successResponse(res, 200, {
-      products,
+      products: productsWithFlags,
       pagination: createPagination(
         +page,
         +limit,

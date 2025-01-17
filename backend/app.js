@@ -18,6 +18,7 @@ const { errorHandler } = require("./middleware/errorHandler");
 const app = express();
 
 app.use(setHeaders);
+app.options("*", setHeaders);
 app.use(cookieParser());
 
 app.use(express.json({ limit: "50mb" }));

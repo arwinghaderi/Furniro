@@ -880,6 +880,21 @@
     .detailes-product-img-secoun {
         width: 100%;
     }
+
+    .detailes-product__size-btn-box-cart {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
+    .lable-product-box-cart {
+        left: -1.5rem;
+        top: -1.5rem;
+    }
+
+    .Discount-product-cart {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
 }
 
 @media screen and (max-width:392px) {

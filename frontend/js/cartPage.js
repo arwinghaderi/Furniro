@@ -21,7 +21,7 @@ const addingCartProductsTemplate = async () => {
     keeperProductCart.innerHTML = "";
     if (cartProductsItems.length) {
         cartProductsItems.forEach(item => {
-            discountTemplate = `<div class="Discount-product"><span class="Discount-product__number">${item.product.discountPercent}%</span></div>`;
+            discountTemplate = `<div class="Discount-product-cart"><span class="Discount-product__number">${item.product.discountPercent}%</span></div>`;
             subtotal = item.product.priceAfterDiscount ? item.product.priceAfterDiscount : item.product.price * item.quantity;
             productImage = item.product.images.find(image => image.hexColorCode === item.color);
             imageUrl = productImage ? `https://furniro-6x7f.onrender.com${productImage.path}` : `https://furniro-6x7f.onrender.com${item.product.images[0].path}`;
@@ -30,15 +30,15 @@ const addingCartProductsTemplate = async () => {
             element.innerHTML = `
                 <div class="cart-shop-section__details-product">
                     <div class="cart-shop-section__box-img">
-                        <div class="lable-product-box">${item.product.discountPercent ? discountTemplate : ""}</div>
+                        <div class="lable-product-box-cart">${item.product.discountPercent ? discountTemplate : ""}</div>
                         <img class="cart-shop-section__img" src="${imageUrl}" alt="product Image">
                     </div>
                     <div class="cart-shop-section-infomation">
                         <span class="cart-shop-section__product-name">${item.product.name.slice(0, 10)}...</span>
                         <div class="cart-detailes_container">
-                            <div class="box-shadow" style="background-color:${item.color}; width: 3rem; height: 3rem; border-radius: 100%;"></div>
-                            <div class="detailes-product__size-btn-box detailes-product__size-btn-box--active">
-                                <span class="detailes-product__size-btn detailes-product__size-btn--active">${item.size}</span>
+                            <div class="box-shadow color-box" style="background-color:${item.color}; width: 2.5rem; height: 2.5rem; border-radius: 100%;"></div>
+                            <div class="detailes-product__size-btn-box-cart detailes-product__size-btn-box-cart--active">
+                                <span class="detailes-product__size-btn-cart detailes-product__size-btn-cart--active">${item.size}</span>
                             </div>
                         </div>
                     </div>

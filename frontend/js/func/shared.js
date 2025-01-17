@@ -6,7 +6,6 @@ const fragment = document.createDocumentFragment();
 
 const addingProductsTemplate = (products, productsStructure = "row", productsWrapper) => {
     productsStructure = getFromLocalStorage("structure") || "row"
-    console.log(products);
     productsWrapper.innerHTML = '';
     let fragment = document.createDocumentFragment();
 
@@ -138,11 +137,11 @@ const toggleLike = async (element, productId, isFavorite) => {
         if (response.ok) {
             element.classList.toggle("heart-icon--active");
         } else {
-            console.log("خطا در بروزرسانی لایک");
+            showAuthenticationRequiredAlert()
         }
 
     } catch (error) {
-        console.log("خطا در ارتباط با سرور", error);
+        showAuthenticationRequiredAlert()
     } finally {
         element.classList.remove("like--pending")
     }

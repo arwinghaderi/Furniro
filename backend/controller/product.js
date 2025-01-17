@@ -236,6 +236,15 @@ exports.removeProduct = async (req, res, next) => {
 exports.getProduct = async (req, res, next) => {
   try {
     const { slug } = req.params;
+    const user = req.user;
+    let fourWeeksAgo = new Date();
+    fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 28);
+
+    const userFavorites = user
+      ? await favoriteModel
+          .findOne({ user: user._id })
+          .then((fav) => fav?.items.map((item) => item.toString()) || [])
+      : [];
 
     let product = await productModel.aggregate([
       {
@@ -274,7 +283,7 @@ exports.getProduct = async (req, res, next) => {
           averageRating: {
             $cond: {
               if: { $gt: [{ $size: "$comments" }, 0] },
-              then: { $avg: `$comments.rating` },
+              then: { $avg: "$comments.rating" },
               else: 0,
             },
           },
@@ -293,16 +302,35 @@ exports.getProduct = async (req, res, next) => {
 
     const productId = product[0]._id.toString();
     const categoryId = product[0].categoryId._id.toString();
-    const reletedProducts = await productModel
-      .find({
-        categoryId,
-        _id: { $ne: productId },
-      })
-      .select("-description -colors -size -createdAt -updatedAt -__v");
+    const relatedProducts = await productModel.aggregate([
+      {
+        $match: {
+          categoryId: new mongoose.Types.ObjectId(categoryId),
+          _id: { $ne: new mongoose.Types.ObjectId(productId) },
+        },
+      },
+      {
+        $addFields: {
+          isFavorite: { $in: [{ $toString: "$_id" }, userFavorites] },
+          isNewProduct: { $gte: ["$updatedAt", fourWeeksAgo] },
+        },
+      },
+      {
+        $project: {
+          description: 0,
+          colors: 0,
+          size: 0,
+          attributes: 0,
+          createdAt: 0,
+          updatedAt: 0,
+          __v: 0,
+        },
+      },
+    ]);
 
     return successResponse(res, 200, {
       product,
-      reletedProducts,
+      relatedProducts,
     });
   } catch (err) {
     next(err);

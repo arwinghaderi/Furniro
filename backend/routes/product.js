@@ -27,7 +27,7 @@ router
 router.route("/:productId").delete(auth, isAdmin, removeProduct);
 
 router.route("/favorites").get(auth, getAllFavorites);
-router.route("/:slug").get(getProduct);
+router.route("/:slug").get(optionalAuth, getProduct);
 router
   .route("/favorites/:productId")
   .post(auth, addToFavorites)

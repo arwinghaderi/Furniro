@@ -1,5 +1,5 @@
 import { getToken } from "../func/utils.js";
-import fetchGetFavoriteProduct from "../favorite.js";
+import { showAuthenticationRequiredAlert } from "../func/utils.js";
 
 const fetchGetCartProducts = async () => {
     const token = getToken();
@@ -41,19 +41,51 @@ const getCountProductsCart = async () => {
     }, 1500); // 
 };
 
+const fetchGetFavoriteProduct = async (page = 1, limit = 4) => {
+    const token = getToken();
+
+    if (!token) {
+        return { data: { favorites: [] } };
+    }
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+
+    if (token) {
+        headers['authorization'] = `Bearer ${token}`;
+    }
+
+    try {
+        const response = await fetch(`https://furniro-6x7f.onrender.com/product/favorites?page=${page}&limit=${limit}`, {
+            method: "GET",
+            headers: headers
+        });
+        const favoriteData = await response.json();
+
+        if (!response.ok) {
+            return { data: { favorites: [] } };
+        }
+
+        return favoriteData;
+    } catch (error) {
+        showAuthenticationRequiredAlert();
+    }
+};
+
 const getCountProductsFavorite = async () => {
     const iconCountProductsFavorite = document.querySelector(".nav-bar__count-Product-favorite");
     iconCountProductsFavorite.classList.add("nav-bar__count-Product-favorite--active");
     iconCountProductsFavorite.innerHTML = "⏳";
     iconCountProductsFavorite.classList.add("spinner");
 
-    const response = await fetchGetFavoriteProduct();
-    const productCount = response.length ? response.length : 0;
+    const favoriteData = await fetchGetFavoriteProduct(1, 4);
+
+    const totalProductsFavorite = favoriteData.data.pagination.totalFavorites || 0
 
     setTimeout(() => {
         iconCountProductsFavorite.classList.remove("spinner");
         iconCountProductsFavorite.innerHTML = ""
-        iconCountProductsFavorite.innerHTML = productCount;
+        iconCountProductsFavorite.innerHTML = totalProductsFavorite;
     }, 1500);
 };
 

@@ -183,6 +183,12 @@
     justify-content: flex-start;
 }
 
+.favorite-product-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .row-container--center {
     display: flex;
     align-items: center;

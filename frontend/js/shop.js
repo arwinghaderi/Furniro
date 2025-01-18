@@ -119,8 +119,6 @@ const fetchProducts = async (page = 1, limit = 4, category = '', title = '') => 
         productsWrapper.classList.remove("row-container--center");
         productsWrapper.classList.add("row-container");
 
-        console.log("Is Favorite:", dataProducts.data.products[0]?.isFavorite);
-
         return dataProducts;
     } catch (error) {
         showSwal(`${error.message}`, "error", "Refresh the page.", "../Pages/shop.html");

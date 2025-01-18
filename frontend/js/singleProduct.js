@@ -410,7 +410,7 @@ const renderProductDetails = async () => {
     try {
         const response = await fetchProductsDetails();
         const product = response.data.product[0];
-        let reletedProducts = response.data.reletedProducts
+        let reletedProducts = response.data.relatedProducts
         reletedProducts ? reletedProducts : reletedProducts = []
         addingproductsDetailes(product);
         addingPagePathDom(product);

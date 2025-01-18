@@ -468,12 +468,6 @@ exports.searchItem = async (req, res, next) => {
       quantity: { $gt: 0 },
     };
 
-    if (!title) {
-      return errorResponse(res, 400, {
-        message: "Please enter a title to search",
-      });
-    }
-
     filters.title = { $regex: title, $options: "i" };
 
     const userFavorites = user
@@ -488,13 +482,8 @@ exports.searchItem = async (req, res, next) => {
       .limit(+limit)
       .select(
         "-__v -description -size -attributes -createdAt -updatedAt -colors"
-      );
-
-    if (products.length === 0) {
-      return errorResponse(res, 404, {
-        message: "No product found",
-      });
-    }
+      )
+      .lean();
 
     const productsWithFlags = products.map((product) => ({
       ...product,

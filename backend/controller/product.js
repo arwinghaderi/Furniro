@@ -488,7 +488,8 @@ exports.searchItem = async (req, res, next) => {
       .limit(+limit)
       .select(
         "-__v -description -size -attributes -createdAt -updatedAt -colors"
-      );
+      )
+      .lean();
 
     if (products.length === 0) {
       return errorResponse(res, 404, {

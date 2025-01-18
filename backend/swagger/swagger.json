@@ -2017,30 +2017,6 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found: No product matches the provided search criteria.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 404
-                    },
-                    "error": {
-                      "type": "string",
-                      "example": "Not Found"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "No product found with the given title."
-                    }
-                  }
-                }
-              }
-            }
-          },
 
           "500": {
             "description": "Internal server error"

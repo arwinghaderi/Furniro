@@ -123,11 +123,22 @@
             <div class="title-box">
                 <h2 class="title section-title">Searched products</h2>
             </div>
-            <div class="search-not-found">
-                <div class="alert alert-danger">
-                    <i class="fa-solid fa-not-equal  icon-not-equal"></i>
-                    <p class="search-not-found__title">هیچ محصولی برای این جستوجو وجود ندارد</p>
-                    <i class="fa-solid fa-not-equal  icon-not-equal"></i>
+            <div class="product___box">
+                <div class="row row-container  search-product-container">
+                    <div class="container">
+                        <div class="empty-products box-shadow">
+                            <h2>No Search Performed</h2>
+                            <p>Please start by entering a keyword in the search box above.</p>
+                            <p>You'll see the results here once you initiate a search.</p>
+                            <img src="../images/images.png" alt="No search performed" />
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-products__pagination">
+                    <div class="shop-products__number-pagination">
+
+
+                    </div>
                 </div>
             </div>
 
@@ -195,7 +206,8 @@
 <script src="../js/shared.js" type="module"></script>
 <script src="../js/Features/showPreviousPath.js" type="module"></script>
 <script src="../js/Features/loader.js"></script>
-<script src="../js/Features/cartQuantityDisplay.js" type="module"></script>
+<!-- <script src="../js/Features/cartQuantityDisplay.js" type="module"></script> -->
+<script src="../js/search.js" type="module"></script>
 <script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
 

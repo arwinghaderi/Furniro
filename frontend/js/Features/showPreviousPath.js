@@ -14,7 +14,6 @@ const displayPaths = () => {
         setTimeout(() => {
             loader.style.display = "none"
             let contentPath = referrer.includes(currentPath) ? "Same path" : extractedPart;
-            console.log(contentPath);
             previousPathElement.innerHTML = contentPath ? contentPath : "home"
             previousPathElement.setAttribute("href", referrer);
         }, 6000)

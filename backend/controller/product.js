@@ -491,12 +491,6 @@ exports.searchItem = async (req, res, next) => {
       )
       .lean();
 
-    if (products.length === 0) {
-      return errorResponse(res, 404, {
-        message: "No product found",
-      });
-    }
-
     const productsWithFlags = products.map((product) => ({
       ...product,
       isFavorite: userFavorites.includes(product._id.toString()),

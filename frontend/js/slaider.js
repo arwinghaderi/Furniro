@@ -11,12 +11,13 @@ const swiper = new Swiper(".mySwiper", {
     },
     pagination: {
         el: ".swiper-pagination",
-        clickable: true,
+        clickable: false,
     },
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
-    }, on: {
+    },
+    on: {
         autoplayTimeLeft(s, time, progress) {
             progressCircle.style.setProperty("--progress", 1 - progress);
             progressContent.textContent = `${Math.ceil(time / 1000)}s`;
@@ -28,7 +29,6 @@ const swiper = new Swiper(".mySwiper", {
         },
         480: {
             slidesPerView: 2,
-
         },
         1200: {
             slidesPerView: 3,
@@ -37,3 +37,4 @@ const swiper = new Swiper(".mySwiper", {
     },
     loop: true
 });
+swiper.update(); swiper.pagination.update(); swiper.navigation.update();

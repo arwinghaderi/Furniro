@@ -1,5 +1,5 @@
 
-import { showSwal, storeAccessTokenWithExpiry, setSecureCookie } from "../func/utils.js"
+import { showSwal, storeAccessTokenWithExpiry, setSecureCookie, showSwalAuth } from "../func/utils.js"
 import { validation } from "./utils.js"
 
 const btnsAuth = document.querySelectorAll(".btn-Auth")
@@ -250,12 +250,12 @@ btnSignIn.addEventListener("click", async (event) => {
 })
 
 const fetchAndSendLoginData = async () => {
-    btnSignIn.innerHTML = `<div class="loader lodaer-sign-in"></div>`
+    btnSignIn.innerHTML = `<div class="loader lodaer-sign-in"></div>`;
 
     const userInformation = {
         email: loginEmailInput.value.trim(),
-        password: loginPasswordInput.value.trim()
-    }
+        password: loginPasswordInput.value.trim(),
+    };
 
     try {
         let response = await fetch("https://furniro-6x7f.onrender.com/auth/login", {
@@ -264,7 +264,7 @@ const fetchAndSendLoginData = async () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(userInformation),
-        })
+        });
 
         const loginData = await response.json();
 
@@ -272,17 +272,28 @@ const fetchAndSendLoginData = async () => {
             const message = loginData.error.message || "An unexpected error occurred.";
             throw new Error(message);
         }
-        const fullName = loginData.data.user.fullname
+        const fullName = loginData.data.user.fullname;
 
-        setSecureCookie("Refresh-Token", loginData.data.refreshToken, 7)
-        storeAccessTokenWithExpiry(loginData.data.accessToken, 14)
-        showSwal(`Your login was successful. Welcome ${fullName} .`, "success", "Go to HomePage", window.history.back ? window.history.back() : "../../index.html")
+        setSecureCookie("Refresh-Token", loginData.data.refreshToken, 7);
+        storeAccessTokenWithExpiry(loginData.data.accessToken, 14);
+
+        showSwalAuth(`Your login was successful. Welcome ${fullName}.`, "success", "Go to Previous Page", () => {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = "../../index.html";
+            }
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
+
     } catch (error) {
-        showSwal(`${error.message}`, "error", ' Correction of information', "#")
+        showSwal(`${error.message}`, "error", 'Correction of information', "#");
     } finally {
-        btnSignIn.disabled = true
+        btnSignIn.disabled = true;
         btnSignIn.innerHTML = '🚫Forbidden';
-        clearLoginInputs(inputs)
+        clearLoginInputs(inputs);
     }
 };
 
@@ -321,7 +332,16 @@ const fetchAndSendRegisterData = async () => {
         storeAccessTokenWithExpiry(registerData.data.accessToken, 14)
         const fullName = registerData.data.user.fullname
 
-        showSwal(`Your registration has been successfully completed. Welcome. ${fullName} .`, "success", "Go to HomePage", window.history.back ? window.history.back() : "../../index.html")
+        showSwalAuth(`Your login was successful. Welcome ${fullName}.`, "success", "Go to Previous Page", () => {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = "../../index.html";
+            }
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
 
     } catch (error) {
         showSwal(`${error.message}`, "error", "Correction of information", "#")

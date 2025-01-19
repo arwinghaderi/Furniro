@@ -116,7 +116,7 @@ loginSuccessfully.addEventListener("click", async () => {
                     confirmButtonColor: "#B88E2F",
                 }).then(async (result) => {
                     if (result.isConfirmed) {
-                        location.href = '../index.html';
+                        window.location.href = "../index.html"
                     }
                 })
 

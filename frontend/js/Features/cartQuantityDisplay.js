@@ -78,15 +78,18 @@ const getCountProductsFavorite = async () => {
     iconCountProductsFavorite.innerHTML = "⏳";
     iconCountProductsFavorite.classList.add("spinner");
 
-    const favoriteData = await fetchGetFavoriteProduct(1, 4);
+    try {
+        const favoriteData = await fetchGetFavoriteProduct(1, 4);
+        const totalProductsFavorite = favoriteData?.data?.pagination?.totalFavorites || 0;
 
-    const totalProductsFavorite = favoriteData.data.pagination.totalFavorites || 0
-
-    setTimeout(() => {
-        iconCountProductsFavorite.classList.remove("spinner");
-        iconCountProductsFavorite.innerHTML = ""
-        iconCountProductsFavorite.innerHTML = totalProductsFavorite;
-    }, 1500);
+        setTimeout(() => {
+            iconCountProductsFavorite.classList.remove("spinner");
+            iconCountProductsFavorite.innerHTML = totalProductsFavorite;
+        }, 1500);
+    } catch (error) {
+        console.log(error);
+        iconCountProductsFavorite.innerHTML = "0";
+    }
 };
 
 window.addEventListener("DOMContentLoaded", () => {

@@ -280,12 +280,15 @@ const fetchAndSendLoginData = async () => {
         showSwalAuth(`Your login was successful. Welcome ${fullName}.`, "success", "Go to Previous Page", () => {
             if (window.history.length > 1) {
                 window.history.back();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 100);
             } else {
                 window.location.href = "../../index.html";
+                setTimeout(() => {
+                    window.location.reload();
+                }, 100);
             }
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
         });
 
     } catch (error) {
@@ -340,7 +343,7 @@ const fetchAndSendRegisterData = async () => {
             }
             setTimeout(() => {
                 window.location.reload();
-            }, 1000);
+            }, 100);
         });
 
     } catch (error) {

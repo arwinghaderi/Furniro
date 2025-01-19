@@ -15,7 +15,7 @@ exports.checkoutValidator = yup.object().shape({
     .min(3)
     .max(30)
     .required("Last name is required"),
-  postallCode: yup.string().required("Postal code is required"),
+  postallCode: yup.string().required("Postal code is required").min(7).max(11),
   fullAddress: yup.string().max(700).required("Full address is required"),
   phone: yup
     .string()

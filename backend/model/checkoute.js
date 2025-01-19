@@ -1,34 +1,76 @@
 const mongoose = require("mongoose");
 
-const schema = mongoose.Schema({
-  firstName: {
-    type: String,
+const productSchema = new mongoose.Schema({
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
     required: true,
-    trim: true,
   },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  postallCode: {
+  color: {
     type: String,
     required: true,
   },
-  fullAddress: {
+  size: {
     type: String,
     required: true,
   },
-  phone: {
-    type: String,
+
+  quantity: {
+    type: Number,
     required: true,
-  },
-  email: {
-    type: String,
-    required: true,
+    min: 1,
   },
 });
 
-const model = mongoose.model("Checkout", schema);
+const checkoutSchema = mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    productItems: [productSchema],
+
+    orderStatus: {
+      type: String,
+      enum: ["processing", "sent", "Delivered"],
+      default: "processing",
+      required: true,
+    },
+
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+
+    postallCode: {
+      type: String,
+      required: true,
+    },
+    fullAddress: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const model = mongoose.model("Checkout", checkoutSchema);
 
 module.exports = model;

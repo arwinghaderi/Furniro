@@ -73,7 +73,7 @@ const addingPaginationTemplate = (currentPage, wrapperPagination, totalPage, lim
 const changePage = async (page, limit) => {
     const favoriteData = await fetchGetFavoriteProduct(page, limit);
     productsFavorite = favoriteData.data.favorites;
-    productsFavoritePagination = favoriteData.data.pagination;
+    productsFavoritePagination = favoriteData.data.pagination || [];
 
     addingProductsTemplate(productsFavorite, productsStructure, favoriteProductContainer);
     addingPaginationTemplate(page, wrapperPagination, productsFavoritePagination.totalPage, limit);
@@ -83,9 +83,8 @@ window.addEventListener("load", async () => {
     if (favoriteProductContainer) {
         const limit = 4;
         const favoriteData = await fetchGetFavoriteProduct(1, limit);
-
         productsFavorite = favoriteData.data.favorites;
-        productsFavoritePagination = favoriteData.data.pagination;
+        productsFavoritePagination = favoriteData.data.pagination || [];
 
         changePage(productsFavoritePagination.page, productsFavoritePagination.limit);
     }

@@ -22,7 +22,7 @@ const addingCartProductsTemplate = async () => {
     if (cartProductsItems.length) {
         cartProductsItems.forEach(item => {
             discountTemplate = `<div class="Discount-product-cart"><span class="Discount-product__number">${item.product.discountPercent}%</span></div>`;
-            subtotal = item.product.priceAfterDiscount ? item.product.priceAfterDiscount : item.product.price * item.quantity;
+            subtotal = item.product.priceAfterDiscount ? item.product.priceAfterDiscount * item.quantity : item.product.price * item.quantity;
             productImage = item.product.images.find(image => image.hexColorCode === item.color);
             imageUrl = productImage ? `https://furniro-6x7f.onrender.com${productImage.path}` : `https://furniro-6x7f.onrender.com${item.product.images[0].path}`;
             const element = document.createElement("div");

@@ -2023,6 +2023,176 @@
           }
         }
       }
+    },
+
+    "/checkoute": {
+      "post": {
+        "summary": "Place an order after validating the cart",
+        "tag": ["Checkoute 💳"],
+        "description": "This endpoint allows the user to place an order by checking out the cart. It validates the cart and creates a checkout record.",
+        "operationId": "placeOrder",
+        "tags": ["Order"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "example": "John"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Doe"
+                  },
+                  "postallCode": {
+                    "type": "string",
+                    "example": "12345"
+                  },
+                  "fullAddress": {
+                    "type": "string",
+                    "example": "1234 Elm Street, Some City, Country"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "09121231212"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "example@example.com"
+                  }
+                },
+                "required": [
+                  "firstName",
+                  "lastName",
+                  "postallCode",
+                  "fullAddress",
+                  "phone",
+                  "email"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order has been successfully placed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Your order has been successfully placed"
+                    },
+                    "checkoute": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "1234567890abcdef"
+                        },
+                        "firstName": {
+                          "type": "string",
+                          "example": "John"
+                        },
+                        "lastName": {
+                          "type": "string",
+                          "example": "Doe"
+                        },
+                        "totalPrice": {
+                          "type": "number",
+                          "example": 100.0
+                        },
+                        "productItems": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "product": {
+                                "type": "string",
+                                "example": "676e3d500fd8cbf3ba735b07"
+                              },
+                              "color": {
+                                "type": "string",
+                                "example": "#aaabbbccc"
+                              },
+                              "size": {
+                                "type": "string",
+                                "example": "L"
+                              },
+                              "quantity": {
+                                "type": "number",
+                                "example": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid data"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized !!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized !!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cart is empty",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Cart is Empty"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

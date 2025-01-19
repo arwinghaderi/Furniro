@@ -280,11 +280,11 @@ const fetchAndSendLoginData = async () => {
 
         showSwalAuth(`Your login was successful. Welcome ${fullName}.`, "success", "Go to Previous Page", () => {
             if (window.history.length > 1) {
-                window.history.back();
-                window.addEventListener('popstate', () => { handleUserAuthentication(); });
+                window.location.href = document.referrer;
+                setTimeout(handleUserAuthentication, 500);
             } else {
                 window.location.href = "../../index.html";
-                window.addEventListener('popstate', () => { handleUserAuthentication(); });
+                setTimeout(handleUserAuthentication, 500);
             }
         });
 
@@ -334,13 +334,12 @@ const fetchAndSendRegisterData = async () => {
 
         showSwalAuth(`Your login was successful. Welcome ${fullName}.`, "success", "Go to Previous Page", () => {
             if (window.history.length > 1) {
-                window.history.back();
+                window.location.href = document.referrer;
+                setTimeout(handleUserAuthentication, 500);
             } else {
                 window.location.href = "../../index.html";
+                setTimeout(handleUserAuthentication, 500);
             }
-            setTimeout(() => {
-                window.location.reload();
-            }, 100);
         });
 
     } catch (error) {

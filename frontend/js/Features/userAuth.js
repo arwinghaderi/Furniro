@@ -21,6 +21,9 @@ const executeTokenCheck = async () => {
 }
 
 const handleUserAuthentication = async () => {
+    console.log(
+        "shod"
+    );
     const isLogin = checkingLoginStatus();
     navbarSuccessfullyRegisterLoading.style.display = "flex";
 

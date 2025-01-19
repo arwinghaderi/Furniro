@@ -461,6 +461,13 @@ exports.searchItem = async (req, res, next) => {
     page = parseInt(page);
     limit = parseInt(limit);
 
+    if (!title) {
+      return successResponse(res, 200, {
+        products: [],
+        pagination: createPagination(+page, +limit, 0, "SearchProduct"),
+      });
+    }
+
     let fourWeeksAgo = new Date();
     fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 28);
 

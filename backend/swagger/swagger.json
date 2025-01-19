@@ -2111,6 +2111,11 @@
                           "type": "number",
                           "example": 100.0
                         },
+                        "orderStatus": {
+                          "type": "string",
+                          "enum": ["processing", "sent", "Delivered"],
+                          "example": "processing"
+                        },
                         "productItems": {
                           "type": "array",
                           "items": {

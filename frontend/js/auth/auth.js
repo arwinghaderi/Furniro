@@ -281,10 +281,10 @@ const fetchAndSendLoginData = async () => {
         showSwalAuth(`Your login was successful. Welcome ${fullName}.`, "success", "Go to Previous Page", () => {
             if (window.history.length > 1) {
                 window.history.back();
-                handleUserAuthentication()
+                window.addEventListener('popstate', () => { handleUserAuthentication(); });
             } else {
                 window.location.href = "../../index.html";
-                handleUserAuthentication()
+                window.addEventListener('popstate', () => { handleUserAuthentication(); });
             }
         });
 

@@ -23,6 +23,19 @@ const showSwal = async (title, icon, confirmButtonText, url) => {
     })
 }
 
+const showSwalAuth = async (title, icon, confirmButtonText, callback) => {
+    await swal.fire({
+        title: title,
+        icon: icon,
+        confirmButtonText: confirmButtonText,
+        confirmButtonColor: "#B88E2F",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            callback()
+        }
+    })
+}
+
 const showSwalAndReload = (message, type) => {
     Swal.fire({
         title: message,
@@ -169,7 +182,7 @@ const showAuthenticationRequiredAlert = () => {
 export {
     saveToLocalStorage, getFromLocalStorage,
     saveFilterState, getFilterState,
-    getUrlParam, showDeleteConfirmation,
+    getUrlParam, showDeleteConfirmation, showSwalAuth,
     showSwal, errorMessagesForCart, showAuthenticationRequiredAlert,
     getToken, storeAccessTokenWithExpiry, getSavedStructure,
     setSecureCookie, getCookieValue, saveStructureState,

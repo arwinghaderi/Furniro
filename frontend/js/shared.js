@@ -1,5 +1,7 @@
-import { getingUaerInformation, checkingLoginStatus, errorMessagesLogout, } from "./auth/utils.js"
+import { errorMessagesLogout, } from "./auth/utils.js"
 import { getToken, getCookieValue, setSecureCookie, storeAccessTokenWithExpiry, getFromLocalStorage, deleteCookie, handleError, showSwal, } from "./func/utils.js"
+import handleUserAuthentication from "./Features/userAuth.js"
+
 
 const $ = document
 const hamburger = $.querySelector(".hamburger")
@@ -17,14 +19,8 @@ menuLink.forEach(function (menuLink) {
         menuLink.classList.add("list-menu-item__link--active")
     })
 })
-const dontLogin = $.querySelector(".dont-login")
 const loginSuccessfully = $.querySelector(".login-successfully")
-const navbarSuccessfullyRegisterText = $.querySelector(".navbar-successfully-Register-text")
-const navbarSuccessfullyRegisterLoading = $.querySelector(".navbar-successfully-Register-Loading")
-const navbarDontRegisterText = $.querySelector(".navbar-dont-Register-text")
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-
 
 const fetchLogoutUser = async () => {
     const token = getToken()
@@ -45,27 +41,6 @@ const fetchLogoutUser = async () => {
     })
     const userData = await response.json()
     return userData
-}
-
-const handleUserAuthentication = async () => {
-    const isLogin = checkingLoginStatus();
-    navbarSuccessfullyRegisterLoading.style.display = "flex";
-
-    if (isLogin) {
-        const userData = await getingUaerInformation();
-
-        const fullName = userData.data.user.fullname;
-        loginSuccessfully.style.display = "flex";
-        dontLogin.style.display = "none";
-        navbarSuccessfullyRegisterText.innerHTML = fullName;
-        setTimeout(executeTokenCheck, 14 * 60 * 1000);
-    } else {
-        navbarDontRegisterText.innerHTML = `Sign In/Sign Up`;
-        dontLogin.style.display = "flex";
-        loginSuccessfully.style.display = "none";
-    }
-
-    navbarSuccessfullyRegisterLoading.style.display = "none";
 }
 
 let previousPaths = JSON.parse(localStorage.getItem('previousPaths')) || [];
@@ -204,19 +179,6 @@ const redirectToLogin = () => {
             location.href = '../index.html';
         }
     });
-}
-
-const executeTokenCheck = async () => {
-    const token = await hasAccessTokenExpired();
-
-    if (token) {
-        setSecureCookie("Refresh-Token", token.RefreshToken, 7);
-        storeAccessTokenWithExpiry(token.AccessToken, 14);
-    } else {
-        redirectToLogin();
-    }
-
-    setTimeout(executeTokenCheck, 14 * 60 * 1000);
 }
 
 const validateEmail = (email) => {

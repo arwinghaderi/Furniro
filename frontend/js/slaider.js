@@ -11,7 +11,7 @@ const swiper = new Swiper(".mySwiper", {
     },
     pagination: {
         el: ".swiper-pagination",
-        clickable: false,
+        clickable: true,
     },
     navigation: {
         nextEl: ".swiper-button-next",

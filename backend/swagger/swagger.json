@@ -2028,10 +2028,9 @@
     "/checkoute": {
       "post": {
         "summary": "Place an order after validating the cart",
-        "tag": ["Checkoute 💳"],
+        "tags": ["Checkoute 💳"],
         "description": "This endpoint allows the user to place an order by checking out the cart. It validates the cart and creates a checkout record.",
         "operationId": "placeOrder",
-        "tags": ["Order"],
         "security": [
           {
             "bearerAuth": []

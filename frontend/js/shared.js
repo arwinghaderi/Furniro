@@ -1,24 +1,8 @@
 import { errorMessagesLogout, } from "./auth/utils.js"
 import { getToken, getCookieValue, setSecureCookie, storeAccessTokenWithExpiry, getFromLocalStorage, deleteCookie, handleError, showSwal, } from "./func/utils.js"
 import handleUserAuthentication from "./Features/userAuth.js"
-
-
 const $ = document
-const hamburger = $.querySelector(".hamburger")
-const contenerMenuMobail = $.querySelector(".contener-menu-mobail")
-const menuLink = $.querySelectorAll(".list-menu-item__link")
 
-hamburger.addEventListener("click", function () {
-    hamburger.classList.toggle("active")
-    contenerMenuMobail.classList.toggle("contener-menu-mobail--active")
-})
-
-menuLink.forEach(function (menuLink) {
-    menuLink.addEventListener("click", function () {
-        $.querySelector(".list-menu-item__link--active").classList.remove("list-menu-item__link--active")
-        menuLink.classList.add("list-menu-item__link--active")
-    })
-})
 const loginSuccessfully = $.querySelector(".login-successfully")
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -257,3 +241,5 @@ footerBackBtn.addEventListener("click", (event) => {
 window.addEventListener("load", () => {
     handleUserAuthentication()
 })
+
+export { redirectToLogin, hasAccessTokenExpired }

@@ -97,7 +97,7 @@ const fetchPlaceOrder = async () => {
             return
         }
 
-        showSwal("Thank you for your order! Your order has been successfully placed.", "success", "OK", '#');
+        showSwal("Thank you for your order! Your order has been successfully placed.", "success", "go to order status", '/Furniro/frontend/Pages/orderStatus .html');
     } catch (error) {
         showSwal("An unexpected error occurred. Please try again.", "error", "Try Again", '../Pages/checkOut.html');
     } finally {

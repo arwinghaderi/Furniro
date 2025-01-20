@@ -1,4 +1,3 @@
-// import { getFromLocalStorage, productDiscountCalculation, saveToLocalStorage, } from "../js/func/utils.js"
 import { fetchGetCartProducts, getCountProductsCart } from "./Features/cartQuantityDisplay.js"
 import { showDeleteConfirmation, getToken, showSwal, showAuthenticationRequiredAlert } from "./func/utils.js";
 import { checkingLoginStatus } from "./auth/utils.js";

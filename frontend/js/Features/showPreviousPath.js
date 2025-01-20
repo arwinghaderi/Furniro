@@ -16,12 +16,12 @@ const displayPaths = () => {
             let contentPath = referrer.includes(currentPath) ? "Same path" : extractedPart;
             previousPathElement.innerHTML = contentPath ? contentPath : "home"
             previousPathElement.setAttribute("href", referrer);
-        }, 6000)
+        }, 1500)
     } else {
         setTimeout(() => {
             loader.style.display = "none"
             previousPathElement.innerHTML = "Direct Entry";
-        }, 6000)
+        }, 1500)
     }
 };
 

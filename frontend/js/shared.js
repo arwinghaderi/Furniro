@@ -143,7 +143,6 @@ const hasAccessTokenExpired = async () => {
     if (hasExpired) {
         try {
             const newToken = await fetchRefreshToken();
-            console.log(newToken);
             if (newToken) {
                 return newToken;
             } else {
@@ -153,8 +152,21 @@ const hasAccessTokenExpired = async () => {
             redirectToLogin();
         }
     } else {
-        redirectToLogin()
+        return null
     }
+}
+
+const executeTokenCheck = async () => {
+    const token = await hasAccessTokenExpired();
+
+    if (token) {
+        setSecureCookie("Refresh-Token", token.RefreshToken, 7);
+        storeAccessTokenWithExpiry(token.AccessToken, 14);
+    } else {
+        redirectToLogin();
+    }
+
+    setTimeout(executeTokenCheck, 14 * 60 * 1000);
 }
 
 const redirectToLogin = () => {

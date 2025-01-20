@@ -2203,7 +2203,7 @@
         "tags": ["Checkoute 💳"],
         "security": [
           {
-            "BearerAuth": []
+            "bearerAuth": []
           }
         ],
         "responses": {

@@ -24,6 +24,11 @@ const productSchema = new mongoose.Schema({
 
 const checkoutSchema = mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     firstName: {
       type: String,
       required: true,

@@ -2196,6 +2196,94 @@
             }
           }
         }
+      },
+      "get": {
+        "summary": "Get orders list",
+        "description": "Fetches the list of orders for the authenticated user.",
+        "tags": ["Checkoute 💳"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the order list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "checkoutList": {
+                      "type": "object",
+                      "properties": {
+                        "_id": { "type": "string" },
+                        "firstName": { "type": "string" },
+                        "lastName": { "type": "string" },
+                        "productItems": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "product": {
+                                "type": "object",
+                                "properties": {
+                                  "_id": { "type": "string" },
+                                  "name": { "type": "string" },
+                                  "price": { "type": "number" },
+                                  "discountPercent": { "type": "number" },
+                                  "quantity": { "type": "number" },
+                                  "colors": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "name": { "type": "string" },
+                                        "hexColorCode": { "type": "string" },
+                                        "_id": { "type": "string" }
+                                      }
+                                    }
+                                  },
+                                  "images": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "hexColorCode": { "type": "string" },
+                                        "path": { "type": "string" },
+                                        "_id": { "type": "string" }
+                                      }
+                                    }
+                                  },
+                                  "slug": { "type": "string" },
+                                  "title": { "type": "string" }
+                                }
+                              },
+                              "color": { "type": "string" },
+                              "size": { "type": "string" },
+                              "quantity": { "type": "number" },
+                              "_id": { "type": "string" }
+                            }
+                          }
+                        },
+                        "orderStatus": { "type": "string" },
+                        "totalPrice": { "type": "number" },
+                        "postallCode": { "type": "string" },
+                        "fullAddress": { "type": "string" },
+                        "phone": { "type": "string" },
+                        "email": { "type": "string" },
+                        "user": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
       }
     }
   }

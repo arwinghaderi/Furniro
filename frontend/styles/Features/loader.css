@@ -62,7 +62,7 @@ body.content-loading .main-Content-App {
     top: 0;
     left: 0;
     z-index: 9999;
-    animation: dropInLoader 1.5s ease forwards;
+    animation: dropInLoader 1s ease forwards;
 }
 
 @keyframes dropInLoader {
@@ -137,7 +137,7 @@ body.content-loading .main-Content-App {
     box-shadow: 5px 5px 15px #fff;
     border-radius: 10px;
     animation: customMovingLine 1.5s infinite ease-in-out;
-    animation-delay: 2s;
+    animation-delay: 1.5s;
 }
 
 @keyframes customMovingLine {

@@ -1,4 +1,4 @@
-import { getToken, showSwal } from "./func/utils.js";
+import { getToken, showSwal, showAuthenticationRequiredAlert } from "./func/utils.js";
 import { fetchGetCartProducts } from "./Features/cartQuantityDisplay.js";
 
 
@@ -54,13 +54,11 @@ Object.values(formInputs).forEach(input => {
 
 const handleServerResponse = (status) => {
     const responseMessages = {
-        401: "You need to authenticate first.",
         404: "Your cart is empty.",
         400: "Invalid input data. Please check your information.",
         500: "Server error. Please try again later.",
         default: "An error occurred. Please try again."
     };
-
     return responseMessages[status] || responseMessages.default;
 };
 
@@ -68,7 +66,7 @@ const fetchPlaceOrder = async () => {
     let token = getToken();
 
     if (!token) {
-        showSwal(handleServerResponse(401), "error", "Try Again", '#');
+        showAuthenticationRequiredAlert()
         return false;
     }
     placeOrderBtn.innerHTML = "Loading..."
@@ -95,13 +93,13 @@ const fetchPlaceOrder = async () => {
         const message = handleServerResponse(response.status);
 
         if (!response.ok) {
-            showSwal(message, "error", "Try Again", '#');
-            return;
+            response.status === 400 ? showSwal(message, "error", "Go to Shop", '../Pages/shop.html') : showSwal(message, "error", "Try Again", '#')
+            return
         }
 
         showSwal("Thank you for your order! Your order has been successfully placed.", "success", "OK", '#');
     } catch (error) {
-        showSwal("An unexpected error occurred. Please try again.", "error", "Try Again", '#');
+        showSwal("An unexpected error occurred. Please try again.", "error", "Try Again", '../Pages/checkOut.html');
     } finally {
         placeOrderBtn.innerHTML = "forbidden⛔"
         placeOrderBtn.classList.add("Place-order-btn--forbidden")
@@ -123,8 +121,6 @@ const checkOutProductsDetails = async () => {
     checkOutDetailsRight.innerHTML = ""
     const getCartProducts = await fetchGetCartProducts();
     const cartProductsTotal = getCartProducts.cart.total;
-
-    console.log(cartProductsTotal);
 
     if (cartProductsTotal) {
         checkOutDetailsRight.insertAdjacentHTML("beforeend", `

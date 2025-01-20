@@ -1,4 +1,4 @@
-import { getFromLocalStorage, showAuthenticationRequiredAlert, getToken } from "./utils.js";
+import { getFromLocalStorage, showAuthenticationRequiredAlert, getToken, showSwal } from "./utils.js";
 import { getCountProductsFavorite } from "../Features/cartQuantityDisplay.js";
 import fetchGetFavoriteProduct from "../favorite.js";
 
@@ -52,6 +52,16 @@ const addingProductsTemplate = (products, productsStructure = "row", productsWra
     productsWrapper.appendChild(fragment);
 }
 
+const copyToClipboard = async (productSlug) => {
+    const productLink = `https://furniroo-store.vercel.app/Pages/product.html?slug=${productSlug}`;
+    try {
+        await navigator.clipboard.writeText(productLink);
+        showSwal(`Link copied to clipboard`, "success", "ok", "#");
+    } catch (error) {
+        showSwal('Failed to copy link ', 'error', 'ok', '#');
+    }
+}
+
 const addingProductsTemplateRow = (product) => {
     element = document.createElement("div");
     element.className = `col col-md-6 col-lg-4 col-xxl-3 product-main-box product-main-box__shop product-main-box__shop--show`;
@@ -69,7 +79,7 @@ const addingProductsTemplateRow = (product) => {
      <div class="box-add-btn-cart"><a href="../../Pages/product.html?slug=${product.slug}" class="box-add-btn-cart__text">Details Product</a></div>
      <div class="product-overlay__options">
      <div class="option-overlay">
-     <i class="fas fa-share-alt fa-flip-vertical icon"></i>
+     <i class="fas fa-share-alt fa-flip-vertical icon" onclick="copyToClipboard('${product.slug}')"></i>
      <span class="option-overlay__text">Share</span></div><div class="option-overlay">
      <i class="fas fa-exchange-alt icon"></i>
      <span class="option-overlay__text">Compare</span></div>
@@ -103,7 +113,7 @@ const addingProductsTemplateCol = (product) => {
         }" class="box-add-btn-cart__text">Details Product</a></div> 
      <div class="product-overlay__options"> 
      <div class="option-overlay"> 
-     <i class="fas fa-share-alt fa-flip-vertical  icon" ></i> 
+     <i class="fas fa-share-alt fa-flip-vertical  icon" onclick="copyToClipboard('${product.slug}')" ></i> 
      <span class="option-overlay__text">Share</span> </div> <div class="option-overlay"> 
      <i class="fas fa-exchange-alt  icon"></i>
      <span class="option-overlay__text">Compare</span></div> 
@@ -156,5 +166,6 @@ const toggleLike = async (element, productId, isFavorite) => {
 };
 
 window.toggleLike = toggleLike;
+window.copyToClipboard = copyToClipboard;
 
 export { addingProductsTemplate };

@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>order status</title>
     <link rel="icon" href="../images/icon.logo.png">
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/grid.css">
     <link rel="stylesheet" href="../styles/font.css">
     <link rel="stylesheet" href="../vendor/FontAwesome5/all.min.css">
     <link rel="stylesheet" href="../vendor/sweetalert2/sweetalert2.min.css">
-    <link rel="stylesheet" href="../styles/mainPages/checkOut.css">
+    <link rel="stylesheet" href="../styles/mainPages/orderStatus .css">
     <link rel="stylesheet" href="../styles/responsive.css">
-    <title>check out</title>
 </head>
 
 <body class="content-loading">
@@ -23,9 +23,8 @@
         </div>
         <div class="loading-line"></div>
     </div>
-
     <div class="main-Content-App">
-        <!--**nav-bar -->
+        <!--** nav-bar -->
         <div class="container">
             <nav class="nav-bar">
 
@@ -33,10 +32,15 @@
                     <img class=" nav-bar__logo-img" src="../images/logoNavbar.jpg" alt="Logo">
                 </a>
                 <ul class="list-menu">
-                    <li class="list-menu__item"><a class="list-menu-item__link " href="../index.html">Home</a></li>
-                    <li class="list-menu__item"><a class="list-menu-item__link " href="../Pages/shop.html">Shop</a></li>
-                    <li class="list-menu__item"><a class="list-menu-item__link " href="./about.html">About</a></li>
-                    <li class="list-menu__item"><a class="list-menu-item__link " href="./contact.html">Contact</a></li>
+                    <li class="list-menu__item"><a class="list-menu-item__link menu-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="list-menu__item"><a class="list-menu-item__link" href="./shop.html">Shop</a>
+                    </li>
+                    <li class="list-menu__item"><a class="list-menu-item__link menu-link" href="./about.html">About</a>
+                    </li>
+                    <li class="list-menu__item"><a class="list-menu-item__link menu-link"
+                            href="./contact.html">Contact</a>
+                    </li>
                 </ul>
 
                 <div class="icon-container-option">
@@ -78,31 +82,29 @@
                 <!-- ** mobail -->
                 <div class="contener-menu-mobail">
                     <ul class="list-menu-mobail">
-                        <li class="list-menu__item-mobail ">
-                            <a class="list-menu-item__link menu-link" href="../index.html">Home</a>
+                        <li class="list-menu__item-mobail"><a class="list-menu-item__link" href="../index.html">Home</a>
                         </li>
-                        <li class="list-menu__item-mobail">
-                            <a class="list-menu-item__link " href="../Pages/shop.html">Shop</a>
+                        <li class="list-menu__item-mobail"><a class="list-menu-item__link" href="./shop.html">Shop</a>
                         </li>
-                        <li class="list-menu__item-mobail">
-                            <a class="list-menu-item__link " href="./about.html">About</a>
+                        <li class="list-menu__item-mobail"><a class="list-menu-item__link" href="./about.html">About</a>
                         </li>
-                        <li class="list-menu__item-mobail">
-                            <a class="list-menu-item__link " href="./contact.html">Contact</a>
+                        <li class="list-menu__item-mobail"><a class="list-menu-item__link"
+                                href="./contact.html">Contact</a>
                         </li>
                     </ul>
 
 
                 </div>
+
                 <div class="hamburger">
                     <div class="hamburger__line"></div>
                 </div>
             </nav>
         </div>
-        <!--** home section -->
+        <!-- **cart-Home -->
         <header class="home-section">
             <img src="../images/icon.logo.png" alt="logo">
-            <h1 class="home-section__title section-title">Checkout</h1>
+            <h1 class="home-section__title section-title">order status</h1>
             <div class="home-section-container-description">
                 <a class="home-section-container-description__befor"></a>
                 <div class="loader loader-Paths"></div>
@@ -110,99 +112,29 @@
                     fill="none">
                     <path d="M0 12L5 7L0 2L1 0L8 7L1 14L0 12Z" fill="black" />
                 </svg>
-                <p class="home-section-container-description__now">Checkout</p>
+                <p class="home-section-container-description__now">order status</p>
             </div>
+
         </header>
-        <!--** checkOut -->
-        <div class="container ">
-            <main class="billing-details">
-                <section class="col-12 col-xl-5">
-                    <div class="receiver-information">
+        <!-- **cart-shop -->
+        <div class="container">
+            <section class="cart-shop-section">
+                <div class="row ">
+                    <div class="col-xl-8 col-xxl-12 cart-shop-section__shop">
+                        <div class="cart-shop-section__shop-title-keeper ">
+                            <span class="cart-shop-section__shop-title-name">Product</span>
+                            <span class="cart-shop-section__shop-title-name">Subtotal</span>
+                            <span class="cart-shop-section__shop-title-name">Quantity</span>
+                            <span class="cart-shop-section__shop-title-name">Status</span>
+                        </div>
+                        <div class="product-cart">
 
-                        <h3 class="title-billing-details section-title">Billing details</h3>
-                        <div class="full-name-input-wrapper">
-                            <div class="warapper-label-input">
-                                <label class="information__input-label section-title" for="">First Name</label>
-                                <div class="input-box full-name-input-box">
-                                    <input class="receiver-information__input" type="text" id="first-name">
-                                </div>
-                            </div>
-                            <div class="warapper-label-input">
-                                <label class="information__input-label  section-title" for="">Last Name</label>
-                                <div class="input-box full-name-input-box">
-                                    <input class="receiver-information__input" type="text" id="last-name">
-                                </div>
-                            </div>
-                        </div>
-                        <label class="information__input-label section-title" for="">Residential address</label>
-                        <div class="input-box ">
-                            <input class="receiver-information__input" type="text" id="address">
-                        </div>
-                        <label class="information__input-label section-title" for="">ZIP code</label>
-                        <div class="input-box ">
-                            <input class="receiver-information__input" type="text" id="zip-code">
-                        </div>
-                        <label class="information__input-label section-title" for="">Phone</label>
-                        <div class="input-box ">
-                            <input class="receiver-information__input " type="text" id="phone">
-                        </div>
-                        <label class="information__input-label section-title" for="">Email address</label>
-                        <div class="input-box ">
-                            <input class="receiver-information__input " type="text" id="email">
                         </div>
                     </div>
-                </section>
-                <section class=" col-12 col-xl-7">
-                    <div class="checkOut">
-                        <div class="checkOut-details">
-                            <div class="checkOut-details-warapper ">
-                                <div class="checkOut-details-left">
-
-                                    <span class="productTotal section-title">Your applied discount</span>
-                                    <span class="productTotal section-title">Total</span>
-                                </div>
-                                <div class="checkOut-details-right">
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="payment-method">
-                            <div class="wrapper-checkbox">
-                                <input class="input-radio input-radio-bank" disabled type="radio" name="option"
-                                    value="bank">
-                                <label class="input-radio-label">Direct Bank Transfer</label>
-                                <p class="bank-transfer-description">
-                                    Online payment is temporarily disabled. Please use the cash on delivery option.
-                                    Thank you for your cooperation.
-                                </p>
-                            </div>
-                            <div class="wrapper-checkbox">
-                                <input class="input-radio" type="radio" name="option" value="Delivery">
-                                <label class="input-radio-label" for="">Cash On Delivery</label>
-                            </div>
-                            <p class="checkOut-description section-title">Your personal data will be used to support
-                                your experience
-                                throughout this website, to manage access to your account,
-                                and for other purposes described in our <span>privacy policy.</span></p>
-                        </div>
-
-                        <div class="warapper-btn">
-
-                            <div class="btn-box">
-                                <button id="placeOrderBtn"
-                                    class="section-title Place-order-btn Place-order-btn--forbidden"
-                                    disabled>forbidden⛔</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-
-            </main>
+                </div>
+            </section>
         </div>
-        <!--** services -->
+        <!--**services  -->
         <section class="services">
             <div class="container">
                 <div class="service-container">
@@ -277,8 +209,8 @@
                 </div>
             </div>
         </section>
-        <!--** footer -->
-        <footer class=" footer">
+        <!-- **footer -->
+        <footer class="footer">
             <hr>
             <div class="container">
                 <div class="footer-items">
@@ -338,10 +270,10 @@
 </body>
 <script src="../vendor/FontAwesome5/all.min.js"></script>
 <script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="../js/shared.js" type="module"></script>
 <script src="../js/Features/showPreviousPath.js" type="module"></script>
 <script src="../js/Features/cartQuantityDisplay.js" type="module"></script>
 <script src="../js/Features/loader.js"></script>
-<script src="../js/shared.js" type="module"></script>
-<script src="../js/checkOut.js" type="module"></script>
+<script src="../js/cartPage.js" type="module"></script>
 
 </html>

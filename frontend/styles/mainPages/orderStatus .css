@@ -145,11 +145,7 @@
 }
 
 .bank-transfer-description {
-    text-shadow: 2px 2px 4px #ff00009c;
-}
-
-.input-radio-bank {
-    cursor: not-allowed;
+    display: none;
 }
 
 .payment-method {
@@ -189,10 +185,4 @@
     outline: none;
     border: none;
     background-color: transparent;
-    font-size: 1.8rem;
-}
-
-
-.Place-order-btn--forbidden {
-    cursor: not-allowed;
 }

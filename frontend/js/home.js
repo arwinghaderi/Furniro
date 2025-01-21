@@ -3,6 +3,11 @@ import { getToken } from "./func/utils.js"
 
 const fetchGetProducts = async () => {
     let productsHomeContainer = document.querySelector(".products-home-container")
+    productsHomeContainer.innerHTML = ""
+    productsHomeContainer.classList.add("row-container--center");
+    productsHomeContainer.classList.remove("row-container");
+    productsHomeContainer.innerHTML = `<div class="loader-bars loader-products-home section-title"></div>`;
+
     let token = getToken();
     try {
         const url = new URL(`https://furniro-6x7f.onrender.com/`);

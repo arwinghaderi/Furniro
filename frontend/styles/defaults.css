@@ -44,6 +44,10 @@ a:hover {
     justify-content: center;
 }
 
+.list-menu-item__link--active {
+    color: var(--Primary-color);
+}
+
 .section-title {
     text-shadow: 2px 2px 4px rgba(184, 142, 47, 0.7);
 }

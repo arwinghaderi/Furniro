@@ -1,10 +1,10 @@
 import { getToken } from "./func/utils.js";
-import { redirectToLogin } from "./shared.js";
+import { showAuthenticationRequiredAlert } from "./func/utils.js";
 
 const fetchOrderStatus = async () => {
     const token = getToken();
     if (!token) {
-        redirectToLogin()
+        showAuthenticationRequiredAlert();
         return false
     }
 
@@ -41,7 +41,6 @@ const addingCartProductsTemplate = async () => {
     const orderStatusData = await fetchOrderStatus();
     const orderStatus = orderStatusData.orderStatus || ""
     const oerderStatusProductsItems = orderStatusData.productItems || []
-
     keeperProductCart.classList.remove("center")
 
     keeperProductCart.innerHTML = "";
@@ -82,12 +81,11 @@ const addingCartProductsTemplate = async () => {
         keeperProductCart.append(fragment);
     } else {
         keeperProductCart.insertAdjacentHTML("beforeend", `
-            <div class="empty-products box-shadow">
-                <h2>Your Cart is Empty</h2>
-                <p>It looks like you haven't added any products to your cart yet.</p>
-                <p>Browse our products and add some amazing products to your cart.</p>
-                <img src="../images/images.png" alt="No products available">
-            </div>
+        <div class="empty-products box-shadow">
+           <h2>No Orders Yet</h2> <p>It looks like you haven't placed any orders yet.</p>
+           <p>Browse our products and place your first order to get started.</p>
+            <img src="../images/images.png" alt="No products available">
+        </div>
         `);
     }
 };

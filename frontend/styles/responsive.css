@@ -113,6 +113,15 @@
 }
 
 @media screen and (max-width:1200px) {
+
+    .icon-container-option {
+        gap: 2rem;
+    }
+
+    .list-menu__item {
+        margin-left: 3rem;
+    }
+
     .slaisder-section {
         flex-direction: column;
     }
@@ -905,14 +914,16 @@
     .product__title {
         font-size: 2.5rem;
     }
+
+    .Product-shipping-status-box {
+        font-size: 1.1rem;
+    }
 }
 
 @media screen and (max-width:392px) {
     .home__title {
         font-size: 3rem;
     }
-
-
 
     .detailes-produc-Specifications__title {
         font-size: 3.2rem;

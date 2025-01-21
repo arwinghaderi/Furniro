@@ -56,7 +56,7 @@ const addingCartProductsTemplate = async () => {
                 <div class="cart-shop-section__details-product">
                     <div class="cart-shop-section__box-img">
                         <div class="lable-product-box-cart">${item.product.discountPercent ? discountTemplate : ""}</div>
-                        <img class="cart-shop-section__img" src="${imageUrl}" alt="product Image">
+                        <img class="cart-shop-section__img" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';" src="${imageUrl}" alt="product Image">
                     </div>
                     <div class="cart-shop-section-infomation">
                         <span class="cart-shop-section__product-name">${item.product.name.slice(0, 10)}...</span>
@@ -84,7 +84,7 @@ const addingCartProductsTemplate = async () => {
         <div class="empty-products box-shadow">
            <h2>No Orders Yet</h2> <p>It looks like you haven't placed any orders yet.</p>
            <p>Browse our products and place your first order to get started.</p>
-            <img src="../images/images.png" alt="No products available">
+            <img src="../images/images.png" alt="No products available onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';"">
         </div>
         `);
     }

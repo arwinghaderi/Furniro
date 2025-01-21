@@ -76,7 +76,7 @@ window.addEventListener("load", async () => {
                 <p class="box-contant-img-slaider__introduction">${product.title}</p>
                 <h5 class="box-contant-img-slaider__title">${product.caption.slice(0, 10)}...</h5>
             </div>
-            <img id="active" loading="lazy" class="slaider-img" src="https://furniro-6x7f.onrender.com${product.imagePath}" alt="product-img">
+            <img id="active" loading="lazy" class="slaider-img" src="https://furniro-6x7f.onrender.com${product.imagePath}"  onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';" alt="product-img">
         </div>
     `);
     });

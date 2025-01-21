@@ -42,7 +42,7 @@ inputSearch.addEventListener("input", (event) => {
                             <h2>No Search Performed</h2>
                             <p>Please start by entering a keyword in the search box above.</p>
                             <p>You'll see the results here once you initiate a search.</p>
-                            <img src="../images/images.png" alt="No search performed" />
+                            <img src="../images/images.png" alt="No search performed" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';" />
                         </div>
                     </div>`
             } else {

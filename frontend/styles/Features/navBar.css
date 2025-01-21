@@ -8,11 +8,10 @@
 .list-menu {
     display: flex;
     align-items: center;
-
 }
 
 .list-menu__item {
-    margin-left: 7rem;
+    margin-left: 4.5rem;
 }
 
 .list-menu__item:first-child {
@@ -21,7 +20,7 @@
 
 .list-menu-item__link {
     color: var(--dark-color);
-    transition: all 0.8s ease-in-out;
+    transition: all 0.2ms ease-in-out;
 }
 
 .list-menu-item__link--active {

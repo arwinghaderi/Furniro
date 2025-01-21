@@ -7,7 +7,8 @@ let discountTemplate, newTemplate, discountPrice, element, randomIndex,
 const fragment = document.createDocumentFragment();
 
 const addingProductsTemplate = (products, productsStructure = "row", productsWrapper) => {
-    productsStructure = getFromLocalStorage("structure") || "row";
+    document.body.classList.contains('shop-page') ? productsStructure = getFromLocalStorage("structure") || "row" : productsStructure
+
     productsWrapper.innerHTML = '';
     let fragment = document.createDocumentFragment();
 

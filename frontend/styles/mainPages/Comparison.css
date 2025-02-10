@@ -209,16 +209,27 @@
     color: #B88E2F;
 }
 
-.swiper-button-next {
-    right: 10px;
-    /* Adjust the position from the right */
-}
-
-.swiper-button-prev {
-    left: 10px;
-    /* Adjust the position from the left */
-}
-
 #comparison-Swiper.swiper-wrapper {
     height: 33rem !important;
+}
+
+.mySwiper {
+    margin-top: 2.5rem;
+}
+
+.header-section {
+    text-align: center;
+    padding: 20px;
+    background-color: #B88E2F;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.header-section h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+.header-section p {
+    margin: 10px 0 0 0;
 }

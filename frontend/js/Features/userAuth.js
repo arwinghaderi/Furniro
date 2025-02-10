@@ -1,5 +1,4 @@
 import { checkingLoginStatus, getingUaerInformation } from "../auth/utils.js"
-
 const $ = document
 const dontLogin = $.querySelector(".dont-login")
 const loginSuccessfully = $.querySelector(".login-successfully")

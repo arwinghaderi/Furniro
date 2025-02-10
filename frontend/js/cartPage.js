@@ -1,4 +1,3 @@
-// import { getFromLocalStorage, productDiscountCalculation, saveToLocalStorage, } from "../js/func/utils.js"
 import { fetchGetCartProducts, getCountProductsCart } from "./Features/cartQuantityDisplay.js"
 import { showDeleteConfirmation, getToken, showSwal, showAuthenticationRequiredAlert } from "./func/utils.js";
 import { checkingLoginStatus } from "./auth/utils.js";
@@ -31,7 +30,7 @@ const addingCartProductsTemplate = async () => {
                 <div class="cart-shop-section__details-product">
                     <div class="cart-shop-section__box-img">
                         <div class="lable-product-box-cart">${item.product.discountPercent ? discountTemplate : ""}</div>
-                        <img class="cart-shop-section__img" src="${imageUrl}" alt="product Image">
+                        <img class="cart-shop-section__img" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';" src="${imageUrl}" alt="product Image">
                     </div>
                     <div class="cart-shop-section-infomation">
                         <span class="cart-shop-section__product-name">${item.product.name.slice(0, 10)}...</span>
@@ -59,7 +58,7 @@ const addingCartProductsTemplate = async () => {
                 <h2>Your Cart is Empty</h2>
                 <p>It looks like you haven't added any products to your cart yet.</p>
                 <p>Browse our products and add some amazing products to your cart.</p>
-                <img src="../images/images.png" alt="No products available">
+                <img src="../images/images.png" alt="No products available" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';">
             </div>
         `);
     }

@@ -1,188 +1,270 @@
 @import url(../Features/navBar.css);
+@import url(../Features/footer.css);
+@import url(../Features/products.css);
 @import url(../Features/homeSection.css);
 @import url(../Features/service.css);
-@import url(../Features/footer.css);
 @import url(../Features/loader.css);
 @import url(../defaults.css);
+@import url(../defaults.css);
 
-.billing-details {
-    padding: 0. 4rem;
-    display: flex;
-    margin-top: 10rem;
+/*
+==========================
+cart-shop
+==========================
+*/
+.cart-shop-section {
+    width: 100%;
+    height: 100%;
 }
 
-.title-billing-details {
-    font-size: 3.6rem;
+.cart-shop-section__shop-title-keeper {
+    width: 100%;
+    background-color: #F9F1E7;
+    box-shadow: 0px 0px 30px rgba(184, 142, 47, 0.7);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.cart-shop-section__details-product {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3rem;
+    gap: 1rem;
+}
+
+.cart-shop-section__box-img {
+    width: 10.5rem;
+    height: 10.5rem;
+    background-color: rgb(184, 142, 47, 23%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    position: relative;
+}
+
+.lable-product-box-cart {
+    position: absolute;
+    right: 0;
+    left: -2rem;
+    top: -2rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    z-index: 1000;
+}
+
+
+.Discount-product-cart {
+    width: 3.8rem;
+    height: 3.8rem;
+    background-color: #E97171;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-shop-section__img {
+    mix-blend-mode: multiply;
+    width: 11rem;
+    height: 9rem;
+}
+
+.cart-shop-section__name-price {
+    display: flex;
+
+    flex-basis: 45%;
+}
+
+.cart-shop-section__Quantity-Subtotal-icon {
+    display: flex;
+    align-items: center;
+    flex-basis: 45%;
+}
+
+
+.cart-shop-section__product-price,
+.cart-shop-section__product-name {
+    color: var(--gray-color);
+    font-family: var(--primary-font);
+}
+
+.cart-shop-section__product-Quantity-box {
+    border-radius: 0.5rem;
+    border: 0.1rem solid var(--gray-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem
+}
+
+
+.cart-shop-section__product-Quantity {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    padding-left: 1rem;
+
+}
+
+.cart-shop-section__product-Quantity[type="number"]::-webkit-inner-spin-button,
+.cart-shop-section__product-Quantity[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+
+}
+
+.cart-shop-section__product-Subtotal {
+    font-family: var(--primary-font);
+}
+
+.cart-shop-section__total {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-shop-section__box-total {
+    width: 39.3rem;
+    background-color: #F9F1E7;
+    box-shadow: 0px 0px 30px rgba(184, 142, 47, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6rem;
+    padding: 2rem 0 2rem 0;
+}
+
+.cart-shop-section__title-total {
+    font-size: 3.2rem;
     font-family: "Poppins-SemiBold";
 }
 
-.receiver-information {
-    width: 95%;
+.cart-shop-section__keeper-sub-total,
+.cart-shop-section__keeper-total {
     display: flex;
+    gap: 6rem;
+}
+
+.cart-shop-section__keeper-sub-total--subTotal {
     flex-direction: column;
-    gap: 2rem;
-    padding: 0 2rem;
-}
-
-.full-name-input-wrapper {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 3rem;
+    gap: 1rem;
 }
 
-.warapper-label-input {
+.cart-shop-section__sub-total-price {
+    color: var(--gray-color);
+    font-family: var(--primary-font);
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.information__input-label {
-    font-family: "Poppins-Medium";
-}
 
-.input-box {
-    display: flex;
-    padding: 1rem;
-    width: 100%;
-    height: 7rem;
-    border: 0.1rem solid var(--gray-color);
-    border-radius: 1rem;
-}
 
-.full-name-input-box {
-    width: 21rem;
-    height: 7rem;
-}
-
-.receiver-information__input {
-    border: none;
-    background-color: transparent;
-    outline: none;
-    width: 100%;
-    height: 100%;
+.cart-shop-section__total-price {
     font-size: 2rem;
-}
-
-.checkOut {
-    width: 95%;
-    padding: 0 2rem;
-
-}
-
-.checkOut-details {
-
-    border-bottom: 0.1rem solid var(--gray-color);
-}
-
-.checkOut-details-warapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 3rem;
-}
-
-.checkOut-details-left,
-.checkOut-details-right {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.Product-name-quantity {
-    color: var(--gray-color);
-}
-
-.Product-quantity {
-    color: #000000;
-}
-
-.productTotal {
-    font-family: "Poppins-Regular";
-}
-
-.checkOut-details__title {
-    font-size: 2.4rem;
-}
-
-.single-product-price-total {
-    font-family: "Poppins-Regular";
-}
-
-.total-price {
-    font-size: 2.4rem;
-    font-family: "Poppins-Bold";
     color: var(--Primary-color);
 }
 
-.input-radio-label {
-    color: var(--gray-color);
-}
-
-.custom-checkbox {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #000;
-    border-radius: 3px;
-    position: relative;
-    cursor: pointer;
-}
-
-.input-radio:checked {
-    background-color: #000000;
-}
-
-.input-radio {
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    border: 0.1rem solid var(--gray-color);
-    border-radius: 3px;
-    cursor: pointer;
-    border-radius: 100%;
-}
-
-.bank-transfer-description {
-    display: none;
-}
-
-.payment-method {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 3rem;
-}
-
-.checkOut-description {
-    width: 80%;
-    font-family: "Poppins-Regular";
-}
-
-.btn-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 3rem;
-    width: 50%;
-    height: 64px;
-    border: 0.1rem solid #000000;
+.cart-shop-section__total-btn-checkOut-box {
+    border: 0.1rem solid var(--dark-color);
     border-radius: 1.5rem;
 }
 
-.warapper-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.Place-order-btn {
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
+.cart-shop-section-btn-checkOut {
     outline: none;
     border: none;
     background-color: transparent;
+    width: 22.8rem;
+    height: 5.9rem;
+    font-size: 2rem;
+    font-family: var(--primary-font);
+    cursor: pointer;
+}
+
+.cart-shop-section-infomation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.detailes-product__size-btn-box-cart {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #F9F1E7;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 5px 15px rgba(184, 142, 47, 0.7);
+    transition: all 0.8s ease-in-out;
+}
+
+.detailes-product__size-btn-cart {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.detailes-product__size-btn-box-cart--active {
+    background-color: var(--Primary-color);
+    color: var(--white-color);
+}
+
+.cart-detailes_container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.icon-delete {
+    color: var(--Primary-color);
+    cursor: pointer;
+}
+
+.Product-shipping-status-box {
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-size: 1.6rem;
+    margin: 10px 0;
+}
+
+.status-processing {
+    background-color: #ffbb00;
+}
+
+.status-sent {
+    background-color: #007BFF;
+}
+
+.status-delivered {
+    background-color: #28A745;
+}
+
+
+.icon-delete--pending {
+    color: hsl(0, 100%, 50%);
+    opacity: 0.6;
+    cursor: not-allowed !important;
+}
+
+.quantity-input--pending {
+    color: hsl(0, 100%, 50%);
 }

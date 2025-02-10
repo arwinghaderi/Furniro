@@ -93,11 +93,12 @@ const fetchPlaceOrder = async () => {
         const message = handleServerResponse(response.status);
 
         if (!response.ok) {
-            response.status === 400 ? showSwal(message, "error", "Go to Shop", '../Pages/shop.html') : showSwal(message, "error", "Try Again", '#')
+            response.status === 400 ? showSwal(message, "error", "Go to Shop", '../Pages/shop.html') :
+                showSwal(message, "error", "Try Again", '#')
             return
         }
 
-        showSwal("Thank you for your order! Your order has been successfully placed.", "success", "OK", '#');
+        showSwal("Thank you for your order! Your order has been successfully placed.", "success", "go to order status", '../Pages/orderStatus .html');
     } catch (error) {
         showSwal("An unexpected error occurred. Please try again.", "error", "Try Again", '../Pages/checkOut.html');
     } finally {

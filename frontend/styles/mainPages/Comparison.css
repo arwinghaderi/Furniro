@@ -176,3 +176,60 @@
     margin-right: 2rem;
     transition: opacity 1s ease-in;
 }
+
+.catgory-comparison {
+    margin: 3rem;
+}
+
+.catgory-box {
+    background-color: white;
+    height: 30rem;
+    border-radius: 1rem;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #B88E2F;
+    border: 0.1rem solid #B88E2F;
+    font-family: "Poppins-Regular";
+}
+
+.catgory-box.active {
+    background-color: #FAF3EA;
+    color: black;
+}
+
+.catgory-box .col-4 {
+    font-family: "Poppins-Regular";
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #B88E2F;
+}
+
+#comparison-Swiper.swiper-wrapper {
+    height: 33rem !important;
+}
+
+.mySwiper {
+    margin-top: 2.5rem;
+}
+
+.header-section {
+    text-align: center;
+    padding: 20px;
+    background-color: #B88E2F;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.header-section h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+.header-section p {
+    margin: 10px 0 0 0;
+}

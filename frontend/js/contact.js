@@ -45,7 +45,7 @@ const fetchContactUs = async () => {
         emailInput.value = ""
         subjectInput.value = ""
         messagInput.value = ""
-        loader.style.display = "flex"
+        loader.style.display = "none"
         submitBtn.disabled = true
         submitBtn.style.display = "flex"
         submitBtn.innerHTML = "🚫 Forbidden"

@@ -1,35 +1,57 @@
-# Furniture store...
+# Furniture Store Project
 
-<h2 align="left">❤Hello, welcome to the furniture selling project repo, I hope you enjoy it❤</h2>
-<p align="center">❤سلام، به مخزن پروژه فروشگاه مبلمان خوش آمدید، امیدوارم از آن لذت ببرید❤</p>
-<hr>
+<h2 align="center">❤ Hello, welcome to the Furniture Store Project Repo! ❤</h2>
+<p align="center">سلام، به مخزن پروژه فروشگاه مبلمان خوش آمدید!</p>
 
-- 👀 &nbsp;Project Name (نام پروژه ):
-  >Furniture store(فروشگاه مبلمان)
+---
 
-- 📝 &nbsp;Project decription (توضیحات پروژه ):
-  
-   >Dedicated system grid(گرید سیستم اختصاصی)
-   
-   >Pagination and filter of exclusive and dynamic products(صفحه بندی و فیلتر محصولات اختصاصی و کاملا پویا)
+## 🌟 **Project Overview (بررسی پروژه)**
+- **Name (نام پروژه):** *Furniture store (فروشگاه مبلمان)*
+- **Description (توضیحات پروژه):**
+  > A comprehensive furniture store application with a myriad of features tailored to enhance user experience. The backend is fully customized, the project follows a modular architecture, and clean code practices are adhered to, based on Uncle Bob's "Clean Code". (یک برنامه فروشگاه مبلمان جامع با مجموعه‌ای از ویژگی‌ها برای بهبود تجربه کاربری. بک‌اند کاملاً اختصاصی است، پروژه به صورت ماژولار پیش رفته و از اصول کدنویسی تمیز بر اساس کتاب "Clean Code" عمو باب پیروی شده است.)
 
-   >Fully dynamic and exclusive slider(اسلایدر کاملا داینامیک و اختصاصی )
-   
-   >All features are fully dynamic(همه ویژگی ها کاملا پویا هستند)
-   
-   >The project is done in a modular way (پروژه به صورت  ماژولار انجام شده)
-   
-   >Fully responsive on all devices(کاملا واکنش گرا در تمامی دستگاه ها)
-   
-   >I tried to write the codes cleanly, refer to Uncle Bob(سعی کردم کدها را تمیز بنویسم مرجع  عمو باب  )
+---
 
+## 🔧 **Key Features (ویژگی‌های کلیدی)**
+1. **Login, Register, Password Recovery, and Token Issuance for Authentication and Authorization (صفحه ورود، ثبت‌نام، بازیابی رمز عبور و صدور توکن برای احراز هویت و مجوزدهی)**
+2. **Order Status Page (صفحه وضعیت سفارش)**
+3. **Filter Products by Category (فیلتر محصولات با توجه به کتگوری محصول)**
+4. **Global Search Page (صفحه جستجوی گلوبال اختصاصی)**
+5. **Comparison Page (صفحه مقایسه)**
+6. **Two Types of Product Box Structure (دو نوع استراکچر برای باکس محصول)**
+7. **Product Detail Page with All Features (صفحه جزئیات محصول اختصاصی برای هر محصول با تمامی امکانات)**
+8. **Custom Shopping Cart (سبد خرید اختصاصی)**
+9. **Product Like and User Favorites Page (لایک محصول و صفحه مورد علاقه کاربر)**
+10. **Pagination with User-defined Display Limit (پیجینیشن با ویژگی تغییر تعداد نمایش محصول توسط کاربر)**
+11. **Search Within Filters (جستجو در فیلترها)**
+12. **Fully Dynamic and Exclusive Slider (اسلایدر کاملا داینامیک و اختصاصی)**
+13. **Fully Dynamic Footer (فوتر کاملا داینامیک)**
+14. **Dedicated System Grid (گرید سیستم اختصاصی)**
+15. **Global Loading Indicator for Slow Network (لودینگ اختصاصی گلوبال برای زمانی که نت ضعیف باشد)**
+16. **Loading Indicator for Sections with Server Requests (لودینگ برای سکشن‌هایی که به سرور ارسال می‌شوند)**
 
-   <p align="center">
-     The furniture store project is built with raw JS and JS library and so far 60% of the project is done and every feature has been tried to be fully dynamic.
-      And the project is still being developed
-  </p>
-    <p align="center">  پروژه فروشگاه مبلمان با JS خام و  کتابخانه  JS  ساخته شده است و تاکنون 60 درصد پروژه انجام شده است و سعی شده هر ویژگی کاملا پویا باشد و این پروژه همچنان در حال توسعه است </p>
-  
+---
+
+## 📈 **Project Status (وضعیت پروژه)**
+- **Completion:** 90%
+- **Remaining Features:** Comparison Page development (توسعه صفحه مقایسه)
+
+---
+
+## 🛠 **Technical Details (جزئیات فنی)**
+- **Fully Dynamic:** All features are fully dynamic and customizable. (همه ویژگی‌ها کاملا پویا و قابل سفارشی‌سازی هستند.)
+- **Modular Architecture:** The project is done in a modular way for better maintainability. (پروژه به صورت ماژولار پیش رفته است برای نگهداری بهتر.)
+- **Responsive Design:** Fully responsive on all devices. (کاملا واکنش‌گرا در تمامی دستگاه‌ها.)
+- **Custom Backend:** Backend is fully customized. (بک‌اند کاملا اختصاصی نوشته شده است.)
+- **Clean Code:** Clean code practices followed (refer to Uncle Bob's "Clean Code"). (پیروی از اصول کدنویسی تمیز بر اساس کتاب "Clean Code" عمو باب)
+
+---
+
+<p align="center">
+  The furniture store project is built with raw JS and JS library and so far 90% of the project is done and every feature has been tried to be fully dynamic. The project is almost completed, with just a few remaining features under development.
+</p>
+<p align="center">پروژه فروشگاه مبلمان با JS خام و کتابخانه JS ساخته شده است و تاکنون 90 درصد پروژه انجام شده است و سعی شده هر ویژگی کاملا پویا باشد. بک‌اند این پروژه کاملا اختصاصی نوشته شده و همه ویژگی‌ها به صورت سفارشی‌سازی شده نوشته شده‌اند. این پروژه تقریباً تکمیل شده است و فقط چند ویژگی باقی‌مانده در حال توسعه است.</p>
+
 - 📋 &nbsp;Languages and Tools (زبان ها و ابزار ها):
   
   >![HTML5](https://a11ybadges.com/badge?logo=html5)

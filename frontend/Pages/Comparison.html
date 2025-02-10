@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../styles/font.css">
     <link rel="stylesheet" href="../vendor/FontAwesome5/all.min.css">
     <link rel="stylesheet" href="../vendor/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="../vendor/swiperSlider/swiper.css">
     <link rel="stylesheet" href="../styles/mainPages/Comparison.css">
     <link rel="stylesheet" href="../styles/grid.css">
     <link rel="stylesheet" href="../styles/responsive.css">
@@ -36,6 +37,8 @@
                     <li class="list-menu__item"><a class="list-menu-item__link " href="../Pages/shop.html">Shop</a></li>
                     <li class="list-menu__item"><a class="list-menu-item__link " href="./about.html">About</a></li>
                     <li class="list-menu__item"><a class="list-menu-item__link " href="./contact.html">Contact</a></li>
+                    <li class="list-menu__item"><a class="list-menu-item__link" href="./orderStatus .html">order
+                            Status</a></li>
                 </ul>
 
                 <div class="icon-container-option">
@@ -70,7 +73,7 @@
                     </a>
                     <a class="icon-container__link" href="./cart.html">
                         <i class="fa-solid fa-cart-shopping menu-icon"></i>
-                        <span class="nav-bar__count-Product " value="0">0</span>
+                        <span class="nav-bar__count-Product nav-bar__count-Product--active " value="0">0</span>
                     </a>
                 </div>
 
@@ -88,6 +91,9 @@
                         </li>
                         <li class="list-menu__item-mobail">
                             <a class="list-menu-item__link " href="./contact.html">Contact</a>
+                        </li>
+                        <li class="list-menu__item-mobail">
+                            <a class="list-menu-item__link " href="./orderStatus .html">order Status</a>
                         </li>
                     </ul>
 
@@ -113,6 +119,19 @@
             </div>
         </header>
         <!-- ** Comparison  -->
+        <div class="container catgory-comparison">
+            <div class="title-box">
+                <h2 class="title section-title">Product comparison</h2>
+                <p class="secondary-title">Select the desired category.</p>
+            </div>
+            <div class="swiper mySwiper ">
+                <div class="swiper-wrapper" id="comparison-Swiper">
+
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
         <div class="container">
             <section class="comparison">
                 <div class="Adding-product-section">
@@ -447,12 +466,15 @@
 
     <script src="../vendor/FontAwesome5/all.min.js"></script>
     <script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="../vendor/swiperSlider/swiper.js"></script>
     <script src="../js/Features/showPreviousPath.js"></script>
+    <script src="../js/Features/menuHamburger.js"></script>
     <script src="../js/Features/loader.js"></script>
     <script src="../js/Features/selectBox.js"></script>
     <script src="../js/Features/cartQuantityDisplay.js" type="module"></script>
     <script src="../js/Comparison.js"></script>
     <script src="../js/shared.js" type="module"></script>
+
 </body>
 
 </html>

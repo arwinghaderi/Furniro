@@ -305,14 +305,14 @@ const addingAllProductPhotos = (product) => {
     let images = product.images;
 
     wrapperMainImage.insertAdjacentHTML("afterbegin", `
-            <img class="detailes-product-img-main___img" src="https://furniro-6x7f.onrender.com${images[0].path}" alt="main-product">`);
+            <img onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';" class="detailes-product-img-main___img" src="https://furniro-6x7f.onrender.com${images[0].path}" alt="main-product">`);
 
     images.forEach((img, index) => {
         let imgPath = img.path ? `https://furniro-6x7f.onrender.com${img.path}` : '';
 
         wrapperSecoundImg.insertAdjacentHTML("beforeend", `
             <div class="detailes-product-img-secound__box ${index === 0 ? 'detailes-product-img-secound__box--active' : ''}">
-                  <img class="detailes-product-img-secound__img" src="${imgPath}" alt="main-product" data-path="${img.path ? img.path : ''}" loading="lazy">
+                  <img class="detailes-product-img-secound__img" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';" src="${imgPath}" alt="main-product" data-path="${img.path ? img.path : ''}" loading="lazy">
             </div>`);
     });
     handleSecondaryImageClick(wrapperSecoundImg, wrapperMainImage)
@@ -399,10 +399,10 @@ const addingProductInformationTemplate = (product) => {
 
     productImgSection.insertAdjacentHTML("beforeend", `
                      <div class="product-img-box box-shadow">
-                        <img class="product-img" src="https://furniro-6x7f.onrender.com${images[0].path}" alt="product-img">
+                        <img class="product-img" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';" src="https://furniro-6x7f.onrender.com${images[0].path}" alt="product-img">
                     </div>
                     <div class="product-img-box box-shadow">
-                        <img class="product-img" src="https://furniro-6x7f.onrender.com${images[1].path}" alt="product-img">
+                        <img class="product-img" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';" src="https://furniro-6x7f.onrender.com${images[1].path}" alt="product-img">
                     </div>`)
 }
 
@@ -467,7 +467,7 @@ const addingProductTemplateToCart = async () => {
         imageUrl = productImage ? `https://furniro-6x7f.onrender.com${productImage.path}` : `https://furniro-6x7f.onrender.com${item.product.images[0].path}`
 
         keeperCartProduct.insertAdjacentHTML("afterbegin",
-            `<div class="products-keeper"><div class="products-keeper__box-img"><img loading="lazy" class="products-keeper__img" src="${imageUrl}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title section-title">${item.product.name.slice(0, 10)}...</h6><div class="box-calculation"><span class="box-calculation__number">${item.quantity}</span>
+            `<div class="products-keeper"><div class="products-keeper__box-img"><img onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';" loading="lazy" class="products-keeper__img" src="${imageUrl}"></div><div class="products-keeper-box-profile"><h6 class="products-keeper-box-profile__title section-title">${item.product.name.slice(0, 10)}...</h6><div class="box-calculation"><span class="box-calculation__number">${item.quantity}</span>
               <span class="box-calculation__multiplication">x</span><span class="box-calculation__price">Rs ${item.product.discountPercent ? item.product.priceAfterDiscount.toLocaleString("en") : item.product.price.toLocaleString("en")} </span>
               </div>
               <div class="product-information-detailes">
@@ -486,7 +486,7 @@ const addingProductTemplateToCart = async () => {
            <h2>Your Cart is Empty</h2>
            <p>It looks like you haven't added any products to your cart yet.</p>
            <p>Browse our products and add some amazing products to your cart.</p>
-           <img src="../images/images.png" alt="No products available" />
+           <img src="../images/images.png" alt="No products available" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Furniture+Store';"/>
          </div>
     `
 }

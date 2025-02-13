@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.route("/products-by-category").get(getCategoryProducts);
 
-router.route("/:productId").get(addProductToCompare);
+router.route("/:productId").post(addProductToCompare);
 
 module.exports = router;

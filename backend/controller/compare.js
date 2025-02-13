@@ -12,7 +12,7 @@ exports.getCategoryProducts = async (req, res, next) => {
 
     const category = await categoryModel.findOne({ _id: categoryId });
     if (!category) {
-      return errorResponse(res, 403, { message: "Category not Found!" });
+      return errorResponse(res, 404, { message: "Category not Found!" });
     }
 
     const products = await productModel.find({ categoryId });
@@ -31,7 +31,7 @@ exports.addProductToCompare = async (req, res, next) => {
 
     const product1 = await productModel.findOne({ _id: productId });
     if (!product1) {
-      return errorResponse(res, 403, { message: "Product not Found!" });
+      return errorResponse(res, 404, { message: "Product not Found!" });
     }
 
     const categoryId = product1.categoryId;

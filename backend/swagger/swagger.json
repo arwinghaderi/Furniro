@@ -1435,7 +1435,6 @@
                         "_id": "676c22eb7ef6f4560f166f9e"
                       }
                     ],
-                    "label": ["New", "Discount"],
                     "size": ["XL"],
                     "attributes": {
                       "Filling Material": "foam"
@@ -2282,6 +2281,122 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/compare/products-by-category": {
+      "get": {
+        "summary": "Get products by category ID",
+        "tags": ["Compare 📊"],
+        "description": "Fetches all products for a given category ID.",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "ID of the category to filter products by",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "60d21b4667d0d8992e610c85"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of products in the category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "categoryId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Category ID not valid or category not found"
+          },
+          "404": {
+            "description": "Category not Found!"
+          }
+        }
+      }
+    },
+    "/compare/{productId}": {
+      "post": {
+        "summary": "Add product to comparison",
+        "tags": ["Compare 📊"],
+        "description": "Fetches a product and other products in the same category for comparison.",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "ID of the product to compare",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "60d21b4667d0d8992e610c85"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product and other products in the same category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product1": {
+                      "type": "object",
+                      "properties": {
+                        "name": { "type": "string" },
+                        "price": { "type": "number" },
+                        "categoryId": { "type": "string" },
+                        "attributes": { "type": "object" }
+                      }
+                    },
+                    "otherProducts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "price": { "type": "number" },
+                          "categoryId": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Product ID not valid or product not found"
+          },
+          "404": {
+            "description": "Product not Found!"
           }
         }
       }

@@ -4,12 +4,12 @@ const customOptions = document.querySelector(".custom-options")
 const arrow = document.querySelector(".arrow-down");
 const optionsList = document.querySelectorAll('.option');
 
-selectContainer.addEventListener("click", () => {
-    customOptions.classList.remove('custom-options--hide');
+// selectContainer.addEventListener("click", () => {
+//     customOptions.classList.remove('custom-options--hide');
 
-    customOptions.classList.toggle("custom-options--active")
-    arrow.classList.toggle("arrow-down--open")
-})
+//     customOptions.classList.toggle("custom-options--active")
+//     arrow.classList.toggle("arrow-down--open")
+// })
 
 optionsList.forEach((option) => {
     option.addEventListener('click', () => {

@@ -126,7 +126,7 @@
             </div>
             <div class="swiper mySwiper ">
                 <div class="swiper-wrapper" id="comparison-Swiper">
-
+                    <div id="loader" class="loader-bars loader-comparison section-title" style="display: none;"></div>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -144,9 +144,9 @@
                             <a class="view-link" href="./shop.html">View More</a>
                         </div>
                     </div>
-                    <div class="product-warapper-section">
+                    <div class="product-wrapper-section">
 
-                        <div class="product-warapper">
+                        <!-- <div class="product-warapper">
                             <div class="Product-Img-Box--com">
                                 <img class="product-img--com" src="../images/Asgaard sofa 3.png" alt="product">
                             </div>
@@ -165,24 +165,20 @@
                                     <span class="Product-rating__Review">204 Review</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="product-selection">
                             <h6 class="product-selection__title section-title">Add A Product</h6>
                             <div class="select-container">
-                                <div class="custom-selected">select</div>
-                                <div class="custom-options">
-                                    <div class="option">Option 1</div>
-                                    <div class="option">Option 2</div>
-                                    <div class="option">Option 3</div>
-                                    <div class="option">Option 1</div>
-                                    <div class="option">Option 2</div>
-                                    <div class="option">Option 3</div>
+                                <div class="custom-options custom-options--active" id="product-select">
+                                    <!-- گزینه‌ها به اینجا اضافه خواهند شد -->
                                 </div>
                                 <span class="arrow-down">
                                     <i class="fas fa-chevron-down"></i>
                                 </span>
                             </div>
+                            
+
                         </div>
                     </div>
                 </div>
@@ -472,7 +468,7 @@
     <script src="../js/Features/loader.js"></script>
     <script src="../js/Features/selectBox.js"></script>
     <script src="../js/Features/cartQuantityDisplay.js" type="module"></script>
-    <script src="../js/Comparison.js"></script>
+    <script src="../js/Comparison.js" type="module"></script>
     <script src="../js/shared.js" type="module"></script>
 
 </body>

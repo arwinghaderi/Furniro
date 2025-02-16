@@ -18,7 +18,7 @@
     align-items: center;
 }
 
-.product-warapper-section {
+.product-wrapper-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -26,7 +26,7 @@
 }
 
 .warapper-Product-guide {
-    width: 100%;
+    width: 30%;
 }
 
 .Product-guide {
@@ -232,4 +232,86 @@
 
 .header-section p {
     margin: 10px 0 0 0;
+}
+
+.catgory-comparison-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20rem;
+    width: 100%;
+}
+
+.loader-comparison {
+    height: 12rem;
+    width: 6rem;
+}
+
+.catgory-box {
+    display: flex;
+    flex-direction: column;
+}
+
+#loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.option img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.option div {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.option div>div {
+    margin-bottom: 5px;
+}
+
+.option .title {
+    font-weight: bold;
+    color: #333;
+}
+
+.option .price {
+    color: #666;
+}
+
+.option:hover {
+    background-color: var(--Primary-color);
+    color: #fff;
+}
+
+.option--active {
+    background-color: var(--Primary-color);
+    color: #fff;
+}
+
+.custom-options {
+    cursor: auto;
 }

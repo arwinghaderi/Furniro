@@ -12,6 +12,7 @@ const concatRouter = require("./routes/contact");
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
 const checkouteRouter = require("./routes/checkout.js");
+const compareRouter = require("./routes/compare.js");
 const apiDocRouter = require("./routes/swagger");
 const { errorResponse } = require("./helper/responses");
 const { errorHandler } = require("./middleware/errorHandler");
@@ -35,6 +36,7 @@ app.use("/concat", concatRouter);
 app.use("/product", productRouter);
 app.use("/cart", cartRouter);
 app.use("/checkoute", checkouteRouter);
+app.use("/compare", compareRouter);
 app.use("/apis", apiDocRouter);
 app.use("*", (req, res) => {
   return errorResponse(res, 404, {

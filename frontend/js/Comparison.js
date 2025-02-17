@@ -3,6 +3,7 @@ import {
   saveToLocalStorage,
   getFromLocalStorage,
 } from './func/utils.js'
+const productSelect = document.getElementById('product-select')
 
 const swiper = new Swiper('.mySwiper', {
   slidesPerView: 4,
@@ -39,6 +40,12 @@ const fetchingCompareProducts = async (id) => {
 
 const initializeProductSelector = async () => {
   let catgoryId = getFromLocalStorage('catgoryId')
+  productSelect.innerHTML = `
+    <div class="empty-products box-shadow">
+      <h2>No Products Available</h2>
+      <p>There are no products available in the selected category. Please choose a different product.</p>
+    </div>
+  `
   if (!catgoryId) {
     return false
   }
@@ -47,6 +54,7 @@ const initializeProductSelector = async () => {
   const customOptions = document.querySelector('.custom-options')
   const options = customOptions.querySelectorAll('.option')
 
+  refreshActiveOptions(options, products)
   selectProducForComparison(options, products)
 }
 
@@ -61,6 +69,7 @@ const activateCategory = async (element, id) => {
   catgoryBoxs.forEach((catgoryBox) => {
     catgoryBox.classList.remove('active')
   })
+
   if (element) {
     element.classList.add('active')
   }
@@ -71,7 +80,6 @@ const activateCategory = async (element, id) => {
     product.selected = false
   })
 
-  const productSelect = document.getElementById('product-select')
   productSelect.innerHTML = ''
 
   if (products.length) {
@@ -99,39 +107,94 @@ const activateCategory = async (element, id) => {
   const customOptions = document.querySelector('.custom-options')
   const options = customOptions.querySelectorAll('.option')
 
+  // Refresh options to set active class to already selected products
+  refreshActiveOptions(options, products)
   selectProducForComparison(options, products)
+}
+
+const refreshActiveOptions = (options, products) => {
+  options.forEach((option) => {
+    const index = option.dataset.index
+    const product = products[index]
+
+    if (
+      selectedProducts.some(
+        (selectedProduct) => selectedProduct._id === product._id
+      )
+    ) {
+      option.classList.add('option--active')
+    } else {
+      option.classList.remove('option--active')
+    }
+  })
 }
 
 const selectProducForComparison = (options, products) => {
   options.forEach((option) => {
     option.addEventListener('click', () => {
       const index = option.dataset.index
+      const selectedProduct = products[index]
 
-      selectedProducts.push(products[index])
+      if (
+        selectedProducts.some((product) => product._id === selectedProduct._id)
+      ) {
+        showSwal(
+          'You have already selected this product!',
+          'warning',
+          'OK',
+          '#'
+        )
+        return
+      }
+
+      const maxSelection = 2
+
+      if (selectedProducts.length >= maxSelection) {
+        showSwal(
+          `You can only select up to ${maxSelection} products!`,
+          'warning',
+          'OK',
+          '#'
+        )
+        return
+      }
+
+      selectedProducts.push(selectedProduct)
 
       const productWrapperSection = document.querySelector(
         '.product-wrapper-section'
       )
 
-      const selectedProduct = products[index]
       const productTemplate = `
-        <div class="product-wrapper">
-          <div class="Product-Img-Box--com">
+      <div class="product-wrapper" data-product-id="${selectedProduct._id}">
+    <span class="product-remove-icon" onclick='productRemove("${
+      selectedProduct._id
+    }", ${JSON.stringify(products)})'>x</span>
+      <div class="Product-Img-Box--com">
             <img class="product-img--com" src="https://furniro-6x7f.onrender.com${
               selectedProduct.images[0].path
             }" alt="${selectedProduct.title}">
           </div>
           <div class="product-details">
-            <span class="product-details__title">${selectedProduct.title}</span>
+            <span class="product-details__title">${selectedProduct.title.slice(
+              0,
+              12
+            )}...</span>
             <span class="Prodct-price">Rs. ${selectedProduct.price.toLocaleString()}</span>
           </div>
         </div>
       `
+
       productWrapperSection.innerHTML += productTemplate
 
       option.classList.add('option--active')
 
-      // به‌روزرسانی گزینه‌های محصولات
+      if (selectedProducts.length === 2) {
+        const productSelectContainer =
+          document.querySelector('.product-selection')
+        productSelectContainer.style.display = 'none'
+      }
+
       activateCategory(null, getFromLocalStorage('catgoryId'))
     })
   })
@@ -174,10 +237,43 @@ const fetchCategories = async () => {
       `${error.message}`,
       'error',
       'Refresh the page.',
-      '../Pages/shop.html'
+      '../Pages/Comparison.html'
     )
   }
 }
 
+const productRemove = (productId, products) => {
+  console.log(products)
+  selectedProducts = selectedProducts.filter(
+    (product) => product._id !== productId
+  )
+
+  const productWrapperSection = document.querySelector(
+    '.product-wrapper-section'
+  )
+  const productElement = productWrapperSection.querySelector(
+    `.product-wrapper[data-product-id="${productId}"]`
+  )
+  productElement.remove()
+
+  if (selectedProducts.length < 2) {
+    const productSelectContainer = document.querySelector('.product-selection')
+    productSelectContainer.style.display = 'block'
+  }
+
+  // Remove the active class from the corresponding option
+  const customOptions = document.querySelector('.custom-options')
+  const options = customOptions.querySelectorAll('.option')
+  options.forEach((option) => {
+    const index = option.dataset.index
+    const product = products[index]
+
+    if (product._id === productId) {
+      option.classList.remove('option--active')
+    }
+  })
+}
+
 document.addEventListener('DOMContentLoaded', fetchCategories)
 window.activateCategory = activateCategory
+window.productRemove = productRemove

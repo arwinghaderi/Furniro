@@ -21,8 +21,15 @@
 .product-wrapper-section {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 6rem;
     width: 100%;
+}
+
+.product-remove-icon {
+    font-size: 2.8rem;
+    color: #B88E2F;
+    cursor: pointer;
 }
 
 .warapper-Product-guide {

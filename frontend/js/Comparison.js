@@ -3,7 +3,13 @@ import {
   saveToLocalStorage,
   getFromLocalStorage,
 } from './func/utils.js'
-const productSelect = document.getElementById('product-select')
+const tableBody = document.querySelector('.verticalTable tbody')
+const productWrapperSection = document.querySelector(
+  '.product-wrapper-section-products'
+)
+const productSelectContainer = document.getElementById(
+  'product-select-container'
+)
 
 const swiper = new Swiper('.mySwiper', {
   slidesPerView: 4,
@@ -40,6 +46,18 @@ const fetchingCompareProducts = async (id) => {
 
 const initializeProductSelector = async () => {
   let catgoryId = getFromLocalStorage('catgoryId')
+  console.log(catgoryId)
+  productSelectContainer.innerHTML = `
+    <div class="select-container">
+      <div class="custom-options custom-options--active" id="product-select">
+      </div>
+      <span class="arrow-down">
+        <i class="fas fa-chevron-down"></i>
+      </span>
+    </div>`
+  const productSelect = document.getElementById('product-select')
+  console.log(productSelect)
+
   productSelect.innerHTML = `
     <div class="empty-products box-shadow">
       <h2>No Products Available</h2>
@@ -50,12 +68,21 @@ const initializeProductSelector = async () => {
     return false
   }
 
-  let products = await fetchingCompareProducts(catgoryId)
-  const customOptions = document.querySelector('.custom-options')
-  const options = customOptions.querySelectorAll('.option')
+  tableBody.innerHTML = `   <div class="container">
+                            <div class="empty-products empty-products--table-section box-shadow">
+                                <h2>No Products Available</h2>
+                                <p>There are no products available in the selected category. Please choose a different
+                                    product.</p>
+                                <img src="../images/images.png" alt="No products available" />
+                            </div>
+                        </div>`
 
-  refreshActiveOptions(options, products)
-  selectProducForComparison(options, products)
+  // let products = await fetchingCompareProducts(catgoryId)
+  // const customOptions = document.querySelector('.custom-options')
+  // const options = customOptions.querySelectorAll('.option')
+  activateCategory(null, catgoryId)
+  // refreshActiveOptions(options, products)
+  // selectProducForComparison(options, products)
 }
 
 initializeProductSelector()
@@ -63,7 +90,18 @@ initializeProductSelector()
 let selectedProducts = []
 
 const activateCategory = async (element, id) => {
-  saveToLocalStorage('catgoryId', id)
+  productSelectContainer.innerHTML = `
+  <div class="select-container">
+  <div class="custom-options custom-options--active" id="product-select">
+  </div>
+  <span class="arrow-down">
+  <i class="fas fa-chevron-down"></i>
+  </span>
+  </div>
+  `
+  const productSelect = document.getElementById('product-select')
+
+  saveToLocalStorage('catgoryId', id ? id : null)
 
   const catgoryBoxs = document.querySelectorAll('.catgory-box')
   catgoryBoxs.forEach((catgoryBox) => {
@@ -75,12 +113,21 @@ const activateCategory = async (element, id) => {
   }
 
   let products = await fetchingCompareProducts(id)
+  console.log(products)
 
   products.forEach((product) => {
     product.selected = false
   })
 
-  productSelect.innerHTML = ''
+  selectedProducts = []
+
+  productWrapperSection.innerHTML = ''
+  tableBody.innerHTML = `  <div class="empty-products box-shadow">
+       <h2>No Products Available</h2>
+       <p>There are no products available in the selected category. Please choose a different product.</p>
+                       <img src="../images/images.png" alt="No products available" />
+
+     </div>`
 
   if (products.length) {
     products.forEach((product, index) => {
@@ -100,23 +147,23 @@ const activateCategory = async (element, id) => {
       <div class="empty-products box-shadow">
         <h2>No Products Available</h2>
         <p>There are no products available in the selected category. Please choose a different product.</p>
+          <img src="../images/images.png" alt="No products available" />
       </div>
     `
   }
 
-  const customOptions = document.querySelector('.custom-options')
-  const options = customOptions.querySelectorAll('.option')
+  const options = productSelect.querySelectorAll('.option')
 
-  // Refresh options to set active class to already selected products
   refreshActiveOptions(options, products)
   selectProducForComparison(options, products)
 }
 
 const refreshActiveOptions = (options, products) => {
   options.forEach((option) => {
+    console.log(option)
     const index = option.dataset.index
+    console.log(index)
     const product = products[index]
-
     if (
       selectedProducts.some(
         (selectedProduct) => selectedProduct._id === product._id
@@ -131,7 +178,7 @@ const refreshActiveOptions = (options, products) => {
 
 const selectProducForComparison = (options, products) => {
   options.forEach((option) => {
-    option.addEventListener('click', () => {
+    option.addEventListener('click', async () => {
       const index = option.dataset.index
       const selectedProduct = products[index]
 
@@ -148,7 +195,6 @@ const selectProducForComparison = (options, products) => {
       }
 
       const maxSelection = 2
-
       if (selectedProducts.length >= maxSelection) {
         showSwal(
           `You can only select up to ${maxSelection} products!`,
@@ -162,21 +208,21 @@ const selectProducForComparison = (options, products) => {
       selectedProducts.push(selectedProduct)
 
       const productWrapperSection = document.querySelector(
-        '.product-wrapper-section'
+        '.product-wrapper-section-products'
       )
-
+      console.log(productWrapperSection)
       const productTemplate = `
-      <div class="product-wrapper" data-product-id="${selectedProduct._id}">
-    <span class="product-remove-icon" onclick='productRemove("${
-      selectedProduct._id
-    }", ${JSON.stringify(products)})'>x</span>
-      <div class="Product-Img-Box--com">
+        <div class="product-wrapper" data-product-id="${selectedProduct._id}">
+          <span class="product-remove-icon" onclick='productRemove("${
+            selectedProduct._id
+          }", ${JSON.stringify(products)})'>x</span>
+          <div class="Product-Img-Box--com">
             <img class="product-img--com" src="https://furniro-6x7f.onrender.com${
               selectedProduct.images[0].path
             }" alt="${selectedProduct.title}">
           </div>
           <div class="product-details">
-            <span class="product-details__title">${selectedProduct.title.slice(
+            <span class="product-details__title">${selectedProduct.name.slice(
               0,
               12
             )}...</span>
@@ -184,20 +230,141 @@ const selectProducForComparison = (options, products) => {
           </div>
         </div>
       `
-
       productWrapperSection.innerHTML += productTemplate
 
       option.classList.add('option--active')
 
       if (selectedProducts.length === 2) {
-        const productSelectContainer =
-          document.querySelector('.product-selection')
-        productSelectContainer.style.display = 'none'
+        document.querySelector('.product-selection').style.display = 'none'
       }
 
-      activateCategory(null, getFromLocalStorage('catgoryId'))
+      // activateCategory(null, getFromLocalStorage('catgoryId'))
+
+      if (selectedProducts.length === 2) {
+        await AddingProductDetailsTable(
+          selectedProducts[0]._id,
+          selectedProducts[1]._id
+        )
+      }
     })
   })
+}
+
+const AddingProductDetailsTable = async (productId1, productId2) => {
+  const tableBody = document.querySelector('.verticalTable tbody')
+  tableBody.innerHTML = ''
+  const loader = document.getElementById('loader-table')
+  loader.style.display = 'flex'
+
+  try {
+    const response1 = await fetch(
+      `https://furniro-6x7f.onrender.com/compare/${productId1}`,
+      { method: 'POST' }
+    )
+    const response2 = await fetch(
+      `https://furniro-6x7f.onrender.com/compare/${productId2}`,
+      { method: 'POST' }
+    )
+
+    if (!response1.ok || !response2.ok) {
+      throw new Error('Failed to fetch product details')
+    }
+
+    const data1 = await response1.json()
+    const data2 = await response2.json()
+    console.log(data2)
+
+    const attributes1 = data1.data.product1.attributes
+    const attributes2 = data2.data.product1.attributes
+    const dimensions1 = data1.data.product1.dimensions
+    const dimensions2 = data2.data.product1.dimensions
+    const productSlug1 = data1.data.product1.slug
+    const productSlug2 = data2.data.product1.slug
+    const productName1 = data1.data.product1.name
+    const productName2 = data2.data.product1.name
+
+    tableBody.innerHTML = ''
+
+    // Add product names
+    tableBody.innerHTML += `
+        <td colspan="4">
+          <div class="title-table">Name</div>
+        </td>
+        <tr>
+        <td class="sub-Title"></td>
+        <td class="sub-Title">${productName1.slice(0, 12)}..</td>
+        <td class="sub-Title">${productName2.slice(0, 12)}..</td>
+      </tr>
+    `
+
+    tableBody.innerHTML += `
+      <tr>
+        <td colspan="4">
+          <div class="title-table">General</div>
+        </td>
+      </tr>
+    `
+    const generalKeys = new Set([
+      ...Object.keys(attributes1),
+      ...Object.keys(attributes2),
+    ])
+    generalKeys.forEach((key) => {
+      const newRow = document.createElement('tr')
+      newRow.innerHTML = `
+        <td>
+          <div class="sub-Title">${
+            key.charAt(0).toUpperCase() + key.slice(1)
+          }</div>
+        </td>
+        <td class="sub-Title">${attributes1[key] || '-'}</td>
+        <td class="sub-Title">${attributes2[key] || '-'}</td>
+        <td class="sub-Title"></td>
+      `
+      tableBody.appendChild(newRow)
+    })
+
+    tableBody.innerHTML += `
+      <tr>
+        <td colspan="4">
+          <div class="title-table">Dimensions</div>
+        </td>
+      </tr>
+    `
+    const dimensionKeys = new Set([
+      ...Object.keys(dimensions1),
+      ...Object.keys(dimensions2),
+    ])
+    dimensionKeys.forEach((key) => {
+      const newRow = document.createElement('tr')
+      newRow.innerHTML = `
+        <td>
+          <div class="sub-Title">${
+            key.charAt(0).toUpperCase() + key.slice(1)
+          }</div>
+        </td>
+        <td class="sub-Title">${dimensions1[key] || '-'}</td>
+        <td class="sub-Title">${dimensions2[key] || '-'}</td>
+        <td class="sub-Title"></td>
+      `
+      tableBody.appendChild(newRow)
+      loader.style.display = 'none'
+    })
+
+    const newRow = document.createElement('tr')
+    newRow.innerHTML = `
+      <td class="sub-Title"></td>
+      <td class="sub-Title">
+        <button class="btn-comparison" onclick="window.location.href='../Pages/product.html?slug=${productSlug1}'">Add to cart</button>
+      </td>
+      <td class="sub-Title">
+        <button class="btn-comparison" onclick="window.location.href='../Pages/product.html?slug=${productSlug2}'">Add to cart</button>
+      </td>
+    `
+    tableBody.appendChild(newRow)
+  } catch (error) {
+    console.error('Error fetching product details:', error)
+    tableBody.innerHTML = 'Failed to load product details'
+  }
 }
 
 const fetchCategories = async () => {
@@ -243,13 +410,12 @@ const fetchCategories = async () => {
 }
 
 const productRemove = (productId, products) => {
-  console.log(products)
   selectedProducts = selectedProducts.filter(
     (product) => product._id !== productId
   )
 
   const productWrapperSection = document.querySelector(
-    '.product-wrapper-section'
+    '.product-wrapper-section-products'
   )
   const productElement = productWrapperSection.querySelector(
     `.product-wrapper[data-product-id="${productId}"]`
@@ -259,9 +425,16 @@ const productRemove = (productId, products) => {
   if (selectedProducts.length < 2) {
     const productSelectContainer = document.querySelector('.product-selection')
     productSelectContainer.style.display = 'block'
+    tableBody.innerHTML = `   <div class="container">
+                            <div class="empty-products empty-products--table-section box-shadow">
+                                <h2>No Products Available</h2>
+                                <p>There are no products available in the selected category. Please choose a different
+                                    product.</p>
+                                <img src="../images/images.png" alt="No products available" />
+                            </div>
+                        </div>`
   }
 
-  // Remove the active class from the corresponding option
   const customOptions = document.querySelector('.custom-options')
   const options = customOptions.querySelectorAll('.option')
   options.forEach((option) => {

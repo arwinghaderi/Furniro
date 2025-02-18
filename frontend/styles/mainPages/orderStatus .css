@@ -268,3 +268,9 @@ cart-shop
 .quantity-input--pending {
     color: hsl(0, 100%, 50%);
 }
+
+.product-cart {
+    overflow: auto;
+    height: 50rem;
+    margin-top: 1rem;
+}

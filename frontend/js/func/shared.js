@@ -80,7 +80,6 @@ const copyToClipboard = async (productSlug) => {
 }
 
 const addingProductsTemplateRow = (product) => {
-  console.log(product)
   element = document.createElement('div')
   element.className = `col col-md-6 col-lg-4 col-xxl-3 product-main-box product-main-box__shop product-main-box__shop--show`
   element.setAttribute('data-aos', 'zoom-in')
@@ -108,7 +107,7 @@ const addingProductsTemplateRow = (product) => {
      }')"></i>
      <span class="option-overlay__text">Share</span></div><div class="option-overlay">
      <a href="../../Pages/Comparison.html?categoryId=${
-       product.categoryId._id
+       product.categoryId._id || product.categoryId
      }&productId=${
     product._id
   }" class="box-add-btn-cart__text">     <i class="fas fa-exchange-alt icon"></i>
@@ -168,8 +167,12 @@ const addingProductsTemplateCol = (product) => {
        product.slug
      }')" ></i> 
      <span class="option-overlay__text">Share</span> </div> <div class="option-overlay"> 
-     <i class="fas fa-exchange-alt  icon"></i>
-     <span class="option-overlay__text">Compare</span></div> 
+     <a href="../../Pages/Comparison.html?categoryId=${
+       product.categoryId._id || product.categoryId 
+     }&productId=${
+    product._id
+  }" class="box-add-btn-cart__text">     <i class="fas fa-exchange-alt icon"></i>
+</a>     <span class="option-overlay__text">Compare</span></div> 
      <div class="option-overlay"><svg id="like" Button" onclick="toggleLike(this, '${
        product._id
      }', ${

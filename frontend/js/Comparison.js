@@ -52,8 +52,6 @@ const fetchingCompareProducts = async (id) => {
       'Refresh the page.',
       '../Pages/Comparison.html'
     )
-    productSelectContainer.innerHTML =
-      'Failed to load products. Please try again.' // پیام خطا در صورت بروز مشکل
     return []
   }
 }
@@ -134,7 +132,6 @@ const selectProducForComparison = (options, products) => {
       }
 
       selectedProducts.push(selectedProduct)
-      console.log('selectedProducts', selectedProducts)
 
       displayProductTemplate(selectedProduct, products)
 
@@ -257,7 +254,6 @@ const AddingProductDetailsTable = async (productId1, productId2) => {
 
     const data1 = await response1.json()
     const data2 = await response2.json()
-    console.log(data2)
 
     const attributes1 = data1.data.product1.attributes
     const attributes2 = data2.data.product1.attributes
@@ -346,7 +342,6 @@ const AddingProductDetailsTable = async (productId1, productId2) => {
     `
     tableBody.appendChild(newRow)
   } catch (error) {
-    console.error('Error fetching product details:', error)
     tableBody.innerHTML = 'Failed to load product details'
   }
 }
@@ -397,7 +392,6 @@ const fetchCategories = async () => {
 
 const productRemove = (productId, productsJson) => {
   const products = JSON.parse(decodeURIComponent(productsJson))
-  console.log(selectedProducts)
   selectedProducts = selectedProducts.filter(
     (product) => product._id !== productId
   )
@@ -410,7 +404,6 @@ const productRemove = (productId, productsJson) => {
     `.product-wrapper[data-product-id="${productId}"]`
   )
 
-  console.log('Product element to remove:', productElement)
   if (productElement) {
     productElement.remove()
   }

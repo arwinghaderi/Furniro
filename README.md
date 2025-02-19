@@ -32,10 +32,9 @@
 
 ---
 
-## 📈 **Project Status (وضعیت پروژه)**
-- **Completion:** 90%
-- **Remaining Features:** Comparison Page development (توسعه صفحه مقایسه)
-
+## 📈 Project Status (وضعیت پروژه)
+- Completion (تکمیل): 100% (۱۰۰٪)
+- Remaining Features (ویژگی‌های باقی‌مانده): None (هیچکدام)
 ---
 
 ## 🛠 **Technical Details (جزئیات فنی)**
@@ -47,10 +46,7 @@
 
 ---
 
-<p align="center">
-  The furniture store project is built with raw JS and JS library and so far 90% of the project is done and every feature has been tried to be fully dynamic. The project is almost completed, with just a few remaining features under development.
-</p>
-<p align="center">پروژه فروشگاه مبلمان با JS خام و کتابخانه JS ساخته شده است و تاکنون 90 درصد پروژه انجام شده است و سعی شده هر ویژگی کاملا پویا باشد. بک‌اند این پروژه کاملا اختصاصی نوشته شده و همه ویژگی‌ها به صورت سفارشی‌سازی شده نوشته شده‌اند. این پروژه تقریباً تکمیل شده است و فقط چند ویژگی باقی‌مانده در حال توسعه است.</p>
+<p align="center"> The furniture store project is built with raw JS and JS library and is now 100% completed. Every feature has been designed to be fully dynamic. (پروژه فروشگاه مبلمان با JS خام و کتابخانه JS ساخته شده و اکنون ۱۰۰ درصد تکمیل شده است. هر ویژگی به طور کامل پویا طراحی شده است.) </p>
 
 - 📋 &nbsp;Languages and Tools (زبان ها و ابزار ها):
   

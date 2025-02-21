@@ -351,8 +351,6 @@ exports.getAllFavorites = async (req, res, next) => {
       .findOne({ user: user._id })
       .populate({
         path: "items",
-        select:
-          "name title price discountPercent priceAfterDiscount images slug updatedAt",
       })
       .populate({
         path: "user",
